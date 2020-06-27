@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomoticApp.Android", "DomoticApp\DomoticApp.Android\DomoticApp.Android.csproj", "{EA4C97A3-213F-42EF-8452-0D173381C345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomoticApp", "DomoticApp\DomoticApp\DomoticApp.csproj", "{8E23281D-2EE7-4474-8D57-68144CCA77B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4C97A3-213F-42EF-8452-0D173381C345}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E23281D-2EE7-4474-8D57-68144CCA77B5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49F2D975-D053-401A-BF6B-1D0C26A8518D}
+	EndGlobalSection
+EndGlobal

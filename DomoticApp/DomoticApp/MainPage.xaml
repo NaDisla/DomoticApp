@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="DomoticApp.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="FondoInicio.png"
+                   Aspect="Fill"
+                   Margin="-30,-25,-30,-20"/>
+            <FlexLayout Direction="Column" 
+                        AlignItems="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" 
+                           Source="Logo05_v2.png"
+                           Margin="0,25,0,0"
+                           HeightRequest="115"/>
+                    <Label Text="¡Bienvenido!" 
+                           FontAttributes="Bold" FontSize="25" 
+                           FlexLayout.AlignSelf="Center"
+                           Margin="25" Grid.Row="1"
+                           TextColor="White"
+                           FontFamily="{StaticResource RalewayBold}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="1:19 a.m." FontAttributes="Bold" 
+                           FontSize="18" 
+                           Grid.Row="2"
+                           TextColor="White"
+                           FlexLayout.AlignSelf="Center"
+                           FontFamily="{StaticResource RalewayBold}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Domingo, Junio 21, 2020"
+                           FontSize="18"
+                           TextColor="White"
+                           FontFamily="{StaticResource RalewayBold}"
+                           FlexLayout.AlignSelf="Center"
+                           Grid.Row="3"
+                           HorizontalTextAlignment="Center"/>
+
+                    <FlexLayout Grid.Row="4" 
+                                Direction="Column" 
+                                JustifyContent="End"
+                                AlignItems="Start">
+                        <Grid BackgroundColor="#175E8D" Padding="1,30,30,30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="140"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition Width="142"/>
+                                <ColumnDefinition Width="130"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Text="Dormitorio"
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnDormitorio"
+                                    Clicked="btnDormitorio_Clicked"
+                                    ContentLayout="Top,25"
+                                    Image="iconoDormitorio" 
+                                    HorizontalOptions="Start"
+                                    Padding="25,15"/>
+                            <Button Grid.Row="0" Text="Cocina" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="1"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnCocina"
+                                    Clicked="btnCocina_Clicked"
+                                    ContentLayout="Top,25"
+                                    Image="iconoCocina" 
+                                    HorizontalOptions="Center"
+                                    Padding="30,15"/>
+                            <Button Grid.Row="0" Text="Baño" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    ContentLayout="Top,25"
+                                    Image="iconoBano" 
+                                    HorizontalOptions="End"
+                                    Padding="35,15"
+                                    x:Name="btnBano"
+                                    Clicked="btnBano_Clicked"/>
+                            
+                            <Button Grid.Row="1" Text="Área de Lavado" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnAreaLavado"
+                                    Clicked="btnAreaLavado_Clicked"
+                                    Grid.Column="0"
+                                    ContentLayout="Top,0"
+                                    Image="iconoLavado" 
+                                    HorizontalOptions="Start"
+                                    Padding="8,15"/>
+                            <Button Grid.Row="1" Text="Sala" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="1"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnSala"
+                                    Clicked="btnSala_Clicked"
+                                    ContentLayout="Top,0"
+                                    Image="iconoSala" 
+                                    HorizontalOptions="Center"
+                                    Padding="30,15"/>
+                            <Button Grid.Row="1" Text="Recibidor" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    ContentLayout="Top,0"
+                                    Image="iconoRecibidor" 
+                                    HorizontalOptions="End"
+                                    Padding="32,15"
+                                    x:Name="btnRecibidor"
+                                    Clicked="btnRecibidor_Clicked"/>
+                            
+                            <Button Grid.Row="2" Text="Piscina" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    ContentLayout="Top,0"
+                                    Image="iconoPiscina" 
+                                    HorizontalOptions="Start"
+                                    Padding="32,15"
+                                    x:Name="btnPiscina"
+                                    Clicked="btnPiscina_Clicked"/>
+                            <Button Grid.Row="2" Text="Tinaco" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="1"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    ContentLayout="Top,0"
+                                    Image="iconoTinaco" 
+                                    HorizontalOptions="Center"
+                                    Padding="30,15"
+                                    x:Name="btnTinaco"
+                                    Clicked="btnTinaco_Clicked"/>
+                            <Button Grid.Row="2" Text="Exteriores" 
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    ContentLayout="Top,0"
+                                    Image="iconoExterior" 
+                                    HorizontalOptions="End"
+                                    Padding="31,15"
+                                    x:Name="btnExteriores"
+                                    Clicked="btnExteriores_Clicked"/>
+                        </Grid>
+                    </FlexLayout>
+                    
+                </Grid>
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+
+
+</ContentPage>
