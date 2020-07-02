@@ -11,6 +11,7 @@ using System.Net.Http;
 using Rg.Plugins.Popup.Services;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Sala;
+using DomoticApp.Views.Cocina;
 
 namespace DomoticApp
 {
@@ -33,6 +34,19 @@ namespace DomoticApp
             else
                 RedIncorrecta();
         }
+
+        /*[Obsolete]
+        async void ValidandoRedes()
+        {
+            content = await client.GetStringAsync(urlApagarLed1);
+            if (CrossConnectivity.Current.IsConnected && content == null)
+                RedIncorrecta();
+            else if (CrossConnectivity.Current.IsConnected && content != null)
+                RedCorrecta();
+            else
+                RedIncorrecta();
+        }*/
+         
         [Obsolete]
         async void RedCorrecta()
         {
@@ -50,17 +64,13 @@ namespace DomoticApp
                 await Task.Delay(2000);
             }
         }
+
         [Obsolete]
         async void RedIncorrecta()
         {
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redIncorrecta);
             await Task.Delay(2000);
-        }
-        [Obsolete]
-        async void ValidameOtraVez()
-        {
-
         }
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
@@ -70,8 +80,7 @@ namespace DomoticApp
 
         private void btnCocina_Clicked(object sender, EventArgs e)
         {
-            
-
+            Navigation.PushAsync(new NavigationPage(new ControlCocinaPage()));
         }
 
         private void btnAreaLavado_Clicked(object sender, EventArgs e)

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="DomoticApp.Views.Cocina.ControlCocinaPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="FondoModulo.png"
+                   Aspect="Fill"
+                   Margin="-30,-25,-30,-20"/>
+            <FlexLayout Direction="Column" 
+                        AlignItems="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="133"/>
+                        <ColumnDefinition Width="133"/>
+                        <ColumnDefinition Width="133"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="Logo06_v2.png"
+                           Margin="0,25,0,0"
+                           HeightRequest="115"/>
+                    <Label Text="Cocina" 
+                           FontAttributes="Bold" FontSize="25" 
+                           FlexLayout.AlignSelf="Center"
+                           Margin="25" Grid.Row="1"
+                           TextColor="White"
+                           FontFamily="{StaticResource RalewayBold}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="1:19 a.m." FontAttributes="Bold" 
+                           FontSize="18" 
+                           Grid.Row="2"
+                           TextColor="White"
+                           FlexLayout.AlignSelf="Center"
+                           FontFamily="{StaticResource RalewayBold}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Domingo, Junio 21, 2020"
+                           FontSize="18"
+                           TextColor="White"
+                           FontFamily="{StaticResource RalewayBold}"
+                           FlexLayout.AlignSelf="Center"
+                           Grid.Row="3"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Grid.Row="4"
+                            Text="Luces"
+                            TextColor="#175E8D"
+                            BackgroundColor="AliceBlue"
+                            FontFamily="{StaticResource RalewayBold}"
+                            x:Name="btnLuces"
+                            Clicked="btnLuces_Clicked"
+                            ContentLayout="Top,25"
+                            Image="iconoLuz" 
+                            HorizontalOptions="Start"
+                            Padding="25,15"/>
+                </Grid>
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

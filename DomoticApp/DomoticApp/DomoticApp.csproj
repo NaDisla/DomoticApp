@@ -21,11 +21,13 @@
 
   <ItemGroup>
     <Folder Include="Customs\" />
-    <Folder Include="Views\Cocina\" />
     <Folder Include="Views\Lavado\" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\Cocina\ControlCocinaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Dormitorio\ControlDormitorioPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
