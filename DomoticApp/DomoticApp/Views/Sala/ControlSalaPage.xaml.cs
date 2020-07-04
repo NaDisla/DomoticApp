@@ -14,7 +14,7 @@ namespace DomoticApp.Views.Sala
     public partial class ControlSalaPage : ContentPage
     {
         public int contador = 1;
-        private const string urlEncenderLed2 = "http://10.0.0.17/P";
+        private const string urlEncenderLed2 = "http://10.0.0.17/S";
         private const string urlApagarLed2 = "http://10.0.0.17/A";
         private readonly HttpClient client = new HttpClient();
         private string content;
