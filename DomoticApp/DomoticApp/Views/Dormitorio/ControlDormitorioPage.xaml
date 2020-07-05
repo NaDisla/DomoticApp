@@ -22,22 +22,16 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                    </Grid.ColumnDefinitions>
-
                     <Image Source="Logo06_v2.png"
-                           Margin="0,25,0,0"
-                           HeightRequest="115"/>
+                           HeightRequest="75"
+                           Grid.Row="0"
+                           Margin="10"/>
                     <Label Text="Dormitorio" 
                            FontAttributes="Bold" FontSize="25" 
-                           FlexLayout.AlignSelf="Center"
+                           HorizontalTextAlignment="Center"
                            Margin="25" Grid.Row="1"
                            TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
+                           FontFamily="{StaticResource RalewayBold}"/>
                     <Label Text="1:19 a.m." FontAttributes="Bold" 
                            FontSize="18" 
                            Grid.Row="2"
@@ -52,41 +46,62 @@
                            FlexLayout.AlignSelf="Center"
                            Grid.Row="3"
                            HorizontalTextAlignment="Center"/>
-                    <Button Grid.Row="4"
-                            Text="Luces"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnLuces"
-                            Clicked="btnLuces_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoLuz" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"/>
-                    <Button Grid.Row="4"
-                            Text="Abanico"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnAbanico"
-                            Clicked="btnAbanico_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoAbanico" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"
-                            Grid.Column="1"/>
-                    <Button Grid.Row="4"
-                            Text="Televisión"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnTelevision"
-                            Clicked="btnTelevision_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoTV" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"
-                            Grid.Column="2"/>
+
+                    <FlexLayout Grid.Row="4" 
+                                Direction="Column" 
+                                JustifyContent="End"
+                                AlignItems="Start">
+                        <Grid Padding="1,30,30,30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="140"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="145"/>
+                                <ColumnDefinition Width="145"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <Button Text="Luces"
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnLuces"
+                                    Clicked="btnLuces_Clicked"
+                                    ContentLayout="Top,25"
+                                    Image="iconoLuz" 
+                                    HorizontalOptions="Start"
+                                    Padding="25,15"/>
+                            <Button Grid.Row="0"
+                                    Text="Abanico"
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnAbanico"
+                                    Clicked="btnAbanico_Clicked"
+                                    ContentLayout="Top,25"
+                                    Image="iconoAbanico" 
+                                    HorizontalOptions="Start"
+                                    Padding="30,15"
+                                    Grid.Column="1"/>
+                            <Button Grid.Row="0"
+                                    Text="Televisión"
+                                    TextColor="#175E8D"
+                                    BackgroundColor="AliceBlue"
+                                    FontFamily="{StaticResource RalewayBold}"
+                                    x:Name="btnTelevision"
+                                    Clicked="btnTelevision_Clicked"
+                                    ContentLayout="Top,25"
+                                    Image="iconoTV" 
+                                    HorizontalOptions="Start"
+                                    Padding="35,15"
+                                    Grid.Column="2"/>
+                        </Grid>
+                    </FlexLayout>
+
+                    
                 </Grid>
             </FlexLayout>
         </Grid>

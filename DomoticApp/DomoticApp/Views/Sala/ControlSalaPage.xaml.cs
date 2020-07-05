@@ -13,11 +13,12 @@ namespace DomoticApp.Views.Sala
 {
     public partial class ControlSalaPage : ContentPage
     {
-        public int contador = 1;
-        private const string urlEncenderLed2 = "http://10.0.0.17/P";
+        public int estado = 1;
+        private const string urlEncenderLed2 = "http://10.0.0.17/S";
         private const string urlApagarLed2 = "http://10.0.0.17/A";
         private readonly HttpClient client = new HttpClient();
         private string content;
+
         public ControlSalaPage()
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace DomoticApp.Views.Sala
 
         private async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            if(contador == 1)
+            if (estado == 1)
             {
                 content = await client.GetStringAsync(urlEncenderLed2);
                 if (content != null)
@@ -33,19 +34,21 @@ namespace DomoticApp.Views.Sala
                 else
                     await DisplayAlert("Error de conexión", "No se ha podido establecer " +
                         "la conexión. ", "OK");
-                contador = 0;
+
+                estado = 0;
             }
             else
             {
                 content = await client.GetStringAsync(urlApagarLed2);
                 if (content != null)
                     await DisplayAlert("Aviso", "Luces apagadas. ", "OK");
+
                 else
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer " +
-                        "la conexión. ", "OK");
-                contador = 1;
+                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión.", "OK");
+                estado = 1;
             }
         }
+
 
         private void btnAbanico_Clicked(object sender, EventArgs e)
         {
