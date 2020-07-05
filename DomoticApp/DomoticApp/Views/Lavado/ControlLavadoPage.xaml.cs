@@ -4,29 +4,35 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DomoticApp.Views.Cocina
+namespace DomoticApp.Views.Lavado
 {
-    public partial class ControlCocinaPage : ContentPage
+    public partial class ControlLavadoPage : ContentPage
     {
         public int estado = 1;
-        private const string urlEncenderLed3 = "http://10.0.0.17/C";
-        private const string urlApagarLed3 = "http://10.0.0.17/I";
+        private const string urlEncenderLed4 = "http://10.0.0.17/R";
+        private const string urlApagarLed4 = "http://10.0.0.17/V";
         private readonly HttpClient client = new HttpClient();
         private string content;
 
-        public ControlCocinaPage()
+        public ControlLavadoPage()
         {
             InitializeComponent();
+        }
+
+        private void btnLavadora_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         private async void btnLuces_Clicked(object sender, EventArgs e)
         {
             if (estado == 1)
             {
-                content = await client.GetStringAsync(urlEncenderLed3);
+                content = await client.GetStringAsync(urlEncenderLed4);
                 if (content != null)
                     await DisplayAlert("Aviso", "Luces encendidas. ", "OK");
                 else
@@ -36,13 +42,13 @@ namespace DomoticApp.Views.Cocina
             }
             else
             {
-                content = await client.GetStringAsync(urlApagarLed3);
+                content = await client.GetStringAsync(urlApagarLed4);
                 if (content != null)
                     await DisplayAlert("Aviso", "Luces apagadas. ", "OK");
                 else
                     await DisplayAlert("Error de conexión", "No se ha podido establecer " +
                         "la conexión. ", "OK");
-                estado = 1; 
+                estado = 1;
             }
         }
     }

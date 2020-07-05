@@ -12,6 +12,7 @@ using Rg.Plugins.Popup.Services;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Cocina;
+using DomoticApp.Views.Lavado;
 
 namespace DomoticApp
 {
@@ -85,7 +86,7 @@ namespace DomoticApp
 
         private void btnAreaLavado_Clicked(object sender, EventArgs e)
         {
-            
+            Navigation.PushAsync(new NavigationPage(new ControlLavadoPage()));
         }
 
         private void btnSala_Clicked(object sender, EventArgs e)
