@@ -13,7 +13,7 @@ namespace DomoticApp.Views.Dormitorio
 
     public partial class ControlDormitorioPage : ContentPage
     {
-        public int estado = 1;
+        public int estado = 0;
         private const string urlEncenderLed1 = "http://10.0.0.17/D";
         private const string urlApagarLed1 = "http://10.0.0.17/O";
         private const string urlEncenderAbanico = "http://10.0.0.17/V";
@@ -27,23 +27,29 @@ namespace DomoticApp.Views.Dormitorio
         }
         private async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            if (estado == 1)
+            if (estado == 0)
             {
                 content = await client.GetStringAsync(urlEncenderLed1);
                 if (content != null)
-                    await DisplayAlert("Aviso", "Luces encendidas.", "OK");
+                {
+                    btnLuces.BackgroundColor = Color.FromHex("#739DB8");
+                    btnLuces.TextColor = Color.White;
+                }
                 else
                     await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-                estado = 0; 
+                estado = 1; 
             }
             else
             {
                 content = await client.GetStringAsync(urlApagarLed1);
                 if (content != null)
-                    await DisplayAlert("Aviso", "Luces apagadas.", "OK");
+                {
+                    btnLuces.BackgroundColor = Color.FromHex("#D2E9F8");
+                    btnLuces.TextColor = Color.FromHex("#166498");
+                }
                 else
                     await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-                estado = 1;
+                estado = 0;
             }        
         }
 

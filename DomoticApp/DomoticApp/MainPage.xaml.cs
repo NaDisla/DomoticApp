@@ -25,6 +25,7 @@ namespace DomoticApp
         LoadingNetworkPage loadingRed = new LoadingNetworkPage();
         CorrectNetworkPage redCorrecta = new CorrectNetworkPage();
         IncorrectNetworkPage redIncorrecta = new IncorrectNetworkPage();
+        ControlDormitorioPage dormitorio = new ControlDormitorioPage();
 
         [Obsolete]
         public MainPage()
@@ -77,6 +78,10 @@ namespace DomoticApp
         private void btnDormitorio_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NavigationPage(new ControlDormitorioPage()));
+            if (dormitorio.estado == 0)
+            {
+                dormitorio.estado = 1;
+            }      
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)
