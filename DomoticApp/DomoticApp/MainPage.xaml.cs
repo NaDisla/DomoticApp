@@ -13,6 +13,7 @@ using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Lavado;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace DomoticApp
 {
@@ -32,22 +33,29 @@ namespace DomoticApp
         {
             InitializeComponent();
             if (CrossConnectivity.Current.IsConnected)
-                RedCorrecta();
+                ValidandoRedes();
             else
                 RedIncorrecta();
         }
 
-        /*[Obsolete]
+        [Obsolete]
         async void ValidandoRedes()
         {
-            content = await client.GetStringAsync(urlApagarLed1);
-            if (CrossConnectivity.Current.IsConnected && content == null)
+            try
+            {
+                content = await client.GetStringAsync(urlApagarLed1);
+                if(content!=null)
+                {
+                    RedCorrecta();
+                }
+                    
+            }
+            catch (Exception)
+            {
                 RedIncorrecta();
-            else if (CrossConnectivity.Current.IsConnected && content != null)
-                RedCorrecta();
-            else
-                RedIncorrecta();
-        }*/
+                
+            }
+        }
          
         [Obsolete]
         async void RedCorrecta()
@@ -70,18 +78,17 @@ namespace DomoticApp
         [Obsolete]
         async void RedIncorrecta()
         {
+            await PopupNavigation.PushAsync(loadingRed);
+            await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redIncorrecta);
-            await Task.Delay(2000);
+            await Task.Delay(10000);
+            System.Environment.Exit(0);
         }
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NavigationPage(new ControlDormitorioPage()));
-            if (dormitorio.estado == 0)
-            {
-                dormitorio.estado = 1;
-            }      
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)

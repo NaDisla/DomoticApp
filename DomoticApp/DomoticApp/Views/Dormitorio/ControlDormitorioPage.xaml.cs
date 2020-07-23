@@ -4,13 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DomoticApp.Views.Dormitorio
 {
-
     public partial class ControlDormitorioPage : ContentPage
     {
         public int estado = 0;
@@ -44,7 +42,8 @@ namespace DomoticApp.Views.Dormitorio
                 content = await client.GetStringAsync(urlApagarLed1);
                 if (content != null)
                 {
-                    btnLuces.BackgroundColor = Color.FromHex("#D2E9F8");
+                    await DisplayAlert("PRUEBA", "Probando ", "OK");
+                    btnLuces.BackgroundColor = Color.AliceBlue;
                     btnLuces.TextColor = Color.FromHex("#166498");
                 }
                 else
