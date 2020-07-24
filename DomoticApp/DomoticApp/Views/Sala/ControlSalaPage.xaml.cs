@@ -30,25 +30,31 @@ namespace DomoticApp.Views.Sala
             {
                 content = await client.GetStringAsync(urlEncenderLed2);
                 if (content != null)
-                    await DisplayAlert("Aviso", "Luces encendidas. ", "OK");
+                {
+                    btnLuces.BackgroundColor = Color.FromHex("#739DB8");
+                    btnLuces.TextColor = Color.White;
+                }
                 else
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer " +
-                        "la conexión. ", "OK");
-
+                {
+                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+                }
                 estado = 0;
             }
             else
             {
                 content = await client.GetStringAsync(urlApagarLed2);
                 if (content != null)
-                    await DisplayAlert("Aviso", "Luces apagadas. ", "OK");
-
+                {
+                    btnLuces.BackgroundColor = Color.AliceBlue;
+                    btnLuces.TextColor = Color.FromHex("#166498");
+                }
                 else
+                {
                     await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión.", "OK");
+                }
                 estado = 1;
             }
         }
-
 
         private void btnAbanico_Clicked(object sender, EventArgs e)
         {

@@ -34,7 +34,9 @@ namespace DomoticApp.Views.Dormitorio
                     btnLuces.TextColor = Color.White;
                 }
                 else
+                {
                     await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+                }
                 estado = 1; 
             }
             else
@@ -42,12 +44,13 @@ namespace DomoticApp.Views.Dormitorio
                 content = await client.GetStringAsync(urlApagarLed1);
                 if (content != null)
                 {
-                    await DisplayAlert("PRUEBA", "Probando ", "OK");
                     btnLuces.BackgroundColor = Color.AliceBlue;
                     btnLuces.TextColor = Color.FromHex("#166498");
                 }
                 else
+                {
                     await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+                }
                 estado = 0;
             }        
         }

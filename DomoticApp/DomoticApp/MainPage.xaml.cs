@@ -27,6 +27,9 @@ namespace DomoticApp
         CorrectNetworkPage redCorrecta = new CorrectNetworkPage();
         IncorrectNetworkPage redIncorrecta = new IncorrectNetworkPage();
         ControlDormitorioPage dormitorio = new ControlDormitorioPage();
+        ControlCocinaPage cocina = new ControlCocinaPage();
+        ControlLavadoPage lavado = new ControlLavadoPage();
+        ControlSalaPage sala = new ControlSalaPage();
 
         [Obsolete]
         public MainPage()
@@ -53,7 +56,6 @@ namespace DomoticApp
             catch (Exception)
             {
                 RedIncorrecta();
-                
             }
         }
          
@@ -88,22 +90,22 @@ namespace DomoticApp
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlDormitorioPage()));
+            Navigation.PushAsync(new NavigationPage(dormitorio));
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlCocinaPage()));
+            Navigation.PushAsync(new NavigationPage(cocina));
         }
 
         private void btnAreaLavado_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlLavadoPage()));
+            Navigation.PushAsync(new NavigationPage(lavado));
         }
 
         private void btnSala_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlSalaPage()));
+            Navigation.PushAsync(new NavigationPage(sala));
         }
 
         private void btnBano_Clicked(object sender, EventArgs e)

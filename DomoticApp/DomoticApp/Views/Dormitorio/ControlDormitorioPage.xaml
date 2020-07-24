@@ -63,7 +63,6 @@
                                 <ColumnDefinition Width="145"/>
                             </Grid.ColumnDefinitions>
 
-
                             <Button Text="Luces"
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
