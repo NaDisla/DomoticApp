@@ -13,6 +13,7 @@ using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Lavado;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace DomoticApp
 {
@@ -25,28 +26,38 @@ namespace DomoticApp
         LoadingNetworkPage loadingRed = new LoadingNetworkPage();
         CorrectNetworkPage redCorrecta = new CorrectNetworkPage();
         IncorrectNetworkPage redIncorrecta = new IncorrectNetworkPage();
+        ControlDormitorioPage dormitorio = new ControlDormitorioPage();
+        ControlCocinaPage cocina = new ControlCocinaPage();
+        ControlLavadoPage lavado = new ControlLavadoPage();
+        ControlSalaPage sala = new ControlSalaPage();
 
         [Obsolete]
         public MainPage()
         {
             InitializeComponent();
             if (CrossConnectivity.Current.IsConnected)
-                RedCorrecta();
+                ValidandoRedes();
             else
                 RedIncorrecta();
         }
 
-        /*[Obsolete]
+        [Obsolete]
         async void ValidandoRedes()
         {
-            content = await client.GetStringAsync(urlApagarLed1);
-            if (CrossConnectivity.Current.IsConnected && content == null)
+            try
+            {
+                content = await client.GetStringAsync(urlApagarLed1);
+                if(content!=null)
+                {
+                    RedCorrecta();
+                }
+                    
+            }
+            catch (Exception)
+            {
                 RedIncorrecta();
-            else if (CrossConnectivity.Current.IsConnected && content != null)
-                RedCorrecta();
-            else
-                RedIncorrecta();
-        }*/
+            }
+        }
          
         [Obsolete]
         async void RedCorrecta()
@@ -69,29 +80,32 @@ namespace DomoticApp
         [Obsolete]
         async void RedIncorrecta()
         {
+            await PopupNavigation.PushAsync(loadingRed);
+            await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redIncorrecta);
-            await Task.Delay(2000);
+            await Task.Delay(10000);
+            System.Environment.Exit(0);
         }
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlDormitorioPage()));
+            Navigation.PushAsync(new NavigationPage(dormitorio));
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlCocinaPage()));
+            Navigation.PushAsync(new NavigationPage(cocina));
         }
 
         private void btnAreaLavado_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlLavadoPage()));
+            Navigation.PushAsync(new NavigationPage(lavado));
         }
 
         private void btnSala_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ControlSalaPage()));
+            Navigation.PushAsync(new NavigationPage(sala));
         }
 
         private void btnBano_Clicked(object sender, EventArgs e)
