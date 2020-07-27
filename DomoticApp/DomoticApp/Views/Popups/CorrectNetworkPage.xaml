@@ -12,7 +12,6 @@
              CloseWhenBackgroundIsClicked="True"
              HasSystemPadding="True">
     <pages:PopupPage.Animation>
-
         <popupAnimations:ScaleAnimation DurationIn="200"
                                    DurationOut="100"
                                    EasingIn="Linear"
@@ -30,7 +29,7 @@
            VerticalOptions="Center">
 
         <StackLayout HorizontalOptions="FillAndExpand">
-            <Label Text="Red conectada" 
+            <Label Text="¡Bienvenido! - Red conectada" 
                    TextColor="#052A48" 
                    FontSize="16"
                    FontFamily="{StaticResource RalewayBold}"/>

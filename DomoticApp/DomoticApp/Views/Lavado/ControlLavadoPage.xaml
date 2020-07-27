@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="133"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Source="Logo06_v2.png"
+                    <Image Source="LogoPages.png"
                            HeightRequest="105"
                            Grid.ColumnSpan="1"/>
                     <Label Text="Área de Lavado" 

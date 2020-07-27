@@ -24,26 +24,20 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" 
-                           Source="Logo05_v2.png"
+                           Source="LogoInicio.png"
                            Margin="0,25,0,0"
-                           HeightRequest="115"/>
-                    <Label Text="¡Bienvenido!" 
-                           FontAttributes="Bold" FontSize="25" 
-                           FlexLayout.AlignSelf="Center"
-                           Margin="25" Grid.Row="1"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
+                           HeightRequest="125"/>
                     <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="18" 
+                           FontSize="20" 
                            Grid.Row="2"
-                           TextColor="White"
+                           TextColor="#0E4265"
                            FlexLayout.AlignSelf="Center"
                            FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
+                           HorizontalTextAlignment="Center"
+                           Margin="0,25,0,0"/>
                     <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="18"
-                           TextColor="White"
+                           FontSize="20"
+                           TextColor="#0E4265"
                            FontFamily="{StaticResource RalewayBold}"
                            FlexLayout.AlignSelf="Center"
                            Grid.Row="3"
@@ -74,7 +68,8 @@
                                     ContentLayout="Top,25"
                                     Image="iconoDormitorio" 
                                     HorizontalOptions="Start"
-                                    Padding="25,15"/>
+                                    Padding="25,15"
+                                    CornerRadius="20"/>
                             <Button Grid.Row="0" Text="Cocina" 
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
@@ -85,7 +80,8 @@
                                     ContentLayout="Top,25"
                                     Image="iconoCocina" 
                                     HorizontalOptions="Center"
-                                    Padding="30,15"/>
+                                    Padding="30,15"
+                                    CornerRadius="20"/>
                             <Button Grid.Row="0" Text="Baño" 
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"

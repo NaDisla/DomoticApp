@@ -83,15 +83,11 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +166,6 @@
     <AndroidResource Include="Resources\drawable\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Logo05_v2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconoAbanico.png" />
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Logo05_v2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\iconoAbanico.png" />
@@ -272,9 +262,6 @@
     <AndroidResource Include="Resources\drawable-ldpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\Logo05_v2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\iconoAbanico.png" />
   </ItemGroup>
   <ItemGroup>
@@ -321,9 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Logo05_v2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\iconoAbanico.png" />
@@ -374,9 +358,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\Logo05_v2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoAbanico.png" />
   </ItemGroup>
   <ItemGroup>
@@ -423,9 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\Logo05_v2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAbanico.png" />
@@ -476,9 +454,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Logo05_v2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconoDormitorio.png" />
   </ItemGroup>
   <ItemGroup>
@@ -501,19 +476,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\drawable-hdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\Logo06_v2.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoInicio.png" />
     <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\Logo06_v2.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
     <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\Logo06_v2.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\Logo06_v2.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\Logo06_v2.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Logo06_v2.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\FondoModulo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\LogoInicio.png" />
     <Content Include="Resources\drawable\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable\Logo06_v2.png" />
+    <AndroidResource Include="Resources\drawable\LogoPages.png" />
+    <AndroidResource Include="Resources\drawable\LogoInicio.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\logoapp.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\logoapp.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\logoapp.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\logoapp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

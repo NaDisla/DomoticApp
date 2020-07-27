@@ -22,7 +22,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Source="Logo06_v2.png"
+                    <Image Source="LogoPages.png"
                            HeightRequest="75"
                            Grid.Row="0"
                            Margin="10"/>

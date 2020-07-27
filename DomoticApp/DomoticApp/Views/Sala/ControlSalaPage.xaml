@@ -28,7 +28,7 @@
                         <ColumnDefinition Width="133"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Source="Logo06_v2.png"
+                    <Image Source="LogoPages.png"
                            Margin="0,25,0,0"
                            HeightRequest="115"/>
                     <Label Text="Sala" 

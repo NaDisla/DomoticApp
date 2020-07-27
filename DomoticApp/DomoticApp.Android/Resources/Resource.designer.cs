@@ -10952,10 +10952,10 @@ namespace DomoticApp.Droid
 			public const int ic_mtrl_chip_close_circle = 2131165286;
 			
 			// aapt resource value: 0x7F070078
-			public const int Logo05_v2 = 2131165304;
+			public const int LogoInicio = 2131165304;
 			
 			// aapt resource value: 0x7F070079
-			public const int Logo06_v2 = 2131165305;
+			public const int LogoPages = 2131165305;
 			
 			// aapt resource value: 0x7F07007A
 			public const int mtrl_snackbar_background = 2131165306;
@@ -11972,6 +11972,9 @@ namespace DomoticApp.Droid
 			
 			// aapt resource value: 0x7F0C0002
 			public const int launcher_foreground = 2131492866;
+			
+			// aapt resource value: 0x7F0C0003
+			public const int logoapp = 2131492867;
 			
 			static Mipmap()
 			{
