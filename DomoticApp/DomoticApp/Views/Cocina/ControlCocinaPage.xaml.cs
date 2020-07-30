@@ -11,9 +11,8 @@ namespace DomoticApp.Views.Cocina
 {
     public partial class ControlCocinaPage : ContentPage
     {
-        public int estado = 1;
-        private const string urlEncenderLed3 = "http://10.0.0.17/C";
-        private const string urlApagarLed3 = "http://10.0.0.17/I";
+        public int estado = 0;
+        private const string urlEncenderLuz = "http://10.0.0.17/C";
         private readonly HttpClient client = new HttpClient();
         private string content;
 
@@ -24,33 +23,29 @@ namespace DomoticApp.Views.Cocina
 
         private async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            if (estado == 1)
+            content = await client.GetStringAsync(urlEncenderLuz);
+            if (content != null)
             {
-                content = await client.GetStringAsync(urlEncenderLed3);
-                if (content != null)
-                {
-                    btnLuces.BackgroundColor = Color.FromHex("#739DB8");
-                    btnLuces.TextColor = Color.White;
-                }
-                else
-                {
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-                } 
-                estado = 0;
+                CambiaColor(btnLuces);
             }
             else
             {
-                content = await client.GetStringAsync(urlApagarLed3);
-                if (content != null)
-                {
-                    btnLuces.BackgroundColor = Color.AliceBlue;
-                    btnLuces.TextColor = Color.FromHex("#166498");
-                } 
-                else
-                {
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-                }
-                estado = 1; 
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
+        }
+        void CambiaColor(Button btn)
+        {
+            if (estado == 0)
+            {
+                btn.BackgroundColor = Color.FromHex("#739DB8");
+                btn.TextColor = Color.White;
+                estado = 1;
+            }
+            else
+            {
+                btn.BackgroundColor = Color.AliceBlue;
+                btn.TextColor = Color.FromHex("#166498");
+                estado = 0;
             }
         }
     }
