@@ -20,7 +20,7 @@ namespace DomoticApp
     [DesignTimeVisible(true)]
     public partial class MainPage : ContentPage
     { 
-        private const string urlApagarLed1 = "http://10.0.0.17/L";
+        private const string urlTarjeta = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
         private string content;
         LoadingNetworkPage loadingRed = new LoadingNetworkPage();
@@ -46,7 +46,7 @@ namespace DomoticApp
         {
             try
             {
-                content = await client.GetStringAsync(urlApagarLed1);
+                content = await client.GetStringAsync(urlTarjeta);
                 if(content!=null)
                 {
                     RedCorrecta();
@@ -62,19 +62,19 @@ namespace DomoticApp
         [Obsolete]
         async void RedCorrecta()
         {
-            content = await client.GetStringAsync(urlApagarLed1);
+            //content = await client.GetStringAsync(urlTarjeta);
             await PopupNavigation.PushAsync(loadingRed);
             await Task.Delay(2500);
-            string acceso, clave;
+            /*string acceso, clave;
             acceso = content.Substring(0, 9);
-            clave = content.Substring(9, 8);
+            clave = content.Substring(9, 8);*/
 
-            if (acceso == "TEJADANET" && clave == "NT190875")
-            {
+            //if (acceso == "TEJADANET" && clave == "NT190875")
+            //{
                 await PopupNavigation.RemovePageAsync(loadingRed);
                 await PopupNavigation.PushAsync(redCorrecta);
                 await Task.Delay(2000);
-            }
+            //}
         }
 
         [Obsolete]

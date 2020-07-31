@@ -15,6 +15,8 @@ namespace DomoticApp.Views.Sala
     {
         public int estado = 0;
         private const string urlEncenderLuz = "http://10.0.0.17/S";
+        private const string urlEncenderAbanico = "http://10.0.0.17/B";
+        private const string urlTarjeta = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
         private string content;
 
@@ -36,14 +38,30 @@ namespace DomoticApp.Views.Sala
             }
         }
 
-        private void btnAbanico_Clicked(object sender, EventArgs e)
+        private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
-
+            content = await client.GetStringAsync(urlEncenderAbanico);
+            if (content != null)
+            {
+                CambiaColor(btnAbanico);
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
         }
 
-        private void btnTelevision_Clicked(object sender, EventArgs e)
+        private async void btnTelevision_Clicked(object sender, EventArgs e)
         {
-
+            content = await client.GetStringAsync(urlTarjeta);
+            if (content != null)
+            {
+                await DisplayAlert("Temperatura",content.Substring(0,18) + "°C","OK");
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
         }
 
         void CambiaColor(Button btn)

@@ -10,7 +10,7 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
-
+            Device.SetFlags(new string[] { "Shapes_Experimental" });
             MainPage = new NavigationPage(new MainPage());
         }
 

@@ -19,7 +19,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -30,7 +29,9 @@
 
                     <Image Source="LogoPages.png"
                            Margin="0,25,0,0"
-                           HeightRequest="115"/>
+                           HeightRequest="90"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"/>
                     <Label Text="Cocina" 
                            FontAttributes="Bold" FontSize="25" 
                            FlexLayout.AlignSelf="Center"
@@ -38,21 +39,7 @@
                            TextColor="White"
                            FontFamily="{StaticResource RalewayBold}"
                            HorizontalTextAlignment="Center"/>
-                    <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="18" 
-                           Grid.Row="2"
-                           TextColor="White"
-                           FlexLayout.AlignSelf="Center"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="18"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           FlexLayout.AlignSelf="Center"
-                           Grid.Row="3"
-                           HorizontalTextAlignment="Center"/>
-                    <Button Grid.Row="4"
+                    <Button Grid.Row="2"
                             Text="Luces"
                             TextColor="#175E8D"
                             BackgroundColor="AliceBlue"
@@ -63,6 +50,13 @@
                             Image="iconoLuz" 
                             HorizontalOptions="Start"
                             Padding="25,15"/>
+                    <Ellipse
+                        Fill="#166498"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        WidthRequest="220"
+                        HeightRequest="324"
+                        HorizontalOptions="Start"/>
                 </Grid>
             </FlexLayout>
         </Grid>
