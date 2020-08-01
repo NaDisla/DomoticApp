@@ -9,7 +9,7 @@
              xmlns:popupAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              InputTransparent="False" 
              Padding="20,100"
-             CloseWhenBackgroundIsClicked="True"
+             CloseWhenBackgroundIsClicked="False"
              HasSystemPadding="True">
     <pages:PopupPage.Animation>
         <popupAnimations:ScaleAnimation DurationIn="200"
@@ -46,8 +46,7 @@
                                    HeightRequest="50" 
                                    WidthRequest="50"/>
 
-                <Label Text="No se ha detectado conexión con la red de la vivienda. 
-                       Si está conectado desde otra red, favor de acceder a través de VPN." 
+                <Label Text="No se ha detectado conexión con la red de la vivienda. Si está conectado desde otra red, favor de acceder a través de VPN." 
                        TextColor="#052A48" 
                        FontSize="13.9"
                        Margin="15,10,0,0"

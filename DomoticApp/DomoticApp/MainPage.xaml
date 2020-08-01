@@ -27,21 +27,6 @@
                            Source="LogoInicio.png"
                            Margin="0,25,0,0"
                            HeightRequest="125"/>
-                    <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="20" 
-                           Grid.Row="2"
-                           TextColor="#0E4265"
-                           FlexLayout.AlignSelf="Center"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"
-                           Margin="0,25,0,0"/>
-                    <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="20"
-                           TextColor="#0E4265"
-                           FontFamily="{StaticResource RalewayBold}"
-                           FlexLayout.AlignSelf="Center"
-                           Grid.Row="3"
-                           HorizontalTextAlignment="Center"/>
 
                     <FlexLayout Grid.Row="4" 
                                 Direction="Column" 

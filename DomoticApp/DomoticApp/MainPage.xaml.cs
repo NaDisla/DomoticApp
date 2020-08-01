@@ -19,7 +19,7 @@ namespace DomoticApp
 {
     [DesignTimeVisible(true)]
     public partial class MainPage : ContentPage
-    { 
+    {
         private const string urlTarjeta = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
         private string content;
@@ -47,34 +47,26 @@ namespace DomoticApp
             try
             {
                 content = await client.GetStringAsync(urlTarjeta);
-                if(content!=null)
+                if (content != null)
                 {
                     RedCorrecta();
                 }
-                    
+
             }
             catch (Exception)
             {
                 RedIncorrecta();
             }
         }
-         
+
         [Obsolete]
         async void RedCorrecta()
         {
-            //content = await client.GetStringAsync(urlTarjeta);
             await PopupNavigation.PushAsync(loadingRed);
             await Task.Delay(2500);
-            /*string acceso, clave;
-            acceso = content.Substring(0, 9);
-            clave = content.Substring(9, 8);*/
-
-            //if (acceso == "TEJADANET" && clave == "NT190875")
-            //{
-                await PopupNavigation.RemovePageAsync(loadingRed);
-                await PopupNavigation.PushAsync(redCorrecta);
-                await Task.Delay(2000);
-            //}
+            await PopupNavigation.RemovePageAsync(loadingRed);
+            await PopupNavigation.PushAsync(redCorrecta);
+            await Task.Delay(2000);
         }
 
         [Obsolete]
@@ -84,8 +76,6 @@ namespace DomoticApp
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redIncorrecta);
-            await Task.Delay(10000);
-            System.Environment.Exit(0);
         }
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
