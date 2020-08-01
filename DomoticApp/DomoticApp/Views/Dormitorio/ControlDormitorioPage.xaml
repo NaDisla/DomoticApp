@@ -18,8 +18,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Source="LogoPages.png"
@@ -32,27 +30,14 @@
                            Margin="25" Grid.Row="1"
                            TextColor="White"
                            FontFamily="{StaticResource RalewayBold}"/>
-                    <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="18" 
-                           Grid.Row="2"
-                           TextColor="White"
-                           FlexLayout.AlignSelf="Center"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="18"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           FlexLayout.AlignSelf="Center"
-                           Grid.Row="3"
-                           HorizontalTextAlignment="Center"/>
 
-                    <FlexLayout Grid.Row="4" 
+                    <FlexLayout Grid.Row="2" 
                                 Direction="Column" 
                                 JustifyContent="End"
                                 AlignItems="Start">
                         <Grid Padding="1,30,30,30">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="140"/>
                                 <RowDefinition Height="140"/>
                                 <RowDefinition Height="140"/>
                                 <RowDefinition Height="140"/>
@@ -72,9 +57,9 @@
                                     ContentLayout="Top,25"
                                     Image="iconoLuz" 
                                     HorizontalOptions="Start"
-                                    Padding="25,15"/>
-                            <Button Grid.Row="0"
-                                    Text="Abanico"
+                                    Padding="25,15"
+                                    CornerRadius="15"/>
+                            <Button Text="Abanico"
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
                                     FontFamily="{StaticResource RalewayBold}"
@@ -84,9 +69,9 @@
                                     Image="iconoAbanico" 
                                     HorizontalOptions="Start"
                                     Padding="30,15"
-                                    Grid.Column="1"/>
-                            <Button Grid.Row="0"
-                                    Text="Televisión"
+                                    Grid.Column="1"
+                                    CornerRadius="15"/>
+                            <Button Text="Televisión"
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
                                     FontFamily="{StaticResource RalewayBold}"
@@ -96,10 +81,78 @@
                                     Image="iconoTV" 
                                     HorizontalOptions="Start"
                                     Padding="35,15"
-                                    Grid.Column="2"/>
+                                    Grid.Column="2"
+                                    CornerRadius="15"/>
+                            <Frame HeightRequest="330" 
+                                           WidthRequest="190" 
+                                           CornerRadius="190" 
+                                           HorizontalOptions="Start" 
+                                           VerticalOptions="Start" 
+                                           Margin="0,20,0,10" 
+                                           Padding="0" 
+                                           BackgroundColor="#166498"
+                                           Grid.Row="1"
+                                           Grid.RowSpan="10"
+                                           Grid.ColumnSpan="2">
+                                <StackLayout>
+                                    <Label Text="Temperatura" 
+                                           TextColor="White" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           HorizontalTextAlignment="Center"
+                                           FontFamily="{StaticResource RalewayBold}"
+                                           FontSize="Medium"
+                                           Margin="0,30,0,10"/>
+                                    <Label TextColor="White"
+                                                 HorizontalOptions="Center" 
+                                                 VerticalOptions="Center" 
+                                                 HorizontalTextAlignment="Center"
+                                                 x:Name="lblTemp"
+                                                 FontFamily="{StaticResource RalewayBold}"
+                                                 FontSize="Title"/>
+                                    <Image Source="iconoTemperatura.png"
+                                           Aspect="AspectFit"
+                                           Margin="20"/>
+                                </StackLayout>
+                            </Frame>
+                            <Frame HeightRequest="330" 
+                                           WidthRequest="180" 
+                                           CornerRadius="190" 
+                                           HorizontalOptions="Start" 
+                                           VerticalOptions="Start" 
+                                           Margin="-60,20,30,10" 
+                                           Padding="0" 
+                                           BackgroundColor="#8CC0E2"
+                                           Grid.Row="1"
+                                           Grid.Column="2"
+                                           Grid.RowSpan="10"
+                                           Grid.ColumnSpan="2">
+                                <StackLayout>
+                                    <Label Text="Humedad" 
+                                           TextColor="#166498" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           HorizontalTextAlignment="Center"
+                                           FontFamily="{StaticResource RalewayBold}"
+                                           FontSize="Medium"
+                                           Margin="0,30,0,10"/>
+                                    <Label TextColor="#166498"
+                                                 HorizontalOptions="Center" 
+                                                 VerticalOptions="Center" 
+                                                 HorizontalTextAlignment="Center"
+                                                 x:Name="lblHum"
+                                                 x:FieldModifier="public"
+                                                 FontFamily="{StaticResource RalewayBold}"
+                                                 FontSize="Title"/>
+                                    <Image Source="iconoHumedad.png"
+                                           Aspect="AspectFit"
+                                           Margin="20"
+                                           HeightRequest="120"/>
+                                </StackLayout>
+                                
+                            </Frame>
                         </Grid>
                     </FlexLayout>
-
                     
                 </Grid>
             </FlexLayout>

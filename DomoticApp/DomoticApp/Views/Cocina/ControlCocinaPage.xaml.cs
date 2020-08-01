@@ -19,6 +19,7 @@ namespace DomoticApp.Views.Cocina
         public ControlCocinaPage()
         {
             InitializeComponent();
+            
         }
 
         private async void btnLuces_Clicked(object sender, EventArgs e)

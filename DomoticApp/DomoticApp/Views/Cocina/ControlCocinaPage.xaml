@@ -50,13 +50,19 @@
                             Image="iconoLuz" 
                             HorizontalOptions="Start"
                             Padding="25,15"/>
-                    <Ellipse
+                    <!--Ellipse
                         Fill="#166498"
                         Grid.Row="3"
                         Grid.ColumnSpan="2"
                         WidthRequest="220"
                         HeightRequest="324"
-                        HorizontalOptions="Start"/>
+                        HorizontalOptions="Start"
+
+                       /-->
+
+
+
+
                 </Grid>
             </FlexLayout>
         </Grid>

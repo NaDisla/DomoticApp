@@ -51,17 +51,9 @@ namespace DomoticApp.Views.Sala
             }
         }
 
-        private async void btnTelevision_Clicked(object sender, EventArgs e)
+        private void btnTelevision_Clicked(object sender, EventArgs e)
         {
-            content = await client.GetStringAsync(urlTarjeta);
-            if (content != null)
-            {
-                await DisplayAlert("Temperatura",content.Substring(0,18) + "°C","OK");
-            }
-            else
-            {
-                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-            }
+            
         }
 
         void CambiaColor(Button btn)

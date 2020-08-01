@@ -12,6 +12,9 @@ namespace DomoticApp.Views.Dormitorio
     public partial class ControlDormitorioPage : ContentPage
     {
         public int estado = 0;
+        public string Temperatura { get; set; }
+        public string Humedad { get; set; }
+        private const string urlTarjeta = "http://10.0.0.17";
         private const string urlEncenderLuz = "http://10.0.0.17/D";
         private const string urlEncenderAbanico = "http://10.0.0.17/A";
         private readonly HttpClient client = new HttpClient();
@@ -21,7 +24,25 @@ namespace DomoticApp.Views.Dormitorio
         {
             InitializeComponent();
         }
-
+        protected async override void OnAppearing()
+        {
+            content = await client.GetStringAsync(urlTarjeta);
+            var cortando = content.Split(';');
+            string temperatura = cortando[0];
+            string humedad = cortando[1];
+            if (content != null)
+            {
+                Temperatura = temperatura + "°C";
+                Humedad = humedad + "%";
+                lblTemp.Text = Temperatura;
+                lblHum.Text = Humedad;
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
+            base.OnAppearing();
+        }
         private async void btnLuces_Clicked(object sender, EventArgs e)
         {
             content = await client.GetStringAsync(urlEncenderLuz);
@@ -33,6 +54,7 @@ namespace DomoticApp.Views.Dormitorio
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
+            
         }
 
         private async void btnAbanico_Clicked(object sender, EventArgs e)
@@ -46,6 +68,7 @@ namespace DomoticApp.Views.Dormitorio
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
+            
         }
 
         private void btnTelevision_Clicked(object sender, EventArgs e)
