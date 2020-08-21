@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DomoticApp.Views.Dormitorio;
-using Rg.Plugins.Popup.Pages;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DomoticApp.Views.Popups
+namespace DomoticApp.Views.Bath
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CorrectNetworkPage : PopupPage
+    public partial class ControlBathPage : ContentPage
     {
-        public CorrectNetworkPage()
+        public ControlBathPage()
         {
             InitializeComponent();
         }

@@ -21,6 +21,7 @@ namespace DomoticApp
     public partial class MainPage : ContentPage
     {
         private const string urlTarjeta = "http://10.0.0.17";
+        private const string urlDormitorio = "http://10.0.0.17/D";
         private readonly HttpClient client = new HttpClient();
         private string content;
         LoadingNetworkPage loadingRed = new LoadingNetworkPage();
@@ -39,6 +40,24 @@ namespace DomoticApp
                 ValidandoRedes();
             else
                 RedIncorrecta();
+        }
+
+        protected async override void OnAppearing()
+        {
+            content = await client.GetStringAsync(urlDormitorio);
+            var cortando = content.Split(';');
+            string estadoDormitorio = cortando[2];
+            if (estadoDormitorio == "1\r\n")
+            {
+                btnRecibidor.Text = "Encendido";
+                btnRecibidor.BackgroundColor = Color.DarkBlue;
+            }
+            else if (estadoDormitorio == "0\r\n")
+            {
+                btnRecibidor.Text = "Apagado";
+                btnRecibidor.BackgroundColor = Color.AliceBlue;
+            }
+            base.OnAppearing();
         }
 
         [Obsolete]
@@ -66,7 +85,6 @@ namespace DomoticApp
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redCorrecta);
-            await Task.Delay(2000);
         }
 
         [Obsolete]

@@ -13,6 +13,9 @@
             <OnPlatform x:Key="RalewayRegular" x:TypeArguments="x:String">
                 <On Platform="Android" Value="Raleway-Regular.ttf#Raleway-Regular"/>
             </OnPlatform>
+            <OnPlatform x:Key="RalewaySemiBold" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Raleway-SemiBold.ttf#Raleway-SemiBold"/>
+            </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

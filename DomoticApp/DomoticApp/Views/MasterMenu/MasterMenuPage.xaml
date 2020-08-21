@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             x:Class="DomoticApp.Views.MasterMenu.MasterMenuPage"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False">
+    
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <Grid BackgroundColor="#D3E7ED">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <StackLayout HorizontalOptions="CenterAndExpand" 
+                                 VerticalOptions="CenterAndExpand">
+                        <Image Source="LogoPages.png" 
+                               Aspect="AspectFit" 
+                               WidthRequest="195" 
+                               HeightRequest="145"
+                               Margin="0,-70,0,0"/>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Margin="10,20,10,0" Grid.Row="1" Spacing="15">
+                    <ScrollView>
+                        <ListView x:Name="listaMenu"
+                                  WidthRequest="120"
+                                  RowHeight="60"
+                                  SeparatorVisibility="None" 
+                                  BackgroundColor="#D3E7ED" 
+                                  ItemSelected="listaMenu_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout VerticalOptions="FillAndExpand" 
+                                                     Orientation="Horizontal" 
+                                                     Padding="20,10,0,10" 
+                                                     Spacing="20">
+                                            <Image Source="{Binding Icon}" 
+                                                   WidthRequest="40" 
+                                                   HeightRequest="40" 
+                                                   VerticalOptions="Center" />
+                                            <Label Text="{Binding Title}" 
+                                                   FontSize="17" 
+                                                   VerticalOptions="Center" 
+                                                   TextColor="#0E4265"
+                                                   FontFamily="{StaticResource RalewaySemiBold}"
+                                                   FontAttributes="Bold"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

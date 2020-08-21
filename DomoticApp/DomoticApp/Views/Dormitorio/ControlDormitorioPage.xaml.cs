@@ -19,10 +19,11 @@ namespace DomoticApp.Views.Dormitorio
         private const string urlEncenderAbanico = "http://10.0.0.17/A";
         private readonly HttpClient client = new HttpClient();
         private string content;
-
+        public string estadoDormitorio;
+        
         public ControlDormitorioPage()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
         protected async override void OnAppearing()
         {
@@ -43,9 +44,11 @@ namespace DomoticApp.Views.Dormitorio
             }
             base.OnAppearing();
         }
-        private async void btnLuces_Clicked(object sender, EventArgs e)
+        public async void btnLuces_Clicked(object sender, EventArgs e)
         {
             content = await client.GetStringAsync(urlEncenderLuz);
+            /*var cortando = content.Split(';');
+            estadoDormitorio = cortando[2];*/
             if (content != null)
             {
                 CambiaColor(btnLuces);

@@ -72,6 +72,9 @@
     <AndroidAsset Include="..\DomoticApp\Fonts\Raleway-Regular.ttf">
       <Link>Assets\Raleway-Regular.ttf</Link>
     </AndroidAsset>
+    <AndroidAsset Include="..\DomoticApp\Fonts\Raleway-SemiBold.ttf">
+      <Link>Assets\Raleway-SemiBold.ttf</Link>
+    </AndroidAsset>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -478,9 +481,11 @@
     <Content Include="Resources\drawable-hdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-hdpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoOjo.png" />
     <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoOjo.png" />
     <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
@@ -493,6 +498,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\LogoInicio.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\LogoInicio.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoOjo.png" />
     <Content Include="Resources\drawable\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable\LogoPages.png" />
     <AndroidResource Include="Resources\drawable\LogoInicio.png" />
@@ -500,6 +509,7 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\logoapp.png" />
+    <AndroidResource Include="Resources\drawable\iconoOjo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

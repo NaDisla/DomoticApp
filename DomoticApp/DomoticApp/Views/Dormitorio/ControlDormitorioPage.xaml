@@ -53,6 +53,7 @@
                                     BackgroundColor="AliceBlue"
                                     FontFamily="{StaticResource RalewayBold}"
                                     x:Name="btnLuces"
+                                    x:FieldModifier="public"
                                     Clicked="btnLuces_Clicked"
                                     ContentLayout="Top,25"
                                     Image="iconoLuz" 
