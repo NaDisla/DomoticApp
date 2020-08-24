@@ -482,10 +482,14 @@
     <AndroidResource Include="Resources\drawable-hdpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-hdpi\LogoInicio.png" />
     <AndroidResource Include="Resources\drawable-hdpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoFlecha.png" />
     <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
     <AndroidResource Include="Resources\drawable-ldpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoFlecha.png" />
     <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
@@ -502,6 +506,14 @@
     <AndroidResource Include="Resources\drawable-xhdpi\iconoOjo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoOjo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoFlecha.png" />
     <Content Include="Resources\drawable\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable\LogoPages.png" />
     <AndroidResource Include="Resources\drawable\LogoInicio.png" />
@@ -510,6 +522,8 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\logoapp.png" />
     <AndroidResource Include="Resources\drawable\iconoOjo.png" />
+    <AndroidResource Include="Resources\drawable\iconMenu.png" />
+    <AndroidResource Include="Resources\drawable\iconoFlecha.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

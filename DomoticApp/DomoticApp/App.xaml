@@ -17,5 +17,27 @@
                 <On Platform="Android" Value="Raleway-SemiBold.ttf#Raleway-SemiBold"/>
             </OnPlatform>
         </ResourceDictionary>
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="Transparent"/>
+        </Style>
+        <Style TargetType="Image" x:Key="FondoPages">
+            <Setter Property="Source" Value="FondoModulo.png"/>
+            <Setter Property="Aspect" Value="Fill"/>
+            <Setter Property="Margin" Value="-30,-25,-30,-20"/>
+        </Style>
+        <Style TargetType="ImageButton" x:Key="BtnMenu">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10,20,0,0"/>
+            <Setter Property="Source" Value="iconMenu.png"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+        <Style TargetType="ImageButton" x:Key="BtnRegreso">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10,20,0,0"/>
+            <Setter Property="Source" Value="iconoFlecha.png"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
     </Application.Resources>
 </Application>

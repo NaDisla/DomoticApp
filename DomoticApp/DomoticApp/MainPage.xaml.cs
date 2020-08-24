@@ -32,17 +32,18 @@ namespace DomoticApp
         ControlLavadoPage lavado = new ControlLavadoPage();
         ControlSalaPage sala = new ControlSalaPage();
 
-        [Obsolete]
-        public MainPage()
+        //[Obsolete]
+        public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
-            if (CrossConnectivity.Current.IsConnected)
+            btnMenu.Clicked += (s, e) => solicitudMenu();
+            /*if (CrossConnectivity.Current.IsConnected)
                 ValidandoRedes();
             else
-                RedIncorrecta();
+                RedIncorrecta();*/
         }
 
-        protected async override void OnAppearing()
+        /*protected async override void OnAppearing()
         {
             content = await client.GetStringAsync(urlDormitorio);
             var cortando = content.Split(';');
@@ -58,10 +59,10 @@ namespace DomoticApp
                 btnRecibidor.BackgroundColor = Color.AliceBlue;
             }
             base.OnAppearing();
-        }
+        }*/
 
-        [Obsolete]
-        async void ValidandoRedes()
+        //[Obsolete]
+        /*async void ValidandoRedes()
         {
             try
             {
@@ -76,25 +77,25 @@ namespace DomoticApp
             {
                 RedIncorrecta();
             }
-        }
+        }*/
 
-        [Obsolete]
-        async void RedCorrecta()
-        {
-            await PopupNavigation.PushAsync(loadingRed);
-            await Task.Delay(2500);
-            await PopupNavigation.RemovePageAsync(loadingRed);
-            await PopupNavigation.PushAsync(redCorrecta);
-        }
+        //[Obsolete]
+        //async void RedCorrecta()
+        //{
+        //    await PopupNavigation.PushAsync(loadingRed);
+        //    await Task.Delay(2500);
+        //    await PopupNavigation.RemovePageAsync(loadingRed);
+        //    await PopupNavigation.PushAsync(redCorrecta);
+        //}
 
-        [Obsolete]
-        async void RedIncorrecta()
-        {
-            await PopupNavigation.PushAsync(loadingRed);
-            await Task.Delay(2500);
-            await PopupNavigation.RemovePageAsync(loadingRed);
-            await PopupNavigation.PushAsync(redIncorrecta);
-        }
+        //[Obsolete]
+        //async void RedIncorrecta()
+        //{
+        //    await PopupNavigation.PushAsync(loadingRed);
+        //    await Task.Delay(2500);
+        //    await PopupNavigation.RemovePageAsync(loadingRed);
+        //    await PopupNavigation.PushAsync(redIncorrecta);
+        //}
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)
         {

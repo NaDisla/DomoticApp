@@ -4,14 +4,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DomoticApp.MainPage">
-
+             x:Class="DomoticApp.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions">
     <ContentPage.Content>
         <Grid>
-            <Image Source="FondoInicio.png"
+            <Image Source="FondoInicio.png" 
                    Aspect="Fill"
                    Margin="-30,-25,-30,-20"/>
-            <FlexLayout Direction="Column" 
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Style="{StaticResource BtnMenu}"
+                                 x:Name="btnMenu"/>
+                    <StackLayout Grid.Column="1">
+                    <Image Source="LogoInicio.png"
+                           HeightRequest="105"
+                           Margin="-30,15,0,0"/>
+                    </StackLayout>
+                    <!--FlexLayout Direction="Column" 
                         AlignItems="Center">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -21,12 +38,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
-                    <Image Grid.Row="0" 
-                           Source="LogoInicio.png"
-                           Margin="0,25,0,0"
-                           HeightRequest="125"/>
-
+                    
                     <FlexLayout Grid.Row="4" 
                                 Direction="Column" 
                                 JustifyContent="End"
@@ -77,7 +89,7 @@
                                     Padding="35,15"
                                     x:Name="btnBano"
                                     Clicked="btnBano_Clicked"/>
-                            
+
                             <Button Grid.Row="1" Text="Área de Lavado" 
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
@@ -105,13 +117,11 @@
                                     BackgroundColor="AliceBlue"
                                     Grid.Column="2"
                                     FontFamily="{StaticResource RalewayBold}"
-                                    
-                                    
                                     HorizontalOptions="End"
                                     Padding="32,15"
                                     x:Name="btnRecibidor"
                                     Clicked="btnRecibidor_Clicked"/>
-                            
+
                             <Button Grid.Row="2" Text="Piscina" 
                                     TextColor="#175E8D"
                                     BackgroundColor="AliceBlue"
@@ -146,11 +156,10 @@
                                     Clicked="btnExteriores_Clicked"/>
                         </Grid>
                     </FlexLayout>
-                    
+                </>
+            </-->
                 </Grid>
-            </FlexLayout>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
-
-
 </ContentPage>

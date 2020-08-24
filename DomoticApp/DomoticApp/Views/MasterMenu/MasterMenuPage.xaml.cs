@@ -4,7 +4,6 @@ using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
-using DomoticApp.Views.Monitoreo;
 using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
@@ -23,15 +22,17 @@ namespace DomoticApp.Views.MasterMenu
     public partial class MasterMenuPage : MasterDetailPage
     {
         public List<MasterMenuItems> elementosMenu {get; set;}
+        ViewCell ultimaCelda;
         public MasterMenuPage()
         {
             InitializeComponent();
+            Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();
-            
+
             MasterMenuItems pagMonitoreo = new MasterMenuItems()
             {
                 Icon = "iconoOjo.png",
-                TargetType = typeof(PanelMonitoreoPage),
+                TargetType = typeof(MainPage),
                 Title = "Monitorear"
             };
             elementosMenu.Add(pagMonitoreo);
@@ -43,7 +44,7 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Dormitorio"
             };
             elementosMenu.Add(pagDormitorio);
-            
+
             MasterMenuItems pagCocina = new MasterMenuItems()
             {
                 Icon = "iconoCocina.png",
@@ -51,7 +52,7 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Cocina"
             };
             elementosMenu.Add(pagCocina);
-            
+
             MasterMenuItems pagBath = new MasterMenuItems()
             {
                 Icon = "iconoBano.png",
@@ -59,7 +60,7 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Baño"
             };
             elementosMenu.Add(pagBath);
-            
+
             MasterMenuItems pagLavado = new MasterMenuItems()
             {
                 Icon = "iconoLavado.png",
@@ -67,7 +68,7 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Área de Lavado"
             };
             elementosMenu.Add(pagLavado);
-            
+
             MasterMenuItems pagSala = new MasterMenuItems()
             {
                 Icon = "iconoSala.png",
@@ -108,9 +109,37 @@ namespace DomoticApp.Views.MasterMenu
             };
             elementosMenu.Add(pagExteriores);
 
+            MasterMenuItems pagTest = new MasterMenuItems()
+            {
+                Icon = "iconoExterior.png",
+                TargetType = typeof(ControlExterioresPage),
+                Title = "Test"
+            };
+            elementosMenu.Add(pagTest);
+
+            MasterMenuItems pagTest2 = new MasterMenuItems()
+            {
+                Icon = "iconoExterior.png",
+                TargetType = typeof(ControlExterioresPage),
+                Title = "Otro Test"
+            };
+            elementosMenu.Add(pagTest2);
+
+            MasterMenuItems pagTest3 = new MasterMenuItems()
+            {
+                Icon = "iconoExterior.png",
+                TargetType = typeof(ControlExterioresPage),
+                Title = "Otro Test 3"
+            };
+            elementosMenu.Add(pagTest3);
+
             listaMenu.ItemsSource = elementosMenu;
-            Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(MainPage)));
             listaMenu.ItemSelected += listaMenu_ItemSelected;
+        }
+
+        private void SolicitudMenu()
+        {
+            IsPresented = !IsPresented;
         }
 
         private void listaMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -118,6 +147,18 @@ namespace DomoticApp.Views.MasterMenu
             MasterMenuItems pagina = e.SelectedItem as MasterMenuItems;
             Detail = new NavigationPage((Page)Activator.CreateInstance(pagina.TargetType));
             IsPresented = false;
+        }
+
+        private void CeldaMenu_Tapped(object sender, EventArgs e)
+        {
+            if (ultimaCelda != null)
+                ultimaCelda.View.BackgroundColor = Color.Default;
+            var viewCell = (ViewCell)sender;
+            if (viewCell.View != null)
+            {
+                viewCell.View.BackgroundColor = Color.FromHex("#A5CDDB");
+                ultimaCelda = viewCell;
+            }
         }
     }
 }

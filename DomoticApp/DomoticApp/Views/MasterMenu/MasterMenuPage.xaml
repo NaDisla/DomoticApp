@@ -5,59 +5,55 @@
              x:Class="DomoticApp.Views.MasterMenu.MasterMenuPage"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False">
-    
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu">
-            <Grid BackgroundColor="#D3E7ED">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid>
-                    <StackLayout HorizontalOptions="CenterAndExpand" 
-                                 VerticalOptions="CenterAndExpand">
+        <ContentPage Title="Menu"
+                     BackgroundColor="Transparent">
+            <Frame CornerRadius="25"
+                   BackgroundColor="#D3E7ED"
+                   Margin="-20,0,0,0"
+                   Padding="0,0,-20,5">
+                <StackLayout>
+                    <StackLayout HorizontalOptions="Center" 
+                                 VerticalOptions="StartAndExpand">
                         <Image Source="LogoPages.png" 
-                               Aspect="AspectFit" 
-                               WidthRequest="195" 
-                               HeightRequest="145"
-                               Margin="0,-70,0,0"/>
+                               Aspect="AspectFit"
+                               WidthRequest="195"
+                               HeightRequest="95"/>
                     </StackLayout>
-                </Grid>
-
-                <StackLayout Margin="10,20,10,0" Grid.Row="1" Spacing="15">
-                    <ScrollView>
+                    <StackLayout HorizontalOptions="StartAndExpand"
+                                 VerticalOptions="StartAndExpand">
                         <ListView x:Name="listaMenu"
-                                  WidthRequest="120"
                                   RowHeight="60"
-                                  SeparatorVisibility="None" 
+                                  SeparatorVisibility="None"
                                   BackgroundColor="#D3E7ED" 
                                   ItemSelected="listaMenu_ItemSelected">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell>
+                                    <ViewCell x:Name="CeldaMenu"
+                                              Tapped="CeldaMenu_Tapped">
                                         <StackLayout VerticalOptions="FillAndExpand" 
-                                                     Orientation="Horizontal" 
-                                                     Padding="20,10,0,10" 
-                                                     Spacing="20">
+                                                     Orientation="Horizontal"
+                                                     Padding="20,10,0,10" Spacing="20"
+                                                     Margin="15,0,0,0">
                                             <Image Source="{Binding Icon}" 
-                                                   WidthRequest="40" 
-                                                   HeightRequest="40" 
-                                                   VerticalOptions="Center" />
+                                                           WidthRequest="40" 
+                                                           HeightRequest="40" 
+                                                           VerticalOptions="Center" />
                                             <Label Text="{Binding Title}" 
-                                                   FontSize="17" 
-                                                   VerticalOptions="Center" 
-                                                   TextColor="#0E4265"
-                                                   FontFamily="{StaticResource RalewaySemiBold}"
-                                                   FontAttributes="Bold"/>
+                                                           FontSize="17" 
+                                                           VerticalOptions="Center" 
+                                                           TextColor="#0E4265"
+                                                           FontFamily="{StaticResource RalewaySemiBold}"/>
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                    </ScrollView>
+                    </StackLayout>
                 </StackLayout>
-            </Grid>
+            </Frame>
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

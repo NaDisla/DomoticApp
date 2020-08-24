@@ -1,4 +1,5 @@
 ﻿using DomoticApp.Views.MasterMenu;
+using Plugin.SharedTransitions;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -6,8 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp
 {
     public partial class App : Application
-    { 
-        [Obsolete]
+    {
         public App()
         {
             InitializeComponent();
