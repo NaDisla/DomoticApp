@@ -22,20 +22,21 @@ namespace DomoticApp.Views.MasterMenu
     public partial class MasterMenuPage : MasterDetailPage
     {
         public List<MasterMenuItems> elementosMenu {get; set;}
-        ViewCell ultimaCelda;
+        ViewCell ultimaCelda, viewCell;
+        MasterMenuItems pagina;
         public MasterMenuPage()
         {
             InitializeComponent();
             Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();
-
-            MasterMenuItems pagMonitoreo = new MasterMenuItems()
+            
+            MasterMenuItems pagInicio = new MasterMenuItems()
             {
                 Icon = "iconoOjo.png",
                 TargetType = typeof(MainPage),
                 Title = "Monitorear"
             };
-            elementosMenu.Add(pagMonitoreo);
+            elementosMenu.Add(pagInicio);
 
             MasterMenuItems pagDormitorio = new MasterMenuItems()
             {
@@ -135,6 +136,13 @@ namespace DomoticApp.Views.MasterMenu
 
             listaMenu.ItemsSource = elementosMenu;
             listaMenu.ItemSelected += listaMenu_ItemSelected;
+            
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            return true;
         }
 
         private void SolicitudMenu()
@@ -144,16 +152,24 @@ namespace DomoticApp.Views.MasterMenu
 
         private void listaMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            MasterMenuItems pagina = e.SelectedItem as MasterMenuItems;
-            Detail = new NavigationPage((Page)Activator.CreateInstance(pagina.TargetType));
-            IsPresented = false;
+            pagina = e.SelectedItem as MasterMenuItems;
+            if(pagina.Title == "Monitorear")
+            {
+                Detail = new MainPage(SolicitudMenu);
+                IsPresented = false;
+            }
+            else
+            {
+                Detail = new NavigationPage((Page)Activator.CreateInstance(pagina.TargetType));
+                IsPresented = false;
+            }
         }
 
         private void CeldaMenu_Tapped(object sender, EventArgs e)
         {
             if (ultimaCelda != null)
                 ultimaCelda.View.BackgroundColor = Color.Default;
-            var viewCell = (ViewCell)sender;
+            viewCell = (ViewCell)sender;
             if (viewCell.View != null)
             {
                 viewCell.View.BackgroundColor = Color.FromHex("#A5CDDB");

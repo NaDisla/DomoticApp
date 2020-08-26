@@ -32,12 +32,5 @@
             <Setter Property="Source" Value="iconMenu.png"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
         </Style>
-        <Style TargetType="ImageButton" x:Key="BtnRegreso">
-            <Setter Property="HorizontalOptions" Value="Start"/>
-            <Setter Property="VerticalOptions" Value="Start"/>
-            <Setter Property="Margin" Value="10,20,0,0"/>
-            <Setter Property="Source" Value="iconoFlecha.png"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-        </Style>
     </Application.Resources>
 </Application>

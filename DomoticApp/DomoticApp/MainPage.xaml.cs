@@ -31,12 +31,13 @@ namespace DomoticApp
         ControlCocinaPage cocina = new ControlCocinaPage();
         ControlLavadoPage lavado = new ControlLavadoPage();
         ControlSalaPage sala = new ControlSalaPage();
-
+        public static Action inicio { get; set; }
         //[Obsolete]
         public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
-            btnMenu.Clicked += (s, e) => solicitudMenu();
+            inicio = solicitudMenu;
+            btnMenu.Clicked += (s, e) => inicio();
             /*if (CrossConnectivity.Current.IsConnected)
                 ValidandoRedes();
             else

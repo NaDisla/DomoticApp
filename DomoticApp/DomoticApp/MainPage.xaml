@@ -22,7 +22,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ImageButton Style="{StaticResource BtnMenu}"
-                                 x:Name="btnMenu"/>
+                                 x:Name="btnMenu"
+                                 x:FieldModifier="public"/>
                     <StackLayout Grid.Column="1">
                     <Image Source="LogoInicio.png"
                            HeightRequest="105"

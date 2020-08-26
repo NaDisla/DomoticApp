@@ -16,11 +16,7 @@ namespace DomoticApp.Views.Bath
         public ControlBathPage()
         {
             InitializeComponent();
-        }
-
-        private void btnRegreso_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new MasterMenuPage());
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
     }
 }

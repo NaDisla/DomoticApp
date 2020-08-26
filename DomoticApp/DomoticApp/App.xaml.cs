@@ -3,6 +3,7 @@ using Plugin.SharedTransitions;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DomoticApp;
 
 namespace DomoticApp
 {
@@ -11,6 +12,7 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
+            
             MainPage = new NavigationPage(new MasterMenuPage());
         }
 

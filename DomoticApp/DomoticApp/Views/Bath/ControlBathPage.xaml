@@ -11,19 +11,30 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ImageButton Style="{StaticResource BtnRegreso}"
-                                 x:Name="btnRegreso"
-                                 Clicked="btnRegreso_Clicked"/>
+                    <ImageButton Style="{StaticResource BtnMenu}"
+                                 x:Name="btnMenu"/>
                     <StackLayout Grid.Column="1">
                         <Image Source="LogoPages.png"
                            HeightRequest="105"
                            Margin="10,15,0,0"/>
                     </StackLayout>
+                    <Button
+                            BackgroundColor="#C7D2E5"
+                            CornerRadius="20"
+                            BorderWidth="1"
+                            BorderColor="#165E8D"
+                            ContentLayout="Top,25"
+                            Text="Baño"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Image="iconoDormitorio.png">
+                    </Button>
                 </Grid>
             </StackLayout>
         </Grid>
