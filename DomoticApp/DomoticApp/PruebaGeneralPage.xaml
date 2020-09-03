@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DomoticApp.PruebaGeneralPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="DarkCyan">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Sala Cocina" x:Name="btnSalaCocina" Grid.Row="1"/>
+            <Button Text="Sala Fondo" Grid.Row="1" Grid.Column="1" x:Name="btnSalaFondo" />
+            <Button Text="Recibidor 1" Grid.Row="1" Grid.Column="2" x:Name="btnRecibidor1" />
+            <Button Text="Lavadero" Grid.Row="1" Grid.Column="3" x:Name="btnLavadero" />
+            <Button Text="Baño" Grid.Row="2" Grid.Column="1" x:Name="btnBath" />
+            <Button Text="Exterior Izquierda" Grid.Row="2" Grid.Column="2" x:Name="btnExtIzquierda" />
+            <Button Text="Exterior Derecha" Grid.Row="2" Grid.Column="3" x:Name="btnExtDerecha" />
+            <Button Text="Dormitorio" Grid.Row="2" Grid.Column="0" x:Name="btnDormitorio" />
+            <Button Text="Recibidor 2" Grid.Row="3" Grid.Column="0" x:Name="btnRecibidor2" />
+            <Button Text="Cocina-Recibidor" Grid.Row="3" Grid.Column="1" x:Name="btnCocinaRecibidor" />
+            <Button Text="Exterior-Lavadero" Grid.Row="3" Grid.Column="2" x:Name="btnExtLavadero" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

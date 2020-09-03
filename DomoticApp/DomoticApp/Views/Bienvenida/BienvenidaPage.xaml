@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DomoticApp.Views.Bienvenida.BienvenidaPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromBottom"
+             sharedTransitions:SharedTransitionNavigationPage.TransitionDuration="500">
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="FondoBienvenida.png"
+                   Aspect="Fill"
+                   Margin="-30,-25,-30,-20"/>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <FlexLayout Direction="Column"
+                                Margin="0,15,0,0"
+                                JustifyContent="SpaceEvenly">
+                        <Image Source="LogoInicio.png"
+                               HeightRequest="115"/>
+                    </FlexLayout>
+                </Grid>
+            </StackLayout>
+            <FlexLayout Direction="Column"
+                        JustifyContent="SpaceEvenly"
+                        Margin="0,80,0,0">
+                <Image Source="imagenBienvenida.png"
+                       HeightRequest="740"/>
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

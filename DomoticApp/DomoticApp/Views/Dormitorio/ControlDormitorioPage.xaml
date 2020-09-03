@@ -19,7 +19,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
+                    <ImageButton Style="{StaticResource BtnMenu}"
+                                 x:Name="btnMenu"/>
                     <Image Source="LogoPages.png"
                            HeightRequest="75"
                            Grid.Row="0"

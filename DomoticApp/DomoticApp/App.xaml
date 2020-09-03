@@ -25,6 +25,11 @@
             <Setter Property="Aspect" Value="Fill"/>
             <Setter Property="Margin" Value="-30,-25,-30,-20"/>
         </Style>
+        <Style TargetType="Image" x:Key="FondoIntro">
+            <Setter Property="Source" Value="FondoBienvenida.png"/>
+            <Setter Property="Aspect" Value="Fill"/>
+            <Setter Property="Margin" Value="-30,-25,-30,-20"/>
+        </Style>
         <Style TargetType="ImageButton" x:Key="BtnMenu">
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="VerticalOptions" Value="Start"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,11 +12,13 @@ namespace DomoticApp.Views.Dormitorio
 {
     public partial class ControlDormitorioPage : ContentPage
     {
-        public int estado = 0;
+        HubConnection connectHub;
+        public int stateButtonClicked = 0;
         public string Temperatura { get; set; }
         public string Humedad { get; set; }
         private const string urlTarjeta = "http://10.0.0.17";
-        private const string urlEncenderLuz = "http://10.0.0.17/D";
+        private const string urlLuz1 = "http://10.0.0.17/dormitorio-izquierda";
+        //private const string urlLuz2 = "http://10.0.0.17/D";
         private const string urlEncenderAbanico = "http://10.0.0.17/A";
         private readonly HttpClient client = new HttpClient();
         private string content;
@@ -23,7 +26,34 @@ namespace DomoticApp.Views.Dormitorio
         
         public ControlDormitorioPage()
         {
-            InitializeComponent();  
+            InitializeComponent();
+            InitializeAction();
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
+        }
+        private async void InitializeAction()
+        {
+            SetupAction();
+            await SignalRConnect();
+
+        }
+        private void SetupAction()
+        {
+            connectHub = new HubConnectionBuilder().WithUrl("http://10.0.0.5:45457/actionHub").Build();
+            connectHub.On<int>("ReceiveState", (stateReceived) =>
+            {
+                CambiaColor(btnLuces, stateReceived);
+            });
+        }
+        async Task SignalRConnect()
+        {
+            try
+            {
+                await connectHub.StartAsync();
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Error estableciendo conexión", e.Message.ToString(), "OK");
+            }
         }
         protected async override void OnAppearing()
         {
@@ -31,6 +61,7 @@ namespace DomoticApp.Views.Dormitorio
             var cortando = content.Split(';');
             string temperatura = cortando[0];
             string humedad = cortando[1];
+            estadoDormitorio = cortando[2];
             if (content != null)
             {
                 Temperatura = temperatura + "°C";
@@ -46,26 +77,33 @@ namespace DomoticApp.Views.Dormitorio
         }
         public async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            content = await client.GetStringAsync(urlEncenderLuz);
-            /*var cortando = content.Split(';');
-            estadoDormitorio = cortando[2];*/
+            content = await client.GetStringAsync(urlLuz1);
             if (content != null)
             {
-                CambiaColor(btnLuces);
+                await SignalRSendState(stateButtonClicked);
             }
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
-            
         }
-
+        async Task SignalRSendState(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendState", state);
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Error", e.Message.ToString(), "OK");
+            }
+        }
         private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
             content = await client.GetStringAsync(urlEncenderAbanico);
             if (content != null)
             {
-                CambiaColor(btnAbanico);
+                await SignalRSendState(stateButtonClicked);
             }
             else
             {
@@ -79,19 +117,19 @@ namespace DomoticApp.Views.Dormitorio
 
         }
 
-        void CambiaColor(Button btn)
+        void CambiaColor(Button btn, int stateButton)
         {
-            if(estado == 0)
+            if(stateButton == 0)
             {
                 btn.BackgroundColor = Color.FromHex("#739DB8");
                 btn.TextColor = Color.White;
-                estado = 1;
+                stateButtonClicked = 1;
             }
             else
             {
                 btn.BackgroundColor = Color.AliceBlue;
                 btn.TextColor = Color.FromHex("#166498");
-                estado = 0;
+                stateButtonClicked = 0;
             }
         }
     }

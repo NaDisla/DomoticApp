@@ -54,6 +54,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>3.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core">
+      <Version>3.1.7</Version>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.0.0.4</Version>
     </PackageReference>
@@ -65,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CustomButtonRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -481,18 +491,24 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoDormitorio.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\FondoBienvenida.png" />
     <Content Include="Resources\drawable-hdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-hdpi\LogoInicio.png" />
     <AndroidResource Include="Resources\drawable-hdpi\iconoOjo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\iconMenu.png" />
     <AndroidResource Include="Resources\drawable-hdpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\FondoBienvenida.png" />
     <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
     <AndroidResource Include="Resources\drawable-ldpi\iconoOjo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\iconMenu.png" />
     <AndroidResource Include="Resources\drawable-ldpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\FondoBienvenida.png" />
     <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
@@ -517,6 +533,14 @@
     <AndroidResource Include="Resources\drawable-xhdpi\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\imagenBienvenida.png" />
+    <AndroidResource Include="Resources\drawable\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\FondoBienvenida.png" />
     <Content Include="Resources\drawable\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable\LogoPages.png" />
     <AndroidResource Include="Resources\drawable\LogoInicio.png" />
