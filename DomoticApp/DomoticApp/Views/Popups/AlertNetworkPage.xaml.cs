@@ -1,26 +1,26 @@
 ﻿using DomoticApp.SettingsAccess;
+using Rg.Plugins.Popup.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
 
-namespace DomoticApp.Views.Exteriores
+namespace DomoticApp.Views.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ControlExterioresPage : ContentPage
+    public partial class AlertNetworkPage : PopupPage
     {
-        public ControlExterioresPage()
+        public AlertNetworkPage()
         {
             InitializeComponent();
         }
 
-        private void btnAjustes_Clicked(object sender, EventArgs e)
+        private void btnAjustesVPN_Clicked(object sender, EventArgs e)
         {
-             DependencyService.Get<IServiceSettings>().OpenSettings();
+            DependencyService.Get<IServiceSettings>().OpenSettings();
         }
     }
 }

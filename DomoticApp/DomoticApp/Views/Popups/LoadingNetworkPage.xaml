@@ -22,24 +22,15 @@
                                    ScaleIn="1.3"
                                    ScaleOut="1.2" />
     </pages:PopupPage.Animation>
-
-    <Frame CornerRadius="15" 
-           OutlineColor="#052A48" 
-           HorizontalOptions="Center" 
-           VerticalOptions="Center">
-
+    <Frame Style="{StaticResource Popup}">
         <StackLayout HorizontalOptions="FillAndExpand">
             <Label Text="Por favor espere" 
                    TextColor="#052A48" 
                    FontSize="Large"
                    FontFamily="{StaticResource RalewayBold}"/>
-
-            <BoxView HeightRequest="1" 
-                     BackgroundColor="Gray" />
-
+            <BoxView Style="{StaticResource PopupLine}" />
             <StackLayout Spacing="0" 
                          Orientation="Horizontal">
-
                 <ActivityIndicator Color="#8DC63D" 
                                    IsRunning="True" 
                                    IsEnabled="True" 

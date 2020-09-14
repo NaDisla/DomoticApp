@@ -26,7 +26,8 @@
                                  VerticalOptions="StartAndExpand">
                         <ListView x:Name="listaMenu"
                                   RowHeight="60"
-                                  SeparatorVisibility="None"
+                                  SeparatorVisibility="Default"
+                                  SeparatorColor="#A1C2D0"
                                   BackgroundColor="#D3E7ED" 
                                   ItemSelected="listaMenu_ItemSelected">
                             <ListView.ItemTemplate>
@@ -36,7 +37,7 @@
                                         <StackLayout VerticalOptions="FillAndExpand" 
                                                      Orientation="Horizontal"
                                                      Padding="20,10,0,10" Spacing="20"
-                                                     Margin="15,0,0,0">
+                                                     Margin="20,0,0,0">
                                             <Image Source="{Binding Icon}" 
                                                            WidthRequest="40" 
                                                            HeightRequest="40" 

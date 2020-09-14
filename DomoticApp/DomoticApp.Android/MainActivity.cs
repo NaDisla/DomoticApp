@@ -62,6 +62,8 @@ namespace DomoticApp.Droid
                 return false;
             }
         }
+
+        [Obsolete]
         public void ValidarInstalacion()
         {
             bool isInstalled = estaInstaladaAplicacion("com.companyname.domoticapp", Application.Context);

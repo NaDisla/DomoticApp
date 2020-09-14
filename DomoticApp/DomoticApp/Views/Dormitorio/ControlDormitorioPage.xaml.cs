@@ -34,7 +34,6 @@ namespace DomoticApp.Views.Dormitorio
         {
             SetupAction();
             await SignalRConnect();
-
         }
         private void SetupAction()
         {

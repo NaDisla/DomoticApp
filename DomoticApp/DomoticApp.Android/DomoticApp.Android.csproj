@@ -51,7 +51,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.SignalR.Client">
@@ -64,15 +63,16 @@
       <Version>3.1.7</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
-      <Version>2.0.0.4</Version>
+      <Version>2.0.0.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Plugin.SharedTransitions">
       <Version>2.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessSettings\SettingsServiceAndroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -87,6 +87,9 @@
     </AndroidAsset>
     <AndroidAsset Include="..\DomoticApp\Fonts\Raleway-SemiBold.ttf">
       <Link>Assets\Raleway-SemiBold.ttf</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\DomoticApp\Fonts\Raleway-Medium.ttf">
+      <Link>Assets\Raleway-Medium.ttf</Link>
     </AndroidAsset>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -501,6 +504,8 @@
     <AndroidResource Include="Resources\drawable-hdpi\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable-ldpi\imagenBienvenida.png" />
     <AndroidResource Include="Resources\drawable-ldpi\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoAlerta.png" />
     <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
     <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
@@ -509,6 +514,8 @@
     <AndroidResource Include="Resources\drawable-ldpi\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable-mdpi\imagenBienvenida.png" />
     <AndroidResource Include="Resources\drawable-mdpi\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoAlerta.png" />
     <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
@@ -541,6 +548,14 @@
     <AndroidResource Include="Resources\drawable-xhdpi\FondoBienvenida.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\FondoBienvenida.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\FondoBienvenida.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoAlerta.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoAlerta.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoAlerta.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAlerta.png" />
     <Content Include="Resources\drawable\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable\LogoPages.png" />
     <AndroidResource Include="Resources\drawable\LogoInicio.png" />
@@ -551,6 +566,8 @@
     <AndroidResource Include="Resources\drawable\iconoOjo.png" />
     <AndroidResource Include="Resources\drawable\iconMenu.png" />
     <AndroidResource Include="Resources\drawable\iconoFlecha.png" />
+    <AndroidResource Include="Resources\drawable\iconoOpciones.png" />
+    <AndroidResource Include="Resources\drawable\iconoAlerta.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

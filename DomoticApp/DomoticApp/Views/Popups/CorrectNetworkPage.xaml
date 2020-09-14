@@ -22,35 +22,17 @@
                                    ScaleIn="1.3"
                                    ScaleOut="1.2"/>
     </pages:PopupPage.Animation>
-
-    <Frame CornerRadius="15" 
-           OutlineColor="#052A48" 
-           HorizontalOptions="Center" 
-           VerticalOptions="Center">
-
+    <Frame Style="{StaticResource Popup}">
         <StackLayout HorizontalOptions="FillAndExpand">
             <Label Text="¡Bienvenido! - Red conectada" 
-                   TextColor="#052A48" 
-                   FontSize="16"
-                   FontFamily="{StaticResource RalewayBold}"/>
-
-            <BoxView HeightRequest="1" 
-                     BackgroundColor="Gray" />
-
+                   Style="{StaticResource TitlePopup}"/>
+            <BoxView Style="{StaticResource PopupLine}" />
             <StackLayout Spacing="0" 
                          Orientation="Horizontal">
-
                 <Image Source="iconoValidacion.png"
-                                   VerticalOptions="Center" 
-                                   HorizontalOptions="Center" 
-                                   HeightRequest="50" 
-                                   WidthRequest="50"/>
-
+                                Style="{StaticResource PopupImage}"/>
                 <Label Text="Se encuentra conectado a la red de su vivienda." 
-                       TextColor="#052A48" 
-                       FontSize="13.9"
-                       Margin="15,10,0,0"
-                       FontFamily="{StaticResource RalewayRegular}"/>
+                       Style="{StaticResource DetailPopup}"/>
             </StackLayout>
         </StackLayout>
     </Frame>

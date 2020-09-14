@@ -4,6 +4,7 @@ using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
+using DomoticApp.Views.Opciones;
 using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
@@ -24,6 +25,8 @@ namespace DomoticApp.Views.MasterMenu
         public List<MasterMenuItems> elementosMenu {get; set;}
         ViewCell ultimaCelda, viewCell;
         MasterMenuItems pagina;
+
+        [Obsolete]
         public MasterMenuPage()
         {
             InitializeComponent();
@@ -110,33 +113,16 @@ namespace DomoticApp.Views.MasterMenu
             };
             elementosMenu.Add(pagExteriores);
 
-            MasterMenuItems pagTest = new MasterMenuItems()
+            MasterMenuItems pagOpciones = new MasterMenuItems()
             {
-                Icon = "iconoExterior.png",
-                TargetType = typeof(ControlExterioresPage),
-                Title = "Test"
+                Icon = "iconoOpciones.png",
+                TargetType = typeof(OpcionesPage),
+                Title = "Más opciones"
             };
-            elementosMenu.Add(pagTest);
-
-            MasterMenuItems pagTest2 = new MasterMenuItems()
-            {
-                Icon = "iconoExterior.png",
-                TargetType = typeof(ControlExterioresPage),
-                Title = "Otro Test"
-            };
-            elementosMenu.Add(pagTest2);
-
-            MasterMenuItems pagTest3 = new MasterMenuItems()
-            {
-                Icon = "iconoExterior.png",
-                TargetType = typeof(ControlExterioresPage),
-                Title = "Otro Test 3"
-            };
-            elementosMenu.Add(pagTest3);
+            elementosMenu.Add(pagOpciones);
 
             listaMenu.ItemsSource = elementosMenu;
             listaMenu.ItemSelected += listaMenu_ItemSelected;
-            
         }
 
         protected override bool OnBackButtonPressed()
@@ -150,6 +136,7 @@ namespace DomoticApp.Views.MasterMenu
             IsPresented = !IsPresented;
         }
 
+        [Obsolete]
         private void listaMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             pagina = e.SelectedItem as MasterMenuItems;
@@ -168,7 +155,9 @@ namespace DomoticApp.Views.MasterMenu
         private void CeldaMenu_Tapped(object sender, EventArgs e)
         {
             if (ultimaCelda != null)
+            {
                 ultimaCelda.View.BackgroundColor = Color.Default;
+            }
             viewCell = (ViewCell)sender;
             if (viewCell.View != null)
             {
