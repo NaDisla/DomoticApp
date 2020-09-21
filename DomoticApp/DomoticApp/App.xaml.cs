@@ -30,10 +30,10 @@ namespace DomoticApp
         {
             InitializeComponent();
             MainPage = new NavigationPage(new MasterMenuPage());
-            if (CrossConnectivity.Current.IsConnected)
+            /*if (CrossConnectivity.Current.IsConnected)
                 ValidandoRedes();
             else
-                RedIncorrecta();
+                RedIncorrecta();*/
         }
         [Obsolete]
         async void ValidandoRedes()

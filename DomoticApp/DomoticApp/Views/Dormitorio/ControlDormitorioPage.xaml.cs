@@ -27,7 +27,7 @@ namespace DomoticApp.Views.Dormitorio
         public ControlDormitorioPage()
         {
             InitializeComponent();
-            InitializeAction();
+            //InitializeAction();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
         private async void InitializeAction()
@@ -56,7 +56,7 @@ namespace DomoticApp.Views.Dormitorio
         }
         protected async override void OnAppearing()
         {
-            content = await client.GetStringAsync(urlTarjeta);
+            /*content = await client.GetStringAsync(urlTarjeta);
             var cortando = content.Split(';');
             string temperatura = cortando[0];
             string humedad = cortando[1];
@@ -72,11 +72,11 @@ namespace DomoticApp.Views.Dormitorio
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
-            base.OnAppearing();
+            base.OnAppearing();*/
         }
         public async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            content = await client.GetStringAsync(urlLuz1);
+            /*content = await client.GetStringAsync(urlLuz1);
             if (content != null)
             {
                 await SignalRSendState(stateButtonClicked);
@@ -84,7 +84,7 @@ namespace DomoticApp.Views.Dormitorio
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-            }
+            }*/
         }
         async Task SignalRSendState(int state)
         {

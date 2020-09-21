@@ -5,99 +5,126 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DomoticApp.Views.Dormitorio.ControlDormitorioPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients">
     <ContentPage.Content>
         <Grid>
-            <Image Source="FondoModulo.png"
-                   Aspect="Fill"
-                   Margin="-30,-25,-30,-20"/>
-            <FlexLayout Direction="Column" 
-                        AlignItems="Center">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <ImageButton Style="{StaticResource BtnMenu}"
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    linear-gradient(362deg, rgb(68, 144, 190),rgb(255,255,255))
+                ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            
+            <ImageButton Style="{StaticResource BtnMenu}"
                                  x:Name="btnMenu"/>
-                    <Image Source="LogoPages.png"
-                           HeightRequest="75"
-                           Grid.Row="0"
-                           Margin="10"/>
-                    <Label Text="Dormitorio" 
-                           FontAttributes="Bold" FontSize="25" 
+            <Image Source="LogoPages.png"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Margin="0,10,0,0"/>
+            <Label Text="Dormitorio" 
+                           FontSize="Title" 
                            HorizontalTextAlignment="Center"
-                           Margin="25" Grid.Row="1"
-                           TextColor="White"
+                           Margin="0,15,0,0" 
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"        
+                           TextColor="#0E4265"
                            FontFamily="{StaticResource RalewayBold}"/>
-
-                    <FlexLayout Grid.Row="2" 
-                                Direction="Column" 
-                                JustifyContent="End"
-                                AlignItems="Start">
-                        <Grid Padding="1,30,30,30">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="140"/>
-                                <RowDefinition Height="140"/>
-                                <RowDefinition Height="140"/>
-                                <RowDefinition Height="140"/>
-                            </Grid.RowDefinitions>
+            <Frame 
+                Opacity=".7"
+                            Grid.ColumnSpan="4"
+                            
+                            Grid.Row="2"
+                            Style="{StaticResource Panel}">
+                <StackLayout>
+                    <Label Text="Dispositivos"
+                                   TextColor="#0E4265"
+                                   FontFamily="{StaticResource RalewayBold}"
+                                   FontSize="19"
+                                   Padding="0,0,0,8"/>
+                    <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="145"/>
-                                <ColumnDefinition Width="145"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                        
                             <Button Text="Luces"
-                                    TextColor="#175E8D"
-                                    BackgroundColor="AliceBlue"
-                                    FontFamily="{StaticResource RalewayBold}"
                                     x:Name="btnLuces"
-                                    x:FieldModifier="public"
                                     Clicked="btnLuces_Clicked"
-                                    ContentLayout="Top,25"
-                                    Image="iconoLuz" 
-                                    HorizontalOptions="Start"
-                                    Padding="25,15"
-                                    CornerRadius="15"/>
-                            <Button Text="Abanico"
-                                    TextColor="#175E8D"
-                                    BackgroundColor="AliceBlue"
-                                    FontFamily="{StaticResource RalewayBold}"
+                                    ImageSource="iconoLuz.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    ContentLayout="Top,0"
+                                    Padding="0,8,0,5"
+                                    FontSize="15"/>
+                        <Button Text="Abanico"
                                     x:Name="btnAbanico"
                                     Clicked="btnAbanico_Clicked"
-                                    ContentLayout="Top,25"
-                                    Image="iconoAbanico" 
-                                    HorizontalOptions="Start"
-                                    Padding="30,15"
+                                    ImageSource="iconoAbanico.png" 
                                     Grid.Column="1"
-                                    CornerRadius="15"/>
-                            <Button Text="Televisión"
-                                    TextColor="#175E8D"
-                                    BackgroundColor="AliceBlue"
-                                    FontFamily="{StaticResource RalewayBold}"
-                                    x:Name="btnTelevision"
+                                    Style="{StaticResource DispositivosOFF}"
+                                ContentLayout="Top,10"
+                                    Padding="0,8,0,5"
+                                FontSize="15"/>
+                        <Button Text="Televisión"
+                                     x:Name="btnTelevision"
                                     Clicked="btnTelevision_Clicked"
-                                    ContentLayout="Top,25"
-                                    Image="iconoTV" 
-                                    HorizontalOptions="Start"
-                                    Padding="35,15"
-                                    Grid.Column="2"
-                                    CornerRadius="15"/>
-                            <Frame HeightRequest="330" 
-                                           WidthRequest="190" 
-                                           CornerRadius="190" 
-                                           HorizontalOptions="Start" 
-                                           VerticalOptions="Start" 
-                                           Margin="0,20,0,10" 
-                                           Padding="0" 
-                                           BackgroundColor="#166498"
-                                           Grid.Row="1"
-                                           Grid.RowSpan="10"
-                                           Grid.ColumnSpan="2">
-                                <StackLayout>
-                                    <Label Text="Temperatura" 
+                                    ImageSource="iconoTV.png" 
+                                    Grid.Column="2"        
+                                    Style="{StaticResource DispositivosOFF}"
+                               ContentLayout="Top,10"
+                                     Padding="0,8,0,5"
+                                FontSize="15"/>
+
+                    </Grid>
+                    
+                </StackLayout>
+            </Frame>
+
+            <Frame Opacity=".7"
+                   Grid.ColumnSpan="4"
+                   Grid.RowSpan="2"
+                   Grid.Row="5"
+                   Style="{StaticResource Panel}">
+                <StackLayout>
+                    <Label Text="Sensación térmica"
+                           TextColor="#0E4265"
+                           FontFamily="{StaticResource RalewayBold}"
+                           FontSize="20"/>
+
+                    <Frame HeightRequest="330" 
+                                    WidthRequest="190" 
+                                    CornerRadius="190" 
+                                    HorizontalOptions="Start" 
+                                    VerticalOptions="Start" 
+                                    Margin="0,20,0,10" 
+                                    Padding="0" 
+                                    BackgroundColor="#166498"
+                                    Grid.Row="1"
+                                    Grid.RowSpan="10"
+                                    Grid.ColumnSpan="2">
+                        <StackLayout>
+                            <Label Text="Temperatura" 
                                            TextColor="White" 
                                            HorizontalOptions="Center" 
                                            VerticalOptions="Center" 
@@ -105,32 +132,33 @@
                                            FontFamily="{StaticResource RalewayBold}"
                                            FontSize="Medium"
                                            Margin="0,30,0,10"/>
-                                    <Label TextColor="White"
-                                                 HorizontalOptions="Center" 
-                                                 VerticalOptions="Center" 
-                                                 HorizontalTextAlignment="Center"
-                                                 x:Name="lblTemp"
-                                                 FontFamily="{StaticResource RalewayBold}"
-                                                 FontSize="Title"/>
-                                    <Image Source="iconoTemperatura.png"
+                            <Label TextColor="White"
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           HorizontalTextAlignment="Center"
+                                           x:Name="lblTemp"
+                                           FontFamily="{StaticResource RalewayBold}"
+                                           FontSize="Title"/>
+                            <Image Source="iconoTemperatura.png"
                                            Aspect="AspectFit"
                                            Margin="20"/>
-                                </StackLayout>
-                            </Frame>
-                            <Frame HeightRequest="330" 
-                                           WidthRequest="180" 
-                                           CornerRadius="190" 
-                                           HorizontalOptions="Start" 
-                                           VerticalOptions="Start" 
-                                           Margin="-60,20,30,10" 
-                                           Padding="0" 
-                                           BackgroundColor="#8CC0E2"
-                                           Grid.Row="1"
-                                           Grid.Column="2"
-                                           Grid.RowSpan="10"
-                                           Grid.ColumnSpan="2">
-                                <StackLayout>
-                                    <Label Text="Humedad" 
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame HeightRequest="330" 
+                            WidthRequest="180" 
+                            CornerRadius="190" 
+                            HorizontalOptions="Start" 
+                            VerticalOptions="Start" 
+                            Margin="-60,20,30,10" 
+                            Padding="0" 
+                            BackgroundColor="#8CC0E2"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Grid.RowSpan="10"
+                            Grid.ColumnSpan="2">
+                        <StackLayout>
+                            <Label Text="Humedad" 
                                            TextColor="#166498" 
                                            HorizontalOptions="Center" 
                                            VerticalOptions="Center" 
@@ -138,26 +166,23 @@
                                            FontFamily="{StaticResource RalewayBold}"
                                            FontSize="Medium"
                                            Margin="0,30,0,10"/>
-                                    <Label TextColor="#166498"
-                                                 HorizontalOptions="Center" 
-                                                 VerticalOptions="Center" 
-                                                 HorizontalTextAlignment="Center"
-                                                 x:Name="lblHum"
-                                                 x:FieldModifier="public"
-                                                 FontFamily="{StaticResource RalewayBold}"
-                                                 FontSize="Title"/>
-                                    <Image Source="iconoHumedad.png"
+                            <Label TextColor="#166498"
+                                            HorizontalOptions="Center" 
+                                            VerticalOptions="Center" 
+                                            HorizontalTextAlignment="Center"
+                                            x:Name="lblHum"
+                                            x:FieldModifier="public"
+                                            FontFamily="{StaticResource RalewayBold}"
+                                            FontSize="Title"/>
+                            <Image Source="iconoHumedad.png"
                                            Aspect="AspectFit"
                                            Margin="20"
                                            HeightRequest="120"/>
-                                </StackLayout>
-                                
-                            </Frame>
-                        </Grid>
-                    </FlexLayout>
-                    
-                </Grid>
-            </FlexLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

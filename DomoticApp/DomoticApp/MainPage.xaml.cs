@@ -24,6 +24,13 @@ namespace DomoticApp
             InitializeComponent();
             inicio = solicitudMenu;
             btnMenu.Clicked += (s, e) => inicio();
+            //btnTest.Clicked += (s, e) => inicio();
+            //btnTest.Clicked += (s, e) => 
+        }
+
+        private void btnTest_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("P", "H", "OK");
         }
 
         /*protected async override void OnAppearing()

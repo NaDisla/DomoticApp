@@ -149,9 +149,6 @@
     <AndroidResource Include="Resources\drawable\iconoLavado.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconoPiscina.png" />
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +182,9 @@
     <AndroidResource Include="Resources\drawable\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconoBano.png" />
@@ -227,13 +226,17 @@
     <AndroidResource Include="Resources\drawable-hdpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\iconoBano.png" />
@@ -275,13 +278,17 @@
     <AndroidResource Include="Resources\drawable-ldpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\iconoBano.png" />
@@ -323,13 +330,17 @@
     <AndroidResource Include="Resources\drawable-mdpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\iconoBano.png" />
@@ -371,13 +382,17 @@
     <AndroidResource Include="Resources\drawable-xhdpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoBano.png" />
@@ -419,13 +434,17 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAbanico.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAbanico.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoBano.png" />
@@ -467,7 +486,9 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTinaco.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTV.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTV.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconoValidacion.png" />
@@ -568,6 +589,7 @@
     <AndroidResource Include="Resources\drawable\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable\iconoOpciones.png" />
     <AndroidResource Include="Resources\drawable\iconoAlerta.png" />
+    <AndroidResource Include="Resources\drawable\iconoLuz.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
