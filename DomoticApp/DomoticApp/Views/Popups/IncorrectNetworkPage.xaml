@@ -24,7 +24,7 @@
     </pages:PopupPage.Animation>
     <Frame Style="{StaticResource Popup}">
         <StackLayout HorizontalOptions="FillAndExpand">
-            <Label Text="No hay conexión" 
+            <Label Text="No hay conexión de red" 
                    Style="{StaticResource TitlePopup}"/>
             <BoxView Style="{StaticResource PopupLine}"/>
             <StackLayout Spacing="0" 

@@ -12,47 +12,65 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using DomoticApp.Views.SmartFridge;
 using DomoticApp.Views.Dormitorio;
+using Xamarin.Essentials;
+using System.Linq;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+using DomoticApp.Views.Usuarios.Login.OlvidoClave;
 
 namespace DomoticApp
 {
     public partial class App : Application
     {
         private const string urlTarjeta = "http://10.0.0.17";
-        LoadingNetworkPage loadingRed;
-        CorrectNetworkPage redCorrecta; 
-        IncorrectNetworkPage redIncorrecta;
-        AlertNetworkPage alertaVPN;
-        private string content;
+        private const string ipCasa = "10.0.0.17";
+        public LoadingNetworkPage loadingRed;
+        public CorrectNetworkPage redCorrecta;
+        public IncorrectNetworkPage redIncorrecta;
+        public AlertNetworkPage alertaVPN;
         private readonly HttpClient client = new HttpClient();
+        IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
+        public string ipDevice, parteInicialCasa, parteInicialDevice;
+        public string[] numIPCasa, numIPDevice;
 
         [Obsolete]
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MasterMenuPage());
-            /*if (CrossConnectivity.Current.IsConnected)
+            MainPage = new NavigationPage(new OlvidoClavePage());
+            /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else
                 RedIncorrecta();*/
         }
         [Obsolete]
-        async void ValidandoRedes()
+        void ValidandoRedes()
         {
-            try
+            var deviceIP = Dns.GetHostAddresses(Dns.GetHostName()).FirstOrDefault();
+
+            if (deviceIP != null)
             {
-                content = await client.GetStringAsync(urlTarjeta);
-                if (content != null)
+                ipDevice = deviceIP.ToString();
+                numIPCasa = ipCasa.Split('.');
+                numIPDevice = ipDevice.Split('.');
+                parteInicialCasa = numIPCasa[0] + numIPCasa[1] + numIPCasa[2];
+                parteInicialDevice = numIPDevice[0] + numIPDevice[1] + numIPDevice[2];
+
+                if (parteInicialDevice == parteInicialCasa && client.GetStringAsync(urlTarjeta) != null)
                 {
                     RedCorrecta();
                 }
-            }
-            catch (Exception)
-            {
-                AlertaVPN();
+                else
+                {
+                    AlertaVPN();
+                }
             }
         }
+
         [Obsolete]
-        async void RedCorrecta()
+        public async void RedCorrecta()
         {
             await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
             await Task.Delay(2500);
@@ -61,7 +79,7 @@ namespace DomoticApp
         }
 
         [Obsolete]
-        async void RedIncorrecta()
+        public async void RedIncorrecta()
         {
             await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
             await Task.Delay(2500);
@@ -70,14 +88,14 @@ namespace DomoticApp
         }
 
         [Obsolete]
-        async void AlertaVPN()
+        public async void AlertaVPN()
         {
             await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(alertaVPN = new AlertNetworkPage());
         }
-        protected override  void OnStart()
+        protected override void OnStart()
         {
         }
 

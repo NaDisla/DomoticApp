@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "101728167221",
+    "firebase_url": "https://domoticapp-database.firebaseio.com",
+    "project_id": "domoticapp-database",
+    "storage_bucket": "domoticapp-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101728167221:android:5387a31cafc00a052e587c",
+        "android_client_info": {
+          "package_name": "com.dislaescanio.domoticapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101728167221-qtqb384evptur0il0e1m7lj80hosgkr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeJeOA6R-WcojBGH4xaC02Ncgrgs0GLNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101728167221-qtqb384evptur0il0e1m7lj80hosgkr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

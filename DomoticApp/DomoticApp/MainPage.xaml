@@ -34,11 +34,8 @@
                        Grid.Column="1"
                        Grid.ColumnSpan="2"/>
                 <Label Text="Mi hogar"
-                       FontFamily="{StaticResource RalewayBold}"
+                       Style="{StaticResource TitlePage}"
                        FontSize="20"
-                       TextColor="#0E4265"
-                       Margin="0,15,0,0"
-                       HorizontalTextAlignment="Center"
                        Grid.Column="1"
                        Grid.Row="1"
                        Grid.ColumnSpan="2"/>

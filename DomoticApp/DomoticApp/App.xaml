@@ -83,10 +83,19 @@
 
             <Style TargetType="Button" x:Key="DispositivosOFF">
                 <Setter Property="FontFamily" Value="{StaticResource RalewayBold}"/>
-                <!--Setter Property="ContentLayout" Value="Top,25"/-->
+                <Setter Property="ContentLayout" Value="Top,0"/>
                 <Setter Property="CornerRadius" Value="15"/>
                 <Setter Property="TextColor" Value="#175E8D"/>
                 <Setter Property="BackgroundColor" Value="#D2E9F8"/>
+                <Setter Property="Padding" Value="0,8,0,5"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="TitlePage">
+                <Setter Property="TextColor" Value="#0E4265" />
+                <Setter Property="FontFamily" Value="{StaticResource RalewayBold}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,15,0,0" />
             </Style>
         </ResourceDictionary>
         

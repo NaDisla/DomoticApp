@@ -10,6 +10,7 @@ using DomoticApp.Views.Popups;
 using System.Net.Http;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Essentials;
 
 namespace DomoticApp
 {
@@ -17,26 +18,30 @@ namespace DomoticApp
     public partial class MainPage : ContentPage
     {
         public static Action inicio { get; set; }
-        
+        App acceso;
+
         [Obsolete]
         public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
             inicio = solicitudMenu;
             btnMenu.Clicked += (s, e) => inicio();
-            //btnTest.Clicked += (s, e) => inicio();
-            //btnTest.Clicked += (s, e) => 
         }
 
-        private void btnTest_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            DisplayAlert("P", "H", "OK");
-        }
-
-        /*protected async override void OnAppearing()
-        {
-           
             base.OnAppearing();
-        }*/
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        { 
+            await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
+        }
     }
 }
