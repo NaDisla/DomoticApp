@@ -4,6 +4,7 @@ using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
+using DomoticApp.Views.Monitoreo;
 using DomoticApp.Views.Opciones;
 using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;

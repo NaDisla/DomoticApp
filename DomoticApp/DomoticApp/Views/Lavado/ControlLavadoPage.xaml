@@ -9,9 +9,6 @@
              NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <Grid>
-            <Image Source="FondoModulo.png"
-                   Aspect="Fill"
-                   Margin="-30,-25,-30,-20"/>
             <FlexLayout Direction="Column" 
                         AlignItems="Center">
                 <Grid>

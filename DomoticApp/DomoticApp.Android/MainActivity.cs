@@ -39,7 +39,9 @@ namespace DomoticApp.Droid
             //}
             //else
             //{
+            Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
             LoadApplication(new App());
+            
             //}
             //StartActivity(intent);
         }

@@ -1,4 +1,5 @@
 ﻿using DomoticApp.Views.MasterMenu;
+using DomoticApp.Views.Monitoreo;
 using System;
 using System.Collections.Generic;
 using System.Linq;

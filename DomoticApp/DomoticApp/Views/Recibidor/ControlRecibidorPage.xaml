@@ -1,12 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DomoticApp.Views.Recibidor.ControlRecibidorPage">
+             x:Class="DomoticApp.Views.Recibidor.ControlRecibidorPage"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="LightBlue">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame BackgroundColor="White"
+                       CornerRadius="30"
+                       Grid.Row="1"
+                       Margin="5,0,5,0"
+                       Grid.RowSpan="2"
+                       Grid.ColumnSpan="5">
+                    <StackLayout>
+                        <Grid RowSpacing="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"/>
+                                <RowDefinition Height="0.5*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="LogoInicio.png"
+                                   Grid.Column="1"
+                                   Grid.Row="1" />
+                        </Grid>
+                        
+                    </StackLayout>
+                    
+                </Frame>
+                <Button Text="Iniciar sesión"
+                        CornerRadius="30"
+                        FontSize="Medium"
+                        BackgroundColor="#1E619A"
+                        FontFamily="{StaticResource RalewayBold}"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        TextColor="White"
+                        />
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -6,7 +6,7 @@
              xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions">
     <ContentPage.Content>
         <Grid>
-            <Image Style="{StaticResource FondoPages}"/>
+           
             <StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>

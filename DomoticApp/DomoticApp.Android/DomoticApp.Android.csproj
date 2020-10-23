@@ -66,9 +66,9 @@
       <Version>2.0.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Database">
-      <Version>118.0.1</Version>
+      <Version>119.2.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1534" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Plugin.SharedTransitions">
       <Version>2.4.0</Version>
@@ -82,6 +82,7 @@
     <Compile Include="AccessSettings\SettingsServiceAndroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomEntryRendererDroid.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,24 +123,6 @@
       <Project>{3BB4B223-58C0-4D38-87BD-CF58D9C5C7B9}</Project>
       <Name>DomoticApp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\FondoInicio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\FondoInicio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\FondoInicio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\FondoInicio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\FondoInicio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\FondoInicio.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\FondoInicio.png" />
@@ -190,404 +173,12 @@
     <AndroidResource Include="Resources\drawable\iconoValidacion.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAbanico.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoBano.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoCasa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoCocina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoError.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoExterior.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoHumedad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoLavado.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoLuz.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoPiscina.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoRecibidor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoSala.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTemperatura.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTinaco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoTV.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoValidacion.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\iconoDormitorio.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoDormitorio.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\FondoBienvenida.png" />
-    <Content Include="Resources\drawable-hdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\iconoFlecha.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\iconoAlerta.png" />
-    <Content Include="Resources\drawable-ldpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\iconoFlecha.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\iconoAlerta.png" />
-    <Content Include="Resources\drawable-mdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\FondoModulo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\LogoInicio.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoOjo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconMenu.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\iconoFlecha.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoFlecha.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoFlecha.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoFlecha.png" />
     <AndroidResource Include="Resources\drawable\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\imagenBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\imagenBienvenida.png" />
     <AndroidResource Include="Resources\drawable\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\FondoBienvenida.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoOpciones.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\iconoAlerta.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\iconoAlerta.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\iconoAlerta.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\iconoAlerta.png" />
-    <Content Include="Resources\drawable\FondoModulo.png" />
     <AndroidResource Include="Resources\drawable\LogoPages.png" />
-    <AndroidResource Include="Resources\drawable\LogoInicio.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\logoapp.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\logoapp.png" />
@@ -598,6 +189,24 @@
     <AndroidResource Include="Resources\drawable\iconoOpciones.png" />
     <AndroidResource Include="Resources\drawable\iconoAlerta.png" />
     <AndroidResource Include="Resources\drawable\iconoLuz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconoLogin03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconoRegistro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconoOlvidoClave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconoUsuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iconoClave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\LogoInicio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

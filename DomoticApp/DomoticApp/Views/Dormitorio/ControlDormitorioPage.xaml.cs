@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using DomoticApp.Views.Monitoreo;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace DomoticApp.Views.Dormitorio
                 await DisplayAlert("Error estableciendo conexión", e.Message.ToString(), "OK");
             }
         }
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             /*content = await client.GetStringAsync(urlTarjeta);
             var cortando = content.Split(';');
@@ -74,7 +75,7 @@ namespace DomoticApp.Views.Dormitorio
             }
             base.OnAppearing();*/
         }
-        public async void btnLuces_Clicked(object sender, EventArgs e)
+        public void btnLuces_Clicked(object sender, EventArgs e)
         {
             /*content = await client.GetStringAsync(urlLuz1);
             if (content != null)

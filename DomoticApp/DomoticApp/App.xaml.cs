@@ -10,15 +10,14 @@ using Plugin.Connectivity;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Runtime.InteropServices;
-using DomoticApp.Views.SmartFridge;
-using DomoticApp.Views.Dormitorio;
 using Xamarin.Essentials;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using DomoticApp.Views.Usuarios.Login.OlvidoClave;
+using DomoticApp.Views.Recibidor;
+using DomoticApp.Views.Usuarios.GeneralLogin;
 
 namespace DomoticApp
 {
@@ -39,7 +38,7 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new OlvidoClavePage());
+            MainPage = new NavigationPage(new GeneralLoginPage());
             /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else
