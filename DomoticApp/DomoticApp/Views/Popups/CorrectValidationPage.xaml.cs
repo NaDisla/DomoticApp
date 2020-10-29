@@ -11,11 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp.Views.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CorrectNetworkPage : PopupPage
+    public partial class CorrectValidationPage : PopupPage
     {
-        public CorrectNetworkPage()
+        public CorrectValidationPage(string title, string detail)
         {
             InitializeComponent();
+            lblTitleCorrectPopup.Text = title;
+            lblTitleDetailPopup.Text = detail;
         }
     }
 }

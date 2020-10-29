@@ -64,21 +64,21 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100" />
                             </Grid.RowDefinitions>
-                            <Button Text="Luces"
-                                    x:Name="btnLuces"
+                            <Button Text="Luz 1"
+                                    x:Name="btnLuz1"
                                     Clicked="btnLuces_Clicked"
                                     ImageSource="iconoLuz.png"
+                                    Style="{StaticResource DispositivosOFF}" />
+                            <Button Text="Luz 2"
+                                    x:Name="btnLuz2"
+                                    Clicked="btnLuces_Clicked"
+                                    ImageSource="iconoLuz.png"
+                                    Grid.Column="1"
                                     Style="{StaticResource DispositivosOFF}" />
                             <Button Text="Abanico"
                                     x:Name="btnAbanico"
                                     Clicked="btnAbanico_Clicked"
                                     ImageSource="iconoAbanico.png"
-                                    Grid.Column="1"
-                                    Style="{StaticResource DispositivosOFF}" />
-                            <Button Text="Televisión"
-                                    x:Name="btnTelevision"
-                                    Clicked="btnTelevision_Clicked"
-                                    ImageSource="iconoTV.png"
                                     Grid.Column="2"
                                     Style="{StaticResource DispositivosOFF}" />
                         </Grid>

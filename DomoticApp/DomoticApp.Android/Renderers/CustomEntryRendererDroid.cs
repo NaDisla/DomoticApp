@@ -23,7 +23,6 @@ namespace DomoticApp.Droid.Renderers
         public CustomEntryRendererDroid(Context context) : base(context)
         {
         }
-
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);

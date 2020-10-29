@@ -1,19 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             x:Class="DomoticApp.Views.MasterMenu.MasterMenuPage"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             x:Class="DomoticApp.Views.MasterMenu.MasterMenuHabitantePage"
              NavigationPage.HasNavigationBar="False">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
                      BackgroundColor="Transparent">
             <Frame Style="{StaticResource BaseMenu}">
                 <StackLayout>
-                    <StackLayout HorizontalOptions="Center" 
+                    <StackLayout HorizontalOptions="Center"
                                  VerticalOptions="StartAndExpand">
-                        <Image Style="{StaticResource LogoMenu}"/>
+                        <Image Style="{StaticResource LogoMenu}" />
                     </StackLayout>
                     <StackLayout HorizontalOptions="StartAndExpand"
                                  VerticalOptions="StartAndExpand">
@@ -24,11 +21,15 @@
                                 <DataTemplate>
                                     <ViewCell x:Name="CeldaMenu"
                                               Tapped="CeldaMenu_Tapped">
-                                        <StackLayout Style="{StaticResource BaseItemMenu}">
-                                            <Image Source="{Binding Icon}" 
-                                                           Style="{StaticResource IconoItemMenu}" />
-                                            <Label Text="{Binding Title}" 
-                                                           Style="{StaticResource TitleItemMenu}"/>
+                                        <StackLayout VerticalOptions="FillAndExpand"
+                                                     Orientation="Horizontal"
+                                                     Padding="20,10,0,10"
+                                                     Spacing="20"
+                                                     Margin="20,0,0,0">
+                                            <Image Source="{Binding Icon}"
+                                                   Style="{StaticResource IconoItemMenu}" />
+                                            <Label Text="{Binding Title}"
+                                                   Style="{StaticResource TitleItemMenu}" />
                                         </StackLayout>
                                     </ViewCell>
                                 </DataTemplate>

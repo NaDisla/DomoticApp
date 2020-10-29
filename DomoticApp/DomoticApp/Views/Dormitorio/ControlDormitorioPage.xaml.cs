@@ -1,4 +1,5 @@
-﻿using DomoticApp.Views.Monitoreo;
+﻿using DomoticApp.DataHelpers;
+using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace DomoticApp.Views.Dormitorio
 {
     public partial class ControlDormitorioPage : ContentPage
     {
-        HubConnection connectHub;
         public int stateButtonClicked = 0;
         public string Temperatura { get; set; }
         public string Humedad { get; set; }
@@ -24,27 +24,35 @@ namespace DomoticApp.Views.Dormitorio
         private readonly HttpClient client = new HttpClient();
         private string content;
         public string estadoDormitorio;
+        SignalRClient serverClient;
         
         public ControlDormitorioPage()
         {
             InitializeComponent();
-            //InitializeAction();
+
+            if(btnLuz1.IsPressed == false)
+                serverClient = new SignalRClient(btnLuz1);
+            else if(btnLuz2.IsPressed == false)
+                serverClient = new SignalRClient(btnLuz2);
+            else if(btnAbanico.IsPressed == false)
+                serverClient = new SignalRClient(btnAbanico);
+
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
-        private async void InitializeAction()
+        /*private async void InitializeAction()
         {
             SetupAction();
             await SignalRConnect();
-        }
-        private void SetupAction()
+        }*/
+        /*private void SetupAction()
         {
-            connectHub = new HubConnectionBuilder().WithUrl("http://10.0.0.5:45457/actionHub").Build();
+            connectHub = new HubConnectionBuilder().WithUrl("http://10.0.0.5:45455/actionHub").Build();
             connectHub.On<int>("ReceiveState", (stateReceived) =>
             {
                 CambiaColor(btnLuces, stateReceived);
             });
-        }
-        async Task SignalRConnect()
+        }*/
+        /*async Task SignalRConnect()
         {
             try
             {
@@ -54,7 +62,7 @@ namespace DomoticApp.Views.Dormitorio
             {
                 await DisplayAlert("Error estableciendo conexión", e.Message.ToString(), "OK");
             }
-        }
+        }*/
         protected override void OnAppearing()
         {
             /*content = await client.GetStringAsync(urlTarjeta);
@@ -75,19 +83,28 @@ namespace DomoticApp.Views.Dormitorio
             }
             base.OnAppearing();*/
         }
-        public void btnLuces_Clicked(object sender, EventArgs e)
+        public async void btnLuces_Clicked(object sender, EventArgs e)
         {
-            /*content = await client.GetStringAsync(urlLuz1);
+            content = await client.GetStringAsync(urlLuz1);
             if (content != null)
             {
-                await SignalRSendState(stateButtonClicked);
+                if (stateButtonClicked == 0)
+                {
+                    await serverClient.SignalRSendState(stateButtonClicked);
+                    stateButtonClicked = 1;
+                }
+                else
+                {
+                    await serverClient.SignalRSendState(stateButtonClicked);
+                    stateButtonClicked = 0;
+                }
             }
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-            }*/
+            }
         }
-        async Task SignalRSendState(int state)
+        /*async Task SignalRSendState(int state)
         {
             try
             {
@@ -97,27 +114,21 @@ namespace DomoticApp.Views.Dormitorio
             {
                 await DisplayAlert("Error", e.Message.ToString(), "OK");
             }
-        }
+        }*/
         private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
             content = await client.GetStringAsync(urlEncenderAbanico);
             if (content != null)
             {
-                await SignalRSendState(stateButtonClicked);
+                //await SignalRSendState(stateButtonClicked);
             }
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
-            
         }
 
-        private void btnTelevision_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        void CambiaColor(Button btn, int stateButton)
+        /*void CambiaColor(Button btn, int stateButton)
         {
             if(stateButton == 0)
             {
@@ -131,6 +142,6 @@ namespace DomoticApp.Views.Dormitorio
                 btn.TextColor = Color.FromHex("#166498");
                 stateButtonClicked = 0;
             }
-        }
+        }*/
     }
 }

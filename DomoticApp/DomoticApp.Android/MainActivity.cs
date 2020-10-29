@@ -11,15 +11,13 @@ using DomoticApp.Views.Bienvenida;
 
 namespace DomoticApp.Droid
 {
-    [Activity(Label = "DomoticApp", Icon = "@mipmap/logoapp", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "DomoticApp", ScreenOrientation = ScreenOrientation.Portrait, Icon = "@mipmap/logoapp", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        //BienvenidaPage bienvenida = new BienvenidaPage();
-
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnCreate(Bundle savedInstanceState)
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -39,7 +37,7 @@ namespace DomoticApp.Droid
             //}
             //else
             //{
-            Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+            //Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
             LoadApplication(new App());
             
             //}
@@ -51,6 +49,9 @@ namespace DomoticApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+
+
         private bool estaInstaladaAplicacion(string nombrePaquete, Context context)
         {
             PackageManager pm = context.PackageManager;

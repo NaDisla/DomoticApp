@@ -5,69 +5,75 @@
             NavigationPage.HasNavigationBar="False"
             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
             xmlns:Custom="clr-namespace:DomoticApp.Customs">
+
     <ContentPage Title="Login"
                  IconImageSource="iconoLogin03.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
                 <magic:CssGradientSource>
-                    <![CDATA[linear-gradient(443deg, rgba(54, 54, 54, 0.05) 0%, rgba(54, 54, 54, 0.05) 33.333%,rgba(85, 85, 85, 0.05) 33.333%, rgba(85, 85, 85, 0.05) 66.666%,rgba(255, 255, 255, 0.05) 66.666%, rgba(255, 255, 255, 0.05) 99.999%),linear-gradient(490deg, rgba(81, 81, 81, 0.05) 0%, rgba(81, 81, 81, 0.05) 33.333%,rgba(238, 238, 238, 0.05) 33.333%, rgba(238, 238, 238, 0.05) 66.666%,rgba(32, 32, 32, 0.05) 66.666%, rgba(32, 32, 32, 0.05) 99.999%),linear-gradient(277deg, rgba(192, 192, 192, 0.05) 0%, rgba(192, 192, 192, 0.05) 33.333%,rgba(109, 109, 109, 0.05) 33.333%, rgba(109, 109, 109, 0.05) 66.666%,rgba(30, 30, 30, 0.05) 66.666%, rgba(30, 30, 30, 0.05) 99.999%),linear-gradient(326deg, rgba(77, 77, 77, 0.05) 0%, rgba(77, 77, 77, 0.05) 33.333%,rgba(55, 55, 55, 0.05) 33.333%, rgba(55, 55, 55, 0.05) 66.666%,rgba(145, 145, 145, 0.05) 66.666%, rgba(145, 145, 145, 0.05) 99.999%),linear-gradient(227deg, rgb(9, 201, 186),rgb(18, 131, 221))]]>
+                    <![CDATA[linear-gradient(156deg, rgba(135, 135, 135, 0.04) 0%, rgba(135, 135, 135, 0.04) 4%,rgba(73, 73, 73, 0.04) 4%, rgba(73, 73, 73, 0.04) 5%,rgba(161, 161, 161, 0.04) 5%, rgba(161, 161, 161, 0.04) 8%,rgba(22, 22, 22, 0.04) 8%, rgba(22, 22, 22, 0.04) 14%,rgba(46, 46, 46, 0.04) 14%, rgba(46, 46, 46, 0.04) 70%,rgba(199, 199, 199, 0.04) 70%, rgba(199, 199, 199, 0.04) 80%,rgba(0, 0, 0, 0.04) 80%, rgba(0, 0, 0, 0.04) 100%),linear-gradient(156deg, rgba(56, 56, 56, 0.1) 0%, rgba(56, 56, 56, 0.1) 36%,rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0.1) 62%,rgba(197, 197, 197, 0.1) 62%, rgba(197, 197, 197, 0.1) 71%,rgba(255, 255, 255, 0.1) 71%, rgba(255, 255, 255, 0.1) 75%,rgba(168, 168, 168, 0.1) 75%, rgba(168, 168, 168, 0.1) 98%,rgba(249, 249, 249, 0.1) 98%, rgba(249, 249, 249, 0.1) 100%),linear-gradient(111deg, rgba(42, 42, 42, 0.05) 0%, rgba(42, 42, 42, 0.05) 9%,rgba(254, 254, 254, 0.05) 9%, rgba(254, 254, 254, 0.05) 11%,rgba(109, 109, 109, 0.05) 11%, rgba(109, 109, 109, 0.05) 28%,rgba(250, 250, 250, 0.05) 28%, rgba(250, 250, 250, 0.05) 86%,rgba(191, 191, 191, 0.05) 86%, rgba(191, 191, 191, 0.05) 100%),linear-gradient(246deg, rgba(175, 175, 175, 0.05) 0%, rgba(175, 175, 175, 0.05) 12%,rgba(195, 195, 195, 0.05) 12%, rgba(195, 195, 195, 0.05) 34%,rgba(10, 10, 10, 0.05) 34%, rgba(10, 10, 10, 0.05) 56%,rgba(241, 241, 241, 0.05) 56%, rgba(241, 241, 241, 0.05) 81%,rgba(244, 244, 244, 0.05) 81%, rgba(244, 244, 244, 0.05) 82%,rgba(36, 36, 36, 0.05) 82%, rgba(36, 36, 36, 0.05) 84%,rgba(161, 161, 161, 0.05) 84%, rgba(161, 161, 161, 0.05) 99%,rgba(81, 81, 81, 0.05) 99%, rgba(81, 81, 81, 0.05) 100%),linear-gradient(111deg, rgba(146, 146, 146, 0.05) 0%, rgba(146, 146, 146, 0.05) 22%,rgba(239, 239, 239, 0.05) 22%, rgba(239, 239, 239, 0.05) 31%,rgba(147, 147, 147, 0.05) 31%, rgba(147, 147, 147, 0.05) 33%,rgba(209, 209, 209, 0.05) 33%, rgba(209, 209, 209, 0.05) 77%,rgba(129, 129, 129, 0.05) 77%, rgba(129, 129, 129, 0.05) 88%,rgba(20, 20, 20, 0.05) 88%, rgba(20, 20, 20, 0.05) 100%),linear-gradient(201deg, rgb(83,153,214),rgb(26,177,185),rgb(17,136,205))]]>
                 </magic:CssGradientSource>
             </magic:GradientView>
             <StackLayout Padding="0"
-                         Margin="10,40,10,0"
-                         HorizontalOptions="FillAndExpand">
-                <Frame  Style="{StaticResource FrameLogin}"
-                        HeightRequest="390">
-                    <StackLayout>
-                        <StackLayout Margin="10">
-                            <Image Source="LogoInicio.png"
-                                   Aspect="AspectFit" />
-                        </StackLayout>
-                        <StackLayout Padding="0"
-                                     Margin="15,10">
-                            <Frame Style="{StaticResource EntryFrame}">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoUsuario.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Usuario"
-                                                                x:Name="txtUser"/>
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Contraseña"
-                                                                IsPassword="True"
-                                                                x:Name="txtPassword"/>
-                                </StackLayout>
-                            </Frame>
-                            <StackLayout  Orientation="Horizontal"
-                                          Margin="0,25,0,0">
-                                <Label Text="¿Olvidó su contraseña?"
-                                       TextColor="#1E619A"
-                                       FontAttributes="Bold"
-                                       TextDecorations="Underline"
-                                       HorizontalOptions="CenterAndExpand"
-                                       FontSize="18"
-                                       FontFamily="{StaticResource RalewayBold}"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center" 
-                                       x:Name="lblOlvidarClave"/>
+                             Margin="10,40,10,0"
+                             HorizontalOptions="FillAndExpand">
+                    <Frame  Style="{StaticResource FrameLogin}"
+                            HeightRequest="390">
+                        <StackLayout>
+                            <StackLayout Margin="10">
+                                <Image Source="LogoInicio.png"
+                                       Aspect="AspectFit" />
                             </StackLayout>
+                        <ScrollView>
+                            <StackLayout Padding="0"
+                                         Margin="15,10"
+                                         x:Name="EntryLayout">
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       x:Name="EntryUsuarioLogin">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}">
+                                            <Image Source="iconoUsuario.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Usuario"
+                                                                    x:Name="txtUser" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,15,0,0"
+                                       x:Name="EntryPasswordLogin">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Contraseña"
+                                                                    IsPassword="True"
+                                                                    x:Name="txtPassword" />
+                                    </StackLayout>
+                                </Frame>
+                                <StackLayout  Orientation="Horizontal"
+                                              Margin="0,25,0,0">
+                                    <Label Text="¿Olvidó su contraseña?"
+                                           TextColor="#1E619A"
+                                           FontAttributes="Bold"
+                                           TextDecorations="Underline"
+                                           HorizontalOptions="CenterAndExpand"
+                                           FontSize="18"
+                                           FontFamily="{StaticResource RalewayBold}"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           x:Name="lblOlvidarClave" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <Button Text="Iniciar sesión"
-                        Style="{StaticResource BtnLoginPage}"
-                        x:Name="btnLogin"
-                        Clicked="btnLogin_Clicked"/>
-            </StackLayout>
+                    </Frame>
+                    <Button Text="Iniciar sesión"
+                            Style="{StaticResource BtnLoginPage}"
+                            x:Name="btnLogin"
+                            Clicked="btnLogin_Clicked" />
+                </StackLayout>
         </Grid>
     </ContentPage>
     <ContentPage Title="Registro"
@@ -75,88 +81,108 @@
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
                 <magic:CssGradientSource>
-                    <![CDATA[linear-gradient(373deg, rgba(54, 54, 54, 0.05) 0%, rgba(54, 54, 54, 0.05) 33.333%,rgba(85, 85, 85, 0.05) 33.333%, rgba(85, 85, 85, 0.05) 66.666%,rgba(255, 255, 255, 0.05) 66.666%, rgba(255, 255, 255, 0.05) 99.999%),linear-gradient(420deg, rgba(81, 81, 81, 0.05) 0%, rgba(81, 81, 81, 0.05) 33.333%,rgba(238, 238, 238, 0.05) 33.333%, rgba(238, 238, 238, 0.05) 66.666%,rgba(32, 32, 32, 0.05) 66.666%, rgba(32, 32, 32, 0.05) 99.999%),linear-gradient(256deg, rgba(192, 192, 192, 0.05) 0%, rgba(192, 192, 192, 0.05) 33.333%,rgba(109, 109, 109, 0.05) 33.333%, rgba(109, 109, 109, 0.05) 66.666%,rgba(30, 30, 30, 0.05) 66.666%, rgba(30, 30, 30, 0.05) 99.999%),linear-gradient(207deg, rgba(77, 77, 77, 0.05) 0%, rgba(77, 77, 77, 0.05) 33.333%,rgba(55, 55, 55, 0.05) 33.333%, rgba(55, 55, 55, 0.05) 66.666%,rgba(145, 145, 145, 0.05) 66.666%, rgba(145, 145, 145, 0.05) 99.999%),linear-gradient(157deg, rgb(115,202,242),rgb(30,97,154))]]>
+                    <![CDATA[linear-gradient(156deg, rgba(135, 135, 135, 0.04) 0%, rgba(135, 135, 135, 0.04) 4%,rgba(73, 73, 73, 0.04) 4%, rgba(73, 73, 73, 0.04) 5%,rgba(161, 161, 161, 0.04) 5%, rgba(161, 161, 161, 0.04) 8%,rgba(22, 22, 22, 0.04) 8%, rgba(22, 22, 22, 0.04) 14%,rgba(46, 46, 46, 0.04) 14%, rgba(46, 46, 46, 0.04) 70%,rgba(199, 199, 199, 0.04) 70%, rgba(199, 199, 199, 0.04) 80%,rgba(0, 0, 0, 0.04) 80%, rgba(0, 0, 0, 0.04) 100%),linear-gradient(156deg, rgba(56, 56, 56, 0.1) 0%, rgba(56, 56, 56, 0.1) 36%,rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0.1) 62%,rgba(197, 197, 197, 0.1) 62%, rgba(197, 197, 197, 0.1) 71%,rgba(255, 255, 255, 0.1) 71%, rgba(255, 255, 255, 0.1) 75%,rgba(168, 168, 168, 0.1) 75%, rgba(168, 168, 168, 0.1) 98%,rgba(249, 249, 249, 0.1) 98%, rgba(249, 249, 249, 0.1) 100%),linear-gradient(111deg, rgba(42, 42, 42, 0.05) 0%, rgba(42, 42, 42, 0.05) 9%,rgba(254, 254, 254, 0.05) 9%, rgba(254, 254, 254, 0.05) 11%,rgba(109, 109, 109, 0.05) 11%, rgba(109, 109, 109, 0.05) 28%,rgba(250, 250, 250, 0.05) 28%, rgba(250, 250, 250, 0.05) 86%,rgba(191, 191, 191, 0.05) 86%, rgba(191, 191, 191, 0.05) 100%),linear-gradient(246deg, rgba(175, 175, 175, 0.05) 0%, rgba(175, 175, 175, 0.05) 12%,rgba(195, 195, 195, 0.05) 12%, rgba(195, 195, 195, 0.05) 34%,rgba(10, 10, 10, 0.05) 34%, rgba(10, 10, 10, 0.05) 56%,rgba(241, 241, 241, 0.05) 56%, rgba(241, 241, 241, 0.05) 81%,rgba(244, 244, 244, 0.05) 81%, rgba(244, 244, 244, 0.05) 82%,rgba(36, 36, 36, 0.05) 82%, rgba(36, 36, 36, 0.05) 84%,rgba(161, 161, 161, 0.05) 84%, rgba(161, 161, 161, 0.05) 99%,rgba(81, 81, 81, 0.05) 99%, rgba(81, 81, 81, 0.05) 100%),linear-gradient(111deg, rgba(146, 146, 146, 0.05) 0%, rgba(146, 146, 146, 0.05) 22%,rgba(239, 239, 239, 0.05) 22%, rgba(239, 239, 239, 0.05) 31%,rgba(147, 147, 147, 0.05) 31%, rgba(147, 147, 147, 0.05) 33%,rgba(209, 209, 209, 0.05) 33%, rgba(209, 209, 209, 0.05) 77%,rgba(129, 129, 129, 0.05) 77%, rgba(129, 129, 129, 0.05) 88%,rgba(20, 20, 20, 0.05) 88%, rgba(20, 20, 20, 0.05) 100%),linear-gradient(201deg, rgb(118,185,240),rgb(11,139,146),rgb(51,128,193))]]>
                 </magic:CssGradientSource>
             </magic:GradientView>
             <StackLayout Padding="0"
                          Margin="10,40,10,0"
                          HorizontalOptions="FillAndExpand">
                 <Frame  Style="{StaticResource FrameLogin}"
-                        HeightRequest="610">
+                        HeightRequest="400">
                     <StackLayout>
                         <StackLayout Margin="10">
                             <Image Source="LogoInicio.png"
                                    Aspect="AspectFit" />
                         </StackLayout>
-                        <StackLayout Padding="0"
-                                     Margin="15,10">
-                            <Frame Style="{StaticResource EntryFrame}">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoUsuario.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Nombre(s)"
-                                                                x:Name="txtNombre" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Apellidos"
-                                                                x:Name="txtApellidos" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Correo electrónico"
-                                                                x:Name="txtCorreo" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Nombre de usuario"
-                                                                x:Name="txtNombreUsuario" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Contraseña"
-                                                                x:Name="txtClaveRegistro"
-                                                                IsPassword="True"/>
-                                </StackLayout>
-                            </Frame>
-                            <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0">
-                                <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
-                                    </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Confirmar contraseña"
-                                                                x:Name="txtConfirmarClave" />
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
+                        <ScrollView>
+                            <StackLayout Padding="0"
+                                         Margin="15,10">
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoUsuario.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Nombre(s)"
+                                                                    x:Name="txtNombre" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,10,0,0"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Apellidos"
+                                                                    x:Name="txtApellidos" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,10,0,0"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Correo electrónico"
+                                                                    x:Name="txtCorreoRegistro" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,10,0,0"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Nombre de usuario"
+                                                                    x:Name="txtNombreUsuario" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,10,0,0"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Contraseña"
+                                                                    x:Name="txtClaveRegistro"
+                                                                    IsPassword="True" />
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Style="{StaticResource EntryFrame}"
+                                       Margin="0,10,0,0"
+                                       HeightRequest="40">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Style="{StaticResource BaseImageFrame}"
+                                               HeightRequest="20"
+                                               WidthRequest="20">
+                                            <Image Source="iconoClave.png"
+                                                   Style="{StaticResource ImageEntry}" />
+                                        </Frame>
+                                        <Custom:CustomEntryRenderer Placeholder="Confirmar contraseña"
+                                                                    x:Name="txtConfirmarClave" />
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ScrollView>
                     </StackLayout>
                 </Frame>
                 <Button Text="Registrarme"
@@ -166,7 +192,91 @@
             </StackLayout>
         </Grid>
     </ContentPage>
-    <ContentPage Title="Olvidé mi clave" 
+    <ContentPage Title="Olvidé mi clave"
                  IconImageSource="iconoOlvidoClave.png">
+        <Grid>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[linear-gradient(156deg, rgba(135, 135, 135, 0.04) 0%, rgba(135, 135, 135, 0.04) 4%,rgba(73, 73, 73, 0.04) 4%, rgba(73, 73, 73, 0.04) 5%,rgba(161, 161, 161, 0.04) 5%, rgba(161, 161, 161, 0.04) 8%,rgba(22, 22, 22, 0.04) 8%, rgba(22, 22, 22, 0.04) 14%,rgba(46, 46, 46, 0.04) 14%, rgba(46, 46, 46, 0.04) 70%,rgba(199, 199, 199, 0.04) 70%, rgba(199, 199, 199, 0.04) 80%,rgba(0, 0, 0, 0.04) 80%, rgba(0, 0, 0, 0.04) 100%),linear-gradient(156deg, rgba(56, 56, 56, 0.1) 0%, rgba(56, 56, 56, 0.1) 36%,rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0.1) 62%,rgba(197, 197, 197, 0.1) 62%, rgba(197, 197, 197, 0.1) 71%,rgba(255, 255, 255, 0.1) 71%, rgba(255, 255, 255, 0.1) 75%,rgba(168, 168, 168, 0.1) 75%, rgba(168, 168, 168, 0.1) 98%,rgba(249, 249, 249, 0.1) 98%, rgba(249, 249, 249, 0.1) 100%),linear-gradient(111deg, rgba(42, 42, 42, 0.05) 0%, rgba(42, 42, 42, 0.05) 9%,rgba(254, 254, 254, 0.05) 9%, rgba(254, 254, 254, 0.05) 11%,rgba(109, 109, 109, 0.05) 11%, rgba(109, 109, 109, 0.05) 28%,rgba(250, 250, 250, 0.05) 28%, rgba(250, 250, 250, 0.05) 86%,rgba(191, 191, 191, 0.05) 86%, rgba(191, 191, 191, 0.05) 100%),linear-gradient(246deg, rgba(175, 175, 175, 0.05) 0%, rgba(175, 175, 175, 0.05) 12%,rgba(195, 195, 195, 0.05) 12%, rgba(195, 195, 195, 0.05) 34%,rgba(10, 10, 10, 0.05) 34%, rgba(10, 10, 10, 0.05) 56%,rgba(241, 241, 241, 0.05) 56%, rgba(241, 241, 241, 0.05) 81%,rgba(244, 244, 244, 0.05) 81%, rgba(244, 244, 244, 0.05) 82%,rgba(36, 36, 36, 0.05) 82%, rgba(36, 36, 36, 0.05) 84%,rgba(161, 161, 161, 0.05) 84%, rgba(161, 161, 161, 0.05) 99%,rgba(81, 81, 81, 0.05) 99%, rgba(81, 81, 81, 0.05) 100%),linear-gradient(111deg, rgba(146, 146, 146, 0.05) 0%, rgba(146, 146, 146, 0.05) 22%,rgba(239, 239, 239, 0.05) 22%, rgba(239, 239, 239, 0.05) 31%,rgba(147, 147, 147, 0.05) 31%, rgba(147, 147, 147, 0.05) 33%,rgba(209, 209, 209, 0.05) 33%, rgba(209, 209, 209, 0.05) 77%,rgba(129, 129, 129, 0.05) 77%, rgba(129, 129, 129, 0.05) 88%,rgba(20, 20, 20, 0.05) 88%, rgba(20, 20, 20, 0.05) 100%),linear-gradient(201deg, rgb(150,206,248),rgb(44,176,177),rgb(35,99,154))]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <StackLayout Padding="0"
+                         Margin="10,40,10,0"
+                         HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource FrameLogin}"
+                        HeightRequest="470">
+                    <StackLayout>
+                        <StackLayout Margin="10">
+                            <Image Source="LogoInicio.png"
+                                   Aspect="AspectFit" />
+                        </StackLayout>
+
+                        <StackLayout Padding="0"
+                                     Margin="15,10">
+                            <Frame Style="{StaticResource EntryFrame}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                        <Image Source="iconoUsuario.png"
+                                               Style="{StaticResource ImageEntry}" />
+                                    </Frame>
+                                    <Custom:CustomEntryRenderer Placeholder="Nombre de usuario"
+                                                                x:Name="txtCorreoCambioClave" />
+                                </StackLayout>
+                            </Frame>
+                            <Button Text="Enviar código"
+                                    Margin="0,30,0,0"
+                                    Style="{StaticResource BtnLoginPage}"
+                                    x:Name="btnEnviarCodigo"
+                                    Clicked="btnEnviarCodigo_Clicked" />
+                            <Frame Style="{StaticResource EntryFrame}"
+                                   Margin="0,15,0,0"
+                                   x:Name="entryCodigo">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                        <Image Source="iconoClave.png"
+                                               Style="{StaticResource ImageEntry}" />
+                                    </Frame>
+                                    <Custom:CustomEntryRenderer Placeholder="Código"
+                                                                x:Name="txtCodigo" />
+                                </StackLayout>
+                            </Frame>
+                            <Button Text="Confirmar"
+                                    Margin="0,30,0,0"
+                                    Style="{StaticResource BtnLoginPage}"
+                                    x:Name="btnConfirmarCodigo"
+                                    Clicked="btnConfirmarCodigo_Clicked" />
+                            <Frame Style="{StaticResource EntryFrame}"
+                                   Margin="0,15,0,0"
+                                   x:Name="entryNuevaClave">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                        <Image Source="iconoClave.png"
+                                               Style="{StaticResource ImageEntry}" />
+                                    </Frame>
+                                    <Custom:CustomEntryRenderer Placeholder="Nueva contraseña"
+                                                                x:Name="txtNuevaClave" />
+                                </StackLayout>
+                            </Frame>
+                            <Frame Style="{StaticResource EntryFrame}"
+                                   Margin="0,15,0,0"
+                                   x:Name="entryConfirmarNuevaClave">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                        <Image Source="iconoClave.png"
+                                               Style="{StaticResource ImageEntry}" />
+                                    </Frame>
+                                    <Custom:CustomEntryRenderer Placeholder="Confirmar contraseña"
+                                                                x:Name="txtConfirmarClaveNueva" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button Text="Cambiar contraseña"
+                        Style="{StaticResource BtnLoginPage}"
+                        x:Name="btnCambiarClave"
+                        Clicked="btnCambiarClave_Clicked" />
+            </StackLayout>
+        </Grid>
     </ContentPage>
 </TabbedPage>

@@ -25,14 +25,16 @@ namespace DomoticApp
     {
         private const string urlTarjeta = "http://10.0.0.17";
         private const string ipCasa = "10.0.0.17";
-        public LoadingNetworkPage loadingRed;
-        public CorrectNetworkPage redCorrecta;
+        public LoadingPage loadingRed;
+        public CorrectValidationPage redCorrecta;
         public IncorrectNetworkPage redIncorrecta;
         public AlertNetworkPage alertaVPN;
         private readonly HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
         public string ipDevice, parteInicialCasa, parteInicialDevice;
         public string[] numIPCasa, numIPDevice;
+        private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
+            textDetailCorrect = "Se encuentra conectado a la red de su vivienda.";
 
         [Obsolete]
         public App()
@@ -71,16 +73,16 @@ namespace DomoticApp
         [Obsolete]
         public async void RedCorrecta()
         {
-            await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
+            await PopupNavigation.PushAsync(loadingRed = new LoadingPage(textLoadingDetail));
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
-            await PopupNavigation.PushAsync(redCorrecta = new CorrectNetworkPage());
+            await PopupNavigation.PushAsync(redCorrecta = new CorrectValidationPage(textTitleCorrect, textDetailCorrect));
         }
 
         [Obsolete]
         public async void RedIncorrecta()
         {
-            await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
+            await PopupNavigation.PushAsync(loadingRed = new LoadingPage(textLoadingDetail));
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(redIncorrecta = new IncorrectNetworkPage());
@@ -89,7 +91,7 @@ namespace DomoticApp
         [Obsolete]
         public async void AlertaVPN()
         {
-            await PopupNavigation.PushAsync(loadingRed = new LoadingNetworkPage());
+            await PopupNavigation.PushAsync(loadingRed = new LoadingPage(textLoadingDetail));
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(alertaVPN = new AlertNetworkPage());

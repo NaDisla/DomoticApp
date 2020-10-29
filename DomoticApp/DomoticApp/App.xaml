@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DomoticApp.App"
-             xmlns:Custom="clr-namespace:DomoticApp.Customs">
+             xmlns:Custom="clr-namespace:DomoticApp.Customs"
+             xmlns:popupAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup">
     <Application.Resources>
         <ResourceDictionary>
             <OnPlatform x:Key="RalewayBold"
@@ -219,11 +220,107 @@
                 <Setter Property="Margin"
                         Value="8,8,0,8" />
             </Style>
-            
-            <Style TargetType="Image" x:Key="ImageEntry">
-                <Setter Property="Aspect" Value="AspectFill"/>
+
+            <Style TargetType="Image"
+                   x:Key="ImageEntry">
+                <Setter Property="Aspect"
+                        Value="AspectFill" />
                 <Setter Property="Margin"
                         Value="0" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="TextLoading">
+                <Setter Property="TextColor"
+                        Value="#052A48"/>
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+            </Style>
+
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color"
+                        Value="#8DC63D"/>
+                <Setter Property="IsRunning"
+                        Value="True" />
+                <Setter Property="IsEnabled"
+                        Value="True" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="HeightRequest"
+                        Value="60" />
+                <Setter Property="WidthRequest"
+                        Value="60" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="BaseMenu">
+                <Setter Property="CornerRadius"
+                        Value="25" />
+                <Setter Property="Margin"
+                        Value="-20,0,0,0" />
+                <Setter Property="BackgroundColor"
+                        Value="#D3E7ED"/>
+                <Setter Property="Padding"
+                        Value="0,0,-20,5"/>
+            </Style>
+
+            <Style TargetType="Image"
+                   x:Key="LogoMenu">
+                <Setter Property="Aspect"
+                        Value="AspectFit" />
+                <Setter Property="WidthRequest"
+                        Value="195" />
+                <Setter Property="HeightRequest"
+                        Value="95" />
+                <Setter Property="Source"
+                        Value="LogoPages.png" />
+            </Style>
+
+            <Style TargetType="ListView" x:Key="ListaMenu">
+                <Setter Property="RowHeight" 
+                        Value="60"/>
+                <Setter Property="SeparatorColor"
+                        Value="#A1C2D0" />
+                <Setter Property="SeparatorVisibility"
+                        Value="Default" />
+                <Setter Property="BackgroundColor"
+                        Value="#D3E7ED" />
+            </Style>
+
+            <Style TargetType="Image" x:Key="IconoItemMenu">
+                <Setter Property="WidthRequest" 
+                        Value="40"/>
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="TitleItemMenu">
+                <Setter Property="TextColor"
+                        Value="#0E4265" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontSize"
+                        Value="17" />
+            </Style>
+
+            <Style TargetType="StackLayout" x:Key="BaseItemMenu">
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Orientation"
+                        Value="Horizontal" />
+                <Setter Property="Padding"
+                        Value="20,10,0,10" />
+                <Setter Property="Spacing"
+                        Value="20" />
+                <Setter Property="Margin"
+                        Value="20,0,0,0" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

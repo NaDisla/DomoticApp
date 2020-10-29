@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DomoticApp.Views.Popups.CorrectNetworkPage"
+             x:Class="DomoticApp.Views.Popups.CorrectValidationPage"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:popupAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              InputTransparent="False" 
@@ -24,15 +24,15 @@
     </pages:PopupPage.Animation>
     <Frame Style="{StaticResource Popup}">
         <StackLayout HorizontalOptions="FillAndExpand">
-            <Label Text="¡Bienvenido! - Red conectada" 
-                   Style="{StaticResource TitlePopup}"/>
+            <Label Style="{StaticResource TitlePopup}"
+                   x:Name="lblTitleCorrectPopup"/>
             <BoxView Style="{StaticResource PopupLine}" />
             <StackLayout Spacing="0" 
                          Orientation="Horizontal">
                 <Image Source="iconoValidacion.png"
                                 Style="{StaticResource PopupImage}"/>
-                <Label Text="Se encuentra conectado a la red de su vivienda." 
-                       Style="{StaticResource DetailPopup}"/>
+                <Label Style="{StaticResource DetailPopup}"
+                       x:Name="lblTitleDetailPopup"/>
             </StackLayout>
         </StackLayout>
     </Frame>
