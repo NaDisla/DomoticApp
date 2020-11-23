@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DomoticApp.Views.Popups.IncorrectNetworkPage"
+             x:Class="DomoticApp.Views.Popups.IncorrectValidationPage"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:popupAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              InputTransparent="False" 
@@ -24,16 +24,20 @@
     </pages:PopupPage.Animation>
     <Frame Style="{StaticResource Popup}">
         <StackLayout HorizontalOptions="FillAndExpand">
-            <Label Text="No hay conexión de red" 
-                   Style="{StaticResource TitlePopup}"/>
+            <Label Style="{StaticResource TitlePopup}"
+                   x:Name="lblTitleError"/>
             <BoxView Style="{StaticResource PopupLine}"/>
             <StackLayout Spacing="0" 
                          Orientation="Horizontal">
                 <Image Source="iconoError.png"
                                 Style="{StaticResource PopupImage}"/>
-                <Label Text="No se ha detectado conexión a internet." 
-                       Style="{StaticResource DetailPopup}"/>
+                <Label Style="{StaticResource DetailPopup}"
+                       x:Name="lblDetailError"/>
             </StackLayout>
+            <Button Text="OK"
+                    Style="{StaticResource ActionPopup}"
+                    x:Name="btnCerrarVentana"
+                    Clicked="btnCerrarVentana_Clicked" />
         </StackLayout>
     </Frame>
 </pages:PopupPage>

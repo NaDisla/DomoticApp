@@ -32,18 +32,9 @@
                        Style="{StaticResource DetailPopup}"/>
             </StackLayout>
             <Button Text="Ajustes de red"
-                        CornerRadius="25"
-                        BackgroundColor="#0E4265"
+                        Style="{StaticResource ActionPopup}"
                         x:Name="btnAjustesVPN"
-                        Clicked="btnAjustesVPN_Clicked"
-                        HorizontalOptions="Center"
-                        VerticalOptions="EndAndExpand"
-                        TextColor="White"
-                        FontFamily="{StaticResource RalewaySemiBold}"
-                        Padding="15,0,15,0"
-                        Margin="0,10,0,0"
-                        FontSize="14"
-                        HeightRequest="40"/>
+                        Clicked="btnAjustesVPN_Clicked"/>
         </StackLayout>
     </Frame>
 </pages:PopupPage>

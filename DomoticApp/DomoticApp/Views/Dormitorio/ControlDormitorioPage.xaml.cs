@@ -15,27 +15,25 @@ namespace DomoticApp.Views.Dormitorio
     public partial class ControlDormitorioPage : ContentPage
     {
         public int stateButtonClicked = 0;
-        public string Temperatura { get; set; }
-        public string Humedad { get; set; }
-        private const string urlTarjeta = "http://10.0.0.17";
-        private const string urlLuz1 = "http://10.0.0.17/dormitorio-izquierda";
-        //private const string urlLuz2 = "http://10.0.0.17/D";
-        private const string urlEncenderAbanico = "http://10.0.0.17/A";
+        private const string urlGeneral= "http://10.0.0.17";
+        private const string urlLuz1 = "http://10.0.0.17/dormitorio-derecha";
+        private const string urlLuz2 = "http://10.0.0.17/dormitorio-izquierda";
+        private const string urlAbanico = "http://10.0.0.17/dormitorio-abanico";
         private readonly HttpClient client = new HttpClient();
         private string content;
-        public string estadoDormitorio;
+        
         SignalRClient serverClient;
         
         public ControlDormitorioPage()
         {
             InitializeComponent();
-
-            if(btnLuz1.IsPressed == false)
-                serverClient = new SignalRClient(btnLuz1);
-            else if(btnLuz2.IsPressed == false)
-                serverClient = new SignalRClient(btnLuz2);
-            else if(btnAbanico.IsPressed == false)
-                serverClient = new SignalRClient(btnAbanico);
+            
+            //if(btnLuz1.IsPressed == false)
+            //    serverClient = new SignalRClient(btnLuz1);
+            //else if(btnLuz2.IsPressed == false)
+            //    serverClient = new SignalRClient(btnLuz2);
+            //else if(btnAbanico.IsPressed == false)
+            //    serverClient = new SignalRClient(btnAbanico);
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
@@ -63,25 +61,24 @@ namespace DomoticApp.Views.Dormitorio
                 await DisplayAlert("Error estableciendo conexión", e.Message.ToString(), "OK");
             }
         }*/
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            /*content = await client.GetStringAsync(urlTarjeta);
+            
+            content = await client.GetStringAsync(urlGeneral);
             var cortando = content.Split(';');
             string temperatura = cortando[0];
             string humedad = cortando[1];
-            estadoDormitorio = cortando[2];
+            string indiceCalor = cortando[2];
             if (content != null)
             {
-                Temperatura = temperatura + "°C";
-                Humedad = humedad + "%";
-                lblTemp.Text = Temperatura;
-                lblHum.Text = Humedad;
+                lblTemp.Text = temperatura + "°C";
+                lblHum.Text = humedad + "%";
             }
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
-            base.OnAppearing();*/
+            base.OnAppearing();
         }
         public async void btnLuces_Clicked(object sender, EventArgs e)
         {
@@ -92,6 +89,7 @@ namespace DomoticApp.Views.Dormitorio
                 {
                     await serverClient.SignalRSendState(stateButtonClicked);
                     stateButtonClicked = 1;
+                    MessagingCenter.Send<object, int>(this, "State", stateButtonClicked);
                 }
                 else
                 {
@@ -117,7 +115,7 @@ namespace DomoticApp.Views.Dormitorio
         }*/
         private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
-            content = await client.GetStringAsync(urlEncenderAbanico);
+            //content = await client.GetStringAsync();
             if (content != null)
             {
                 //await SignalRSendState(stateButtonClicked);

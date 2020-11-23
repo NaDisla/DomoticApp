@@ -19,5 +19,10 @@ namespace DomoticApp.Views.Bath
             InitializeComponent();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
+
+        private void btnLuz_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

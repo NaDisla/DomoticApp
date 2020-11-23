@@ -5,7 +5,8 @@
              x:Class="DomoticApp.Views.MasterMenu.MasterMenuPage"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
                      BackgroundColor="Transparent">

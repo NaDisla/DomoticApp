@@ -24,15 +24,14 @@ namespace DomoticApp.DataHelpers
                 {
                     UsuarioID = user.Object.UsuarioID,
                     AccesoID = user.Object.AccesoID,
-                    UsuarioNombres = user.Object.UsuarioNombres,
-                    UsuarioApellidos = user.Object.UsuarioApellidos,
+                    UsuarioNombreCompleto = user.Object.UsuarioNombreCompleto,
                     UsuarioCorreo = user.Object.UsuarioCorreo,
                     NombreUsuario = user.Object.NombreUsuario,
                     UsuarioClave = user.Object.UsuarioClave,
                     UsuarioRol = user.Object.UsuarioRol
                 }).ToList();
         }
-        public async Task AgregarUsuario(int id, string nombres, string apellidos, string correo, string nombreUsuario, string clave)
+        public async Task AgregarUsuario(int id, string nombreCompleto, string correo, string nombreUsuario, string clave)
         {
             var obtenerUsuarios = await GetUsuarios();
 
@@ -41,8 +40,7 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombres = nombres,
-                    UsuarioApellidos = apellidos,
+                    UsuarioNombreCompleto = nombreCompleto,
                     UsuarioCorreo = correo,
                     NombreUsuario = nombreUsuario,
                     UsuarioClave = clave,
@@ -54,8 +52,7 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombres = nombres,
-                    UsuarioApellidos = apellidos,
+                    UsuarioNombreCompleto = nombreCompleto,
                     UsuarioCorreo = correo,
                     NombreUsuario = nombreUsuario,
                     UsuarioClave = clave,

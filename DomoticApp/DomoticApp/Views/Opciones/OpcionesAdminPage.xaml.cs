@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp.Views.Opciones
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OpcionesPage : ContentPage
+    public partial class OpcionesAdminPage : ContentPage
     {
-        public OpcionesPage()
+        public OpcionesAdminPage()
         {
             InitializeComponent();
         }

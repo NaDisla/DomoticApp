@@ -18,6 +18,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Usuarios.GeneralLogin;
+using DomoticApp.Views.Usuarios;
 
 namespace DomoticApp
 {
@@ -27,20 +28,34 @@ namespace DomoticApp
         private const string ipCasa = "10.0.0.17";
         public LoadingPage loadingRed;
         public CorrectValidationPage redCorrecta;
-        public IncorrectNetworkPage redIncorrecta;
+        public IncorrectValidationPage redIncorrecta;
         public AlertNetworkPage alertaVPN;
+        public GeneralLoginPage login;
         private readonly HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
         public string ipDevice, parteInicialCasa, parteInicialDevice;
         public string[] numIPCasa, numIPDevice;
         private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
-            textDetailCorrect = "Se encuentra conectado a la red de su vivienda.";
+            textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red", 
+            textDetailError = "No se ha detectado una conexión de internet.";
 
         [Obsolete]
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new GeneralLoginPage());
+            var isLoogged = SecureStorage.GetAsync("isLogged").Result;
+            if (isLoogged == "1")
+            {
+                MainPage = new NavigationPage(new MasterMenuPage());
+            }
+            else if (isLoogged == "2")
+            {
+                MainPage = new NavigationPage(new MasterMenuHabitantePage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new GeneralLoginPage());
+            }
             /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else
@@ -85,7 +100,7 @@ namespace DomoticApp
             await PopupNavigation.PushAsync(loadingRed = new LoadingPage(textLoadingDetail));
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
-            await PopupNavigation.PushAsync(redIncorrecta = new IncorrectNetworkPage());
+            await PopupNavigation.PushAsync(redIncorrecta = new IncorrectValidationPage(textTitleError, textDetailError));
         }
 
         [Obsolete]

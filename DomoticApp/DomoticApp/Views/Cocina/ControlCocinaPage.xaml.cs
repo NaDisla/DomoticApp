@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DomoticApp.DataHelpers;
+using DomoticApp.Views.Monitoreo;
+using DomoticApp.Views.SmartFridge;
+using System;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,42 +11,54 @@ namespace DomoticApp.Views.Cocina
     public partial class ControlCocinaPage : ContentPage
     {
         public int estado = 0;
-        private const string urlEncenderLuz = "http://10.0.0.17/C";
+        private const string urlLuz1 = "http://10.0.0.17/cocina-recibidor", urlLuz2 = "http://10.0.0.17/sala-cocina";
         private readonly HttpClient client = new HttpClient();
         private string content;
+        SignalRClient serverClient;
+        public int stateButtonClicked = 0;
 
         public ControlCocinaPage()
         {
             InitializeComponent();
-            
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
-        private async void btnLuces_Clicked(object sender, EventArgs e)
+        async void SendArduinoRequest(string url)
         {
-            content = await client.GetStringAsync(urlEncenderLuz);
+            content = await client.GetStringAsync(url);
             if (content != null)
             {
-                CambiaColor(btnLuces);
+                if (stateButtonClicked == 0)
+                {
+                    await serverClient.SignalRSendState(stateButtonClicked);
+                    stateButtonClicked = 1;
+                    MessagingCenter.Send<object, int>(this, "State", stateButtonClicked);
+                }
+                else
+                {
+                    await serverClient.SignalRSendState(stateButtonClicked);
+                    stateButtonClicked = 0;
+                }
             }
             else
             {
                 await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
         }
-        void CambiaColor(Button btn)
+
+        private void btnLuz1_Clicked(object sender, EventArgs e)
         {
-            if (estado == 0)
-            {
-                btn.BackgroundColor = Color.FromHex("#739DB8");
-                btn.TextColor = Color.White;
-                estado = 1;
-            }
-            else
-            {
-                btn.BackgroundColor = Color.AliceBlue;
-                btn.TextColor = Color.FromHex("#166498");
-                estado = 0;
-            }
+            SendArduinoRequest(urlLuz1);
+        }
+
+        private void btnLuz2_Clicked(object sender, EventArgs e)
+        {
+            SendArduinoRequest(urlLuz2);
+        }
+
+        private async void btnNevera_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FridgeSimulatorPage());
         }
     }
 }

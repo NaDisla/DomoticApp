@@ -9,7 +9,7 @@
              xmlns:popupAnimations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              InputTransparent="False" 
              Padding="20,100"
-             CloseWhenBackgroundIsClicked="True"
+             CloseWhenBackgroundIsClicked="False"
              HasSystemPadding="True">
     <pages:PopupPage.Animation>
         <popupAnimations:ScaleAnimation DurationIn="200"
@@ -34,6 +34,10 @@
                 <Label Style="{StaticResource DetailPopup}"
                        x:Name="lblTitleDetailPopup"/>
             </StackLayout>
+            <Button Text="OK"
+                    Style="{StaticResource ActionPopup}"
+                    x:Name="btnCerrarVentana"
+                    Clicked="btnCerrarVentana_Clicked"/>
         </StackLayout>
     </Frame>
 </pages:PopupPage>

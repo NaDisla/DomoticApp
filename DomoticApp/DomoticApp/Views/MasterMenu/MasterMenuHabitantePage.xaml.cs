@@ -5,10 +5,12 @@ using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Monitoreo;
+using DomoticApp.Views.Opciones;
 using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Tinaco;
+using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,6 +115,22 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Exteriores"
             };
             elementosMenu.Add(pagExteriores);
+            
+            MasterMenuItems pagOpciones = new MasterMenuItems()
+            {
+                Icon = "iconoOpciones.png",
+                TargetType = typeof(OpcionesHabitantePage),
+                Title = "Más opciones"
+            };
+            elementosMenu.Add(pagOpciones);
+
+            MasterMenuItems pagSalir = new MasterMenuItems()
+            {
+                Icon = "salir.png",
+                TargetType = typeof(GeneralLoginPage),
+                Title = "Cerrar sesión"
+            };
+            elementosMenu.Add(pagSalir);
 
             listaMenu.ItemsSource = elementosMenu;
             listaMenu.ItemSelected += listaMenu_ItemSelected;

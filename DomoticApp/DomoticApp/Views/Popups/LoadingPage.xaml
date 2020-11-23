@@ -32,8 +32,7 @@
                 <ActivityIndicator />
                 <Label Style="{StaticResource TextLoading}"
                        Margin="10,10,0,0"
-                       x:Name="lblLoadingDetail"
-                       x:FieldModifier="public"/>
+                       x:Name="lblLoadingDetail" />
             </StackLayout>
         </StackLayout>
     </Frame>

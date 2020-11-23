@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DomoticApp.Views.Dormitorio;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
@@ -12,13 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp.Views.Popups
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CorrectValidationPage : PopupPage
+    public partial class IncorrectValidationPage : PopupPage
     {
-        public CorrectValidationPage(string title, string detail)
+        public IncorrectValidationPage(string title, string detail)
         {
             InitializeComponent();
-            lblTitleCorrectPopup.Text = title;
-            lblTitleDetailPopup.Text = detail;
+            lblTitleError.Text = title;
+            lblDetailError.Text = detail;
         }
 
         [Obsolete]

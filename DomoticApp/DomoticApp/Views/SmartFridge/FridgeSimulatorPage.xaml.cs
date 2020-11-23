@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomoticApp.Views.Monitoreo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp.Views.SmartFridge
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WebViewPage : ContentPage
+    public partial class FridgeSimulatorPage : ContentPage
     {
-        public WebViewPage()
+        public FridgeSimulatorPage()
         {
             WebView webview = new WebView
             {
@@ -24,6 +25,7 @@ namespace DomoticApp.Views.SmartFridge
                      webview
                 }
             };
+            //btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
         protected override void OnAppearing()
         {

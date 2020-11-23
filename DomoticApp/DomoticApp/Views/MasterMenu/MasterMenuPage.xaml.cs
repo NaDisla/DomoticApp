@@ -10,6 +10,7 @@ using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Tinaco;
+using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace DomoticApp.Views.MasterMenu
         public MasterMenuPage()
         {
             InitializeComponent();
+            
             Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();
             
@@ -117,10 +119,18 @@ namespace DomoticApp.Views.MasterMenu
             MasterMenuItems pagOpciones = new MasterMenuItems()
             {
                 Icon = "iconoOpciones.png",
-                TargetType = typeof(OpcionesPage),
+                TargetType = typeof(OpcionesAdminPage),
                 Title = "Más opciones"
             };
             elementosMenu.Add(pagOpciones);
+
+            MasterMenuItems pagSalir = new MasterMenuItems()
+            {
+                Icon = "salir.png",
+                TargetType = typeof(GeneralLoginPage),
+                Title = "Cerrar sesión"
+            };
+            elementosMenu.Add(pagSalir);
 
             listaMenu.ItemsSource = elementosMenu;
             listaMenu.ItemSelected += listaMenu_ItemSelected;
