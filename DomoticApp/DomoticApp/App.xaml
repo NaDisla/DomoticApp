@@ -142,6 +142,24 @@
             </Style>
 
             <Style TargetType="Button"
+                   x:Key="BtnIconoIzquierda">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="ContentLayout"
+                        Value="Left,0" />
+                <Setter Property="CornerRadius"
+                        Value="15" />
+                <Setter Property="TextColor"
+                        Value="#175E8D" />
+                <Setter Property="BackgroundColor"
+                        Value="#b9d9f0" />
+                <Setter Property="Padding"
+                        Value="0,8,0,5" />
+                <Setter Property="FontSize"
+                        Value="15" />
+            </Style>
+
+            <Style TargetType="Button"
                    x:Key="ActionPopup">
                 <Setter Property="FontFamily"
                         Value="{StaticResource RalewayBold}" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DomoticApp.Views.Accesos;
+using DomoticApp.Views.Monitoreo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,22 @@ namespace DomoticApp.Views.Opciones
         public OpcionesAdminPage()
         {
             InitializeComponent();
+            btnMenu.Clicked += (s,e) => MainPage.inicio();
+        }
+
+        private void btnUsuarios_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnAccesos_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NavigationPage(new TestAccesosPage()));
+        }
+
+        private void btnEntradas_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

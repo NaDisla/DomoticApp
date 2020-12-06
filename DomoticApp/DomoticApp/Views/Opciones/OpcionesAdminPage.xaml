@@ -1,12 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DomoticApp.Views.Opciones.OpcionesAdminPage">
+             x:Class="DomoticApp.Views.Opciones.OpcionesAdminPage"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Página de opciones de Administrador"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    repeating-linear-gradient(224deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),repeating-linear-gradient(134deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),linear-gradient(179deg, rgb(214,241,255),rgb(28,105,150))
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                             x:Name="btnMenu" />
+                <Image Source="LogoPages.png"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,10,0,0" />
+                <Label Text="Seleccione el apartado deseado"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TitlePage}" />
+                <Frame Grid.ColumnSpan="4"
+                       Grid.Row="2"
+                       Style="{StaticResource Panel}">
+                    <StackLayout>
+                        <Label Text="Mantenimiento"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60" />
+                            </Grid.RowDefinitions>
+                            <Button Text="Usuarios"
+                                    x:Name="btnUsuarios"
+                                    Clicked="btnUsuarios_Clicked"
+                                    ImageSource="usuarios.png"
+                                    Style="{StaticResource BtnIconoIzquierda}"
+                                    Padding="20,8,0,5"/>
+                            <Button Text="Accesos"
+                                    x:Name="btnAccesos"
+                                    Clicked="btnAccesos_Clicked"
+                                    ImageSource="accesos.png"
+                                    Grid.Column="1"
+                                    Style="{StaticResource BtnIconoIzquierda}" />
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.ColumnSpan="4"
+                       Grid.RowSpan="3"
+                       Grid.Row="4"
+                       Style="{StaticResource Panel}">
+                    <StackLayout>
+                        <Label Text="Log de actividades"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Text="Entradas a la vivienda"
+                                    x:Name="btnEntradas"
+                                    Clicked="btnEntradas_Clicked"
+                                    ImageSource="usuarios.png"
+                                    Style="{StaticResource DispositivosOFF}"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

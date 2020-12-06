@@ -35,12 +35,10 @@ namespace DomoticApp.Views.Sala
             var cortando = content.Split(';');
             string temperatura = cortando[3];
             string humedad = cortando[4];
-            string indiceCalor = cortando[5];
             if (content != null)
             {
                 lblTemp.Text = temperatura + "°C";
                 lblHum.Text = humedad + "%";
-                lblIndiceCalor.Text = indiceCalor;
             }
             else
             {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DomoticApp.Models
+﻿namespace DomoticApp.Models
 {
     public class Accesos
     {
         public int AccesoID { get; set; }
-        public string AccesoNombre { get; set; }
+        public string AccesoTipo { get; set; }
+        public string AccesoValor { get; set; }
     }
 }

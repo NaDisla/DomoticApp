@@ -43,6 +43,15 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
+            DetectarLogin();
+            /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
+                ValidandoRedes();
+            else
+                RedIncorrecta();*/
+        }
+        [Obsolete]
+        void DetectarLogin()
+        {
             var isLoogged = SecureStorage.GetAsync("isLogged").Result;
             if (isLoogged == "1")
             {
@@ -56,10 +65,6 @@ namespace DomoticApp
             {
                 MainPage = new NavigationPage(new GeneralLoginPage());
             }
-            /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
-                ValidandoRedes();
-            else
-                RedIncorrecta();*/
         }
         [Obsolete]
         void ValidandoRedes()

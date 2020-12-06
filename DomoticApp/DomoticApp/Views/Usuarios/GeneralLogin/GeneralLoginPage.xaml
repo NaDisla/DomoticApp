@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="DomoticApp.Views.Usuarios.GeneralLogin.GeneralLoginPage"
             NavigationPage.HasNavigationBar="False"
             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
             xmlns:Custom="clr-namespace:DomoticApp.Customs">
 
-    <ContentPage Title="Login"
+    <!--<ContentPage Title="Login"
                  IconImageSource="iconoLogin03.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
@@ -41,8 +41,7 @@
                                                        Style="{StaticResource ImageEntry}" />
                                             </Frame>
                                             <Custom:CustomEntryRenderer Placeholder="Usuario"
-                                                                        x:Name="txtUser"
-                                                                        x:FieldModifier="public"/>
+                                                                        x:Name="txtUser"/>
                                         </StackLayout>
                                     </Frame>
                                     <Frame Style="{StaticResource EntryFrame}"
@@ -57,8 +56,7 @@
                                             <Custom:CustomEntryRenderer Placeholder="Contraseña"
                                                                         IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, 
                                                                         Path=HidePassword}"
-                                                                        x:Name="txtPassword"
-                                                                        x:FieldModifier="public"/>
+                                                                        x:Name="txtPassword"/>
                                             <ImageButton Style="{StaticResource BaseImageFrame}"
                                                          HorizontalOptions="End"
                                                          Margin="0,10,10,8"
@@ -96,12 +94,12 @@
                     <Button Text="Iniciar sesión"
                             Style="{StaticResource BtnLoginPage}"
                             x:Name="btnLogin"
-                            Clicked="btnLogin_Clicked" />
+                            Clicked="btnLogin_Clicked"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
-    </ContentPage>
-    <ContentPage Title="Registro"
+    </ContentPage>-->
+    <!--<ContentPage Title="Registro"
                  IconImageSource="iconoRegistro.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
@@ -113,7 +111,7 @@
                          Margin="10,40,10,0"
                          HorizontalOptions="FillAndExpand">
                 <Frame  Style="{StaticResource FrameLogin}"
-                        HeightRequest="400">
+                        HeightRequest="460">
                     <StackLayout>
                         <StackLayout Margin="10">
                             <Image Source="LogoInicio.png"
@@ -143,7 +141,7 @@
                                                HeightRequest="20"
                                                WidthRequest="20">
                                             <Image Source="iconoCorreo.png"
-                                                   Style="{StaticResource ImageEntry}" />
+                                                   Style="{StaticResource ImageEntry}"/>
                                         </Frame>
                                         <Custom:CustomEntryRenderer Placeholder="Correo electrónico"
                                                                     x:Name="txtCorreoRegistro"
@@ -203,9 +201,9 @@
                         Clicked="btnRegistro_Clicked" />
             </StackLayout>
         </Grid>
-    </ContentPage>
-    <ContentPage Title="Olvidé mi clave"
-                 IconImageSource="iconoOlvidoClave.png">
+    </ContentPage>-->
+    <!--ContentPage Title="Olvidé mi clave"
+                 IconImageSource="iconoOlvidoClave.png"-->
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
                 <magic:CssGradientSource>
@@ -217,26 +215,29 @@
                          HorizontalOptions="FillAndExpand">
                 <Frame  Style="{StaticResource FrameLogin}"
                         HeightRequest="470">
-                    <StackLayout>
-                        <StackLayout Margin="10">
-                            <Image Source="LogoInicio.png"
-                                   Aspect="AspectFit" />
-                        </StackLayout>
-
+                <StackLayout>
+                    <StackLayout Margin="10">
+                        <Image Source="LogoInicio.png"
+                               Aspect="AspectFit" />
+                    </StackLayout>
+                    <ScrollView>
                         <StackLayout Padding="0"
                                      Margin="15,10">
-                            <Frame Style="{StaticResource EntryFrame}">
+                            <Frame Style="{StaticResource EntryFrame}"
+                                   HeightRequest="40"
+                                   x:Name="entryUsuarioCambiarClave">
                                 <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                    <Frame Style="{StaticResource BaseImageFrame}"
+                                           HeightRequest="40">
                                         <Image Source="iconoUsuario.png"
                                                Style="{StaticResource ImageEntry}" />
                                     </Frame>
                                     <Custom:CustomEntryRenderer Placeholder="Nombre de usuario"
-                                                                x:Name="txtCorreoCambioClave" />
+                                                                x:Name="txtUsuarioCambioClave" />
                                 </StackLayout>
                             </Frame>
                             <Button Text="Enviar código"
-                                    Margin="0,30,0,0"
+                                    Margin="0,10,0,0"
                                     Style="{StaticResource BtnLoginPage}"
                                     x:Name="btnEnviarCodigo"
                                     Clicked="btnEnviarCodigo_Clicked" />
@@ -248,18 +249,20 @@
                                         <Image Source="iconoClave.png"
                                                Style="{StaticResource ImageEntry}" />
                                     </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Código"
-                                                                x:Name="txtCodigo" />
+                                    <Custom:CustomEntryRenderer Placeholder="Código enviado a su correo"
+                                                                x:Name="txtCodigo"
+                                                                Keyboard="Numeric"/>
                                 </StackLayout>
                             </Frame>
                             <Button Text="Confirmar"
-                                    Margin="0,30,0,0"
+                                    Margin="0,10,0,0"
                                     Style="{StaticResource BtnLoginPage}"
                                     x:Name="btnConfirmarCodigo"
                                     Clicked="btnConfirmarCodigo_Clicked" />
                             <Frame Style="{StaticResource EntryFrame}"
                                    Margin="0,15,0,0"
-                                   x:Name="entryNuevaClave">
+                                   x:Name="entryNuevaClave"
+                                   HeightRequest="40">
                                 <StackLayout Orientation="Horizontal">
                                     <Frame Style="{StaticResource BaseImageFrame}">
                                         <Image Source="iconoClave.png"
@@ -271,7 +274,8 @@
                             </Frame>
                             <Frame Style="{StaticResource EntryFrame}"
                                    Margin="0,15,0,0"
-                                   x:Name="entryConfirmarNuevaClave">
+                                   x:Name="entryConfirmarNuevaClave"
+                                   HeightRequest="40">
                                 <StackLayout Orientation="Horizontal">
                                     <Frame Style="{StaticResource BaseImageFrame}">
                                         <Image Source="iconoClave.png"
@@ -282,13 +286,15 @@
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
+                    </ScrollView>
+                </StackLayout>
+            </Frame>
                 <Button Text="Cambiar contraseña"
                         Style="{StaticResource BtnLoginPage}"
                         x:Name="btnCambiarClave"
+                        IsVisible="False"
                         Clicked="btnCambiarClave_Clicked" />
             </StackLayout>
         </Grid>
-    </ContentPage>
-</TabbedPage>
+    <!--/-->
+</ContentPage>

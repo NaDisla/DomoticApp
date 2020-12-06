@@ -10,7 +10,7 @@ namespace DomoticApp.DataHelpers
     public class SignalRClient
     {
         HubConnection connectHub;
-        const string urlServer = "http://10.0.0.5:45455/actionHub";
+        const string urlServer = "http://10.0.0.5:45458/actionHub";
         Button buttonReceived;
 
         public SignalRClient(Button btnReceived)

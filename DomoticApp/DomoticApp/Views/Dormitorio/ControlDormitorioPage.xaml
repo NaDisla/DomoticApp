@@ -60,12 +60,12 @@
                             </Grid.RowDefinitions>
                             <Button Text="Luz 1"
                                     x:Name="btnLuz1"
-                                    Clicked="btnLuces_Clicked"
+                                    Clicked="btnLuz1_Clicked"
                                     ImageSource="luz.png"
                                     Style="{StaticResource DispositivosOFF}" />
                             <Button Text="Luz 2"
                                     x:Name="btnLuz2"
-                                    Clicked="btnLuces_Clicked"
+                                    Clicked="btnLuz2_Clicked"
                                     ImageSource="luz.png"
                                     Grid.Column="1"
                                     Style="{StaticResource DispositivosOFF}" />
@@ -84,7 +84,7 @@
                        Grid.Row="4"
                        Style="{StaticResource Panel}">
                     <StackLayout>
-                        <Label Text="Sensación térmica"
+                        <Label Text="Condiciones atmosféricas"
                                TextColor="#0E4265"
                                FontFamily="{StaticResource RalewayBold}"
                                FontSize="19" />
