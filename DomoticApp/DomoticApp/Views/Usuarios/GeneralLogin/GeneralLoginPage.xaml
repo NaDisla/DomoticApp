@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="DomoticApp.Views.Usuarios.GeneralLogin.GeneralLoginPage"
-            NavigationPage.HasNavigationBar="False"
-            xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
-            xmlns:Custom="clr-namespace:DomoticApp.Customs">
-
-    <!--<ContentPage Title="Login"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DomoticApp.Views.Usuarios.GeneralLogin.GeneralLoginPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:Custom="clr-namespace:DomoticApp.Customs">
+    
+    <ContentPage Title="Login"
                  IconImageSource="iconoLogin03.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
@@ -26,7 +26,7 @@
                             <StackLayout Margin="10">
                                 <Image Source="LogoInicio.png"
                                        Aspect="AspectFit"
-                                       x:Name="imgLogin"/>
+                                       x:Name="imgLogin" />
                             </StackLayout>
                             <ScrollView>
                                 <StackLayout Padding="0"
@@ -41,7 +41,7 @@
                                                        Style="{StaticResource ImageEntry}" />
                                             </Frame>
                                             <Custom:CustomEntryRenderer Placeholder="Usuario"
-                                                                        x:Name="txtUser"/>
+                                                                        x:Name="txtUser" />
                                         </StackLayout>
                                     </Frame>
                                     <Frame Style="{StaticResource EntryFrame}"
@@ -56,7 +56,7 @@
                                             <Custom:CustomEntryRenderer Placeholder="Contraseña"
                                                                         IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, 
                                                                         Path=HidePassword}"
-                                                                        x:Name="txtPassword"/>
+                                                                        x:Name="txtPassword" />
                                             <ImageButton Style="{StaticResource BaseImageFrame}"
                                                          HorizontalOptions="End"
                                                          Margin="0,10,10,8"
@@ -94,12 +94,13 @@
                     <Button Text="Iniciar sesión"
                             Style="{StaticResource BtnLoginPage}"
                             x:Name="btnLogin"
-                            Clicked="btnLogin_Clicked"/>
+                            Clicked="btnLogin_Clicked" />
                 </StackLayout>
             </ScrollView>
         </Grid>
-    </ContentPage>-->
-    <!--<ContentPage Title="Registro"
+    </ContentPage>
+    
+    <ContentPage Title="Registro"
                  IconImageSource="iconoRegistro.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
@@ -121,13 +122,15 @@
                             <StackLayout Padding="0"
                                          Margin="15,10">
                                 <Frame Style="{StaticResource EntryFrame}"
-                                       HeightRequest="40">
+                                       HeightRequest="40"
+                                       x:Name="entryNombreRealRegistro">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource BaseImageFrame}"
                                                HeightRequest="20"
                                                WidthRequest="20">
                                             <Image Source="iconoNombre.png"
-                                                   Style="{StaticResource ImageEntry}" />
+                                                   Style="{StaticResource ImageEntry}"
+                                                   Aspect="AspectFit" />
                                         </Frame>
                                         <Custom:CustomEntryRenderer Placeholder="Nombre completo"
                                                                     x:Name="txtNombreCompleto" />
@@ -135,22 +138,25 @@
                                 </Frame>
                                 <Frame Style="{StaticResource EntryFrame}"
                                        Margin="0,10,0,0"
-                                       HeightRequest="40">
+                                       HeightRequest="40"
+                                       x:Name="entryCorreoRegistro">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource BaseImageFrame}"
                                                HeightRequest="20"
                                                WidthRequest="20">
                                             <Image Source="iconoCorreo.png"
-                                                   Style="{StaticResource ImageEntry}"/>
+                                                   Style="{StaticResource ImageEntry}"
+                                                   Aspect="AspectFit" />
                                         </Frame>
                                         <Custom:CustomEntryRenderer Placeholder="Correo electrónico"
                                                                     x:Name="txtCorreoRegistro"
-                                                                    Keyboard="Email"/>
+                                                                    Keyboard="Email" />
                                     </StackLayout>
                                 </Frame>
                                 <Frame Style="{StaticResource EntryFrame}"
                                        Margin="0,10,0,0"
-                                       HeightRequest="40">
+                                       HeightRequest="40"
+                                       x:Name="entryUsuarioRegistro">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource BaseImageFrame}"
                                                HeightRequest="20"
@@ -164,7 +170,8 @@
                                 </Frame>
                                 <Frame Style="{StaticResource EntryFrame}"
                                        Margin="0,10,0,0"
-                                       HeightRequest="40">
+                                       HeightRequest="40"
+                                       x:Name="entryClaveRegistro">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource BaseImageFrame}"
                                                HeightRequest="20"
@@ -173,13 +180,29 @@
                                                    Style="{StaticResource ImageEntry}" />
                                         </Frame>
                                         <Custom:CustomEntryRenderer Placeholder="Contraseña"
-                                                                    x:Name="txtClaveRegistro"
-                                                                    IsPassword="True" />
+                                                                    IsPassword="{Binding Source={x:Reference ShowPasswordTriggerPasswordReg}, 
+                                                                        Path=HidePassword}"
+                                                                    x:Name="txtClaveRegistro" />
+                                        <ImageButton Style="{StaticResource BaseImageFrame}"
+                                                     HorizontalOptions="End"
+                                                     Margin="0,10,10,8"
+                                                     HeightRequest="20"
+                                                     Source="HidePassword.png"
+                                                     x:Name="btnHidePasswordReg">
+                                            <ImageButton.Triggers>
+                                                <EventTrigger Event="Clicked">
+                                                    <Custom:ActionTrigger ShowIcon="ShowPassword"
+                                                                          HideIcon="HidePassword"
+                                                                          x:Name="ShowPasswordTriggerPasswordReg" />
+                                                </EventTrigger>
+                                            </ImageButton.Triggers>
+                                        </ImageButton>
                                     </StackLayout>
                                 </Frame>
                                 <Frame Style="{StaticResource EntryFrame}"
                                        Margin="0,10,0,0"
-                                       HeightRequest="40">
+                                       HeightRequest="40"
+                                       x:Name="entryConfirmarClaveRegistro">
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Style="{StaticResource BaseImageFrame}"
                                                HeightRequest="20"
@@ -188,7 +211,23 @@
                                                    Style="{StaticResource ImageEntry}" />
                                         </Frame>
                                         <Custom:CustomEntryRenderer Placeholder="Confirmar contraseña"
-                                                                    x:Name="txtConfirmarClave" />
+                                                                    IsPassword="{Binding Source={x:Reference ShowPasswordTriggerConfirmPasswordReg}, 
+                                                                        Path=HidePassword}"
+                                                                    x:Name="txtConfirmarClaveRegistro" />
+                                        <ImageButton Style="{StaticResource BaseImageFrame}"
+                                                     HorizontalOptions="End"
+                                                     Margin="0,10,10,8"
+                                                     HeightRequest="20"
+                                                     Source="HidePassword.png"
+                                                     x:Name="btnHideConfirmPasswordReg">
+                                            <ImageButton.Triggers>
+                                                <EventTrigger Event="Clicked">
+                                                    <Custom:ActionTrigger ShowIcon="ShowPassword"
+                                                                          HideIcon="HidePassword"
+                                                                          x:Name="ShowPasswordTriggerConfirmPasswordReg" />
+                                                </EventTrigger>
+                                            </ImageButton.Triggers>
+                                        </ImageButton>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
@@ -201,9 +240,10 @@
                         Clicked="btnRegistro_Clicked" />
             </StackLayout>
         </Grid>
-    </ContentPage>-->
-    <!--ContentPage Title="Olvidé mi clave"
-                 IconImageSource="iconoOlvidoClave.png"-->
+    </ContentPage>
+
+    <ContentPage Title="Olvidé mi clave"
+                 IconImageSource="iconoOlvidoClave.png">
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
                 <magic:CssGradientSource>
@@ -214,13 +254,12 @@
                          Margin="10,40,10,0"
                          HorizontalOptions="FillAndExpand">
                 <Frame  Style="{StaticResource FrameLogin}"
-                        HeightRequest="470">
-                <StackLayout>
-                    <StackLayout Margin="10">
-                        <Image Source="LogoInicio.png"
-                               Aspect="AspectFit" />
-                    </StackLayout>
-                    <ScrollView>
+                        HeightRequest="370">
+                    <StackLayout>
+                        <StackLayout Margin="10">
+                            <Image Source="LogoInicio.png"
+                                   Aspect="AspectFit" />
+                        </StackLayout>
                         <StackLayout Padding="0"
                                      Margin="15,10">
                             <Frame Style="{StaticResource EntryFrame}"
@@ -228,7 +267,9 @@
                                    x:Name="entryUsuarioCambiarClave">
                                 <StackLayout Orientation="Horizontal">
                                     <Frame Style="{StaticResource BaseImageFrame}"
-                                           HeightRequest="40">
+                                           x:Name="baseImageUser3"
+                                           HeightRequest="20"
+                                           WidthRequest="20">
                                         <Image Source="iconoUsuario.png"
                                                Style="{StaticResource ImageEntry}" />
                                     </Frame>
@@ -242,16 +283,19 @@
                                     x:Name="btnEnviarCodigo"
                                     Clicked="btnEnviarCodigo_Clicked" />
                             <Frame Style="{StaticResource EntryFrame}"
-                                   Margin="0,15,0,0"
-                                   x:Name="entryCodigo">
+                                   x:Name="entryCodigo"
+                                   HeightRequest="40">
                                 <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
-                                        <Image Source="iconoClave.png"
-                                               Style="{StaticResource ImageEntry}" />
+                                    <Frame Style="{StaticResource BaseImageFrame}"
+                                           HeightRequest="20"
+                                           WidthRequest="20">
+                                        <Image Source="iconoCodigo.png"
+                                               Style="{StaticResource ImageEntry}"
+                                               Aspect="AspectFit" />
                                     </Frame>
                                     <Custom:CustomEntryRenderer Placeholder="Código enviado a su correo"
                                                                 x:Name="txtCodigo"
-                                                                Keyboard="Numeric"/>
+                                                                Keyboard="Numeric" />
                                 </StackLayout>
                             </Frame>
                             <Button Text="Confirmar"
@@ -264,12 +308,30 @@
                                    x:Name="entryNuevaClave"
                                    HeightRequest="40">
                                 <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                    <Frame Style="{StaticResource BaseImageFrame}"
+                                           HeightRequest="20"
+                                           WidthRequest="20">
                                         <Image Source="iconoClave.png"
                                                Style="{StaticResource ImageEntry}" />
                                     </Frame>
-                                    <Custom:CustomEntryRenderer Placeholder="Nueva contraseña"
+                                    <Custom:CustomEntryRenderer Placeholder="Contraseña"
+                                                                IsPassword="{Binding Source={x:Reference ShowPasswordTriggerPasswordChange}, 
+                                                                        Path=HidePassword}"
                                                                 x:Name="txtNuevaClave" />
+                                    <ImageButton Style="{StaticResource BaseImageFrame}"
+                                                 HorizontalOptions="End"
+                                                 Margin="0,10,10,8"
+                                                 HeightRequest="20"
+                                                 Source="HidePassword.png"
+                                                 x:Name="btnHidePasswordChange">
+                                        <ImageButton.Triggers>
+                                            <EventTrigger Event="Clicked">
+                                                <Custom:ActionTrigger ShowIcon="ShowPassword"
+                                                                      HideIcon="HidePassword"
+                                                                      x:Name="ShowPasswordTriggerPasswordChange" />
+                                            </EventTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
                                 </StackLayout>
                             </Frame>
                             <Frame Style="{StaticResource EntryFrame}"
@@ -277,24 +339,42 @@
                                    x:Name="entryConfirmarNuevaClave"
                                    HeightRequest="40">
                                 <StackLayout Orientation="Horizontal">
-                                    <Frame Style="{StaticResource BaseImageFrame}">
+                                    <Frame Style="{StaticResource BaseImageFrame}"
+                                           HeightRequest="20"
+                                           WidthRequest="20">
                                         <Image Source="iconoClave.png"
                                                Style="{StaticResource ImageEntry}" />
                                     </Frame>
                                     <Custom:CustomEntryRenderer Placeholder="Confirmar contraseña"
+                                                                IsPassword="{Binding Source={x:Reference ShowPasswordTriggerConfirmPasswordChange}, 
+                                                                        Path=HidePassword}"
                                                                 x:Name="txtConfirmarClaveNueva" />
+                                    <ImageButton Style="{StaticResource BaseImageFrame}"
+                                                 HorizontalOptions="End"
+                                                 Margin="0,10,10,8"
+                                                 HeightRequest="20"
+                                                 Source="HidePassword.png"
+                                                 x:Name="btnHideConfirmPasswordChange">
+                                        <ImageButton.Triggers>
+                                            <EventTrigger Event="Clicked">
+                                                <Custom:ActionTrigger ShowIcon="ShowPassword"
+                                                                      HideIcon="HidePassword"
+                                                                      x:Name="ShowPasswordTriggerConfirmPasswordChange" />
+                                            </EventTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
                                 </StackLayout>
                             </Frame>
+                            <Button Text="Cambiar contraseña"
+                                    Style="{StaticResource BtnLoginPage}"
+                                    Margin="0,10,0,0"
+                                    x:Name="btnCambiarClave"
+                                    IsVisible="False"
+                                    Clicked="btnCambiarClave_Clicked" />
                         </StackLayout>
-                    </ScrollView>
-                </StackLayout>
-            </Frame>
-                <Button Text="Cambiar contraseña"
-                        Style="{StaticResource BtnLoginPage}"
-                        x:Name="btnCambiarClave"
-                        IsVisible="False"
-                        Clicked="btnCambiarClave_Clicked" />
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </Grid>
-    <!--/-->
-</ContentPage>
+    </ContentPage>
+</TabbedPage>

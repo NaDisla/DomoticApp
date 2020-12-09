@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -155,6 +156,10 @@ namespace DomoticApp.Views.MasterMenu
             {
                 Detail = new MainPage(SolicitudMenu);
                 IsPresented = false;
+            }
+            else if(pagina.TargetType.Equals(typeof(GeneralLoginPage)))
+            {
+                Application.Current.MainPage = new NavigationPage(new GeneralLoginPage());
             }
             else
             {

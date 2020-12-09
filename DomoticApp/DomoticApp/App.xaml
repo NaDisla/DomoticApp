@@ -249,7 +249,7 @@
                 <Setter Property="HorizontalOptions"
                         Value="FillAndExpand" />
                 <Setter Property="FontFamily"
-                        Value="{StaticResource RalewaySemiBold}" />
+                        Value="{StaticResource RalewayMedium}" />
                 <Setter Property="Margin"
                         Value="0,0,20,0" />
             </Style>

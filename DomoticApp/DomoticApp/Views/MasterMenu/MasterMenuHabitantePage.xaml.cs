@@ -156,6 +156,10 @@ namespace DomoticApp.Views.MasterMenu
                 Detail = new MainPage(SolicitudMenu);
                 IsPresented = false;
             }
+            else if (pagina.TargetType.Equals(typeof(GeneralLoginPage)))
+            {
+                Application.Current.MainPage = new NavigationPage(new GeneralLoginPage());
+            }
             else
             {
                 Detail = new NavigationPage((Page)Activator.CreateInstance(pagina.TargetType));
