@@ -5,90 +5,195 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DomoticApp.Views.Sala.ControlSalaPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients">
     <ContentPage.Content>
         <Grid>
-            <Image Source="FondoModulo.png"
-                   Aspect="Fill"
-                   Margin="-30,-25,-30,-20"/>
-            <FlexLayout Direction="Column" 
-                        AlignItems="Center">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="Logo06_v2.png"
-                           Margin="0,25,0,0"
-                           HeightRequest="115"/>
-                    <Label Text="Sala" 
-                           FontAttributes="Bold" FontSize="25" 
-                           FlexLayout.AlignSelf="Center"
-                           Margin="25" Grid.Row="1"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="18" 
-                           Grid.Row="2"
-                           TextColor="White"
-                           FlexLayout.AlignSelf="Center"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="18"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           FlexLayout.AlignSelf="Center"
-                           Grid.Row="3"
-                           HorizontalTextAlignment="Center"/>
-                    <Button Grid.Row="4"
-                            Text="Luces"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnLuces"
-                            Clicked="btnLuces_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoLuz" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"/>
-                    <Button Grid.Row="4"
-                            Text="Abanico"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnAbanico"
-                            Clicked="btnAbanico_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoAbanico" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"
-                            Grid.Column="1"/>
-                    <Button Grid.Row="4"
-                            Text="Televisión"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnTelevision"
-                            Clicked="btnTelevision_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoTV" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"
-                            Grid.Column="2"/>
-                </Grid>
-            </FlexLayout>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    repeating-linear-gradient(224deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),repeating-linear-gradient(134deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),linear-gradient(179deg, rgb(214,241,255),rgb(28,105,150))
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                             x:Name="btnMenu" />
+                <Image Source="LogoPages.png"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,10,0,0" />
+                <Label Text="Sala"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TitlePage}" />
+                <Frame Grid.ColumnSpan="4"
+                       Grid.Row="2"
+                       Style="{StaticResource Panel}">
+                    <StackLayout>
+                        <Label Text="Dispositivos"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Button Text="Luz 1"
+                                    x:Name="btnLuz1"
+                                    Clicked="btnLuz1_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}" />
+                            <Button Text="Luz 2"
+                                    x:Name="btnLuz2"
+                                    Clicked="btnLuz2_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    Grid.Column="1"/>
+                            <Button Text="Luz 3"
+                                    x:Name="btnLuz3"
+                                    Clicked="btnLuz3_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    Grid.Column="2" />
+                            <Button Text="Abanico"
+                                    x:Name="btnAbanico"
+                                    Clicked="btnAbanico_Clicked"
+                                    ImageSource="abanico.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    Grid.Column="3"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.ColumnSpan="4"
+                       Grid.RowSpan="3"
+                       Grid.Row="4"
+                       Style="{StaticResource Panel}">
+                    <StackLayout>
+                        <Label Text="Condiciones atmosféricas"
+                               TextColor="#0E4265"
+                               FontFamily="{StaticResource RalewayBold}"
+                               FontSize="19" />
+                        <Grid ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="330" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="0.1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Frame CornerRadius="190"
+                                   Padding="0"
+                                   Margin="0,10,0,15">
+                                <Grid>
+                                    <magic:GradientView VerticalOptions="FillAndExpand"
+                                                        HorizontalOptions="FillAndExpand">
+                                        <magic:CssGradientSource>
+                                            <![CDATA[
+                                                radial-gradient(circle at 25% 56%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 2%,transparent 2%, transparent 100%),radial-gradient(circle at 82% 13%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 2%,transparent 2%, transparent 100%),radial-gradient(circle at 83% 72%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 2% 3%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 40% 42%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 65% 1%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 14% 41%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 67% 71%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 11% 31%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),linear-gradient(180deg, rgb(188,219,238),rgb(28,105,150))
+                                            ]]>
+                                        </magic:CssGradientSource>
+                                    </magic:GradientView>
+                                    <StackLayout>
+                                        <Label Text="Temperatura"
+                                               TextColor="#166498"
+                                               HorizontalTextAlignment="Center"
+                                               FontFamily="{StaticResource RalewayBold}"
+                                               FontSize="16"
+                                               Margin="0,25,0,10" />
+                                        <Label TextColor="#166498"
+                                               HorizontalTextAlignment="Center"
+                                               x:Name="lblTemp"
+                                               FontFamily="{StaticResource RalewayBold}"
+                                               FontSize="17"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="temperatura.png"
+                                                   Margin="0,30,0,0"
+                                                   WidthRequest="120"
+                                                   HeightRequest="170"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                            <Frame  CornerRadius="190"
+                                    Padding="0"
+                                    Grid.Column="1"
+                                    Margin="0,10,0,15">
+                                <Grid>
+                                    <magic:GradientView VerticalOptions="FillAndExpand"
+                                                        HorizontalOptions="FillAndExpand">
+                                        <magic:CssGradientSource>
+                                            <![CDATA[
+                                                radial-gradient(circle at 25% 56%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 2%,transparent 2%, transparent 100%),radial-gradient(circle at 82% 13%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 2%,transparent 2%, transparent 100%),radial-gradient(circle at 83% 72%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 2% 3%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 40% 42%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 65% 1%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 8%,transparent 8%, transparent 100%),radial-gradient(circle at 14% 41%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 67% 71%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 11% 31%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),linear-gradient(180deg, rgb(188,219,238),rgb(46,148,207))
+                                            ]]>
+                                        </magic:CssGradientSource>
+                                    </magic:GradientView>
+                                    <StackLayout>
+                                        <Label Text="Humedad"
+                                               TextColor="#166498"
+                                               HorizontalTextAlignment="Center"
+                                               FontFamily="{StaticResource RalewayBold}"
+                                               FontSize="15"
+                                               Margin="0,25,0,10" />
+                                        <Label TextColor="#166498"
+                                               HorizontalTextAlignment="Center"
+                                               x:Name="lblHum"
+                                               x:FieldModifier="public"
+                                               FontFamily="{StaticResource RalewayBold}"
+                                               FontSize="Title" />
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="humedad.png"
+                                                   Margin="0,30,0,0"
+                                                   WidthRequest="100"
+                                                   HeightRequest="130" />
+                                        </Grid>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                            <Button Text="Actualizar"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Style="{StaticResource BtnUpdateTempHumCal}"
+                                    x:Name="btnUpdateTempHumCal"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

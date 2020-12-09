@@ -1,4 +1,5 @@
 ﻿using DomoticApp.Views.Dormitorio;
+using DomoticApp.Views.Monitoreo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,57 +14,105 @@ namespace DomoticApp.Views.Sala
 {
     public partial class ControlSalaPage : ContentPage
     {
-        public int estado = 1;
-        private const string urlEncenderLed2 = "http://10.0.0.17/S";
-        private const string urlApagarLed2 = "http://10.0.0.17/A";
+        public int estado = 0;
+        private const string urlLuz1 = "http://10.0.0.17/luz-sala-1";
+        private const string urlLuz2 = "http://10.0.0.17/luz-sala-2";
+        private const string urlLuz3 = "http://10.0.0.17/luz-sala-3";
+        private const string urlAbanico = "http://10.0.0.17/abanico-sala";
+        private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
         private string content;
 
         public ControlSalaPage()
         {
             InitializeComponent();
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
-        private async void btnLuces_Clicked(object sender, EventArgs e)
+        protected async override void OnAppearing()
         {
-            if (estado == 1)
+            content = await client.GetStringAsync(urlGeneral);
+            var cortando = content.Split(';');
+            string temperatura = cortando[3];
+            string humedad = cortando[4];
+            if (content != null)
             {
-                content = await client.GetStringAsync(urlEncenderLed2);
-                if (content != null)
-                {
-                    btnLuces.BackgroundColor = Color.FromHex("#739DB8");
-                    btnLuces.TextColor = Color.White;
-                }
-                else
-                {
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-                }
-                estado = 0;
+                lblTemp.Text = temperatura + "°C";
+                lblHum.Text = humedad + "%";
             }
             else
             {
-                content = await client.GetStringAsync(urlApagarLed2);
-                if (content != null)
-                {
-                    btnLuces.BackgroundColor = Color.AliceBlue;
-                    btnLuces.TextColor = Color.FromHex("#166498");
-                }
-                else
-                {
-                    await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión.", "OK");
-                }
-                estado = 1;
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
+            base.OnAppearing();
+        }
+
+        private async void btnAbanico_Clicked(object sender, EventArgs e)
+        {
+            content = await client.GetStringAsync(urlAbanico);
+            if (content != null)
+            {
+                //CambiaColor(btnAbanico);
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
             }
         }
 
-        private void btnAbanico_Clicked(object sender, EventArgs e)
+        void CambiaColor(Button btn)
         {
-
+            if (estado == 0)
+            {
+                btn.BackgroundColor = Color.FromHex("#739DB8");
+                btn.TextColor = Color.White;
+                estado = 1;
+            }
+            else
+            {
+                btn.BackgroundColor = Color.AliceBlue;
+                btn.TextColor = Color.FromHex("#166498");
+                estado = 0;
+            }
         }
 
-        private void btnTelevision_Clicked(object sender, EventArgs e)
+        private async void btnLuz1_Clicked(object sender, EventArgs e)
         {
+            content = await client.GetStringAsync(urlLuz1);
+            if (content != null)
+            {
+                CambiaColor(btnLuz1);
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
+        }
 
+        private async void btnLuz2_Clicked(object sender, EventArgs e)
+        {
+            content = await client.GetStringAsync(urlLuz2);
+            if (content != null)
+            {
+                CambiaColor(btnLuz1);
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
+        }
+
+        private async void btnLuz3_Clicked(object sender, EventArgs e)
+        {
+            content = await client.GetStringAsync(urlLuz3);
+            if (content != null)
+            {
+                CambiaColor(btnLuz1);
+            }
+            else
+            {
+                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+            }
         }
     }
 }

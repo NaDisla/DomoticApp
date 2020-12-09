@@ -5,6 +5,6 @@ DomoticApp es una aplicación para el control de los diferentes dispositivos de 
 ## ¿Por qué? ❓
 Surge debido a la necesidad de optimizar la relación humano-vivienda a través del uso del Internet de las Cosas (IoT). (Pd: Proyecto de Grado 😂).
 ## Elementos necesarios 📋
-1. Móvil Android. 📱
+1. Dispositivo Android. 📱
 2. Internet. 📡
 3. Arduino y derivados (sensores, actuadores, etc.) 💡

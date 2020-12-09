@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             x:Class="DomoticApp.Views.MasterMenu.MasterMenuPage"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                     BackgroundColor="Transparent">
+            <Frame Style="{StaticResource BaseMenu}">
+                <StackLayout>
+                    <StackLayout HorizontalOptions="Center" 
+                                 VerticalOptions="StartAndExpand">
+                        <Image Style="{StaticResource LogoMenu}"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="StartAndExpand"
+                                 VerticalOptions="StartAndExpand">
+                        <ListView x:Name="listaMenu"
+                                  Style="{StaticResource ListaMenu}"
+                                  ItemSelected="listaMenu_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell x:Name="CeldaMenu"
+                                              Tapped="CeldaMenu_Tapped">
+                                        <StackLayout Style="{StaticResource BaseItemMenu}">
+                                            <Image Source="{Binding Icon}" 
+                                                           Style="{StaticResource IconoItemMenu}" />
+                                            <Label Text="{Binding Title}" 
+                                                           Style="{StaticResource TitleItemMenu}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

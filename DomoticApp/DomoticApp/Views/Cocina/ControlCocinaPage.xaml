@@ -5,66 +5,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DomoticApp.Views.Cocina.ControlCocinaPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients">
     <ContentPage.Content>
         <Grid>
-            <Image Source="FondoModulo.png"
-                   Aspect="Fill"
-                   Margin="-30,-25,-30,-20"/>
-            <FlexLayout Direction="Column" 
-                        AlignItems="Center">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    repeating-linear-gradient(224deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),repeating-linear-gradient(134deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),linear-gradient(179deg, rgb(214,241,255),rgb(28,105,150))
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                        <ColumnDefinition Width="133"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="Logo06_v2.png"
-                           Margin="0,25,0,0"
-                           HeightRequest="115"/>
-                    <Label Text="Cocina" 
-                           FontAttributes="Bold" FontSize="25" 
-                           FlexLayout.AlignSelf="Center"
-                           Margin="25" Grid.Row="1"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="1:19 a.m." FontAttributes="Bold" 
-                           FontSize="18" 
-                           Grid.Row="2"
-                           TextColor="White"
-                           FlexLayout.AlignSelf="Center"
-                           FontFamily="{StaticResource RalewayBold}"
-                           HorizontalTextAlignment="Center"/>
-                    <Label Text="Domingo, Junio 21, 2020"
-                           FontSize="18"
-                           TextColor="White"
-                           FontFamily="{StaticResource RalewayBold}"
-                           FlexLayout.AlignSelf="Center"
-                           Grid.Row="3"
-                           HorizontalTextAlignment="Center"/>
-                    <Button Grid.Row="4"
-                            Text="Luces"
-                            TextColor="#175E8D"
-                            BackgroundColor="AliceBlue"
-                            FontFamily="{StaticResource RalewayBold}"
-                            x:Name="btnLuces"
-                            Clicked="btnLuces_Clicked"
-                            ContentLayout="Top,25"
-                            Image="iconoLuz" 
-                            HorizontalOptions="Start"
-                            Padding="25,15"/>
-                </Grid>
-            </FlexLayout>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                             x:Name="btnMenu" />
+                <Image Source="LogoPages.png"
+                       Margin="0,10,0,0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2" />
+                <Label Text="Cocina"
+                       Style="{StaticResource TitlePage}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"/>
+                <Frame Grid.ColumnSpan="4"
+                       Grid.Row="2"
+                       Style="{StaticResource Panel}">
+                    <StackLayout>
+                        <Label Text="Dispositivos"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Button Text="Luz 1"
+                                    x:Name="btnLuz1"
+                                    Clicked="btnLuz1_Clicked"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    ImageSource="luz.png" />
+                            <Button Text="Luz 2"
+                                    x:Name="btnLuz2"
+                                    Clicked="btnLuz2_Clicked"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    ImageSource="luz.png"
+                                    Grid.Column="1"/>
+                            <Button Text="Nevera"
+                                    x:Name="btnNevera"
+                                    Clicked="btnNevera_Clicked"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    ImageSource="nevera.png"
+                                    Grid.Column="2"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

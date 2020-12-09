@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+  <color android:color="@color/launcher_background"/>
+</item>
+  <item>
+    <bitmap android:src="@drawable/fondosplash"
+      android:tileMode="disabled"
+      android:gravity="fill_vertical"/>
+  </item>
+  <item>
+    <bitmap android:src="@drawable/imagenbienvenida"
+      android:tileMode="disabled"
+      android:gravity="center"/>
+  </item>
+    <item>
+    <bitmap android:src="@drawable/logoinicio"
+      android:tileMode="disabled"
+      android:gravity="center_horizontal|top"/>
+  </item>
+</layer-list>

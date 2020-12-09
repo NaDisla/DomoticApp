@@ -4,15 +4,426 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DomoticApp.App">
+             x:Class="DomoticApp.App"
+             xmlns:Custom="clr-namespace:DomoticApp.Customs">
     <Application.Resources>
         <ResourceDictionary>
-            <OnPlatform x:Key="RalewayBold" x:TypeArguments="x:String">
-                <On Platform="Android" Value="Raleway-Bold.ttf#Raleway-Bold"/>
+            <OnPlatform x:Key="RalewayBold"
+                        x:TypeArguments="x:String">
+                <On Platform="Android"
+                    Value="Raleway-Bold.ttf#Raleway-Bold" />
             </OnPlatform>
-            <OnPlatform x:Key="RalewayRegular" x:TypeArguments="x:String">
-                <On Platform="Android" Value="Raleway-Regular.ttf#Raleway-Regular"/>
+            <OnPlatform x:Key="RalewayRegular"
+                        x:TypeArguments="x:String">
+                <On Platform="Android"
+                    Value="Raleway-Regular.ttf#Raleway-Regular" />
             </OnPlatform>
+            <OnPlatform x:Key="RalewaySemiBold"
+                        x:TypeArguments="x:String">
+                <On Platform="Android"
+                    Value="Raleway-SemiBold.ttf#Raleway-SemiBold" />
+            </OnPlatform>
+            <OnPlatform x:Key="RalewayMedium"
+                        x:TypeArguments="x:String">
+                <On Platform="Android"
+                    Value="Raleway-Medium.ttf#Raleway-Medium" />
+            </OnPlatform>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="Transparent" />
+            </Style>
+
+
+            <Style TargetType="Image"
+                   x:Key="FondoMonitoreo">
+                <Setter Property="Source"
+                        Value="FondoInicio.png" />
+                <Setter Property="Margin"
+                        Value="-32,-30,-32,-22" />
+                <Setter Property="Aspect"
+                        Value="Fill" />
+            </Style>
+
+            <Style TargetType="ImageButton"
+                   x:Key="BtnMenu">
+                <Setter Property="HorizontalOptions"
+                        Value="Start" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="Margin"
+                        Value="10,20,0,0" />
+                <Setter Property="Source"
+                        Value="iconMenu.png" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="Popup">
+                <Setter Property="CornerRadius"
+                        Value="15" />
+                <Setter Property="OutlineColor"
+                        Value="#052A48" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="Panel">
+                <Setter Property="CornerRadius"
+                        Value="30" />
+                <Setter Property="Margin"
+                        Value="0,0,0,-25" />
+                <Setter Property="BackgroundColor"
+                        Value="#E0EFF4" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="TitlePopup">
+                <Setter Property="TextColor"
+                        Value="#052A48" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+            </Style>
+
+            <Style TargetType="BoxView"
+                   x:Key="PopupLine">
+                <Setter Property="HeightRequest"
+                        Value="1" />
+                <Setter Property="BackgroundColor"
+                        Value="Gray" />
+            </Style>
+
+            <Style TargetType="Image"
+                   x:Key="PopupImage">
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="WidthRequest"
+                        Value="40" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="DetailPopup">
+                <Setter Property="TextColor"
+                        Value="#052A48" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+                <Setter Property="Margin"
+                        Value="10,10,0,0" />
+            </Style>
+
+            <Style TargetType="Button"
+                   x:Key="DispositivosOFF">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="ContentLayout"
+                        Value="Top,0" />
+                <Setter Property="CornerRadius"
+                        Value="15" />
+                <Setter Property="TextColor"
+                        Value="#175E8D" />
+                <Setter Property="BackgroundColor"
+                        Value="#b9d9f0" />
+                <Setter Property="Padding"
+                        Value="0,8,0,5" />
+                <Setter Property="FontSize"
+                        Value="15" />
+            </Style>
+
+            <Style TargetType="Button"
+                   x:Key="BtnIconoIzquierda">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="ContentLayout"
+                        Value="Left,0" />
+                <Setter Property="CornerRadius"
+                        Value="15" />
+                <Setter Property="TextColor"
+                        Value="#175E8D" />
+                <Setter Property="BackgroundColor"
+                        Value="#b9d9f0" />
+                <Setter Property="Padding"
+                        Value="0,8,0,5" />
+                <Setter Property="FontSize"
+                        Value="15" />
+            </Style>
+
+            <Style TargetType="Button"
+                   x:Key="ActionPopup">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="CornerRadius"
+                        Value="25" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="BackgroundColor"
+                        Value="#0E4265" />
+                <Setter Property="Padding"
+                        Value="15,0,15,0" />
+                <Setter Property="FontSize"
+                        Value="14" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="EndAndExpand" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="TitlePage">
+                <Setter Property="TextColor"
+                        Value="#0E4265" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0,15,0,0" />
+                <Setter Property="FontSize"
+                        Value="Title" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="FrameName">
+                <Setter Property="TextColor"
+                        Value="#0E4265" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="Padding"
+                        Value="0,0,0,8" />
+                <Setter Property="FontSize"
+                        Value="19" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="FrameLogin">
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="HasShadow"
+                        Value="True" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+            </Style>
+
+            <Style TargetType="Button"
+                   x:Key="BtnLoginPage">
+                <Setter Property="BackgroundColor"
+                        Value="#1E619A" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="Padding"
+                        Value="20,0,20,0" />
+                <Setter Property="Margin"
+                        Value="0,-35,0,0" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="FontSize"
+                        Value="18" />
+            </Style>
+
+            <Style TargetType="Custom:CustomEntryRenderer">
+                <Setter Property="PlaceholderColor"
+                        Value="#1E619A" />
+                <Setter Property="TextColor"
+                        Value="#1E619A" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayMedium}" />
+                <Setter Property="Margin"
+                        Value="0,0,20,0" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="EntryFrame">
+                <Setter Property="BackgroundColor"
+                        Value="#E7E9EB" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="BaseImageFrame">
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="WidthRequest"
+                        Value="40" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="8,8,0,8" />
+            </Style>
+
+            <Style TargetType="Image"
+                   x:Key="ImageEntry">
+                <Setter Property="Aspect"
+                        Value="AspectFill" />
+                <Setter Property="Margin"
+                        Value="0" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="TextLoading">
+                <Setter Property="TextColor"
+                        Value="#052A48" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+            </Style>
+
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color"
+                        Value="#028103" />
+                <Setter Property="IsRunning"
+                        Value="True" />
+                <Setter Property="IsEnabled"
+                        Value="True" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="HeightRequest"
+                        Value="60" />
+                <Setter Property="WidthRequest"
+                        Value="60" />
+            </Style>
+
+            <Style TargetType="Frame"
+                   x:Key="BaseMenu">
+                <Setter Property="CornerRadius"
+                        Value="25" />
+                <Setter Property="Margin"
+                        Value="-20,0,0,0" />
+                <Setter Property="BackgroundColor"
+                        Value="#D3E7ED" />
+                <Setter Property="Padding"
+                        Value="0,0,-20,5" />
+            </Style>
+
+            <Style TargetType="Image"
+                   x:Key="LogoMenu">
+                <Setter Property="Aspect"
+                        Value="AspectFit" />
+                <Setter Property="WidthRequest"
+                        Value="195" />
+                <Setter Property="HeightRequest"
+                        Value="95" />
+                <Setter Property="Source"
+                        Value="LogoPages.png" />
+            </Style>
+
+            <Style TargetType="ListView"
+                   x:Key="ListaMenu">
+                <Setter Property="RowHeight"
+                        Value="60" />
+                <Setter Property="SeparatorColor"
+                        Value="#A1C2D0" />
+                <Setter Property="SeparatorVisibility"
+                        Value="Default" />
+                <Setter Property="BackgroundColor"
+                        Value="#D3E7ED" />
+            </Style>
+
+            <Style TargetType="Image"
+                   x:Key="IconoItemMenu">
+                <Setter Property="WidthRequest"
+                        Value="40" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="TitleItemMenu">
+                <Setter Property="TextColor"
+                        Value="#0E4265" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontSize"
+                        Value="17" />
+            </Style>
+
+            <Style TargetType="StackLayout"
+                   x:Key="BaseItemMenu">
+                <Setter Property="VerticalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="Orientation"
+                        Value="Horizontal" />
+                <Setter Property="Padding"
+                        Value="20,10,0,10" />
+                <Setter Property="Spacing"
+                        Value="20" />
+                <Setter Property="Margin"
+                        Value="20,0,0,0" />
+            </Style>
+
+            <Style TargetType="Button" 
+                   x:Key="Activos">
+                <Setter Property="BackgroundColor"
+                        Value="#D2E9F8"/>
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="BorderColor"
+                        Value="#165E8D" />
+                <Setter Property="BorderWidth"
+                        Value="1" />
+                <Setter Property="ContentLayout"
+                        Value="Top,0" />
+                <Setter Property="CornerRadius"
+                        Value="20" />
+                <Setter Property="Padding"
+                        Value="0,15,0,0" />
+                <Setter Property="TextColor"
+                        Value="#165E8D" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+            </Style>
+
+            <Style TargetType="Button"
+                   x:Key="BtnUpdateTempHumCal">
+                <Setter Property="CornerRadius" 
+                        Value="15"/>
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+                <Setter Property="BackgroundColor"
+                        Value="#2E7BA9" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="16"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

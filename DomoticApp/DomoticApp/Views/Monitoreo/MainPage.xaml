@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="DomoticApp.Views.Monitoreo.MainPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Image Style="{StaticResource FondoMonitoreo}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                        x:Name="btnMenu"/>
+                <Image Margin="0,10,0,0"
+                       Source="LogoInicio.png"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"/>
+                <Label Text="Mi hogar"
+                       Style="{StaticResource TitlePage}"
+                       FontSize="20"
+                       Grid.Column="1"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"/>
+                <Frame Grid.ColumnSpan="4"
+                       Grid.RowSpan="9"
+                       Grid.Row="2"
+                       Style="{StaticResource Panel}">
+                    <Label Text="Módulos activos"
+                           TextColor="#0E4265"
+                           FontFamily="{StaticResource RalewayBold}"
+                           FontSize="19"/>
+                </Frame>
+                <Frame BackgroundColor="#8CAEC9"
+                       Grid.Row="3"
+                       Style="{StaticResource Panel}"
+                       Grid.ColumnSpan="4"
+                       Grid.RowSpan="8"
+                       x:Name="PanelActivos">
+                    <ScrollView>
+                        <StackLayout>
+                            <Grid RowSpacing="15"
+                                  ColumnSpacing="15">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="115" />
+                                    <RowDefinition Height="115" />
+                                    <RowDefinition Height="115" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="No hay módulos activos."
+                                       FontFamily="{StaticResource RalewayBold}"
+                                       TextColor="White"
+                                       FontSize="19"
+                                       Grid.Row="1"
+                                       Grid.ColumnSpan="3"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       IsVisible="False"
+                                       x:Name="lblTextoActivos" />
+                                <Button Text="Dormitorio"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="dormitorio.png"
+                                        x:Name="btnDormitorio"
+                                        Clicked="btnDormitorio_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Cocina"
+                                        Grid.Column="2"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="cocina.png"
+                                        x:Name="btnCocina"
+                                        Clicked="btnCocina_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Área de lavado"
+                                        Grid.Row="1"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="lavado.png"
+                                        Padding="5,10,5,0"
+                                        x:Name="btnLavado"
+                                        Clicked="btnLavado_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Sala"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="sala.png"
+                                        x:Name="btnSala"
+                                        Clicked="btnSala_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Baño"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="bath.png"
+                                        x:Name="btnBath"
+                                        Clicked="btnBath_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Recibidor"
+                                        Grid.Row="2"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="recibidor.png"
+                                        x:Name="btnRecibidor"
+                                        Clicked="btnRecibidor_Clicked"
+                                        IsVisible="False"/>
+                                <Button Text="Exteriores"
+                                        Grid.Row="2"
+                                        Grid.Column="2"
+                                        Style="{StaticResource Activos}"
+                                        ImageSource="exteriores.png"
+                                        x:Name="btnExteriores"
+                                        Clicked="btnExteriores_Clicked"
+                                        IsVisible="False"/>
+                            </Grid>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
