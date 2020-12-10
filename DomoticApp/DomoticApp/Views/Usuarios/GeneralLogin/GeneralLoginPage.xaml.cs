@@ -74,6 +74,7 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         {
             var registro = await registroBackend.Registro(txtNombreUsuario, txtNombreCompleto, txtCorreoRegistro, txtClaveRegistro, txtConfirmarClaveRegistro, entryNombreRealRegistro,
                 entryUsuarioRegistro, entryCorreoRegistro, entryClaveRegistro, entryConfirmarClaveRegistro);
+            
             if(registro)
             {
                 CurrentPage = Children[0];
