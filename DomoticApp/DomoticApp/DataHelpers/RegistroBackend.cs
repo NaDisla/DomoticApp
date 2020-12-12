@@ -139,8 +139,8 @@ namespace DomoticApp.DataHelpers
                             if (usuarioExiste != null)
                             {
                                 await PopupNavigation.RemovePageAsync(loading);
-                                titleError = "Usuario existente";
-                                detailError = "Este usuario ya está registrado. Intente nuevamente.";
+                                titleError = "Usuario incorrecto";
+                                detailError = "El nombre de usuario es incorrecto. Intente nuevamente.";
                                 await results.Unsuccess(titleError, detailError);
                                 result = false;
                             }

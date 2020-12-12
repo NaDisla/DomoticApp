@@ -132,7 +132,7 @@
                                                    Style="{StaticResource ImageEntry}"
                                                    Aspect="AspectFit" />
                                         </Frame>
-                                        <Custom:CustomEntryRenderer Placeholder="Nombre completo"
+                                        <Custom:CustomEntryRenderer Placeholder="Nombre y apellido"
                                                                     x:Name="txtNombreCompleto" />
                                     </StackLayout>
                                 </Frame>
