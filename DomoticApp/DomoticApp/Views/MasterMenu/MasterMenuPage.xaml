@@ -18,6 +18,11 @@
                     </StackLayout>
                     <StackLayout HorizontalOptions="StartAndExpand"
                                  VerticalOptions="StartAndExpand">
+                        <StackLayout Padding="0,0,0,15">
+                            <Button x:Name="btnPerfilUsuario"
+                                    Clicked="btnPerfilUsuario_Clicked"
+                                    Style="{StaticResource SaludoUsuario}" />
+                        </StackLayout>
                         <ListView x:Name="listaMenu"
                                   Style="{StaticResource ListaMenu}"
                                   ItemSelected="listaMenu_ItemSelected">

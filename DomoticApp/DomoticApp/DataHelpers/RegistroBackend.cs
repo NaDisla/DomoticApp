@@ -81,8 +81,7 @@ namespace DomoticApp.DataHelpers
             Frame frameConfirmarClaveRegistro)
         {
             var correo = txtCorreoRegistro.Text;
-            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)| (([0 - 9a - z]((\\.(? !\\.)) |[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)" +
-                "(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
 
             if (string.IsNullOrEmpty(txtNombreCompleto.Text) || string.IsNullOrEmpty(txtNombreUsuario.Text) || string.IsNullOrEmpty(txtCorreoRegistro.Text)
                 || string.IsNullOrEmpty(txtClaveRegistro.Text) || string.IsNullOrEmpty(txtConfirmarClaveRegistro.Text))
@@ -90,7 +89,7 @@ namespace DomoticApp.DataHelpers
                 CamposNoNulos(txtNombreUsuario, txtNombreCompleto, txtCorreoRegistro, txtClaveRegistro, txtConfirmarClaveRegistro, frameNombreRealRegistro,
                     frameUsuarioRegistro, frameCorreoRegistro, frameClaveRegistro, frameConfirmarClaveRegistro);
             }
-            else if(!Regex.IsMatch(correo, emailPattern))
+            else if (!Regex.IsMatch(correo, emailPattern))
             {
                 titleError = "Correo no válido";
                 detailError = "El correo ingresado no es correcto. Intente nuevamente.";
@@ -132,20 +131,43 @@ namespace DomoticApp.DataHelpers
                     try
                     {
                         var getUsuarios = await data.GetUsuarios();
-                        
+                        var usuarioExiste = getUsuarios.Where(x => x.NombreUsuario == txtNombreUsuario.Text).Select(y => y.NombreUsuario).FirstOrDefault();
+
                         if (getUsuarios.Count == 0)
                         {
                             idUser = 1000;
-                            if(txtNombreUsuario.Text.Equals(getUsuarios.Select(y => y.NombreUsuario)))    
-                            RegistroUsuario(idUser, loading, txtClaveRegistro, txtNombreCompleto, txtCorreoRegistro, txtNombreUsuario, txtConfirmarClaveRegistro);
+                            if (usuarioExiste != null)
+                            {
+                                await PopupNavigation.RemovePageAsync(loading);
+                                titleError = "Usuario incorrecto";
+                                detailError = "El nombre de usuario es incorrecto. Intente nuevamente.";
+                                await results.Unsuccess(titleError, detailError);
+                                result = false;
+                            }
+                            else
+                            {
+                                RegistroUsuario(idUser, loading, txtClaveRegistro, txtNombreCompleto, txtCorreoRegistro, txtNombreUsuario, txtConfirmarClaveRegistro);
+                                result = true;
+                            }
                         }
                         else
                         {
                             var getUserID = getUsuarios.Select(x => x.UsuarioID).LastOrDefault();
                             getUserID++;
-                            RegistroUsuario(getUserID, loading, txtClaveRegistro, txtNombreCompleto, txtCorreoRegistro, txtNombreUsuario, txtConfirmarClaveRegistro);
+                            if (usuarioExiste != null)
+                            {
+                                await PopupNavigation.RemovePageAsync(loading);
+                                titleError = "Usuario existente";
+                                detailError = "Este usuario ya está registrado. Intente nuevamente.";
+                                await results.Unsuccess(titleError, detailError);
+                                result = false;
+                            }
+                            else
+                            {
+                                RegistroUsuario(getUserID, loading, txtClaveRegistro, txtNombreCompleto, txtCorreoRegistro, txtNombreUsuario, txtConfirmarClaveRegistro);
+                                result = true;
+                            }
                         }
-                        result = true;
                     }
                     catch (Exception)
                     {

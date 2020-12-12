@@ -14,7 +14,7 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         LoginBackend loginBackend = new LoginBackend();
         RegistroBackend registroBackend = new RegistroBackend();
         CambiarClaveBackend cambioClave = new CambiarClaveBackend();
-
+        public string usuario = "";
         public GeneralLoginPage()
         {
             InitializeComponent();
@@ -58,14 +58,15 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
             var login = await loginBackend.Login(txtUser, txtPassword, EntryUsuarioLogin, EntryPasswordLogin);
+            usuario = loginBackend.nombreRealUsuario;
 
             if (login == 1)
             {
-                await Navigation.PushAsync(new MasterMenuPage());
+                await Navigation.PushAsync(new MasterMenuPage(usuario));
             }
             else if (login == 2)
             {
-                await Navigation.PushAsync(new MasterMenuHabitantePage());
+                await Navigation.PushAsync(new MasterMenuHabitantePage(usuario));
             }
         }
 
@@ -74,6 +75,7 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         {
             var registro = await registroBackend.Registro(txtNombreUsuario, txtNombreCompleto, txtCorreoRegistro, txtClaveRegistro, txtConfirmarClaveRegistro, entryNombreRealRegistro,
                 entryUsuarioRegistro, entryCorreoRegistro, entryClaveRegistro, entryConfirmarClaveRegistro);
+            
             if(registro)
             {
                 CurrentPage = Children[0];

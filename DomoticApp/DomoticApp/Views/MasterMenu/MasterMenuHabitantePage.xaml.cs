@@ -1,4 +1,5 @@
-﻿using DomoticApp.MenuItems;
+﻿using DomoticApp.DataHelpers;
+using DomoticApp.MenuItems;
 using DomoticApp.Views.Bath;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
@@ -28,11 +29,15 @@ namespace DomoticApp.Views.MasterMenu
         public List<MasterMenuItems> elementosMenu { get; set; }
         ViewCell ultimaCelda, viewCell;
         MasterMenuItems pagina;
+        string usuario;
 
         [Obsolete]
-        public MasterMenuHabitantePage()
+        public MasterMenuHabitantePage(string _usuario)
         {
+            usuario = _usuario;
             InitializeComponent();
+            btnPerfilUsuario.Text = $"¡Hola {usuario}!";
+
             Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();
 
@@ -165,6 +170,11 @@ namespace DomoticApp.Views.MasterMenu
                 Detail = new NavigationPage((Page)Activator.CreateInstance(pagina.TargetType));
                 IsPresented = false;
             }
+        }
+
+        private void btnPerfilUsuario_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         private void CeldaMenu_Tapped(object sender, EventArgs e)

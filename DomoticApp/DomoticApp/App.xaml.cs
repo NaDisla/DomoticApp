@@ -19,6 +19,7 @@ using System.Net.Sockets;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using DomoticApp.Views.Usuarios;
+using DomoticApp.DataHelpers;
 
 namespace DomoticApp
 {
@@ -30,15 +31,14 @@ namespace DomoticApp
         public CorrectValidationPage redCorrecta;
         public IncorrectValidationPage redIncorrecta;
         public AlertNetworkPage alertaVPN;
-        public GeneralLoginPage login;
         private readonly HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
-        public string ipDevice, parteInicialCasa, parteInicialDevice;
+        public string ipDevice, parteInicialCasa, parteInicialDevice, admin;
         public string[] numIPCasa, numIPDevice;
         private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
             textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red", 
             textDetailError = "No se ha detectado una conexión de internet.";
-
+        
         [Obsolete]
         public App()
         {
@@ -53,13 +53,15 @@ namespace DomoticApp
         void DetectarLogin()
         {
             var isLoogged = SecureStorage.GetAsync("isLogged").Result;
+            var nombreUsuario = SecureStorage.GetAsync("nombreUsuario").Result;
+
             if (isLoogged == "1")
             {
-                MainPage = new NavigationPage(new MasterMenuPage());
+                MainPage = new NavigationPage(new MasterMenuPage(nombreUsuario));
             }
             else if (isLoogged == "2")
             {
-                MainPage = new NavigationPage(new MasterMenuHabitantePage());
+                MainPage = new NavigationPage(new MasterMenuHabitantePage(nombreUsuario));
             }
             else
             {

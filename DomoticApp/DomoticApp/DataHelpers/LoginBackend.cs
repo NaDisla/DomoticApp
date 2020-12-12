@@ -11,17 +11,12 @@ namespace DomoticApp.DataHelpers
 {
     public partial class LoginBackend
     {
-        //public INavigation Navigation;
         string claveEncriptada, titleCorrect, detailCorrect, titleError, detailError, detailLoading;
+        public string nombreRealUsuario = "";
         int result;
         GeneralData data = new GeneralData();
         ResultsOperations results = new ResultsOperations();
-
-        /*public LoginBackend(INavigation navigation)
-        {
-            Navigation = navigation;
-        }*/
-
+        
         #region ValidarNoNulos
         public void CamposNoNulos(Entry txtUser, Entry txtPassword, Frame frameUser, Frame framePassword)
         {
@@ -72,12 +67,15 @@ namespace DomoticApp.DataHelpers
                 var getUsers = await data.GetUsuarios();
                 var userLogin = getUsers.Where(x => x.NombreUsuario == txtUser.Text && x.UsuarioClave == claveEncriptada)
                     .Select(y => y.UsuarioRol).FirstOrDefault();
+                nombreRealUsuario = getUsers.Where(n => n.NombreUsuario == txtUser.Text && n.UsuarioClave == claveEncriptada)
+                    .Select(m => m.UsuarioNombreCompleto).FirstOrDefault();
 
                 if (userLogin == "Administrador")
                 {
                     await PopupNavigation.RemovePageAsync(loading);
                     await results.Success(titleCorrect, detailCorrect);
                     await SecureStorage.SetAsync("isLogged", "1");
+                    await SecureStorage.SetAsync("nombreUsuario", nombreRealUsuario);
                     result = 1;
                 }
                 else if (userLogin == "Habitante")
@@ -85,6 +83,7 @@ namespace DomoticApp.DataHelpers
                     await PopupNavigation.RemovePageAsync(loading);
                     await results.Success(titleCorrect, detailCorrect);
                     await SecureStorage.SetAsync("isLogged", "2");
+                    await SecureStorage.SetAsync("nombreUsuario", nombreRealUsuario);
                     result = 2;
                 }
                 else
