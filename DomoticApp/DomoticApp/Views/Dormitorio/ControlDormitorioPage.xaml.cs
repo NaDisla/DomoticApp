@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,53 +15,39 @@ namespace DomoticApp.Views.Dormitorio
 {
     public partial class ControlDormitorioPage : ContentPage
     {
-        public int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0;
+        public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0, stateGeneral = 0;
         private const string urlGeneral= "http://10.0.0.17";
         private const string urlLuz1 = "http://10.0.0.17/luz-dormitorio-1";
         private const string urlLuz2 = "http://10.0.0.17/luz-dormitorio-2";
         private const string urlAbanico = "http://10.0.0.17/abanico-dormitorio";
         private readonly HttpClient client = new HttpClient();
-        private string content;
+        private string content, titleError, detailError;
         
         SignalRClient serverClient;
-        
+        ResultsOperations results = new ResultsOperations();
+
+        [Obsolete]
         public ControlDormitorioPage()
         {
             InitializeComponent();
+            //TempHum();
 
-            if (btnLuz1.IsPressed == false)
+            /*if (btnLuz1.IsPressed == false)
                 serverClient = new SignalRClient(btnLuz1);
             else if (btnLuz2.IsPressed == false)
                 serverClient = new SignalRClient(btnLuz2);
             else if (btnAbanico.IsPressed == false)
-                serverClient = new SignalRClient(btnAbanico);
+                serverClient = new SignalRClient(btnAbanico);*/
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
-        /*private async void InitializeAction()
+        protected override bool OnBackButtonPressed()
         {
-            SetupAction();
-            await SignalRConnect();
-        }*/
-        /*private void SetupAction()
-        {
-            connectHub = new HubConnectionBuilder().WithUrl("http://10.0.0.5:45455/actionHub").Build();
-            connectHub.On<int>("ReceiveState", (stateReceived) =>
-            {
-                CambiaColor(btnLuces, stateReceived);
-            });
-        }*/
-        /*async Task SignalRConnect()
-        {
-            try
-            {
-                await connectHub.StartAsync();
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Error estableciendo conexión", e.Message.ToString(), "OK");
-            }
-        }*/
+            base.OnBackButtonPressed();
+            return true;
+        }
+
+        [Obsolete]
         protected async override void OnAppearing()
         {
             content = await client.GetStringAsync(urlGeneral);
@@ -74,69 +61,80 @@ namespace DomoticApp.Views.Dormitorio
             }
             else
             {
-                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+                titleError = "Error de conexión";
+                detailError = "No se ha podido establecer la conexión con la vivienda.";
+                await results.Unsuccess(titleError, detailError);
             }
             base.OnAppearing();
         }
-        /*async Task SignalRSendState(int state)
-        {
-            try
-            {
-                await connectHub.InvokeAsync("SendState", state);
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Error", e.Message.ToString(), "OK");
-            }
-        }*/
+
+        [Obsolete]
         private void btnAbanico_Clicked(object sender, EventArgs e)
         {
-            Control(urlAbanico, stateAbanico);
+            SendArduinoRequest(urlAbanico, stateAbanico);
         }
+
+        [Obsolete]
         private void btnLuz1_Clicked(object sender, EventArgs e)
         {
-            Control(urlLuz1, stateLuz1);
+            SendArduinoRequest(urlLuz1, stateLuz1);
         }
+
+        [Obsolete]
         private void btnLuz2_Clicked(object sender, EventArgs e)
         {
-            Control(urlLuz2, stateLuz2);
+            SendArduinoRequest(urlLuz2, stateLuz2);
         }
-        async void Control(string contentUrl, int state)
+
+        [Obsolete]
+        async void SendArduinoRequest(string contentUrl, int state)
         {
             content = await client.GetStringAsync(contentUrl);
             if (content != null)
             {
-                if (state == 0)
+                if (contentUrl == urlAbanico && state == 0)
                 {
-                    await serverClient.SignalRSendState(state);
+                    //await serverClient.SignalRSendState(state);
                     state = 1;
-                    MessagingCenter.Send<object, int>(this, "State", state);
+                    stateAbanico = state;
                 }
-                else
+                else if (contentUrl == urlAbanico && state == 1)
                 {
-                    await serverClient.SignalRSendState(state);
+                    //await serverClient.SignalRSendState(state);
                     state = 0;
+                    stateAbanico = state;
+                }
+                if (contentUrl == urlLuz1 && state == 0)
+                {
+                    //await serverClient.SignalRSendState(state);
+                    state = 1;
+                    stateLuz1 = state;
+                }
+                else if (contentUrl == urlLuz1 && state == 1)
+                {
+                    //await serverClient.SignalRSendState(state);
+                    state = 0;
+                    stateLuz1 = state;
+                }
+                if (contentUrl == urlLuz2 && state == 0)
+                {
+                    //await serverClient.SignalRSendState(state);
+                    state = 1;
+                    stateLuz2 = state;
+                }
+                else if (contentUrl == urlLuz2 && state == 1)
+                {
+                    //await serverClient.SignalRSendState(state);
+                    state = 0;
+                    stateLuz2 = state;
                 }
             }
             else
             {
-                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
+                titleError = "Error de conexión";
+                detailError = "No se ha podido establecer la conexión con la vivienda.";
+                await results.Unsuccess(titleError, detailError);
             }
         }
-        /*void CambiaColor(Button btn, int stateButton)
-        {
-            if(stateButton == 0)
-            {
-                btn.BackgroundColor = Color.FromHex("#739DB8");
-                btn.TextColor = Color.White;
-                stateButtonClicked = 1;
-            }
-            else
-            {
-                btn.BackgroundColor = Color.AliceBlue;
-                btn.TextColor = Color.FromHex("#166498");
-                stateButtonClicked = 0;
-            }
-        }*/
     }
 }

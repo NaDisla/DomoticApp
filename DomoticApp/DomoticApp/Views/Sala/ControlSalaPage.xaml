@@ -54,7 +54,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100" />
@@ -69,19 +68,13 @@
                                     Clicked="btnLuz2_Clicked"
                                     ImageSource="luz.png"
                                     Style="{StaticResource DispositivosOFF}"
-                                    Grid.Column="1"/>
-                            <Button Text="Luz 3"
-                                    x:Name="btnLuz3"
-                                    Clicked="btnLuz3_Clicked"
-                                    ImageSource="luz.png"
-                                    Style="{StaticResource DispositivosOFF}"
-                                    Grid.Column="2" />
+                                    Grid.Column="1" />
                             <Button Text="Abanico"
                                     x:Name="btnAbanico"
                                     Clicked="btnAbanico_Clicked"
                                     ImageSource="abanico.png"
                                     Style="{StaticResource DispositivosOFF}"
-                                    Grid.Column="3"/>
+                                    Grid.Column="2"/>
                         </Grid>
                     </StackLayout>
                 </Frame>
@@ -101,7 +94,6 @@
                                 <RowDefinition Height="0.1*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>

@@ -5,59 +5,76 @@
              xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid BackgroundColor="LightBlue">
+        <Grid>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    repeating-linear-gradient(224deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),repeating-linear-gradient(134deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),linear-gradient(179deg, rgb(214,241,255),rgb(28,105,150))
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="0.2*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Frame BackgroundColor="White"
-                       CornerRadius="30"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                             x:Name="btnMenu" />
+                <Image Source="LogoPages.png"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,10,0,0" />
+                <Label Text="Recibidor"
                        Grid.Row="1"
-                       Margin="5,0,5,0"
-                       Grid.RowSpan="2"
-                       Grid.ColumnSpan="5">
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TitlePage}" />
+                <Frame Grid.ColumnSpan="4"
+                       Grid.Row="2"
+                       Style="{StaticResource Panel}">
                     <StackLayout>
-                        <Grid RowSpacing="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.2*"/>
-                                <RowDefinition Height="0.5*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <Label Text="Dispositivos"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="LogoInicio.png"
-                                   Grid.Column="1"
-                                   Grid.Row="1" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Button Text="Luz 1"
+                                    x:Name="btnLuz1"
+                                    Clicked="btnLuz1_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}"/>
+                            <Button Text="Luz 2"
+                                    x:Name="btnLuz2"
+                                    Clicked="btnLuz2_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    Grid.Column="1" />
+                            <Button Text="Luz 3"
+                                    x:Name="btnLuz3"
+                                    Clicked="btnLuz3_Clicked"
+                                    ImageSource="luz.png"
+                                    Style="{StaticResource DispositivosOFF}"
+                                    Grid.Column="2" />
                         </Grid>
-                        
                     </StackLayout>
-                    
                 </Frame>
-                <Button Text="Iniciar sesión"
-                        CornerRadius="30"
-                        FontSize="Medium"
-                        BackgroundColor="#1E619A"
-                        FontFamily="{StaticResource RalewayBold}"
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        TextColor="White"
-                        />
             </Grid>
         </Grid>
     </ContentPage.Content>

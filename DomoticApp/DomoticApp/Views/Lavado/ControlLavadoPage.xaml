@@ -72,7 +72,7 @@
                        Grid.Row="4"
                        Style="{StaticResource Panel}">
                     <StackLayout>
-                        <Label Text="Sensación térmica"
+                        <Label Text="Sensación de humedad"
                                TextColor="#0E4265"
                                FontFamily="{StaticResource RalewayBold}"
                                FontSize="19" />

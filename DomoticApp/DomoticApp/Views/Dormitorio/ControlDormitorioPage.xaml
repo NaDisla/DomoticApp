@@ -119,8 +119,7 @@
                                                HorizontalTextAlignment="Center"
                                                x:Name="lblTemp"
                                                FontFamily="{StaticResource RalewayBold}"
-                                               FontSize="Title"
-                                               Text="30C" />
+                                               FontSize="Title"/>
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
@@ -159,8 +158,7 @@
                                                x:Name="lblHum"
                                                x:FieldModifier="public"
                                                FontFamily="{StaticResource RalewayBold}"
-                                               FontSize="Title"
-                                               Text="34.99%" />
+                                               FontSize="Title"/>
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
