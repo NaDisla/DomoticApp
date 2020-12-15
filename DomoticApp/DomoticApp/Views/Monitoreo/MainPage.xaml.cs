@@ -31,40 +31,41 @@ namespace DomoticApp.Views.Monitoreo
         public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
-            
+
             inicio = solicitudMenu;
             btnMenu.Clicked += (s, e) => inicio();
         }
 
         protected override void OnAppearing()
         {
-            GetStateDormitorio();
-            GetStateCocina();
-            GetStateBath();
-            GetStateExteriores();
-            GetStateLavadero();
-            GetStateRecibidor();
-            GetStateSala();
+            GetStateModules();
 
             base.OnAppearing();
+
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        void ControlActivos(Button btnModule, int state)
+        void GetStateModules()
         {
-            if(state == 1)
+            var dormitorio = GetStateDormitorio();
+            var cocina = GetStateCocina();
+            var bath = GetStateBath();
+            var exteriores = GetStateExteriores();
+            var lavadero = GetStateLavadero();
+            var recibidor = GetStateRecibidor();
+            var sala = GetStateSala();
+
+            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
             {
                 lblTextoActivos.IsVisible = false;
-                btnModule.IsVisible = true;
             }
             else
             {
                 lblTextoActivos.IsVisible = true;
-                btnModule.IsVisible = false;
             }
         }
 
-        void GetStateDormitorio()
+        bool GetStateDormitorio()
         {
             var luzDormitorio1 = ControlDormitorioPage.stateLuz1;
             var luzDormitorio2 = ControlDormitorioPage.stateLuz2;
@@ -72,44 +73,47 @@ namespace DomoticApp.Views.Monitoreo
 
             if (luzDormitorio1 == 1 || luzDormitorio2 == 1 || dormitorioAbanico == 1)
             {
-                ControlActivos(btnDormitorio, 1);
+                btnDormitorio.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnDormitorio, 0);
+                return false;
             }
         }
 
-        void GetStateCocina()
+        bool GetStateCocina()
         {
             var luzCocina1 = ControlCocinaPage.stateLuz1;
             var luzCocina2 = ControlCocinaPage.stateLuz2;
 
             if (luzCocina1 == 1 || luzCocina2 == 1)
             {
-                ControlActivos(btnCocina, 1);
+                btnCocina.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnCocina, 0);
+                return false;
             }
         }
 
-        void GetStateBath()
+        bool GetStateBath()
         {
             var luzBath = ControlBathPage.stateLuz;
 
             if (luzBath == 1 || luzBath == 1)
             {
-                ControlActivos(btnBath, 1);
+                btnBath.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnBath, 0);
+                return false;
             }
         }
 
-        void GetStateExteriores()
+        bool GetStateExteriores()
         {
             var luzEntrada1 = ControlExterioresPage.stateLuzEntrada1;
             var luzEntrada2 = ControlExterioresPage.stateLuzEntrada2;
@@ -120,29 +124,31 @@ namespace DomoticApp.Views.Monitoreo
 
             if (luzEntrada1 == 1 || luzEntrada2 == 1 || luzEntrada3 == 1 || luzJardin1 == 1 || luzJardin2 == 1 || luzTerraza == 1)
             {
-                ControlActivos(btnExteriores, 1);
+                btnExteriores.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnExteriores, 0);
+                return false;
             }
         }
 
-        void GetStateLavadero()
+        bool GetStateLavadero()
         {
             var luzLavadero = ControlLavadoPage.stateLuz;
 
             if (luzLavadero == 1 || luzLavadero == 1)
             {
-                ControlActivos(btnLavado, 1);
+                btnLavado.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnLavado, 0);
+                return false;
             }
         }
 
-        void GetStateRecibidor()
+        bool GetStateRecibidor()
         {
             var luzRecibidor1 = ControlRecibidorPage.stateLuz1;
             var luzRecibidor2 = ControlRecibidorPage.stateLuz2;
@@ -150,15 +156,16 @@ namespace DomoticApp.Views.Monitoreo
 
             if (luzRecibidor1 == 1 || luzRecibidor2 == 1 || luzRecibidor3 == 1)
             {
-                ControlActivos(btnRecibidor, 1);
+                btnRecibidor.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnRecibidor, 0);
+                return false;
             }
         }
 
-        void GetStateSala()
+        bool GetStateSala()
         {
             var luzSala1 = ControlSalaPage.stateLuz1;
             var luzSala2 = ControlSalaPage.stateLuz2;
@@ -166,11 +173,12 @@ namespace DomoticApp.Views.Monitoreo
 
             if (luzSala1 == 1 || luzSala2 == 1 || abanicoSala == 1)
             {
-                ControlActivos(btnSala, 1);
+                btnSala.IsVisible = true;
+                return true;
             }
             else
             {
-                ControlActivos(btnSala, 0);
+                return false;
             }
         }
 
@@ -179,8 +187,9 @@ namespace DomoticApp.Views.Monitoreo
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
         }
+
         private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        { 
+        {
             await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
         }
 
