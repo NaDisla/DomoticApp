@@ -74,8 +74,7 @@
                                        HorizontalOptions="CenterAndExpand"
                                        VerticalOptions="CenterAndExpand"
                                        HorizontalTextAlignment="Center"
-                                       IsVisible="False"
-                                       x:Name="lblTextoActivos" />
+                                       x:Name="lblTextoActivos"/>
                                 <Button Text="Dormitorio"
                                         Style="{StaticResource Activos}"
                                         ImageSource="dormitorio.png"
