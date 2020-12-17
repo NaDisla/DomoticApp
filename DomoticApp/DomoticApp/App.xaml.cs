@@ -43,8 +43,7 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
-            //DetectarLogin();
-            MainPage = new NavigationPage(new MasterMenuPage(""));
+            DetectarLogin();
             /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else

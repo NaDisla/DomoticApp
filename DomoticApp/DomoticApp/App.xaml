@@ -91,6 +91,16 @@
                         Value="{StaticResource RalewayBold}" />
             </Style>
 
+            <Style TargetType="Label"
+                   x:Key="NombreCampoPerfil">
+                <Setter Property="TextColor"
+                        Value="#166498" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+            </Style>
+
             <Style TargetType="BoxView"
                    x:Key="PopupLine">
                 <Setter Property="HeightRequest"

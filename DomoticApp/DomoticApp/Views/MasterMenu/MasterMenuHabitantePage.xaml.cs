@@ -36,7 +36,22 @@ namespace DomoticApp.Views.MasterMenu
         {
             usuario = _usuario;
             InitializeComponent();
-            btnPerfilUsuario.Text = $"¡Hola {usuario}!";
+
+            var hora = DateTime.Now.Hour;
+            var horario = DateTime.Now.ToShortTimeString();
+
+            if (hora <= 12 && horario.Contains("a. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenos días {usuario}!";
+            }
+            else if (hora >= 12 || hora <= 18 && horario.Contains("p. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenas tardes {usuario}!";
+            }
+            else if (hora > 18 && hora <= 23 && horario.Contains("p. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenas noches {usuario}!";
+            }
 
             Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();

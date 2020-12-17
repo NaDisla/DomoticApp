@@ -65,13 +65,12 @@ namespace DomoticApp.DataHelpers
             }
         }
         
-        public async Task AgregarClave(int id, string nombre, string valor)
+        public async Task AgregarClaveTeclado(string usuario, string clave)
         {
             await client.Child("Accesos").PostAsync(new Accesos()
             {
-                AccesoID = id,
-                AccesoTipo = nombre,
-                AccesoValor = valor
+                Usuario = usuario,
+                ClaveTeclado = clave
             });
         }
         

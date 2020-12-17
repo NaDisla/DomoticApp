@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Accesos\TestAccesosPage.xaml">
+    <EmbeddedResource Update="Views\Accesos\AccesosPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Administrador\TestRFIDPage.xaml">
@@ -115,12 +115,15 @@
     <EmbeddedResource Update="Views\Usuarios\GeneralLogin\GeneralLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Usuarios\ListaUsuariosPage.xaml">
+    <EmbeddedResource Update="Views\Usuarios\PerfilPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Accesos\AccesosPage.xaml.cs">
+      <DependentUpon>AccesosPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Opciones\OpcionesAdminPage.xaml.cs">
       <DependentUpon>OpcionesAdminPage.xaml</DependentUpon>
     </Compile>

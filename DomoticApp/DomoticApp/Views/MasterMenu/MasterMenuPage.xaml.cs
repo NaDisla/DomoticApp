@@ -11,6 +11,7 @@ using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Tinaco;
+using DomoticApp.Views.Usuarios;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,21 @@ namespace DomoticApp.Views.MasterMenu
         {
             InitializeComponent();
             usuario = _usuario;
-            btnPerfilUsuario.Text = $"¡Hola {usuario}!";
+            var hora = DateTime.Now.Hour;
+            var horario = DateTime.Now.ToShortTimeString();
+
+            if (hora <= 12 && horario.Contains("a. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenos días {usuario}!";
+            }
+            else if (hora >= 12 || hora <= 18 && horario.Contains("p. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenas tardes {usuario}!";
+            }
+            else if (hora > 18 && hora <= 23 && horario.Contains("p. m."))
+            {
+                btnPerfilUsuario.Text = $"¡Buenas noches {usuario}!";
+            }
 
             Detail = new MainPage(SolicitudMenu);
             elementosMenu = new List<MasterMenuItems>();
@@ -172,9 +187,9 @@ namespace DomoticApp.Views.MasterMenu
             }
         }
 
-        private void btnPerfilUsuario_Clicked(object sender, EventArgs e)
+        private async void btnPerfilUsuario_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new PerfilPage(usuario));
         }
 
         private void CeldaMenu_Tapped(object sender, EventArgs e)

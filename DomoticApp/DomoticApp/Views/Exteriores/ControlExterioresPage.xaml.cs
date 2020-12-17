@@ -1,5 +1,6 @@
 ﻿using DomoticApp.DataHelpers;
 using DomoticApp.SettingsAccess;
+using DomoticApp.Views.Monitoreo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace DomoticApp.Views.Exteriores
         public ControlExterioresPage()
         {
             InitializeComponent();
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
         [Obsolete]

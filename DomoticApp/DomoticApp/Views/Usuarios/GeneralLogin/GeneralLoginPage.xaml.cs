@@ -15,6 +15,7 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         RegistroBackend registroBackend = new RegistroBackend();
         CambiarClaveBackend cambioClave = new CambiarClaveBackend();
         public string usuario = "";
+
         public GeneralLoginPage()
         {
             InitializeComponent();

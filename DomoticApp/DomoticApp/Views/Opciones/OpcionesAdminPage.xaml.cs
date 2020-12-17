@@ -27,7 +27,7 @@ namespace DomoticApp.Views.Opciones
 
         private async void btnAccesos_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NavigationPage(new TestAccesosPage()));
+            await Navigation.PushAsync(new AccesosPage());
         }
 
         private void btnEntradas_Clicked(object sender, EventArgs e)
