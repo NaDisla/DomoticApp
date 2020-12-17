@@ -44,7 +44,7 @@ namespace DomoticApp.Views.MasterMenu
             {
                 btnPerfilUsuario.Text = $"¡Buenos días {usuario}!";
             }
-            else if (hora >= 12 || hora <= 18 && horario.Contains("p. m."))
+            else if (hora >= 12 && hora <= 18 && horario.Contains("p. m."))
             {
                 btnPerfilUsuario.Text = $"¡Buenas tardes {usuario}!";
             }
