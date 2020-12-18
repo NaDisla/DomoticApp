@@ -193,9 +193,9 @@ namespace DomoticApp.Views.Monitoreo
             await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
         }
 
-        private async void btnDormitorio_Clicked(object sender, EventArgs e)
+        private void btnDormitorio_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ControlDormitorioPage());
+            
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)

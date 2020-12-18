@@ -17,7 +17,7 @@ namespace DomoticApp.Views.Usuarios
     {
         GeneralData data = new GeneralData();
         public string _usuario { get; set; }
-        string titleError, detailError, titleCorrect, detailCorrect, detailLoading;
+        string titleError, detailError, titleCorrect, detailCorrect, detailLoading, claveEncriptada;
         int userID;
         Models.Usuarios perfilUsuario;
         ResultsOperations results = new ResultsOperations();
@@ -34,12 +34,12 @@ namespace DomoticApp.Views.Usuarios
         async void DatosUsuario()
         {
             usuarios = await data.GetUsuarios();
-            userID = usuarios.Where(x => x.UsuarioNombreCompleto == _usuario).Select(y => y.UsuarioID).FirstOrDefault();
+            userID = usuarios.Where(x => x.UsuarioNombreReal == _usuario).Select(y => y.UsuarioID).FirstOrDefault();
             perfilUsuario = await data.GetUsuario(userID);
 
-            txtNombreRealPerfil.Text = perfilUsuario.UsuarioNombreCompleto;
+            txtNombreRealPerfil.Text = perfilUsuario.UsuarioNombreReal;
             txtCorreoPerfil.Text = perfilUsuario.UsuarioCorreo;
-            txtUsuarioPerfil.Text = perfilUsuario.NombreUsuario;
+            txtUsuarioPerfil.Text = perfilUsuario.UsuarioNombre;
             txtClavePerfil.Text = DataSecurity.Decrypt(perfilUsuario.UsuarioClave, "sblw-3hn8-sqoy19");
         }
 
@@ -53,8 +53,8 @@ namespace DomoticApp.Views.Usuarios
 
             try
             {
-                var usuarioExiste = usuarios.Where(x => x.NombreUsuario == txtUsuarioPerfil.Text && x.UsuarioID != userID)
-                    .Select(y => y.NombreUsuario).FirstOrDefault();
+                var usuarioExiste = usuarios.Where(x => x.UsuarioNombre == txtUsuarioPerfil.Text && x.UsuarioID != userID)
+                    .Select(y => y.UsuarioNombre).FirstOrDefault();
 
                 if(usuarioExiste != null)
                 {
@@ -65,7 +65,8 @@ namespace DomoticApp.Views.Usuarios
                 }
                 else
                 {
-                    await data.UpdateUsuario(userID, txtNombreRealPerfil.Text, txtCorreoPerfil.Text, txtUsuarioPerfil.Text, txtClavePerfil.Text,
+                    claveEncriptada = DataSecurity.Encrypt(txtClavePerfil.Text, "sblw-3hn8-sqoy19");
+                    await data.UpdateUsuario(userID, txtNombreRealPerfil.Text, txtCorreoPerfil.Text, txtUsuarioPerfil.Text, claveEncriptada,
                     perfilUsuario.UsuarioRol);
                     await PopupNavigation.RemovePageAsync(loading);
                     titleCorrect = "Perfil actualizado";

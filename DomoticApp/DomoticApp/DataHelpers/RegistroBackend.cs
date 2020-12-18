@@ -131,7 +131,7 @@ namespace DomoticApp.DataHelpers
                     try
                     {
                         var getUsuarios = await data.GetUsuarios();
-                        var usuarioExiste = getUsuarios.Where(x => x.NombreUsuario == txtNombreUsuario.Text).Select(y => y.NombreUsuario).FirstOrDefault();
+                        var usuarioExiste = getUsuarios.Where(x => x.UsuarioNombre == txtNombreUsuario.Text).Select(y => y.UsuarioNombre).FirstOrDefault();
 
                         if (getUsuarios.Count == 0)
                         {

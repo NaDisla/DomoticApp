@@ -63,7 +63,8 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            
+                            <ScrollView Grid.ColumnSpan="4">
+                                <StackLayout HeightRequest="460">
                             <Frame BackgroundColor="#D5E3EE"
                                    BorderColor="#166498"
                                    CornerRadius="20"
@@ -143,6 +144,8 @@
                                     TextColor="White"
                                     FontSize="16"
                                     Margin="0,10,0,0"/>
+                                </StackLayout>
+                            </ScrollView>
                         </Grid>
                     </StackLayout>
                 </Frame>

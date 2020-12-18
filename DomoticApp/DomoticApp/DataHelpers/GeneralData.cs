@@ -20,9 +20,9 @@ namespace DomoticApp.DataHelpers
                 {
                     UsuarioID = user.Object.UsuarioID,
                     AccesoID = user.Object.AccesoID,
-                    UsuarioNombreCompleto = user.Object.UsuarioNombreCompleto,
+                    UsuarioNombreReal = user.Object.UsuarioNombreReal,
                     UsuarioCorreo = user.Object.UsuarioCorreo,
-                    NombreUsuario = user.Object.NombreUsuario,
+                    UsuarioNombre = user.Object.UsuarioNombre,
                     UsuarioClave = user.Object.UsuarioClave,
                     UsuarioRol = user.Object.UsuarioRol
                 }).ToList();
@@ -44,9 +44,9 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombreCompleto = nombreCompleto,
+                    UsuarioNombreReal = nombreCompleto,
                     UsuarioCorreo = correo,
-                    NombreUsuario = nombreUsuario,
+                    UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
                     UsuarioRol = "Administrador"
                  });
@@ -56,9 +56,9 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombreCompleto = nombreCompleto,
+                    UsuarioNombreReal = nombreCompleto,
                     UsuarioCorreo = correo,
-                    NombreUsuario = nombreUsuario,
+                    UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
                     UsuarioRol = "Habitante"
                 });
@@ -110,9 +110,9 @@ namespace DomoticApp.DataHelpers
             await client.Child("Usuarios").Child(claveNueva.Key).PutAsync(new Usuarios() 
             {
                 UsuarioID = idUsuario,
-                UsuarioNombreCompleto = nombreRealUsuario,
+                UsuarioNombreReal = nombreRealUsuario,
                 UsuarioCorreo = correoUsuario,
-                NombreUsuario = nombreUsuario,
+                UsuarioNombre = nombreUsuario,
                 UsuarioClave = nuevaClave,
                 UsuarioRol = rolUsuario
             });

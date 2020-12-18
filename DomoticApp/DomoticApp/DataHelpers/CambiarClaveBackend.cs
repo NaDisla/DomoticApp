@@ -65,7 +65,7 @@ namespace DomoticApp.DataHelpers
                 await PopupNavigation.PushAsync(loadingUsuario);
                 await Task.Delay(2000);
                 var getUsers = await data.GetUsuarios();
-                var userCorreo = getUsers.Where(x => x.NombreUsuario == txtUsuarioCambioClave.Text)
+                var userCorreo = getUsers.Where(x => x.UsuarioNombre == txtUsuarioCambioClave.Text)
                     .Select(y => y.UsuarioCorreo).FirstOrDefault();
 
                 if (userCorreo != null)
@@ -248,11 +248,11 @@ namespace DomoticApp.DataHelpers
                     try
                     {
                         var getUsers = await data.GetUsuarios();
-                        var idUsuario = getUsers.Where(y => y.NombreUsuario == txtUsuarioCambioClave.Text).Select(x => x.UsuarioID).FirstOrDefault();
+                        var idUsuario = getUsers.Where(y => y.UsuarioNombre == txtUsuarioCambioClave.Text).Select(x => x.UsuarioID).FirstOrDefault();
                         var infoUsuario = await data.GetUsuario(idUsuario);
                         int usuarioID = infoUsuario.UsuarioID;
-                        string nombreRealUsuario = infoUsuario.UsuarioNombreCompleto;
-                        string nombreUsuario = infoUsuario.NombreUsuario;
+                        string nombreRealUsuario = infoUsuario.UsuarioNombreReal;
+                        string nombreUsuario = infoUsuario.UsuarioNombre;
                         string claveEncriptada = DataSecurity.Encrypt(txtNuevaClave.Text, "sblw-3hn8-sqoy19");
                         string rolUsuario = infoUsuario.UsuarioRol;
                         string correoUsuario = infoUsuario.UsuarioCorreo;

@@ -39,8 +39,8 @@ namespace DomoticApp.Views.Accesos
                        select usuario).Select(p => new Models.Usuarios()
                        {
                            UsuarioID = p.UsuarioID,
-                           NombreUsuario = p.NombreUsuario,
-                           UsuarioNombreCompleto = p.UsuarioNombreCompleto
+                           UsuarioNombre = p.UsuarioNombre,
+                           UsuarioNombreReal = p.UsuarioNombreReal
                        }).ToList();
             ListUsuarios = new ObservableCollection<Models.Usuarios>(final);
             
@@ -86,7 +86,7 @@ namespace DomoticApp.Views.Accesos
         {
             try
             {
-                await data.AgregarClaveTeclado(selectedUser.NombreUsuario, txtClaveTeclado.Text);
+                await data.AgregarClaveTeclado(selectedUser.UsuarioNombre, txtClaveTeclado.Text);
                 await DisplayAlert("Registro exitoso", "Se ha registrado su clave de acceso", "OK");
             }
             catch (Exception)

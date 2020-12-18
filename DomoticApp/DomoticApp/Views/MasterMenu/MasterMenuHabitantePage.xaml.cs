@@ -1,5 +1,4 @@
-﻿using DomoticApp.DataHelpers;
-using DomoticApp.MenuItems;
+﻿using DomoticApp.MenuItems;
 using DomoticApp.Views.Bath;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
@@ -11,13 +10,10 @@ using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.Views.Tinaco;
+using DomoticApp.Views.Usuarios;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -42,15 +38,15 @@ namespace DomoticApp.Views.MasterMenu
 
             if (hora <= 12 && horario.Contains("a. m."))
             {
-                btnPerfilUsuario.Text = $"¡Buenos días {usuario}!";
+                btnPerfilUsuario.Text = $"Buenos días, {usuario}";
             }
             else if (hora >= 12 && hora <= 18 && horario.Contains("p. m."))
             {
-                btnPerfilUsuario.Text = $"¡Buenas tardes {usuario}!";
+                btnPerfilUsuario.Text = $"Buenas tardes, {usuario}";
             }
             else if (hora > 18 && hora <= 23 && horario.Contains("p. m."))
             {
-                btnPerfilUsuario.Text = $"¡Buenas noches {usuario}!";
+                btnPerfilUsuario.Text = $"Buenas noches, {usuario}";
             }
 
             Detail = new MainPage(SolicitudMenu);
@@ -189,7 +185,8 @@ namespace DomoticApp.Views.MasterMenu
 
         private void btnPerfilUsuario_Clicked(object sender, EventArgs e)
         {
-
+            Detail = new NavigationPage(new PerfilPage(usuario));
+            IsPresented = false;
         }
 
         private void CeldaMenu_Tapped(object sender, EventArgs e)
