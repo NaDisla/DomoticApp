@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +17,17 @@ namespace DomoticApp.Views.Opciones
         public OpcionesAdminPage()
         {
             InitializeComponent();
+            ResizeTitlePage();
             btnMenu.Clicked += (s,e) => MainPage.inicio();
+        }
+        void ResizeTitlePage()
+        {
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var height = mainDisplayInfo.Height;
+            if(height <= 2000)
+            {
+                lblTitlePage.FontSize = 17;
+            }
         }
 
         private void btnUsuarios_Clicked(object sender, EventArgs e)

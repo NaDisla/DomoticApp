@@ -435,25 +435,26 @@
                         Value="16"/>
             </Style>
 
-            <Style TargetType="Button" x:Key="SaludoUsuario">
-                <Setter Property="FontFamily" 
-                        Value="{StaticResource RalewaySemiBold}"/>
+            <Style TargetType="Button"
+                   x:Key="SaludoUsuario">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
                 <Setter Property="FontSize"
-                        Value="17"/>
+                        Value="17" />
                 <Setter Property="TextColor"
-                        Value="#707087"/>
+                        Value="#707087" />
                 <Setter Property="BorderColor"
-                        Value="#707087"/>
+                        Value="#707087" />
                 <Setter Property="Padding"
-                        Value="12,8,12,8"/>
+                        Value="12,8,12,8" />
                 <Setter Property="BackgroundColor"
-                        Value="#F0F0F3"/>
+                        Value="#F0F0F3" />
                 <Setter Property="CornerRadius"
-                        Value="30"/>
+                        Value="30" />
                 <Setter Property="BorderWidth"
-                        Value="1"/>
+                        Value="1" />
                 <Setter Property="HorizontalOptions"
-                        Value="CenterAndExpand"/>
+                        Value="CenterAndExpand" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

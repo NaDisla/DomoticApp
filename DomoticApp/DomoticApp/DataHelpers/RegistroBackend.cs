@@ -95,6 +95,12 @@ namespace DomoticApp.DataHelpers
                 detailError = "El correo ingresado no es correcto. Intente nuevamente.";
                 await results.Unsuccess(titleError, detailError);
             }
+            else if(!txtNombreCompleto.Text.ToCharArray().All(Char.IsLetter))
+            {
+                titleError = "Nombre incorrecto";
+                detailError = "El nombre no puede contener números. Intente nuevamente.";
+                await results.Unsuccess(titleError, detailError);
+            }
             else
             {
                 frameNombreRealRegistro.BorderColor = Color.Default;

@@ -39,7 +39,8 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        Grid.ColumnSpan="2"
-                       Style="{StaticResource TitlePage}" />
+                       Style="{StaticResource TitlePage}"
+                       x:Name="lblTitlePage"/>
                 <Frame Grid.ColumnSpan="4"
                        Grid.Row="2"
                        Style="{StaticResource Panel}">

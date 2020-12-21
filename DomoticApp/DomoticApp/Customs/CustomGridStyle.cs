@@ -25,7 +25,7 @@ namespace DomoticApp.Customs
 
         public override Color GetSelectionBackgroundColor()
         {
-            return Color.LightGray;
+            return Color.DarkGray;
         }
     }
 }
