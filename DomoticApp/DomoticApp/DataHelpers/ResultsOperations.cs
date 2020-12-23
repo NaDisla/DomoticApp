@@ -10,10 +10,8 @@ namespace DomoticApp.DataHelpers
         string titleAlert, detailAlert;
 
         [Obsolete]
-        public async Task Alert()
+        public async Task Alert(string titleAlert, string detailAlert)
         {
-            titleAlert = "Contraseñas no coinciden";
-            detailAlert = "Las contraseñas no coinciden. Verifique nuevamente.";
             AlertPage alert = new AlertPage(titleAlert, detailAlert);
             await PopupNavigation.PushAsync(alert);
         }

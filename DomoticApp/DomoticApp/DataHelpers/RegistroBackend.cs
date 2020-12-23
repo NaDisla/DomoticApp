@@ -13,7 +13,7 @@ namespace DomoticApp.DataHelpers
     {
         ResultsOperations results = new ResultsOperations();
         GeneralData data = new GeneralData();
-        string detailLoading, claveEncriptada, titleCorrect, detailCorrect, titleError, detailError;
+        string detailLoading, claveEncriptada, titleCorrect, detailCorrect, titleError, detailError, titleAlert, detailAlert;
         int idUser;
         bool result;
 
@@ -95,7 +95,7 @@ namespace DomoticApp.DataHelpers
                 detailError = "El correo ingresado no es correcto. Intente nuevamente.";
                 await results.Unsuccess(titleError, detailError);
             }
-            else if(!txtNombreCompleto.Text.ToCharArray().All(Char.IsLetter))
+            else if(!Regex.IsMatch(txtNombreCompleto.Text, @"^[a-zA-Z \s]+$"))
             {
                 titleError = "Nombre incorrecto";
                 detailError = "El nombre no puede contener números. Intente nuevamente.";
@@ -126,7 +126,9 @@ namespace DomoticApp.DataHelpers
 
                 if (txtConfirmarClaveRegistro.Text != txtClaveRegistro.Text)
                 {
-                    await results.Alert();
+                    titleAlert = "Contraseñas no coinciden";
+                    detailAlert = "Las contraseñas no coinciden. Intente nuevamente.";
+                    await results.Alert(titleAlert, detailAlert);
                 }
                 else
                 {

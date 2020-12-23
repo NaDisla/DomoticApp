@@ -15,7 +15,7 @@ namespace DomoticApp.DataHelpers
         Random codigoCambio = new Random();
         GeneralData data = new GeneralData();
         ResultsOperations results = new ResultsOperations();
-        string detailLoading, titleError, detailError, titleCorrect, detailCorrect;
+        string detailLoading, titleError, detailError, titleCorrect, detailCorrect, titleAlert, detailAlert;
 
         #region EnviarCodigo
         [Obsolete]
@@ -236,7 +236,9 @@ namespace DomoticApp.DataHelpers
             {
                 if (txtConfirmarClaveNueva.Text != txtNuevaClave.Text)
                 {
-                    await results.Alert();
+                    titleAlert = "Contraseñas no coinciden";
+                    detailAlert = "Las contraseñas no coinciden. Intente nuevamente.";
+                    await results.Alert(titleAlert, detailAlert);
                 }
                 else
                 {

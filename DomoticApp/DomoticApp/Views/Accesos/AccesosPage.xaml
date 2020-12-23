@@ -56,7 +56,6 @@
                                        Grid.Row="2"
                                        Grid.ColumnSpan="7"
                                        Grid.RowSpan="3"
-                                       SelectionChanged="dataGrid_SelectionChanged"
                                        QueryCellStyle="dataGrid_QueryCellStyle">
                 </Syncfusion:SfDataGrid>
                 <Button Text="Asignar acceso"
@@ -68,8 +67,8 @@
                         FontFamily="{StaticResource RalewayBold}"
                         FontSize="15"
                         Grid.ColumnSpan="2"
-                        x:Name="btnToken"
-                        Clicked="btnToken_Clicked" />
+                        x:Name="btnAsignarAcceso"
+                        Clicked="btnAsignarAcceso_Clicked" />
                 <Button Text="Desactivar token/tarjeta"
                         BackgroundColor="#b9d9f0"
                         Grid.Row="5"

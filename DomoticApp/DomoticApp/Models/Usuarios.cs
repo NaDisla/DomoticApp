@@ -8,6 +8,6 @@
         public string UsuarioNombre { get; set; }
         public string UsuarioCorreo { get; set; }
         public string UsuarioClave { get; set; }
-        public Accesos AccesoID { get; set; }
+        public string Acceso { get; set; }
     }
 }

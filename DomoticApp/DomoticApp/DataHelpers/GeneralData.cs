@@ -19,24 +19,12 @@ namespace DomoticApp.DataHelpers
                 user => new Usuarios 
                 {
                     UsuarioID = user.Object.UsuarioID,
-                    AccesoID = user.Object.AccesoID,
+                    Acceso = user.Object.Acceso,
                     UsuarioNombreReal = user.Object.UsuarioNombreReal,
                     UsuarioCorreo = user.Object.UsuarioCorreo,
                     UsuarioNombre = user.Object.UsuarioNombre,
                     UsuarioClave = user.Object.UsuarioClave,
                     UsuarioRol = user.Object.UsuarioRol
-                }).ToList();
-        }
-
-        public async Task<List<UsuariosAccesos>> GetUsuariosAccesos()
-        {
-            return (await client.Child("UsuariosAccesos").OnceAsync<UsuariosAccesos>()).Select(
-                user => new UsuariosAccesos
-                {
-                    UsuarioID = user.Object.UsuarioID,
-                    Usuario = user.Object.Usuario,
-                    UsuarioNombreApellido = user.Object.UsuarioNombreApellido,
-                    UsuarioAcceso = user.Object.UsuarioAcceso
                 }).ToList();
         }
 
@@ -60,16 +48,9 @@ namespace DomoticApp.DataHelpers
                     UsuarioCorreo = correo,
                     UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
-                    UsuarioRol = "Administrador"
+                    UsuarioRol = "Administrador",
+                    Acceso = "null"
                  });
-
-                await client.Child("UsuariosAccesos").PostAsync(new UsuariosAccesos()
-                {
-                    UsuarioID = id,
-                    Usuario = nombreUsuario,
-                    UsuarioNombreApellido = nombreReal,
-                    UsuarioAcceso = "null"
-                });
             }
             else
             {
@@ -80,15 +61,8 @@ namespace DomoticApp.DataHelpers
                     UsuarioCorreo = correo,
                     UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
-                    UsuarioRol = "Habitante"
-                });
-
-                await client.Child("UsuariosAccesos").PostAsync(new UsuariosAccesos()
-                {
-                    UsuarioID = id,
-                    Usuario = nombreUsuario,
-                    UsuarioNombreApellido = nombreReal,
-                    UsuarioAcceso = "null"
+                    UsuarioRol = "Habitante",
+                    Acceso = "null"
                 });
             }
         }
