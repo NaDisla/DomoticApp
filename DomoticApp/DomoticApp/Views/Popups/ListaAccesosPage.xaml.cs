@@ -1,4 +1,6 @@
-﻿using Rg.Plugins.Popup.Pages;
+﻿using DomoticApp.DataHelpers;
+using DomoticApp.Views.Accesos;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,11 @@ namespace DomoticApp.Views.Popups
     {
         ViewCell ultimaCelda, viewCell;
         List<Accesos> accesos = new List<Accesos>();
+        ResultsOperations results = new ResultsOperations();
+        GeneralData data = new GeneralData();
+        AccesosPage accesosPage = new AccesosPage();
+        string titleAlert, detailAlert, accesoAsignar, titleCorrect, detailCorrect, usuario, titleError, detailError;
+
         public ListaAccesosPage()
         {
             InitializeComponent();
@@ -30,12 +37,42 @@ namespace DomoticApp.Views.Popups
 
         private void listaAccesos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            var item = (Accesos)e.SelectedItem;
+            accesoAsignar = item.Nombre;
         }
 
-        private void btnAsignarAccesoUsuario_Clicked(object sender, EventArgs e)
+        [Obsolete]
+        private async void btnAsignarAccesoUsuario_Clicked(object sender, EventArgs e)
         {
-
+            if(listaAccesos.SelectedItem == null)
+            {
+                titleAlert = "Seleccione un acceso";
+                detailAlert = "Debe seleccionar el acceso que desea asignarle al usuario.";
+                await results.Alert(titleAlert, detailAlert);
+            }
+            else
+            {
+                var accesoExistente = AccesosPage.getUsuarios.Where(y => y.Acceso == accesoAsignar).Select(y => y.Acceso).FirstOrDefault();
+                if(accesoAsignar == accesoExistente)
+                {
+                    titleError = "Usuario con acceso seleccionado";
+                    detailError = "Este acceso ya se encuentra asignado a otro usuario.";
+                    await results.Unsuccess(titleError, detailError);
+                }
+                else
+                {
+                    await data.UpdateUsuario(AccesosPage.selectedUser.UsuarioID, AccesosPage.selectedUser.UsuarioNombreReal,
+                    AccesosPage.selectedUser.UsuarioCorreo, AccesosPage.selectedUser.UsuarioNombre, AccesosPage.selectedUser.UsuarioClave,
+                    AccesosPage.selectedUser.UsuarioRol, accesoAsignar);
+                    MessagingCenter.Send(this, "RefreshAccesosPage");
+                    usuario = AccesosPage.selectedUser.UsuarioNombreReal;
+                    await PopupNavigation.PopAsync(true);
+                    titleCorrect = "Acceso asignado";
+                    detailCorrect = $"Se ha asignado {accesoAsignar} a {usuario}.";
+                    await results.Success(titleCorrect, detailCorrect);
+                    AccesosPage.selectedUser = null;
+                }
+            }
         }
 
         [Obsolete]
@@ -44,22 +81,23 @@ namespace DomoticApp.Views.Popups
             await PopupNavigation.PopAsync(true);
         }
 
-        private void listaAccesos_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void celdaListaAcceso_Tapped(object sender, EventArgs e)
         {
-
+            if (ultimaCelda != null)
+            {
+                ultimaCelda.View.BackgroundColor = Color.Default;
+            }
+            viewCell = (ViewCell)sender;
+            if (viewCell.View != null)
+            {
+                viewCell.View.BackgroundColor = Color.FromHex("#A5CDDB");
+                ultimaCelda = viewCell;
+            }
         }
     }
     public class Accesos
     {
         public string Nombre { get; set; }
         public string Valor { get; set; }
-
-        public string Acceso
-        {
-            get
-            {
-                return string.Format("{0}: {1}", Nombre, Valor);
-            }
-        }
     }
 }

@@ -29,15 +29,22 @@
                           SeparatorColor="DarkCyan"
                           RowHeight="80"
                           BackgroundColor="AliceBlue"
-                          HasUnevenRows="True">
+                          HasUnevenRows="True"
+                          HeightRequest="190"
+                          ItemSelected="listaAccesos_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell x:Name="celdaListaAcceso"
+                                      Tapped="celdaListaAcceso_Tapped">
                                 <StackLayout VerticalOptions="FillAndExpand"
-                                             Padding="20,10,0,10">
-                                    <Label Text="{Binding Acceso}"
+                                             Padding="10,10,0,10"
+                                             Orientation="Horizontal">
+                                    <Label Text="{Binding Nombre, StringFormat='{0}:'}"
                                            FontFamily="{StaticResource RalewaySemiBold}"
-                                           TextColor="#175E8D"/>
+                                           TextColor="#175E8D" HorizontalOptions="Start" VerticalOptions="Start"/>
+                                    <Label Text="{Binding Valor}"
+                                           FontFamily="{StaticResource RalewayRegular}"
+                                           TextColor="#175E8D" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

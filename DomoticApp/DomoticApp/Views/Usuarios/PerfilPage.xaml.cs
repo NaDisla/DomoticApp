@@ -67,7 +67,7 @@ namespace DomoticApp.Views.Usuarios
                 {
                     claveEncriptada = DataSecurity.Encrypt(txtClavePerfil.Text, "sblw-3hn8-sqoy19");
                     await data.UpdateUsuario(userID, txtNombreRealPerfil.Text, txtCorreoPerfil.Text, txtUsuarioPerfil.Text, claveEncriptada,
-                    perfilUsuario.UsuarioRol);
+                    perfilUsuario.UsuarioRol, perfilUsuario.Acceso);
                     await PopupNavigation.RemovePageAsync(loading);
                     titleCorrect = "Perfil actualizado";
                     detailCorrect = "Se ha actualizado su perfl correctamente.";

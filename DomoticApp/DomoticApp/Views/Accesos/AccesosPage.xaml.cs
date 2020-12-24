@@ -1,4 +1,5 @@
-﻿using DomoticApp.DataHelpers;
+﻿using DomoticApp.Customs;
+using DomoticApp.DataHelpers;
 using DomoticApp.Views.Monitoreo;
 using DomoticApp.Views.Popups;
 using Rg.Plugins.Popup.Services;
@@ -20,13 +21,14 @@ namespace DomoticApp.Views.Accesos
     public partial class AccesosPage : ContentPage
     {
         GeneralData data = new GeneralData();
-        int selectedUser, rowIndex;
         public ObservableCollection<Models.Usuarios> ListUsuarios { get; set; }
         private const string urlGeneral = "http://10.0.0.17", urlToken1 = "http://10.0.0.17/desactivar-token-1", 
             urlToken2 = "http://10.0.0.17/desactivar-token-2", urlTarjeta1 = "http://10.0.0.17/desactivar-tarjeta-1",
             urlTarjeta2 = "http://10.0.0.17/desactivar-tarjeta-2";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleAlert, detailAlert;
+        private string content, titleAlert, detailAlert, acceso, titleError, detailError, titleCorrect, detailCorrect;
+        public static Models.Usuarios selectedUser;
+        public static List<Models.Usuarios> getUsuarios;
         ResultsOperations results = new ResultsOperations();
 
         public AccesosPage()
@@ -38,17 +40,26 @@ namespace DomoticApp.Views.Accesos
             dataGrid.Columns[5].IsHidden = true;
             dataGrid.Columns[6].IsHidden = true;
             btnMenu.Clicked += (s, e) => MainPage.inicio();
-            dataGrid.GridTapped += dataGrid_GridTapped;
+            MessagingCenter.Subscribe<ListaAccesosPage>(this, "RefreshAccesosPage", (sender) => {
+                GetUsersData();
+            });
         }
 
-        private void dataGrid_GridTapped(object sender, GridTappedEventArgs e)
+        private void dataGrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
         {
-            rowIndex = e.RowColumnIndex.RowIndex;
+            if(selectedUser == null)
+            {
+                selectedUser = (e.AddedItems[0] as Models.Usuarios);
+            }
+            else
+            {
+                selectedUser = null;
+            }
         }
 
-        async void GetUsersData()
+        public async void GetUsersData()
         {
-            List<Models.Usuarios> getUsuarios = await data.GetUsuarios();
+            getUsuarios = await data.GetUsuarios();
             ListUsuarios = new ObservableCollection<Models.Usuarios>(getUsuarios);
             dataGrid.ItemsSource = ListUsuarios;
         }
@@ -119,20 +130,67 @@ namespace DomoticApp.Views.Accesos
             dataGrid.Columns.Add(septimaColumna);
         }
 
-        private void btnDesactivarTokenTarjeta_Clicked(object sender, EventArgs e)
+        [Obsolete]
+        private async void btnDesactivarTokenTarjeta_Clicked(object sender, EventArgs e)
         {
+            if (selectedUser == null)
+            {
+                titleAlert = "Seleccione un usuario";
+                detailAlert = "Debe seleccionar el usuario al que desea desactivar el acceso de tarjeta o token.";
+                await results.Alert(titleAlert, detailAlert);
+            }
+            else if(selectedUser.Acceso == "Clave teclado")
+            {
+                titleAlert = "Usuario incorrecto";
+                detailAlert = "Este usuario no tiene una tarjeta o token como acceso.";
+                await results.Alert(titleAlert, detailAlert);
+            }
+            else
+            {
+                acceso = selectedUser.Acceso;
+                switch (acceso)
+                {
+                    case "Tarjeta 1":
+                        DesactivarTarjetaToken(urlTarjeta1);
+                        break;
 
+                    case "Tarjeta 2":
+                        DesactivarTarjetaToken(urlTarjeta2);
+                        break;
+
+                    case "Token 1":
+                        DesactivarTarjetaToken(urlToken1);
+                        break;
+
+                    case "Token 2":
+                        DesactivarTarjetaToken(urlToken2);
+                        break;
+                }
+            }
         }
 
-        private void dataGrid_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
+        [Obsolete]
+        async void DesactivarTarjetaToken(string url)
         {
-            e.Style.Font = "Raleway-Regular.ttf#Raleway-Regular";
+            content = await client.GetStringAsync(url);
+            if(content != null)
+            {
+                titleCorrect = "Acceso desactivado";
+                detailCorrect = "Se ha desactivado el acceso correctamente.";
+                await results.Success(titleCorrect, detailCorrect);
+            }
+            else
+            {
+                titleError = "Error de conexión";
+                detailError = "No se ha podido establecer la conexión con la vivienda.";
+                await results.Unsuccess(titleError, detailError);
+            }
         }
 
         [Obsolete]
         private async void btnAsignarAcceso_Clicked(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(rowIndex.ToString()))
+            if(selectedUser == null)
             {
                 titleAlert = "Seleccione un usuario";
                 detailAlert = "Debe seleccionar el usuario al que desea asignarle el acceso.";

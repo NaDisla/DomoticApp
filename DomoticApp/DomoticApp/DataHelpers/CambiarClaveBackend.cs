@@ -258,7 +258,8 @@ namespace DomoticApp.DataHelpers
                         string claveEncriptada = DataSecurity.Encrypt(txtNuevaClave.Text, "sblw-3hn8-sqoy19");
                         string rolUsuario = infoUsuario.UsuarioRol;
                         string correoUsuario = infoUsuario.UsuarioCorreo;
-                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario);
+                        string accesoUsuario = infoUsuario.Acceso;
+                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario, accesoUsuario);
                         await PopupNavigation.RemovePageAsync(loading);
                         titleCorrect = "Contraseña actualizada";
                         detailCorrect = "Se ha cambiado la contraseña exitosamente.";

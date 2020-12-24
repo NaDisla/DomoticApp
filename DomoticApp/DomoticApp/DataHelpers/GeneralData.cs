@@ -67,15 +67,6 @@ namespace DomoticApp.DataHelpers
             }
         }
         
-        public async Task AgregarClaveTeclado(string usuario, string clave)
-        {
-            await client.Child("Accesos").PostAsync(new Accesos()
-            {
-                Usuario = usuario,
-                ClaveTeclado = clave
-            });
-        }
-        
         public async Task CambiarClave(int codigo, string usuario)
         {
             await client.Child("CambiosClaveUsuarios").PostAsync(new CambiarClaveUsuario()
@@ -103,8 +94,9 @@ namespace DomoticApp.DataHelpers
             await client.Child("CambiosClaveUsuarios").Child(updateCodigo.Key)
                 .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, CodigoCambio = codigo});
         }
+        
         public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave, 
-            string rolUsuario)
+            string rolUsuario, string acceso)
         {
             var claveNueva = (await client.Child("Usuarios").OnceAsync<Usuarios>()).
                 Where(x => x.Object.UsuarioID == idUsuario).FirstOrDefault();
@@ -116,7 +108,8 @@ namespace DomoticApp.DataHelpers
                 UsuarioCorreo = correoUsuario,
                 UsuarioNombre = nombreUsuario,
                 UsuarioClave = nuevaClave,
-                UsuarioRol = rolUsuario
+                UsuarioRol = rolUsuario,
+                Acceso = acceso
             });
         }
     }
