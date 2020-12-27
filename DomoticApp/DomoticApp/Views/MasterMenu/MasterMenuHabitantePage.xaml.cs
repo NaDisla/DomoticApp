@@ -1,4 +1,5 @@
-﻿using DomoticApp.MenuItems;
+﻿using DomoticApp.DataHelpers;
+using DomoticApp.MenuItems;
 using DomoticApp.Views.Bath;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
@@ -14,6 +15,7 @@ using DomoticApp.Views.Usuarios;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,14 +27,21 @@ namespace DomoticApp.Views.MasterMenu
         public List<MasterMenuItems> elementosMenu { get; set; }
         ViewCell ultimaCelda, viewCell;
         MasterMenuItems pagina;
+        public static string usuarioRefresh;
         string usuario;
 
         [Obsolete]
         public MasterMenuHabitantePage(string _usuario)
         {
-            usuario = _usuario;
             InitializeComponent();
-
+            if(_usuario != PerfilPage.refreshUsuario)
+            {
+                usuario = _usuario;
+            }
+            else
+            {
+                usuario = usuarioRefresh;
+            }
             var hora = DateTime.Now.Hour;
             var horario = DateTime.Now.ToShortTimeString();
 

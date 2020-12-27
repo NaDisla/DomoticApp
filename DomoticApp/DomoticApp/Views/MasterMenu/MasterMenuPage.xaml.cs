@@ -26,12 +26,21 @@ namespace DomoticApp.Views.MasterMenu
         ViewCell ultimaCelda, viewCell;
         MasterMenuItems pagina;
         public string usuario { get; set; }
-        
+        public static string usuarioRefresh;
+
         [Obsolete]
         public MasterMenuPage(string _usuario)
         {
             InitializeComponent();
-            usuario = _usuario;
+
+            if (_usuario != PerfilPage.refreshUsuario)
+            {
+                usuario = _usuario;
+            }
+            else
+            {
+                usuario = usuarioRefresh;
+            }
             var hora = DateTime.Now.Hour;
             var horario = DateTime.Now.ToShortTimeString();
 

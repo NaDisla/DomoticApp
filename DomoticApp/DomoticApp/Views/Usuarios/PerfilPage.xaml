@@ -56,7 +56,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="360" />
+                                <RowDefinition Height="360" x:Name="rowPerfil"/>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
@@ -65,85 +65,81 @@
                             </Grid.RowDefinitions>
                             <ScrollView Grid.ColumnSpan="4">
                                 <StackLayout HeightRequest="460">
-                            <Frame BackgroundColor="#D5E3EE"
-                                   BorderColor="#166498"
-                                   CornerRadius="20"
-                                   Grid.ColumnSpan="4"
-                                   Grid.RowSpan="5">
-                                <StackLayout>
-                                    <StackLayout Grid.Row="1"
-                                                 Grid.ColumnSpan="4">
-                                        <Label Text="Nombre y apellido"
-                                               Style="{StaticResource NombreCampoPerfil}"/>
-                                        <Frame Style="{StaticResource EntryFrame}"
-                                               HeightRequest="40"
-                                               BackgroundColor="White"
-                                               x:Name="entryNombreRealPerfil"
-                                               Padding="15,0,0,0"
-                                               Margin="0,5,0,10">
-                                            <Custom:CustomEntryRenderer x:Name="txtNombreRealPerfil"
-                                                                        FontFamily="{StaticResource RalewayRegular}" />
-                                        </Frame>
-                                    </StackLayout>
-                                    <StackLayout Grid.Row="2"
-                                                 Grid.ColumnSpan="4">
-                                        <Label Text="Correo electrónico"
-                                               Style="{StaticResource NombreCampoPerfil}"/>
-                                        <Frame Style="{StaticResource EntryFrame}"
-                                               HeightRequest="40"
-                                               BackgroundColor="White"
-                                               x:Name="entryCorreoPerfil"
-                                               Padding="15,0,0,0"
-                                               Margin="0,5,0,10">
-                                            <Custom:CustomEntryRenderer x:Name="txtCorreoPerfil"
-                                                                        FontFamily="{StaticResource RalewayRegular}" 
-                                                                        Keyboard="Email"/>
-                                        </Frame>
-                                    </StackLayout>
-                                    <StackLayout Grid.Row="3"
-                                                 Grid.ColumnSpan="4">
-                                        <Label Text="Nombre de usuario"
-                                               Style="{StaticResource NombreCampoPerfil}"/>
-                                        <Frame Style="{StaticResource EntryFrame}"
-                                               HeightRequest="40"
-                                               BackgroundColor="White"
-                                               x:Name="entryUsuarioPerfil"
-                                               Padding="15,0,0,0"
-                                               Margin="0,5,0,10">
-                                            <Custom:CustomEntryRenderer x:Name="txtUsuarioPerfil"
-                                                                        FontFamily="{StaticResource RalewayRegular}"/>
-                                        </Frame>
-                                    </StackLayout>
-                                    <StackLayout Grid.Row="4"
-                                                 Grid.ColumnSpan="4">
-                                        <Label Text="Contraseña"
-                                               Style="{StaticResource NombreCampoPerfil}"/>
-                                        <Frame Style="{StaticResource EntryFrame}"
-                                               HeightRequest="40"
-                                               BackgroundColor="White"
-                                               x:Name="entryClavePerfil"
-                                               Padding="15,0,0,0"
-                                               Margin="0,5,0,0">
-                                            <Custom:CustomEntryRenderer x:Name="txtClavePerfil"
-                                                                        FontFamily="{StaticResource RalewayRegular}"
-                                                                        IsPassword="True"/>
-                                        </Frame>
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                            <Button Grid.Row="5"
-                                    x:Name="btnActualizarPerfil"
-                                    Clicked="btnActualizarPerfil_Clicked"
-                                    Text="Actualizar perfil"
-                                    FontFamily="{StaticResource RalewayBold}"
-                                    Grid.Column="1"
-                                    BackgroundColor="#166498"
-                                    Grid.RowSpan="8"
-                                    Grid.ColumnSpan="2"
-                                    CornerRadius="15"
-                                    TextColor="White"
-                                    FontSize="16"
-                                    Margin="0,10,0,0"/>
+                                    <Frame BackgroundColor="#D5E3EE"
+                                           BorderColor="#166498"
+                                           CornerRadius="20"
+                                           Grid.ColumnSpan="4"
+                                           Grid.RowSpan="5">
+                                        <StackLayout>
+                                            <StackLayout Grid.Row="1"
+                                                         Grid.ColumnSpan="4">
+                                                <Label Text="Nombre y apellido"
+                                                       Style="{StaticResource NombreCampoPerfil}" />
+                                                <Frame Style="{StaticResource EntryFrame}"
+                                                       HeightRequest="40"
+                                                       BackgroundColor="White"
+                                                       x:Name="entryNombreRealPerfil"
+                                                       Padding="15,0,0,0"
+                                                       Margin="0,5,0,10">
+                                                    <Custom:CustomEntryRenderer x:Name="txtNombreRealPerfil"
+                                                                                FontFamily="{StaticResource RalewayRegular}" />
+                                                </Frame>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="2"
+                                                         Grid.ColumnSpan="4">
+                                                <Label Text="Correo electrónico"
+                                                       Style="{StaticResource NombreCampoPerfil}" />
+                                                <Frame Style="{StaticResource EntryFrame}"
+                                                       HeightRequest="40"
+                                                       BackgroundColor="White"
+                                                       x:Name="entryCorreoPerfil"
+                                                       Padding="15,0,0,0"
+                                                       Margin="0,5,0,10">
+                                                    <Custom:CustomEntryRenderer x:Name="txtCorreoPerfil"
+                                                                                FontFamily="{StaticResource RalewayRegular}"
+                                                                                Keyboard="Email" />
+                                                </Frame>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="3"
+                                                         Grid.ColumnSpan="4">
+                                                <Label Text="Nombre de usuario"
+                                                       Style="{StaticResource NombreCampoPerfil}" />
+                                                <Frame Style="{StaticResource EntryFrame}"
+                                                       HeightRequest="40"
+                                                       BackgroundColor="White"
+                                                       x:Name="entryUsuarioPerfil"
+                                                       Padding="15,0,0,0"
+                                                       Margin="0,5,0,10">
+                                                    <Custom:CustomEntryRenderer x:Name="txtUsuarioPerfil"
+                                                                                FontFamily="{StaticResource RalewayRegular}" />
+                                                </Frame>
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="4"
+                                                         Grid.ColumnSpan="4">
+                                                <Label Text="Contraseña"
+                                                       Style="{StaticResource NombreCampoPerfil}" />
+                                                <Frame Style="{StaticResource EntryFrame}"
+                                                       HeightRequest="40"
+                                                       BackgroundColor="White"
+                                                       x:Name="entryClavePerfil"
+                                                       Padding="15,0,0,0"
+                                                       Margin="0,5,0,0">
+                                                    <Custom:CustomEntryRenderer x:Name="txtClavePerfil"
+                                                                                FontFamily="{StaticResource RalewayRegular}"
+                                                                                IsPassword="True" />
+                                                </Frame>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Button Grid.Row="5"
+                                            x:Name="btnActualizarPerfil"
+                                            Clicked="btnActualizarPerfil_Clicked"
+                                            Text="Actualizar perfil"
+                                            Grid.Column="1"
+                                            Grid.RowSpan="8"
+                                            Grid.ColumnSpan="2"
+                                            Margin="0,10,0,0" 
+                                            Style="{StaticResource BtnActualizar}"/>
                                 </StackLayout>
                             </ScrollView>
                         </Grid>

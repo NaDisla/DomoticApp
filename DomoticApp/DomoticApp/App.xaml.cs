@@ -20,6 +20,7 @@ using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using DomoticApp.Views.Usuarios;
 using DomoticApp.DataHelpers;
+using Plugin.LocalNotifications;
 
 namespace DomoticApp
 {
@@ -33,7 +34,7 @@ namespace DomoticApp
         public AlertNetworkPage alertaVPN;
         private readonly HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
-        public string ipDevice, parteInicialCasa, parteInicialDevice, admin;
+        public string ipDevice, parteInicialCasa, parteInicialDevice, admin, content;
         public string[] numIPCasa, numIPDevice;
         private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
             textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red", 
@@ -44,6 +45,7 @@ namespace DomoticApp
         {
             InitializeComponent();
             DetectarLogin();
+            NotificationTinaco();
             /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else
@@ -89,6 +91,22 @@ namespace DomoticApp
                 {
                     AlertaVPN();
                 }
+            }
+        }
+
+        async void NotificationTinaco()
+        {
+            content = await client.GetStringAsync(urlTarjeta);
+            var cortando = content.Split(';');
+            string nivel = cortando[5];
+            int agua = int.Parse(nivel);
+            if (nivel == "06")
+            {
+                CrossLocalNotifications.Current.Show("Tinaco vacío", "El tinaco necesita llenarse.", 0);
+            }
+            else if(agua >= 10 && agua <= 40)
+            {
+                CrossLocalNotifications.Current.Show("Tinaco disminuyendo", "El tinaco está a punto de quedar vacío.", 0);
             }
         }
 

@@ -456,6 +456,28 @@
                 <Setter Property="HorizontalOptions"
                         Value="CenterAndExpand" />
             </Style>
+            <Style TargetType="Label" x:Key="NivelAgua">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor"
+                        Value="#166498"/>
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="Button"
+                   x:Key="BtnActualizar">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="BackgroundColor"
+                        Value="#166498" />
+                <Setter Property="CornerRadius"
+                        Value="15" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

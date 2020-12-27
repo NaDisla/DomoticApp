@@ -1,12 +1,111 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DomoticApp.Views.Tinaco.ControlTinacoPage">
+             x:Class="DomoticApp.Views.Tinaco.ControlTinacoPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <magic:GradientView VerticalOptions="FillAndExpand">
+                <magic:CssGradientSource>
+                    <![CDATA[
+                    repeating-linear-gradient(224deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),repeating-linear-gradient(134deg, rgba(4, 229, 71,0.08) 0px, rgba(4, 229, 71,0.08) 1px,transparent 1px, transparent 9px),linear-gradient(179deg, rgb(214,241,255),rgb(28,105,150))
+                    ]]>
+                </magic:CssGradientSource>
+            </magic:GradientView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.7*" />
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="0.9*" />
+                </Grid.RowDefinitions>
+                <ImageButton Style="{StaticResource BtnMenu}"
+                             x:Name="btnMenu" />
+                <Image Source="LogoPages.png"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,10,0,0" />
+                <Label Text="Tinaco"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TitlePage}" />
+                <Frame Grid.ColumnSpan="4"
+                       Grid.Row="2"
+                       Grid.RowSpan="4"
+                       Style="{StaticResource Panel}"
+                       x:Name="FrameContenido">
+                    <StackLayout>
+                        <Label Text="Nivel de agua actual"
+                               Style="{StaticResource FrameName}" />
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="45" />
+                            </Grid.RowDefinitions>
+                            <Image Source="tinaco.png"
+                                   Aspect="AspectFit"
+                                   Grid.Row="3"
+                                   Grid.ColumnSpan="2" />
+                            <Grid Grid.Row="3"
+                                  Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="0.2*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="40%"
+                                       x:Name="lblNivelAguaPorcentaje"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Style="{StaticResource NivelAgua}"
+                                       FontSize="19"/>
+                                <Label Text="Bajo"
+                                       x:Name="lblNivelAguaTexto"
+                                       Grid.Row="4"
+                                       Grid.Column="1"
+                                       FontSize="19"
+                                       Style="{StaticResource NivelAgua}"/>
+                            </Grid>
+                            <Button Grid.Row="5"
+                                    x:Name="btnActualizarNivelAgua"
+                                    Text="Actualizar nivel"
+                                    Grid.ColumnSpan="3"
+                                    Style="{StaticResource BtnActualizar}"
+                                    Clicked="btnActualizarNivelAgua_Clicked"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

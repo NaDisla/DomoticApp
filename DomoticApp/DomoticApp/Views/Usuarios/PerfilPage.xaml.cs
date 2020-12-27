@@ -1,4 +1,5 @@
 ﻿using DomoticApp.DataHelpers;
+using DomoticApp.Views.MasterMenu;
 using DomoticApp.Views.Monitoreo;
 using DomoticApp.Views.Popups;
 using Rg.Plugins.Popup.Services;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,6 +21,7 @@ namespace DomoticApp.Views.Usuarios
         public string _usuario { get; set; }
         string titleError, detailError, titleCorrect, detailCorrect, detailLoading, claveEncriptada;
         int userID;
+        public static string refreshUsuario;
         Models.Usuarios perfilUsuario;
         ResultsOperations results = new ResultsOperations();
         List<Models.Usuarios> usuarios;
@@ -29,6 +32,14 @@ namespace DomoticApp.Views.Usuarios
             _usuario = usuario;
             DatosUsuario();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
+            
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var height = mainDisplayInfo.Height;
+
+            if(height > 2000)
+            {
+                rowPerfil.Height = 490;
+            }
         }
 
         async void DatosUsuario()
@@ -68,6 +79,10 @@ namespace DomoticApp.Views.Usuarios
                     claveEncriptada = DataSecurity.Encrypt(txtClavePerfil.Text, "sblw-3hn8-sqoy19");
                     await data.UpdateUsuario(userID, txtNombreRealPerfil.Text, txtCorreoPerfil.Text, txtUsuarioPerfil.Text, claveEncriptada,
                     perfilUsuario.UsuarioRol, perfilUsuario.Acceso);
+                    refreshUsuario = txtNombreRealPerfil.Text;
+                    await SecureStorage.SetAsync("nombreUsuario", txtNombreRealPerfil.Text);
+                    MasterMenuHabitantePage.usuarioRefresh = txtNombreRealPerfil.Text;
+                    MasterMenuPage.usuarioRefresh = txtNombreRealPerfil.Text;
                     await PopupNavigation.RemovePageAsync(loading);
                     titleCorrect = "Perfil actualizado";
                     detailCorrect = "Se ha actualizado su perfl correctamente.";
@@ -81,7 +96,6 @@ namespace DomoticApp.Views.Usuarios
                 detailError = "Ha ocurrido un error procesando la actualización de datos. Intente nuevamente.";
                 await results.Unsuccess(titleError, detailError);
             }
-            
         }
     }
 }
