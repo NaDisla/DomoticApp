@@ -36,10 +36,9 @@ namespace DomoticApp.Views.Cocina
             SendArduinoRequest(urlLuz2, stateLuz2);
         }
 
-        private async void btnNevera_Clicked(object sender, EventArgs e)
+        private void btnNevera_Clicked(object sender, EventArgs e)
         {
-            
-            await Navigation.PushAsync(new NavigationPage(new FridgeSimulatorPage()));
+            LayoutNevera.IsVisible = true;
         }
 
         [Obsolete]

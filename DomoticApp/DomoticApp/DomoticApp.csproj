@@ -107,9 +107,6 @@
     <EmbeddedResource Update="Views\Sala\ControlSalaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SmartFridge\FridgeSimulatorPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Tinaco\ControlTinacoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -136,9 +133,6 @@
     </Compile>
     <Compile Update="Views\Popups\LoadingPage.xaml.cs">
       <DependentUpon>LoadingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SmartFridge\FridgeSimulatorPage.xaml.cs">
-      <DependentUpon>FridgeSimulatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Usuarios\GeneralLogin\GeneralLoginPage.xaml.cs">
       <DependentUpon>GeneralLoginPage.xaml</DependentUpon>
