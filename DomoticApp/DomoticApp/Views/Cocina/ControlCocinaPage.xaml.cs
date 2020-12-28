@@ -38,7 +38,8 @@ namespace DomoticApp.Views.Cocina
 
         private async void btnNevera_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new FridgeSimulatorPage());
+            
+            await Navigation.PushAsync(new NavigationPage(new FridgeSimulatorPage()));
         }
 
         [Obsolete]

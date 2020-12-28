@@ -4,6 +4,10 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Plugin.LocalNotifications;
+using Android.Content;
+using Android.Util;
+using Android.Gms.Common;
+using Xamarin.Essentials;
 
 namespace DomoticApp.Droid
 {
@@ -19,12 +23,13 @@ namespace DomoticApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            
+            Rg.Plugins.Popup.Popup.Init(this);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.logoNotifica;
+            //LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.logoNotifica;
 
             LoadApplication(new App());
         }

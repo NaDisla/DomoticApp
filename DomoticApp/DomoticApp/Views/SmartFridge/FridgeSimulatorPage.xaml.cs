@@ -14,7 +14,7 @@ namespace DomoticApp.Views.SmartFridge
     {
         public FridgeSimulatorPage()
         {
-            WebView webview = new WebView
+            /*WebView webview = new WebView
             {
                 Source = "http://publish.samsungsimulator.com/simulator/ac2b0789-5ad3-4932-b286-11e46e8e756c/",
                 VerticalOptions = LayoutOptions.FillAndExpand
@@ -24,13 +24,13 @@ namespace DomoticApp.Views.SmartFridge
                 Children = {
                      webview
                 }
-            };
-            //btnMenu.Clicked += (s, e) => MainPage.inicio();
+            };*/
+            btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            NavigationPage.SetHasNavigationBar(this, false);
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    NavigationPage.SetHasNavigationBar(this, false);
+        //}
     }
 }

@@ -45,7 +45,7 @@ namespace DomoticApp
         {
             InitializeComponent();
             DetectarLogin();
-            NotificationTinaco();
+            //NotificationTinaco();
             /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
                 ValidandoRedes();
             else
