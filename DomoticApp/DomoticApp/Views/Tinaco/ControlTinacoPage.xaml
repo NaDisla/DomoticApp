@@ -83,14 +83,12 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="40%"
-                                       x:Name="lblNivelAguaPorcentaje"
+                                <Label x:Name="lblNivelAguaPorcentaje"
                                        Grid.Row="2"
                                        Grid.Column="1"
                                        Style="{StaticResource NivelAgua}"
                                        FontSize="19"/>
-                                <Label Text="Bajo"
-                                       x:Name="lblNivelAguaTexto"
+                                <Label x:Name="lblNivelAguaTexto"
                                        Grid.Row="4"
                                        Grid.Column="1"
                                        FontSize="19"

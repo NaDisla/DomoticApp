@@ -25,43 +25,49 @@ namespace DomoticApp.Views.Tinaco
             InitializeComponent();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
-
-        private async void btnActualizarNivelAgua_Clicked(object sender, EventArgs e)
+        async void GetNivel()
         {
             content = await client.GetStringAsync(urlGeneral);
             if (content != null)
             {
                 string[] cortando = content.Split(';');
                 nivelAgua = cortando[5];
-                if(nivelAgua == "06")
+                aguaNivel = int.Parse(nivelAgua);
+
+                if (aguaNivel == 06)
                 {
                     lblNivelAguaPorcentaje.Text = "0%";
-                }
-                else
-                {
-                    lblNivelAguaPorcentaje.Text = $"{nivelAgua}%";
-                }
-                
-                aguaNivel = int.Parse(nivelAgua);
-                if (aguaNivel >= 80 && aguaNivel <= 100)
-                {
-                    lblNivelAguaTexto.Text = "Alto";
-                }
-                else if (aguaNivel >= 79 && aguaNivel <= 50)
-                {
-                    lblNivelAguaTexto.Text = "Medio";
-                }
-                else if(aguaNivel == 06)
-                {
                     lblNivelAguaTexto.Text = "Vacío";
                     CrossLocalNotifications.Current.Show("Tinaco vacío", "El tinaco necesita llenarse.", 0);
                 }
-                else
+                else 
                 {
-                    lblNivelAguaTexto.Text = "Bajo";
-                    CrossLocalNotifications.Current.Show("Tinaco disminuyendo", "El tinaco está a punto de quedar vacío.", 0);
+                    lblNivelAguaPorcentaje.Text = $"{nivelAgua}%";
+                    if (aguaNivel >= 80 && aguaNivel <= 100)
+                    {
+                        lblNivelAguaTexto.Text = "Alto";
+                    }
+                    else if (aguaNivel >= 79 && aguaNivel <= 50)
+                    {
+                        lblNivelAguaTexto.Text = "Medio";
+                    }
+                    else
+                    {
+                        lblNivelAguaTexto.Text = "Bajo";
+                        CrossLocalNotifications.Current.Show("Tinaco disminuyendo", "El tinaco está a punto de quedar vacío.", 0);
+                    }
+
                 }
             }
+        }
+        protected override void OnAppearing()
+        {
+            GetNivel();
+            base.OnAppearing();
+        }
+        private void btnActualizarNivelAgua_Clicked(object sender, EventArgs e)
+        {
+            GetNivel();
         }
     }
 }
