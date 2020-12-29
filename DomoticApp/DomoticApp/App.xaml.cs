@@ -3,7 +3,6 @@ using Plugin.SharedTransitions;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using DomoticApp;
 using Rg.Plugins.Popup.Services;
 using DomoticApp.Views.Popups;
 using Plugin.Connectivity;
@@ -34,7 +33,7 @@ namespace DomoticApp
         public AlertNetworkPage alertaVPN;
         private readonly HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
-        public string ipDevice, parteInicialCasa, parteInicialDevice, admin, content;
+        public string ipDevice, parteInicialCasa, parteInicialDevice, admin, content, MyIp;
         public string[] numIPCasa, numIPDevice;
         private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
             textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red", 
@@ -44,12 +43,9 @@ namespace DomoticApp
         public App()
         {
             InitializeComponent();
-            DetectarLogin();
+            CheckConnection();
+            
             //NotificationTinaco();
-            /*if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
-                ValidandoRedes();
-            else
-                RedIncorrecta();*/
         }
         [Obsolete]
         void DetectarLogin()
@@ -70,14 +66,25 @@ namespace DomoticApp
                 MainPage = new NavigationPage(new GeneralLoginPage());
             }
         }
+
         [Obsolete]
-        void ValidandoRedes()
+        void CheckConnection()
         {
-            var deviceIP = Dns.GetHostAddresses(Dns.GetHostName()).FirstOrDefault();
+            if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
+                ValidandoRedes();
+            else
+                RedIncorrecta();
+        }
+
+        [Obsolete]
+        async void ValidandoRedes()
+        {
+            var deviceIP = Dns.GetHostAddresses(Dns.GetHostName()).LastOrDefault();
 
             if (deviceIP != null)
             {
                 ipDevice = deviceIP.ToString();
+
                 numIPCasa = ipCasa.Split('.');
                 numIPDevice = ipDevice.Split('.');
                 parteInicialCasa = numIPCasa[0] + numIPCasa[1] + numIPCasa[2];
@@ -86,14 +93,27 @@ namespace DomoticApp
                 if (parteInicialDevice == parteInicialCasa && client.GetStringAsync(urlTarjeta) != null)
                 {
                     RedCorrecta();
+                    DetectarLogin();
                 }
                 else
                 {
                     AlertaVPN();
+                    
+                }
+                var result = AlertNetworkPage.res;
+                if (result == 1)
+                {
+                    await PopupNavigation.RemovePageAsync(alertaVPN);
+                    CheckConnection();
+                }
+                else if(result == 2)
+                {
+                    await PopupNavigation.RemovePageAsync(alertaVPN);
+                    CheckConnection();
                 }
             }
         }
-
+        
         async void NotificationTinaco()
         {
             content = await client.GetStringAsync(urlTarjeta);
@@ -109,7 +129,7 @@ namespace DomoticApp
                 CrossLocalNotifications.Current.Show("Tinaco disminuyendo", "El tinaco está a punto de quedar vacío.", 0);
             }
         }
-
+        
         [Obsolete]
         public async void RedCorrecta()
         {
@@ -136,8 +156,15 @@ namespace DomoticApp
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(alertaVPN = new AlertNetworkPage());
         }
+        
         protected override void OnStart()
         {
+            
+        }
+
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            
         }
 
         protected override void OnSleep()

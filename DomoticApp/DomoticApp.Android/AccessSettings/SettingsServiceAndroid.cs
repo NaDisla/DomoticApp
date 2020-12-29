@@ -19,18 +19,34 @@ namespace DomoticApp.Droid.AccessSettings
 {
     public class SettingsServiceAndroid : IServiceSettings
     {
+        public SettingsServiceAndroid()
+        {
+        }
+
         [Obsolete]
-        public void OpenSettings()
+        public static int OpenSettings()
         {
             int sdkVersion = int.Parse(Build.VERSION.Sdk);
             if(sdkVersion >= 20 && sdkVersion <= 25 )
             {
                 Forms.Context.StartActivity(new Intent(Android.Provider.Settings.ActionWirelessSettings));
+                return 1;
             }
             else if(sdkVersion >= 26 && sdkVersion <= 30)
             {
                 Forms.Context.StartActivity(new Intent(Android.Provider.Settings.ActionVpnSettings));
+                return 2;
             }
+            else
+            {
+                return 0;
+            }
+        }
+
+        [Obsolete]
+        int IServiceSettings.OpenSettings()
+        {
+            return OpenSettings();
         }
     }
 }

@@ -13,6 +13,8 @@ namespace DomoticApp.Views.Popups
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AlertNetworkPage : PopupPage
     {
+        public static int res;
+
         public AlertNetworkPage()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace DomoticApp.Views.Popups
 
         private void btnAjustesVPN_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IServiceSettings>().OpenSettings();
+           res = DependencyService.Get<IServiceSettings>().OpenSettings();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using DomoticApp.DataHelpers;
 using DomoticApp.Views.Monitoreo;
-using DomoticApp.Views.SmartFridge;
 using System;
 using System.Net.Http;
 using Xamarin.Forms;
