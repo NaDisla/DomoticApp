@@ -21,9 +21,10 @@ namespace DomoticApp.Views.Popups
         }
 
         [Obsolete]
-        private async void btnCerrarVentana_Clicked(object sender, EventArgs e)
+        private void btnCerrarVentana_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.PopAsync(true);
+            Environment.Exit(0);
+            //await PopupNavigation.PopAsync(true);
         }
     }
 }

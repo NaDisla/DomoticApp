@@ -44,8 +44,6 @@ namespace DomoticApp
         {
             InitializeComponent();
             CheckConnection();
-            
-            //NotificationTinaco();
         }
         [Obsolete]
         void DetectarLogin()
@@ -84,32 +82,29 @@ namespace DomoticApp
             if (deviceIP != null)
             {
                 ipDevice = deviceIP.ToString();
-
                 numIPCasa = ipCasa.Split('.');
                 numIPDevice = ipDevice.Split('.');
                 parteInicialCasa = numIPCasa[0] + numIPCasa[1] + numIPCasa[2];
                 parteInicialDevice = numIPDevice[0] + numIPDevice[1] + numIPDevice[2];
 
-                if (parteInicialDevice == parteInicialCasa && client.GetStringAsync(urlTarjeta) != null)
+                try
                 {
-                    RedCorrecta();
-                    DetectarLogin();
+                    content = await client.GetStringAsync(urlTarjeta);
+                    if (parteInicialDevice == parteInicialCasa && content != null)
+                    {
+                        RedCorrecta();
+                        DetectarLogin();
+                    }
+                    else if (parteInicialDevice != parteInicialCasa && content != null)
+                    {
+                        AlertaVPN();
+                        DetectarLogin();
+                    }
                 }
-                else
+                catch (Exception)
                 {
                     AlertaVPN();
-                    
-                }
-                var result = AlertNetworkPage.res;
-                if (result == 1)
-                {
-                    await PopupNavigation.RemovePageAsync(alertaVPN);
-                    CheckConnection();
-                }
-                else if(result == 2)
-                {
-                    await PopupNavigation.RemovePageAsync(alertaVPN);
-                    CheckConnection();
+                    DetectarLogin();
                 }
             }
         }
@@ -158,13 +153,7 @@ namespace DomoticApp
         }
         
         protected override void OnStart()
-        {
-            
-        }
-
-        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            
+        {   
         }
 
         protected override void OnSleep()
