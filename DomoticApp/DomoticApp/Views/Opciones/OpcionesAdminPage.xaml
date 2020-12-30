@@ -23,7 +23,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.6*" />
                     <RowDefinition Height="0.6*" />
-                    <RowDefinition Height="150" />
+                    <RowDefinition Height="120" />
                     <RowDefinition Height="0.3*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -46,7 +46,8 @@
                        Style="{StaticResource Panel}">
                     <StackLayout>
                         <Label Text="Mantenimiento"
-                               Style="{StaticResource FrameName}" />
+                               Style="{StaticResource FrameName}" 
+                               x:Name="lblTitleFrameMantenimiento"/>
                         <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -60,13 +61,14 @@
                                     Clicked="btnUsuarios_Clicked"
                                     ImageSource="usuarios.png"
                                     Style="{StaticResource BtnIconoIzquierda}"
-                                    Padding="20,8,0,5"/>
+                                    Padding="20,8,15,5"/>
                             <Button Text="Accesos"
                                     x:Name="btnAccesos"
                                     Clicked="btnAccesos_Clicked"
                                     ImageSource="accesos.png"
                                     Grid.Column="1"
-                                    Style="{StaticResource BtnIconoIzquierda}" />
+                                    Style="{StaticResource BtnIconoIzquierda}"
+                                    Padding="20,8,15,5"/>
                         </Grid>
                     </StackLayout>
                 </Frame>
@@ -76,7 +78,8 @@
                        Style="{StaticResource Panel}">
                     <StackLayout>
                         <Label Text="Log de actividades"
-                               Style="{StaticResource FrameName}" />
+                               Style="{StaticResource FrameName}"
+                               x:Name="lblTitleFrameLog"/>
                         <Grid ColumnSpacing="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />

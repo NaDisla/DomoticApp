@@ -78,7 +78,7 @@ namespace DomoticApp.Views.Usuarios
                 {
                     claveEncriptada = DataSecurity.Encrypt(txtClavePerfil.Text, "sblw-3hn8-sqoy19");
                     await data.UpdateUsuario(userID, txtNombreRealPerfil.Text, txtCorreoPerfil.Text, txtUsuarioPerfil.Text, claveEncriptada,
-                    perfilUsuario.UsuarioRol, perfilUsuario.Acceso);
+                    perfilUsuario.UsuarioRol, perfilUsuario.Acceso, perfilUsuario.UsuarioEstado);
                     refreshUsuario = txtNombreRealPerfil.Text;
                     await SecureStorage.SetAsync("nombreUsuario", txtNombreRealPerfil.Text);
                     MasterMenuHabitantePage.usuarioRefresh = txtNombreRealPerfil.Text;

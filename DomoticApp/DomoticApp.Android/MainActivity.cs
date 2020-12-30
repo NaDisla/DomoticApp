@@ -29,7 +29,7 @@ namespace DomoticApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            //LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.logoNotifica;
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.logoNotifica;
 
             LoadApplication(new App());
         }

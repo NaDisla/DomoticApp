@@ -7,43 +7,42 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DomoticApp.Views.Accesos
+namespace DomoticApp.Views.Usuarios
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccesosPage : ContentPage
+    public partial class ListaUsuariosPage : ContentPage
     {
         GeneralData data = new GeneralData();
         public ObservableCollection<Models.Usuarios> ListUsuarios { get; set; }
-        private const string urlGeneral = "http://10.0.0.17", urlToken1 = "http://10.0.0.17/desactivar-token-1", 
-            urlToken2 = "http://10.0.0.17/desactivar-token-2", urlTarjeta1 = "http://10.0.0.17/desactivar-tarjeta-1",
-            urlTarjeta2 = "http://10.0.0.17/desactivar-tarjeta-2";
+        private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleAlert, detailAlert, acceso, titleError, detailError, titleCorrect, detailCorrect;
+        private string content, titleAlert, detailAlert, titleError, detailError, titleCorrect, detailCorrect,
+            detailLoading;
         public static Models.Usuarios selectedUser;
         public static List<Models.Usuarios> getUsuarios;
         ResultsOperations results = new ResultsOperations();
 
-        public AccesosPage()
+        public ListaUsuariosPage()
         {
             InitializeComponent();
             CustomFont();
             GetUsersData();
+            dataGrid.Columns[3].IsHidden = true;
             dataGrid.Columns[4].IsHidden = true;
             dataGrid.Columns[5].IsHidden = true;
-            dataGrid.Columns[6].IsHidden = true;
-            dataGrid.Columns[7].IsHidden = true;
             btnMenu.Clicked += (s, e) => MainPage.inicio();
-            MessagingCenter.Subscribe<ListaAccesosPage>(this, "RefreshAccesosPage", (sender) => {
+            MessagingCenter.Subscribe<ListaUsuariosPage>(this, "RefreshUsuariosPage", (sender) => {
                 GetUsersData();
             });
         }
 
         private void dataGrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
         {
-            if(selectedUser == null)
+            if (selectedUser == null)
             {
                 selectedUser = (e.AddedItems[0] as Models.Usuarios);
             }
@@ -136,75 +135,47 @@ namespace DomoticApp.Views.Accesos
         }
 
         [Obsolete]
-        private async void btnDesactivarTokenTarjeta_Clicked(object sender, EventArgs e)
+        private async void btnDesactivarUsuario_Clicked(object sender, EventArgs e)
         {
             if (selectedUser == null)
             {
                 titleAlert = "Seleccione un usuario";
-                detailAlert = "Debe seleccionar el usuario al que desea desactivar el acceso de tarjeta o token.";
+                detailAlert = "Debe seleccionar el usuario que desea desactivar o activar.";
                 await results.Alert(titleAlert, detailAlert);
             }
-            else if(selectedUser.Acceso == "Clave teclado")
+            else if (selectedUser.UsuarioEstado == "Activo")
             {
-                titleAlert = "Usuario incorrecto";
-                detailAlert = "Este usuario no tiene una tarjeta o token como acceso.";
-                await results.Alert(titleAlert, detailAlert);
-            }
-            else
-            {
-                acceso = selectedUser.Acceso;
-                switch (acceso)
-                {
-                    case "Tarjeta 1":
-                        DesactivarTarjetaToken(urlTarjeta1);
-                        break;
+                detailLoading = "Desactivando usuario...";
+                LoadingPage loading = new LoadingPage(detailLoading);
+                await PopupNavigation.PushAsync(loading);
+                await Task.Delay(1000);
 
-                    case "Tarjeta 2":
-                        DesactivarTarjetaToken(urlTarjeta2);
-                        break;
+                await data.UpdateUsuario(selectedUser.UsuarioID, selectedUser.UsuarioNombreReal, selectedUser.UsuarioCorreo, selectedUser.UsuarioNombre,
+                    selectedUser.UsuarioClave, selectedUser.UsuarioRol, selectedUser.Acceso, "Inactivo");
+                MessagingCenter.Send(this, "RefreshUsuariosPage");
 
-                    case "Token 1":
-                        DesactivarTarjetaToken(urlToken1);
-                        break;
-
-                    case "Token 2":
-                        DesactivarTarjetaToken(urlToken2);
-                        break;
-                }
-            }
-        }
-
-        [Obsolete]
-        async void DesactivarTarjetaToken(string url)
-        {
-            content = await client.GetStringAsync(url);
-            if(content != null)
-            {
-                titleCorrect = "Acceso desactivado";
-                detailCorrect = "Se ha desactivado el acceso correctamente.";
+                await PopupNavigation.RemovePageAsync(loading);
+                titleCorrect = "Usuario desactivado";
+                detailCorrect = "Se ha desactivado el usuario correctamente.";
                 await results.Success(titleCorrect, detailCorrect);
+                selectedUser = null;
             }
-            else
+            else if (selectedUser.UsuarioEstado == "Inactivo")
             {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
-            }
-        }
+                detailLoading = "Activando usuario...";
+                LoadingPage loading = new LoadingPage(detailLoading);
+                await PopupNavigation.PushAsync(loading);
+                await Task.Delay(1000);
+                
+                await data.UpdateUsuario(selectedUser.UsuarioID, selectedUser.UsuarioNombreReal, selectedUser.UsuarioCorreo, selectedUser.UsuarioNombre,
+                    selectedUser.UsuarioClave, selectedUser.UsuarioRol, selectedUser.Acceso, "Activo");
+                MessagingCenter.Send(this, "RefreshUsuariosPage");
 
-        [Obsolete]
-        private async void btnAsignarAcceso_Clicked(object sender, EventArgs e)
-        {
-            if(selectedUser == null)
-            {
-                titleAlert = "Seleccione un usuario";
-                detailAlert = "Debe seleccionar el usuario al que desea asignarle el acceso.";
-                await results.Alert(titleAlert, detailAlert);
-            }
-            else
-            {
-                ListaAccesosPage listaAccesos = new ListaAccesosPage();
-                await PopupNavigation.PushAsync(listaAccesos);
+                await PopupNavigation.RemovePageAsync(loading);
+                titleCorrect = "Usuario activado";
+                detailCorrect = "Se ha activado el usuario correctamente.";
+                await results.Success(titleCorrect, detailCorrect);
+                selectedUser = null;
             }
         }
     }

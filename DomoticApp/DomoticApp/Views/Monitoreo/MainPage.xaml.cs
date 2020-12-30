@@ -18,6 +18,8 @@ using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
+using DomoticApp.DataHelpers;
+using DomoticApp.Models;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -26,6 +28,8 @@ namespace DomoticApp.Views.Monitoreo
     {
         public static Action inicio { get; set; }
         public int _stateReceived { get; set; }
+        GeneralData data = new GeneralData();
+        List<ControlesAlexa> controlesAlexa;
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
@@ -39,14 +43,25 @@ namespace DomoticApp.Views.Monitoreo
         protected override void OnAppearing()
         {
             GetStateModules();
-
             base.OnAppearing();
-
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        void GetStateModules()
+        protected override void OnDisappearing()
         {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
+        }
+
+        async void GetStateModules()
+        {
+            controlesAlexa = await data.GetControlesAlexa();
+            var alexaDormitorio = GetStateAlexaDormitorio();
             var dormitorio = GetStateDormitorio();
             var cocina = GetStateCocina();
             var bath = GetStateBath();
@@ -55,13 +70,30 @@ namespace DomoticApp.Views.Monitoreo
             var recibidor = GetStateRecibidor();
             var sala = GetStateSala();
 
-            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
+            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala || alexaDormitorio)
             {
                 lblTextoActivos.IsVisible = false;
             }
             else
             {
                 lblTextoActivos.IsVisible = true;
+            }
+        }
+
+        bool GetStateAlexaDormitorio()
+        {
+            var abanicoDormitorio = controlesAlexa.Select(x => x.AbanicoDormitorio).FirstOrDefault();
+            var luz1 = controlesAlexa.Select(x => x.LuzDormitorio1).FirstOrDefault();
+            var luz2 = controlesAlexa.Select(x => x.LuzDormitorio2).FirstOrDefault();
+
+            if(abanicoDormitorio == 1 || luz1 == 1 || luz2 == 1)
+            {
+                btnDormitorio.IsVisible = true;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -180,17 +212,6 @@ namespace DomoticApp.Views.Monitoreo
             {
                 return false;
             }
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
-        }
-
-        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
         }
 
         private void btnDormitorio_Clicked(object sender, EventArgs e)

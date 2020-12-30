@@ -1,8 +1,6 @@
 ﻿using DomoticApp.Views.MasterMenu;
-using Plugin.SharedTransitions;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Rg.Plugins.Popup.Services;
 using DomoticApp.Views.Popups;
 using Plugin.Connectivity;
@@ -14,11 +12,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Usuarios.GeneralLogin;
-using DomoticApp.Views.Usuarios;
-using DomoticApp.DataHelpers;
 using Plugin.LocalNotifications;
 
 namespace DomoticApp
@@ -29,16 +23,16 @@ namespace DomoticApp
         private const string ipCasa = "10.0.0.17";
         public LoadingPage loadingRed;
         public CorrectValidationPage redCorrecta;
-        public IncorrectValidationPage redIncorrecta;
+        public IncorrectNetworkPage redIncorrecta;
         public AlertNetworkPage alertaVPN;
-        private readonly HttpClient client = new HttpClient();
+        private HttpClient client = new HttpClient();
         IEnumerable<ConnectionProfile> connectionProfile = Connectivity.ConnectionProfiles;
         public string ipDevice, parteInicialCasa, parteInicialDevice, admin, content, MyIp;
         public string[] numIPCasa, numIPDevice;
         private const string textLoadingDetail = "Comprobando conexión...", textTitleCorrect = "¡Bienvenido(a)! - Red conectada",
-            textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red", 
+            textDetailCorrect = "Se encuentra conectado a la red de su vivienda.", textTitleError = "No hay conexión de red",
             textDetailError = "No se ha detectado una conexión de internet.";
-        
+
         [Obsolete]
         public App()
         {
@@ -69,16 +63,20 @@ namespace DomoticApp
         void CheckConnection()
         {
             if (connectionProfile.Contains(ConnectionProfile.WiFi) || connectionProfile.Contains(ConnectionProfile.Cellular))
+            {
                 ValidandoRedes();
+                DetectarLogin();
+            }
             else
+            {
                 RedIncorrecta();
+            }
         }
 
         [Obsolete]
         async void ValidandoRedes()
         {
             var deviceIP = Dns.GetHostAddresses(Dns.GetHostName()).LastOrDefault();
-
             if (deviceIP != null)
             {
                 ipDevice = deviceIP.ToString();
@@ -87,28 +85,28 @@ namespace DomoticApp
                 parteInicialCasa = numIPCasa[0] + numIPCasa[1] + numIPCasa[2];
                 parteInicialDevice = numIPDevice[0] + numIPDevice[1] + numIPDevice[2];
 
-                try
+                if (parteInicialCasa == parteInicialDevice)
                 {
                     content = await client.GetStringAsync(urlTarjeta);
-                    if (parteInicialDevice == parteInicialCasa && content != null)
+                    if (content != null)
                     {
                         RedCorrecta();
-                        DetectarLogin();
+                        NotificationTinaco();
                     }
-                    else if (parteInicialDevice != parteInicialCasa && content != null)
+                    else
                     {
                         AlertaVPN();
-                        DetectarLogin();
                     }
+                    
                 }
-                catch (Exception)
+                else if (parteInicialCasa != parteInicialDevice)
                 {
                     AlertaVPN();
                     DetectarLogin();
                 }
             }
         }
-        
+
         async void NotificationTinaco()
         {
             content = await client.GetStringAsync(urlTarjeta);
@@ -119,12 +117,12 @@ namespace DomoticApp
             {
                 CrossLocalNotifications.Current.Show("Tinaco vacío", "El tinaco necesita llenarse.", 0);
             }
-            else if(agua >= 10 && agua <= 40)
+            else if (agua >= 10 && agua <= 40)
             {
                 CrossLocalNotifications.Current.Show("Tinaco disminuyendo", "El tinaco está a punto de quedar vacío.", 0);
             }
         }
-        
+
         [Obsolete]
         public async void RedCorrecta()
         {
@@ -140,7 +138,7 @@ namespace DomoticApp
             await PopupNavigation.PushAsync(loadingRed = new LoadingPage(textLoadingDetail));
             await Task.Delay(2500);
             await PopupNavigation.RemovePageAsync(loadingRed);
-            await PopupNavigation.PushAsync(redIncorrecta = new IncorrectValidationPage(textTitleError, textDetailError));
+            await PopupNavigation.PushAsync(redIncorrecta = new IncorrectNetworkPage(textTitleError, textDetailError));
         }
 
         [Obsolete]
@@ -151,9 +149,9 @@ namespace DomoticApp
             await PopupNavigation.RemovePageAsync(loadingRed);
             await PopupNavigation.PushAsync(alertaVPN = new AlertNetworkPage());
         }
-        
+
         protected override void OnStart()
-        {   
+        {
         }
 
         protected override void OnSleep()

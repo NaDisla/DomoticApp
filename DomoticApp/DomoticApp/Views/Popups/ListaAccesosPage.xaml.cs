@@ -63,7 +63,7 @@ namespace DomoticApp.Views.Popups
                 {
                     await data.UpdateUsuario(AccesosPage.selectedUser.UsuarioID, AccesosPage.selectedUser.UsuarioNombreReal,
                     AccesosPage.selectedUser.UsuarioCorreo, AccesosPage.selectedUser.UsuarioNombre, AccesosPage.selectedUser.UsuarioClave,
-                    AccesosPage.selectedUser.UsuarioRol, accesoAsignar);
+                    AccesosPage.selectedUser.UsuarioRol, accesoAsignar, AccesosPage.selectedUser.UsuarioEstado);
                     MessagingCenter.Send(this, "RefreshAccesosPage");
                     usuario = AccesosPage.selectedUser.UsuarioNombreReal;
                     await PopupNavigation.PopAsync(true);

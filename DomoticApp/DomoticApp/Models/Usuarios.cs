@@ -9,5 +9,6 @@
         public string UsuarioCorreo { get; set; }
         public string UsuarioClave { get; set; }
         public string Acceso { get; set; }
+        public string UsuarioEstado { get; set; }
     }
 }

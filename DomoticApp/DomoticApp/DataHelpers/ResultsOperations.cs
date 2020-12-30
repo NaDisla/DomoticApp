@@ -7,8 +7,6 @@ namespace DomoticApp.DataHelpers
 {
     public class ResultsOperations
     {
-        string titleAlert, detailAlert;
-
         [Obsolete]
         public async Task Alert(string titleAlert, string detailAlert)
         {

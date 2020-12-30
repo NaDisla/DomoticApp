@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DomoticApp.Views.Popups
@@ -21,10 +16,9 @@ namespace DomoticApp.Views.Popups
         }
 
         [Obsolete]
-        private void btnCerrarVentana_Clicked(object sender, EventArgs e)
+        private async void btnCerrarVentana_Clicked(object sender, EventArgs e)
         {
-            Environment.Exit(0);
-            //await PopupNavigation.PopAsync(true);
+            await PopupNavigation.PopAsync(true);
         }
     }
 }

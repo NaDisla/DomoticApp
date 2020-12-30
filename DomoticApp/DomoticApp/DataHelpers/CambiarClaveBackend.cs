@@ -259,7 +259,8 @@ namespace DomoticApp.DataHelpers
                         string rolUsuario = infoUsuario.UsuarioRol;
                         string correoUsuario = infoUsuario.UsuarioCorreo;
                         string accesoUsuario = infoUsuario.Acceso;
-                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario, accesoUsuario);
+                        string estadoUsuario = infoUsuario.UsuarioEstado;
+                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario, accesoUsuario, estadoUsuario);
                         await PopupNavigation.RemovePageAsync(loading);
                         titleCorrect = "Contraseña actualizada";
                         detailCorrect = "Se ha cambiado la contraseña exitosamente.";

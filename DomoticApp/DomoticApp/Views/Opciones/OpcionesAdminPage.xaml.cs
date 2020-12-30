@@ -1,5 +1,6 @@
 ﻿using DomoticApp.Views.Accesos;
 using DomoticApp.Views.Monitoreo;
+using DomoticApp.Views.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,14 @@ namespace DomoticApp.Views.Opciones
             if(height <= 2000)
             {
                 lblTitlePage.FontSize = 17;
+                lblTitleFrameMantenimiento.FontSize = 17;
+                lblTitleFrameLog.FontSize = 17;
             }
         }
 
-        private void btnUsuarios_Clicked(object sender, EventArgs e)
+        private async void btnUsuarios_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new ListaUsuariosPage());
         }
 
         private async void btnAccesos_Clicked(object sender, EventArgs e)

@@ -24,7 +24,22 @@ namespace DomoticApp.DataHelpers
                     UsuarioCorreo = user.Object.UsuarioCorreo,
                     UsuarioNombre = user.Object.UsuarioNombre,
                     UsuarioClave = user.Object.UsuarioClave,
-                    UsuarioRol = user.Object.UsuarioRol
+                    UsuarioRol = user.Object.UsuarioRol,
+                    UsuarioEstado = user.Object.UsuarioEstado
+                }).ToList();
+        }
+
+        public async Task<List<ControlesAlexa>> GetControlesAlexa()
+        {
+            return (await client.Child("ControlesAlexa").OnceAsync<ControlesAlexa>()).Select(
+                alexa => new ControlesAlexa
+                {
+                    AbanicoDormitorio = alexa.Object.AbanicoDormitorio,
+                    AbanicoSala = alexa.Object.AbanicoSala,
+                    LuzDormitorio1 = alexa.Object.LuzDormitorio1,
+                    LuzDormitorio2 = alexa.Object.LuzDormitorio1,
+                    LuzSala1 = alexa.Object.LuzSala1,
+                    LuzSala2 = alexa.Object.LuzSala2
                 }).ToList();
         }
 
@@ -49,7 +64,8 @@ namespace DomoticApp.DataHelpers
                     UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
                     UsuarioRol = "Administrador",
-                    Acceso = "null"
+                    Acceso = "null",
+                    UsuarioEstado = "Activo"
                  });
             }
             else
@@ -62,7 +78,8 @@ namespace DomoticApp.DataHelpers
                     UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
                     UsuarioRol = "Habitante",
-                    Acceso = "null"
+                    Acceso = "null",
+                    UsuarioEstado = "Activo"
                 });
             }
         }
@@ -96,7 +113,7 @@ namespace DomoticApp.DataHelpers
         }
         
         public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave, 
-            string rolUsuario, string acceso)
+            string rolUsuario, string acceso, string estado)
         {
             var claveNueva = (await client.Child("Usuarios").OnceAsync<Usuarios>()).
                 Where(x => x.Object.UsuarioID == idUsuario).FirstOrDefault();
@@ -109,7 +126,8 @@ namespace DomoticApp.DataHelpers
                 UsuarioNombre = nombreUsuario,
                 UsuarioClave = nuevaClave,
                 UsuarioRol = rolUsuario,
-                Acceso = acceso
+                Acceso = acceso,
+                UsuarioEstado = estado
             });
         }
     }
