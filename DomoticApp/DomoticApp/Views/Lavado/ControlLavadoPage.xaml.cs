@@ -16,9 +16,11 @@ namespace DomoticApp.Views.Lavado
     {
         public static int stateLuz = 0;
         private const string urlLuz = "http://10.0.0.17/luz-lavadero";
+        private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
         private string content, titleError, detailError;
-
+        string humedad;
+        int aguaNivel;
         SignalRClient serverClient;
         ResultsOperations results = new ResultsOperations();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
@@ -26,6 +28,11 @@ namespace DomoticApp.Views.Lavado
         public ControlLavadoPage()
         {
             InitializeComponent();
+            if (btnLuz.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz);
+            }
+            GetNivel();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -53,6 +60,24 @@ namespace DomoticApp.Views.Lavado
             cambioRed.NetworkChanged(e);
         }
 
+        async void GetNivel()
+        {
+            content = await client.GetStringAsync(urlGeneral);
+            if (content != null)
+            {
+                string[] cortando = content.Split(';');
+                humedad = cortando[6];
+                if (humedad.Contains("�"))
+                {
+                    lblHum.Text = "8.00%";
+                }
+                else
+                {
+                    lblHum.Text = $"{humedad}%";
+                }
+            }
+        }
+
         [Obsolete]
         private void btnLuz_Clicked(object sender, EventArgs e)
         {
@@ -68,19 +93,15 @@ namespace DomoticApp.Views.Lavado
                 if (url == urlLuz && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
                 else if (url == urlLuz && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
             }
         }
     }

@@ -23,6 +23,18 @@ namespace DomoticApp.Views.Recibidor
         public ControlRecibidorPage()
         {
             InitializeComponent();
+            if (btnLuz1.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz1);
+            }
+            else if (btnLuz2.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz2);
+            }
+            else if (btnLuz3.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz3);
+            }
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -77,31 +89,37 @@ namespace DomoticApp.Views.Recibidor
                 if (url == urlLuz1 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 else if (url == urlLuz1 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 else if (url == urlLuz2 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if (url == urlLuz2 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if (url == urlLuz3 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz3 = state;
                 }
                 else if (url == urlLuz3 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz3 = state;
                 }
             }

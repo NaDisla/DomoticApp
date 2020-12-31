@@ -32,12 +32,20 @@ namespace DomoticApp.Views.Dormitorio
         {
             InitializeComponent();
             DatosTermicos();
-            /*if (btnLuz1.IsPressed == false)
+            
+            if (btnLuz1.IsPressed == false)
+            {
                 serverClient = new SignalRClient(btnLuz1);
+            }
             else if (btnLuz2.IsPressed == false)
+            {
                 serverClient = new SignalRClient(btnLuz2);
+            }
             else if (btnAbanico.IsPressed == false)
-                serverClient = new SignalRClient(btnAbanico);*/
+            {
+                serverClient = new SignalRClient(btnAbanico);
+            }
+
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
         protected override bool OnBackButtonPressed()
@@ -107,46 +115,40 @@ namespace DomoticApp.Views.Dormitorio
             {
                 if (contentUrl == urlAbanico && state == 0)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
                 }
                 else if (contentUrl == urlAbanico && state == 1)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
                 }
                 if (contentUrl == urlLuz1 && state == 0)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 else if (contentUrl == urlLuz1 && state == 1)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 if (contentUrl == urlLuz2 && state == 0)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if (contentUrl == urlLuz2 && state == 1)
                 {
-                    //await serverClient.SignalRSendState(state);
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
             }
         }
     }

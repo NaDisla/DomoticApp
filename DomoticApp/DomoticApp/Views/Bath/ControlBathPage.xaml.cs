@@ -26,6 +26,12 @@ namespace DomoticApp.Views.Bath
         public ControlBathPage()
         {
             InitializeComponent();
+
+            if (btnLuz.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz);
+            }
+
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -68,19 +74,15 @@ namespace DomoticApp.Views.Bath
                 if(url == urlLuz && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
                 else if (url == urlLuz && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
             }
         }
     }

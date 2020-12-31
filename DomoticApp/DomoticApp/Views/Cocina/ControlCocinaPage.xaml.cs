@@ -13,15 +13,22 @@ namespace DomoticApp.Views.Cocina
         public static int stateLuz1 = 0, stateLuz2 = 0;
         private const string urlLuz1 = "http://10.0.0.17/luz-cocina-1", urlLuz2 = "http://10.0.0.17/luz-cocina-2";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleError, detailError;
+        private string content;
         SignalRClient serverClient;
-        ResultsOperations results = new ResultsOperations();
-        public int stateButtonClicked = 0;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlCocinaPage()
         {
             InitializeComponent();
+            
+            if (btnLuz1.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz1);
+            }
+            else if(btnLuz2.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz2);
+            }
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -63,7 +70,18 @@ namespace DomoticApp.Views.Cocina
 
         private void btnNevera_Clicked(object sender, EventArgs e)
         {
-            LayoutNevera.IsVisible = true;
+            if(LayoutNevera.IsVisible == false)
+            {
+                btnNevera.BackgroundColor = Color.FromHex("#739DB8");
+                btnNevera.TextColor = Color.White;
+                LayoutNevera.IsVisible = true;
+            }
+            else
+            {
+                btnNevera.BackgroundColor = Color.AliceBlue;
+                btnNevera.TextColor = Color.FromHex("#166498");
+                LayoutNevera.IsVisible = false;
+            }
         }
 
         [Obsolete]
@@ -75,31 +93,27 @@ namespace DomoticApp.Views.Cocina
                 if (url == urlLuz1 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
-                    //await serverClient.SignalRSendState(stateButtonClicked);
                 }
                 else if (url == urlLuz1 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
-                    //await serverClient.SignalRSendState(stateButtonClicked);
                 }
                 else if(url == urlLuz2 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if(url == urlLuz2 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
             }
         }
     }

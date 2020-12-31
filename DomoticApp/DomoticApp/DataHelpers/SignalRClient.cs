@@ -10,7 +10,7 @@ namespace DomoticApp.DataHelpers
     public class SignalRClient
     {
         HubConnection connectHub;
-        const string urlServer = "http://10.0.0.5:45458/actionHub";
+        const string urlServer = "http://10.0.0.5:45455/actionHub";
         Button buttonReceived;
 
         public SignalRClient(Button btnReceived)
@@ -36,7 +36,7 @@ namespace DomoticApp.DataHelpers
        
         private void CambiaColor(Button button, int stateButton)
         {
-            if (stateButton == 0)
+            if (stateButton == 1)
             {
                 button.BackgroundColor = Color.FromHex("#739DB8");
                 button.TextColor = Color.White;

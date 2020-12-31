@@ -72,17 +72,17 @@
                        Grid.Row="4"
                        Style="{StaticResource Panel}">
                     <StackLayout>
-                        <Label Text="Sensación de humedad"
+                        <Label Text="Condiciones atmosféricas"
                                TextColor="#0E4265"
                                FontFamily="{StaticResource RalewayBold}"
                                FontSize="19" />
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="150" />
+                                <RowDefinition Height="0.9*"/>
+                                <RowDefinition Height="170" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -90,6 +90,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Frame  CornerRadius="190"
+                                    Grid.Row="1"
                                     Padding="0"
                                     Margin="0,10,0,15"
                                     Grid.ColumnSpan="3">
@@ -113,44 +114,39 @@
                                             <Image Source="humedad.png"
                                                    Margin="20,0,0,0"
                                                    HeightRequest="100"
-                                                   WidthRequest="100"/>
+                                                   WidthRequest="100" />
                                         </Grid>
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="0.9*" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.5*" />
+                                                <ColumnDefinition Width="0.1*" />
                                                 <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="7*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Label Text="Humedad"
                                                    TextColor="#115079"
                                                    HorizontalTextAlignment="Center"
                                                    FontFamily="{StaticResource RalewayBold}"
-                                                   FontSize="20"
-                                                   Margin="20,25,0,0"
-                                                   VerticalTextAlignment="Start"
-                                                   Grid.Column="1"/>
+                                                   FontSize="Medium"
+                                                   Margin="0,25,0,0"
+                                                   Grid.Column="1"
+                                                   Grid.ColumnSpan="2"/>
                                             <Label TextColor="#115079"
                                                    HorizontalTextAlignment="Center"
                                                    x:Name="lblHum"
                                                    x:FieldModifier="public"
                                                    FontFamily="{StaticResource RalewayBold}"
                                                    FontSize="Title"
-                                                   Text="34.99%"
                                                    Grid.Row="1"
-                                                   Grid.Column="1"/>
+                                                   Grid.Column="2"/>
                                         </Grid>
                                     </StackLayout>
                                 </Grid>
                             </Frame>
-                            <Button Text="Actualizar" 
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Style="{StaticResource BtnUpdateTempHumCal}"
-                                    x:Name="btnActualizarHumedad"/>
                         </Grid>
                     </StackLayout>
                 </Frame>

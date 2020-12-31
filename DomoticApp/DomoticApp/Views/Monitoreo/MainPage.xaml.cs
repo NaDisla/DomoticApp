@@ -31,6 +31,7 @@ namespace DomoticApp.Views.Monitoreo
         GeneralData data = new GeneralData();
         List<ControlesAlexa> controlesAlexa;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
+        SignalRClient serverClient;
 
         [Obsolete]
         public MainPage(Action solicitudMenu)

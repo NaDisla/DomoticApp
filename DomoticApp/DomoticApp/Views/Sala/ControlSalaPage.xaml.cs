@@ -17,11 +17,25 @@ namespace DomoticApp.Views.Sala
         private readonly HttpClient client = new HttpClient();
         private string content;
 
+        SignalRClient serverClient;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlSalaPage()
         {
             InitializeComponent();
+
+            if (btnLuz1.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz1);
+            }
+            else if(btnLuz2.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnLuz2);
+            }
+            else if(btnAbanico.IsPressed == false)
+            {
+                serverClient = new SignalRClient(btnAbanico);
+            }
             DatosTermicos();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
@@ -54,8 +68,8 @@ namespace DomoticApp.Views.Sala
         {
             content = await client.GetStringAsync(urlGeneral);
             var cortando = content.Split(';');
-            string temperatura = cortando[3];
-            string humedad = cortando[4];
+            string temperatura = cortando[2];
+            string humedad = cortando[3];
             if (content != null)
             {
                 lblTemp.Text = temperatura + "°C";
@@ -90,31 +104,37 @@ namespace DomoticApp.Views.Sala
                 if (url == urlLuz1 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 else if (url == urlLuz1 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
                 }
                 else if (url == urlLuz2 && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if (url == urlLuz2 && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
                 }
                 else if (url == urlAbanico && state == 0)
                 {
                     state = 1;
+                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
                 }
                 else if (url == urlAbanico && state == 1)
                 {
                     state = 0;
+                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
                 }
             }
