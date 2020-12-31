@@ -1,5 +1,4 @@
 ﻿using DomoticApp.DataHelpers;
-using DomoticApp.SettingsAccess;
 using DomoticApp.Views.Monitoreo;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,11 +26,36 @@ namespace DomoticApp.Views.Exteriores
 
         SignalRClient serverClient;
         ResultsOperations results = new ResultsOperations();
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlExterioresPage()
         {
             InitializeComponent();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
         }
 
         [Obsolete]

@@ -16,7 +16,7 @@ namespace DomoticApp.DataHelpers
         GeneralData data = new GeneralData();
         ResultsOperations results = new ResultsOperations();
         string detailLoading, titleError, detailError, titleCorrect, detailCorrect, titleAlert, detailAlert;
-
+        
         #region EnviarCodigo
         [Obsolete]
         public void EnviarCodigo(Entry txtUsuarioCambioClave, Frame frameUsuarioCambiarClave, Button btnEnviarCodigo,
@@ -78,11 +78,12 @@ namespace DomoticApp.DataHelpers
 
                     var getUserCodigo = await data.GetUsuariosCambioClave();
                     var userCodigo = getUserCodigo.Where(x => x.NombreUsuario == txtUsuarioCambioClave.Text).ToList();
+                    var fechaCambio = DateTime.Now.ToShortDateString();
 
                     if (userCodigo.Count == 0)
                     {
                         ConfigEnviarCorreo(mail, SmtpServer, userCorreo, loadingSend, result);
-                        await data.CambiarClave(codigo, txtUsuarioCambioClave.Text);
+                        await data.CambiarClave(codigo, txtUsuarioCambioClave.Text, fechaCambio);
                         ControlesCodigo(frameUsuarioCambiarClave, btnEnviarCodigo, frameCodigo, btnConfirmarCodigo);
                     }
                     else

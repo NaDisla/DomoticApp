@@ -3,15 +3,12 @@ using System;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
 using DomoticApp.Views.Popups;
-using Plugin.Connectivity;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using Xamarin.Essentials;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.NetworkInformation;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using Plugin.LocalNotifications;
 
@@ -39,22 +36,22 @@ namespace DomoticApp
             InitializeComponent();
             CheckConnection();
         }
+
         [Obsolete]
         void DetectarLogin()
         {
             var isLogged = SecureStorage.GetAsync("isLogged").Result;
             var nombreUsuario = SecureStorage.GetAsync("nombreUsuario").Result;
-            var estadoUsuario = SecureStorage.GetAsync("estadoUsuario").Result;
 
-            if (isLogged == "1" || estadoUsuario == "Activo")
+            if (isLogged == "1")
             {
                 MainPage = new NavigationPage(new MasterMenuPage(nombreUsuario));
             }
-            else if (isLogged == "2" || estadoUsuario == "Activo")
+            else if (isLogged == "2")
             {
                 MainPage = new NavigationPage(new MasterMenuHabitantePage(nombreUsuario));
             }
-            else if((isLogged == "1" || isLogged == "2") && estadoUsuario == "Inactivo")
+            else
             {
                 MainPage = new NavigationPage(new GeneralLoginPage());
             }
@@ -96,7 +93,7 @@ namespace DomoticApp
                     }
                     else
                     {
-                        AlertaVPN();
+                        RedIncorrecta();
                     }
                     
                 }

@@ -84,12 +84,13 @@ namespace DomoticApp.DataHelpers
             }
         }
         
-        public async Task CambiarClave(int codigo, string usuario)
+        public async Task CambiarClave(int codigo, string usuario, string fecha)
         {
             await client.Child("CambiosClaveUsuarios").PostAsync(new CambiarClaveUsuario()
             {
                 CodigoCambio = codigo,
-                NombreUsuario = usuario
+                NombreUsuario = usuario,
+                FechaCambio = fecha
             });
         }
         
@@ -99,7 +100,8 @@ namespace DomoticApp.DataHelpers
                 userCodigo => new CambiarClaveUsuario
                 {
                     CodigoCambio = userCodigo.Object.CodigoCambio,
-                    NombreUsuario = userCodigo.Object.NombreUsuario
+                    NombreUsuario = userCodigo.Object.NombreUsuario,
+                    FechaCambio = userCodigo.Object.FechaCambio
                 }).ToList();
         }
         

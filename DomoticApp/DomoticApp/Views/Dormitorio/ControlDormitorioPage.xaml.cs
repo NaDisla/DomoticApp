@@ -16,13 +16,14 @@ namespace DomoticApp.Views.Dormitorio
     public partial class ControlDormitorioPage : ContentPage
     {
         public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0, stateGeneral = 0;
-        private const string urlGeneral= "http://10.0.0.17";
+        private const string urlGeneral = "http://10.0.0.17";
         private const string urlLuz1 = "http://10.0.0.17/luz-dormitorio-1";
         private const string urlLuz2 = "http://10.0.0.17/luz-dormitorio-2";
         private const string urlAbanico = "http://10.0.0.17/abanico-dormitorio";
         private readonly HttpClient client = new HttpClient();
         private string content, titleError, detailError;
-        
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
+
         SignalRClient serverClient;
         ResultsOperations results = new ResultsOperations();
 
@@ -30,15 +31,13 @@ namespace DomoticApp.Views.Dormitorio
         public ControlDormitorioPage()
         {
             InitializeComponent();
-            //TempHum();
-
+            DatosTermicos();
             /*if (btnLuz1.IsPressed == false)
                 serverClient = new SignalRClient(btnLuz1);
             else if (btnLuz2.IsPressed == false)
                 serverClient = new SignalRClient(btnLuz2);
             else if (btnAbanico.IsPressed == false)
                 serverClient = new SignalRClient(btnAbanico);*/
-
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
         protected override bool OnBackButtonPressed()
@@ -48,24 +47,38 @@ namespace DomoticApp.Views.Dormitorio
         }
 
         [Obsolete]
-        protected async override void OnAppearing()
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
+        }
+
+        async void DatosTermicos()
         {
             content = await client.GetStringAsync(urlGeneral);
             var cortando = content.Split(';');
             string temperatura = cortando[0];
             string humedad = cortando[1];
-            if (content != null)
-            {
-                lblTemp.Text = temperatura + "°C";
-                lblHum.Text = humedad + "%";
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
-            }
-            base.OnAppearing();
+
+            lblTemp.Text = temperatura + "°C";
+            lblHum.Text = humedad + "%";
         }
 
         [Obsolete]

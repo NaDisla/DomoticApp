@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using DomoticApp.Views.Popups;
-using System.Net.Http;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Essentials;
@@ -20,6 +19,7 @@ using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.DataHelpers;
 using DomoticApp.Models;
+using System.Net;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -30,6 +30,7 @@ namespace DomoticApp.Views.Monitoreo
         public int _stateReceived { get; set; }
         GeneralData data = new GeneralData();
         List<ControlesAlexa> controlesAlexa;
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
@@ -40,22 +41,29 @@ namespace DomoticApp.Views.Monitoreo
             btnMenu.Clicked += (s, e) => inicio();
         }
 
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
         {
             GetStateModules();
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
         }
 
-        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
+            cambioRed.NetworkChanged(e);
         }
 
         async void GetStateModules()

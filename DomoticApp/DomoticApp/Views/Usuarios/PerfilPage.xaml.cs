@@ -6,7 +6,6 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -25,6 +24,7 @@ namespace DomoticApp.Views.Usuarios
         Models.Usuarios perfilUsuario;
         ResultsOperations results = new ResultsOperations();
         List<Models.Usuarios> usuarios;
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public PerfilPage(string usuario)
         {
@@ -40,6 +40,30 @@ namespace DomoticApp.Views.Usuarios
             {
                 rowPerfil.Height = 490;
             }
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
         }
 
         async void DatosUsuario()

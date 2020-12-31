@@ -30,6 +30,7 @@ namespace DomoticApp.Views.Opciones
         public static Models.Usuarios selectedUser;
         public static List<Models.Usuarios> getUsuarios;
         ResultsOperations results = new ResultsOperations();
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public OpcionesAdminPage()
         {
@@ -49,6 +50,30 @@ namespace DomoticApp.Views.Opciones
             MessagingCenter.Subscribe<ListaAccesosPage>(this, "RefreshAccesosPage", (sender) => {
                 GetUsersData();
             });
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
         }
 
         public async void GetUsersData()

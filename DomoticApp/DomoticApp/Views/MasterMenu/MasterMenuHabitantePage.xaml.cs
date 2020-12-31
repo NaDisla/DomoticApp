@@ -1,12 +1,10 @@
-﻿using DomoticApp.DataHelpers;
-using DomoticApp.MenuItems;
+﻿using DomoticApp.MenuItems;
 using DomoticApp.Views.Bath;
 using DomoticApp.Views.Cocina;
 using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Monitoreo;
-using DomoticApp.Views.Opciones;
 using DomoticApp.Views.Piscina;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
@@ -15,13 +13,13 @@ using DomoticApp.Views.Usuarios;
 using DomoticApp.Views.Usuarios.GeneralLogin;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DomoticApp.Views.MasterMenu
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [Obsolete]
     public partial class MasterMenuHabitantePage : MasterDetailPage
     {
         public List<MasterMenuItems> elementosMenu { get; set; }
@@ -140,14 +138,6 @@ namespace DomoticApp.Views.MasterMenu
                 Title = "Exteriores"
             };
             elementosMenu.Add(pagExteriores);
-            
-            MasterMenuItems pagOpciones = new MasterMenuItems()
-            {
-                Icon = "iconoOpciones.png",
-                TargetType = typeof(OpcionesHabitantePage),
-                Title = "Más opciones"
-            };
-            elementosMenu.Add(pagOpciones);
 
             MasterMenuItems pagSalir = new MasterMenuItems()
             {

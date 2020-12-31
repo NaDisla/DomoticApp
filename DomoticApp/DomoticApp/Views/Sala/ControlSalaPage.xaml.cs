@@ -1,14 +1,9 @@
 ﻿using DomoticApp.DataHelpers;
-using DomoticApp.Views.Dormitorio;
 using DomoticApp.Views.Monitoreo;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace DomoticApp.Views.Sala
 {
@@ -20,17 +15,42 @@ namespace DomoticApp.Views.Sala
         private const string urlAbanico = "http://10.0.0.17/abanico-sala";
         private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleError, detailError;
+        private string content;
 
-        ResultsOperations results = new ResultsOperations();
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlSalaPage()
         {
             InitializeComponent();
+            DatosTermicos();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
-        protected async override void OnAppearing()
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
+        }
+
+        async void DatosTermicos()
         {
             content = await client.GetStringAsync(urlGeneral);
             var cortando = content.Split(';');
@@ -41,11 +61,6 @@ namespace DomoticApp.Views.Sala
                 lblTemp.Text = temperatura + "°C";
                 lblHum.Text = humedad + "%";
             }
-            else
-            {
-                await DisplayAlert("Error de conexión", "No se ha podido establecer la conexión. ", "OK");
-            }
-            base.OnAppearing();
         }
 
         [Obsolete]
@@ -102,12 +117,6 @@ namespace DomoticApp.Views.Sala
                     state = 0;
                     stateAbanico = state;
                 }
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
             }
         }
     }
