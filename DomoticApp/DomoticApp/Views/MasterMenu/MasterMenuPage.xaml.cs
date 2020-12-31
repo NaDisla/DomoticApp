@@ -20,6 +20,7 @@ using Xamarin.Forms.Xaml;
 namespace DomoticApp.Views.MasterMenu
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [Obsolete]
     public partial class MasterMenuPage : MasterDetailPage
     {
         public List<MasterMenuItems> elementosMenu { get; set; }

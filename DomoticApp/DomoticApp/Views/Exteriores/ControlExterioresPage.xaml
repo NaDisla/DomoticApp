@@ -23,11 +23,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.6*" />
                     <RowDefinition Height="0.6*" />
-                    <RowDefinition Height="150" />
-                    <RowDefinition Height="0.3*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="260" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="0.6*" />
                 </Grid.RowDefinitions>
                 <ImageButton Style="{StaticResource BtnMenu}"
                              x:Name="btnMenu" />
@@ -51,11 +50,9 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
                                 <RowDefinition Height="100" />
                             </Grid.RowDefinitions>
                             <Button Text="Entrada 1"
@@ -80,21 +77,23 @@
                                     x:Name="btnLuzJardin1"
                                     Clicked="btnLuzJardin1_Clicked"
                                     ImageSource="luz.png"
-                                    Grid.Column="3"
+                                    Grid.Row="1"
                                     Style="{StaticResource DispositivosOFF}"
                                     Padding="0,10,0,0" />
                             <Button Text="Jardín 2"
                                     x:Name="btnLuzJardin2"
                                     Clicked="btnLuzJardin2_Clicked"
                                     ImageSource="luz.png"
-                                    Grid.Column="4"
+                                    Grid.Column="1"
+                                    Grid.Row="1"
                                     Style="{StaticResource DispositivosOFF}"
                                     Padding="0,10,0,0" />
                             <Button Text="Terraza"
                                     x:Name="btnLuzTerraza"
                                     Clicked="btnLuzTerraza_Clicked"
                                     ImageSource="luz.png"
-                                    Grid.Column="5"
+                                    Grid.Column="2"
+                                    Grid.Row="1"
                                     Style="{StaticResource DispositivosOFF}"
                                     Padding="0,10,0,0" />
                         </Grid>

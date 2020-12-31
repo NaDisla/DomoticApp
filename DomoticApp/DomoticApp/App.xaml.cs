@@ -42,18 +42,19 @@ namespace DomoticApp
         [Obsolete]
         void DetectarLogin()
         {
-            var isLoogged = SecureStorage.GetAsync("isLogged").Result;
+            var isLogged = SecureStorage.GetAsync("isLogged").Result;
             var nombreUsuario = SecureStorage.GetAsync("nombreUsuario").Result;
+            var estadoUsuario = SecureStorage.GetAsync("estadoUsuario").Result;
 
-            if (isLoogged == "1")
+            if (isLogged == "1" || estadoUsuario == "Activo")
             {
                 MainPage = new NavigationPage(new MasterMenuPage(nombreUsuario));
             }
-            else if (isLoogged == "2")
+            else if (isLogged == "2" || estadoUsuario == "Activo")
             {
                 MainPage = new NavigationPage(new MasterMenuHabitantePage(nombreUsuario));
             }
-            else
+            else if((isLogged == "1" || isLogged == "2") && estadoUsuario == "Inactivo")
             {
                 MainPage = new NavigationPage(new GeneralLoginPage());
             }

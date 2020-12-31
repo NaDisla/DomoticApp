@@ -478,6 +478,17 @@
                 <Setter Property="CornerRadius"
                         Value="15" />
             </Style>
+            <Style TargetType="Button"
+                   x:Key="BtnMantenimiento">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="IsVisible"
+                        Value="False" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

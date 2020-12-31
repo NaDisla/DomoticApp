@@ -20,7 +20,7 @@ namespace DomoticApp.Views.Usuarios
         public ObservableCollection<Models.Usuarios> ListUsuarios { get; set; }
         private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleAlert, detailAlert, titleError, detailError, titleCorrect, detailCorrect,
+        private string titleAlert, detailAlert, titleCorrect, detailCorrect,
             detailLoading;
         public static Models.Usuarios selectedUser;
         public static List<Models.Usuarios> getUsuarios;
