@@ -43,7 +43,7 @@ namespace DomoticApp.DataHelpers
             }
             else
             {
-                button.BackgroundColor = Color.AliceBlue;
+                button.BackgroundColor = Color.FromHex("#b9d9f0");
                 button.TextColor = Color.FromHex("#166498");
             }
         }

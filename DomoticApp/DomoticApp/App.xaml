@@ -399,10 +399,10 @@
                         Value="20,0,0,0" />
             </Style>
 
-            <Style TargetType="Button" 
+            <Style TargetType="Button"
                    x:Key="Activos">
                 <Setter Property="BackgroundColor"
-                        Value="#D2E9F8"/>
+                        Value="#D2E9F8" />
                 <Setter Property="FontSize"
                         Value="15" />
                 <Setter Property="BorderColor"
@@ -419,20 +419,6 @@
                         Value="#165E8D" />
                 <Setter Property="FontFamily"
                         Value="{StaticResource RalewayBold}" />
-            </Style>
-
-            <Style TargetType="Button"
-                   x:Key="BtnUpdateTempHumCal">
-                <Setter Property="CornerRadius" 
-                        Value="15"/>
-                <Setter Property="FontFamily"
-                        Value="{StaticResource RalewaySemiBold}" />
-                <Setter Property="BackgroundColor"
-                        Value="#2E7BA9" />
-                <Setter Property="TextColor"
-                        Value="White" />
-                <Setter Property="FontSize"
-                        Value="16"/>
             </Style>
 
             <Style TargetType="Button"

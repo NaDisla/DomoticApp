@@ -85,17 +85,19 @@ namespace DomoticApp
 
                 if (parteInicialCasa == parteInicialDevice)
                 {
-                    content = await client.GetStringAsync(urlTarjeta);
-                    if (content != null)
+                    try
                     {
-                        RedCorrecta();
-                        NotificationTinaco();
+                        content = await client.GetStringAsync(urlTarjeta);
+                        if (content != null)
+                        {
+                            RedCorrecta();
+                            NotificationTinaco();
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        RedIncorrecta();
+                        AlertaVPN();
                     }
-                    
                 }
                 else if (parteInicialCasa != parteInicialDevice)
                 {
