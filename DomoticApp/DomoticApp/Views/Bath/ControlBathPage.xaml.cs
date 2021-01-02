@@ -27,10 +27,10 @@ namespace DomoticApp.Views.Bath
         {
             InitializeComponent();
 
-            if (btnLuz.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz);
-            }
+            //if (btnLuz.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz);
+            //}
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }

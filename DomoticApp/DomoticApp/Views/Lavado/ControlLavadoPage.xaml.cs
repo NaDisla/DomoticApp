@@ -28,10 +28,10 @@ namespace DomoticApp.Views.Lavado
         public ControlLavadoPage()
         {
             InitializeComponent();
-            if (btnLuz.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz);
-            }
+            //if (btnLuz.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz);
+            //}
             GetNivel();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }

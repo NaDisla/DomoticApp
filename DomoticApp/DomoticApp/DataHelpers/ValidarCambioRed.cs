@@ -21,7 +21,7 @@ namespace DomoticApp.DataHelpers
         public CorrectValidationPage redCorrecta;
         public IncorrectNetworkPage redIncorrecta;
         public AlertNetworkPage alertaVPN;
-        int estadoRedCorrecta, estadoRedIncorrecta;
+        int estadoRedCorrecta, estadoRedIncorrecta, estadoVPN;
 
         [Obsolete]
         public async void NetworkChanged(ConnectivityChangedEventArgs e)
@@ -70,6 +70,11 @@ namespace DomoticApp.DataHelpers
                 await PopupNavigation.RemovePageAsync(redIncorrecta);
                 estadoRedIncorrecta = 0;
             }
+            else if (estadoVPN == 1)
+            {
+                await PopupNavigation.RemovePageAsync(alertaVPN);
+                estadoVPN = 0;
+            }
             else
             {
                 await PopupNavigation.PushAsync(redCorrecta = new CorrectValidationPage(titleCorrect, detailCorrect));
@@ -85,6 +90,11 @@ namespace DomoticApp.DataHelpers
                 await PopupNavigation.RemovePageAsync(redCorrecta);
                 estadoRedCorrecta = 0;
             }
+            else if(estadoVPN == 1)
+            {
+                await PopupNavigation.RemovePageAsync(alertaVPN);
+                estadoVPN = 0;
+            }
             else
             {
                 await PopupNavigation.PushAsync(redIncorrecta = new IncorrectNetworkPage(titleError, detailError));
@@ -96,6 +106,7 @@ namespace DomoticApp.DataHelpers
         public async void AlertaVPN()
         {
             await PopupNavigation.PushAsync(alertaVPN = new AlertNetworkPage());
+            estadoVPN = 1;
         }
     }
 }

@@ -24,18 +24,18 @@ namespace DomoticApp.Views.Sala
         {
             InitializeComponent();
 
-            if (btnLuz1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz1);
-            }
-            else if(btnLuz2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz2);
-            }
-            else if(btnAbanico.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnAbanico);
-            }
+            //if (btnLuz1.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz1);
+            //}
+            //else if(btnLuz2.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz2);
+            //}
+            //else if(btnAbanico.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnAbanico);
+            //}
             DatosTermicos();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }

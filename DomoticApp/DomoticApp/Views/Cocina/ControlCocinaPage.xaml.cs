@@ -21,14 +21,14 @@ namespace DomoticApp.Views.Cocina
         {
             InitializeComponent();
             
-            if (btnLuz1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz1);
-            }
-            else if(btnLuz2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz2);
-            }
+            //if (btnLuz1.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz1);
+            //}
+            //else if(btnLuz2.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz2);
+            //}
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 

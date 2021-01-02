@@ -23,31 +23,75 @@ namespace DomoticApp.Views.Dormitorio
         private readonly HttpClient client = new HttpClient();
         private string content, titleError, detailError;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
-
-        SignalRClient serverClient;
         ResultsOperations results = new ResultsOperations();
+        HubConnection connectHub;
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        Button receiveButton;
 
         [Obsolete]
         public ControlDormitorioPage()
         {
             InitializeComponent();
+            InitializeAction();
             DatosTermicos();
-            
-            if (btnLuz1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz1);
-            }
-            else if (btnLuz2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz2);
-            }
-            else if (btnAbanico.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnAbanico);
-            }
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
+
+        private async void InitializeAction()
+        {
+            SetupAction();
+            await SignalRConnect();
+        }
+
+        private void SetupAction()
+        {
+            connectHub = new HubConnectionBuilder().WithUrl(urlServer).Build();
+            connectHub.On<int>("ReceiveState", (stateReceived) =>
+            {
+                CambiaColor(receiveButton, stateReceived);
+            });
+        }
+
+        private void CambiaColor(Button button, int stateButton)
+        {
+            receiveButton = button;
+            if (stateButton == 1)
+            {
+                button.BackgroundColor = Color.FromHex("#739DB8");
+                button.TextColor = Color.White;
+            }
+            /*else
+            {
+                button.BackgroundColor = Color.FromHex("#b9d9f0");
+                button.TextColor = Color.FromHex("#166498");
+            }*/
+        }
+
+        public async Task SignalRConnect()
+        {
+            try
+            {
+                await connectHub.StartAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task SignalRSendState(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendState", state);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         protected override bool OnBackButtonPressed()
         {
             base.OnBackButtonPressed();
@@ -90,21 +134,24 @@ namespace DomoticApp.Views.Dormitorio
         }
 
         [Obsolete]
-        private void btnAbanico_Clicked(object sender, EventArgs e)
+        private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlAbanico, stateAbanico);
+            await SignalRSendState(stateAbanico);
         }
 
         [Obsolete]
-        private void btnLuz1_Clicked(object sender, EventArgs e)
+        private async void btnLuz1_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz1, stateLuz1);
+            await SignalRSendState(stateLuz1);
         }
 
         [Obsolete]
-        private void btnLuz2_Clicked(object sender, EventArgs e)
+        private async void btnLuz2_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz2, stateLuz2);
+            await SignalRSendState(stateLuz2);
         }
 
         [Obsolete]
@@ -116,38 +163,42 @@ namespace DomoticApp.Views.Dormitorio
                 if (contentUrl == urlAbanico && state == 0)
                 {
                     state = 1;
-                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
+                    CambiaColor(btnAbanico, stateAbanico);
                 }
                 else if (contentUrl == urlAbanico && state == 1)
                 {
                     state = 0;
-                    await serverClient.SignalRSendState(state);
                     stateAbanico = state;
+                    btnAbanico.BackgroundColor = Color.FromHex("#b9d9f0");
+                    btnAbanico.TextColor = Color.FromHex("#166498");
+                    //CambiaColor(btnAbanico, stateAbanico);
                 }
                 if (contentUrl == urlLuz1 && state == 0)
                 {
                     state = 1;
-                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
+                    CambiaColor(btnLuz1, stateLuz1);
                 }
                 else if (contentUrl == urlLuz1 && state == 1)
                 {
                     state = 0;
-                    await serverClient.SignalRSendState(state);
                     stateLuz1 = state;
+                    btnLuz1.BackgroundColor = Color.FromHex("#b9d9f0");
+                    btnLuz1.TextColor = Color.FromHex("#166498");
+                    //CambiaColor(btnLuz1, stateLuz1);
                 }
                 if (contentUrl == urlLuz2 && state == 0)
                 {
                     state = 1;
-                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
+                    CambiaColor(btnLuz2, stateLuz2);
                 }
                 else if (contentUrl == urlLuz2 && state == 1)
                 {
                     state = 0;
-                    await serverClient.SignalRSendState(state);
                     stateLuz2 = state;
+                    //CambiaColor(btnLuz2, stateLuz2);
                 }
             }
         }

@@ -23,18 +23,18 @@ namespace DomoticApp.Views.Recibidor
         public ControlRecibidorPage()
         {
             InitializeComponent();
-            if (btnLuz1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz1);
-            }
-            else if (btnLuz2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz2);
-            }
-            else if (btnLuz3.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuz3);
-            }
+            //if (btnLuz1.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz1);
+            //}
+            //else if (btnLuz2.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz2);
+            //}
+            //else if (btnLuz3.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuz3);
+            //}
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 

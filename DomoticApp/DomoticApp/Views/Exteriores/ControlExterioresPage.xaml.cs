@@ -26,30 +26,30 @@ namespace DomoticApp.Views.Exteriores
         {
             InitializeComponent();
 
-            if (btnLuzEntrada1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzEntrada1);
-            }
-            else if (btnLuzEntrada2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzEntrada2);
-            }
-            else if (btnLuzEntrada3.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzEntrada3);
-            }
-            else if (btnLuzJardin1.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzJardin1);
-            }
-            else if (btnLuzJardin2.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzJardin2);
-            }
-            else if (btnLuzTerraza.IsPressed == false)
-            {
-                serverClient = new SignalRClient(btnLuzTerraza);
-            }
+            //if (btnLuzEntrada1.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzEntrada1);
+            //}
+            //else if (btnLuzEntrada2.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzEntrada2);
+            //}
+            //else if (btnLuzEntrada3.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzEntrada3);
+            //}
+            //else if (btnLuzJardin1.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzJardin1);
+            //}
+            //else if (btnLuzJardin2.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzJardin2);
+            //}
+            //else if (btnLuzTerraza.IsPressed == false)
+            //{
+            //    serverClient = new SignalRClient(btnLuzTerraza);
+            //}
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
