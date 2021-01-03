@@ -67,10 +67,10 @@ namespace DomoticApp.Views.Monitoreo
             cambioRed.NetworkChanged(e);
         }
 
-        async void GetStateModules()
+       void GetStateModules()
         {
-            controlesAlexa = await data.GetControlesAlexa();
-            var alexaDormitorio = GetStateAlexaDormitorio();
+            /*controlesAlexa = await data.GetControlesAlexa();
+            var alexaDormitorio = GetStateAlexaDormitorio();*/
             var dormitorio = GetStateDormitorio();
             var cocina = GetStateCocina();
             var bath = GetStateBath();
@@ -79,7 +79,7 @@ namespace DomoticApp.Views.Monitoreo
             var recibidor = GetStateRecibidor();
             var sala = GetStateSala();
 
-            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala || alexaDormitorio)
+            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
             {
                 lblTextoActivos.IsVisible = false;
             }

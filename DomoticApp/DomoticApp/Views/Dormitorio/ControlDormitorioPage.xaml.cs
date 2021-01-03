@@ -2,14 +2,10 @@
 using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace DomoticApp.Views.Dormitorio
 {
@@ -21,9 +17,9 @@ namespace DomoticApp.Views.Dormitorio
         private const string urlLuz2 = "http://10.0.0.17/luz-dormitorio-2";
         private const string urlAbanico = "http://10.0.0.17/abanico-dormitorio";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleError, detailError;
+        private string content;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
-        ResultsOperations results = new ResultsOperations();
+        CambiarColorBotones colorButton = new CambiarColorBotones();
         HubConnection connectHub;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
         int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
@@ -61,30 +57,16 @@ namespace DomoticApp.Views.Dormitorio
             });
         }
 
-        void CambiarColorLucesON(Button button)
-        {
-            button.BackgroundColor = Color.FromHex("#F8F8D8");
-            button.TextColor = Color.FromHex("#166498");
-            button.BorderColor = Color.FromHex("#e6e620");
-        }
-
-        void CambiarColorOFF(Button button)
-        {
-            button.BackgroundColor = Color.FromHex("#b9d9f0");
-            button.TextColor = Color.FromHex("#166498");
-            button.BorderColor = Color.FromHex("#166498");
-        }
-
         private void CambiaColorLuz1(Button button, int stateButton)
         {
             if (stateButton == 0)
             {
-                CambiarColorLucesON(button);
+                colorButton.CambiarColorLucesON(button);
                 estadoLogicaLuz1 = 1;
             }
             else
             {
-                CambiarColorOFF(button);
+                colorButton.CambiarColorOFF(button);
                 estadoLogicaLuz1 = 0;
             }
         }
@@ -93,12 +75,12 @@ namespace DomoticApp.Views.Dormitorio
         {
             if (stateButton == 0)
             {
-                CambiarColorLucesON(button);
+                colorButton.CambiarColorLucesON(button);
                 estadoLogicaLuz2 = 1;
             }
             else
             {
-                CambiarColorOFF(button);
+                colorButton.CambiarColorOFF(button);
                 estadoLogicaLuz2 = 0;
             }
         }
@@ -107,13 +89,12 @@ namespace DomoticApp.Views.Dormitorio
         {
             if (stateButton == 0)
             {
-                button.BackgroundColor = Color.FromHex("#aec5d4");
-                button.TextColor = Color.FromHex("#166498");
+                colorButton.CambiarColorOtrosON(button);
                 estadoLogicaAbanico = 1;
             }
             else
             {
-                CambiarColorOFF(button);
+                colorButton.CambiarColorOFF(button);
                 estadoLogicaAbanico = 0;
             }
         }
@@ -173,18 +154,18 @@ namespace DomoticApp.Views.Dormitorio
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnAppearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnDisappearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;

@@ -81,11 +81,10 @@
                 </Frame>
                 <Frame x:Name="LayoutNevera"
                        IsVisible="False"
-                       BackgroundColor="#E0EFF4"
+                       Style="{StaticResource Panel}"
                        Grid.Row="4"
                        Grid.ColumnSpan="4"
-                       Grid.RowSpan="3"
-                       CornerRadius="30">
+                       Grid.RowSpan="3">
                     <StackLayout VerticalOptions="FillAndExpand">
                         <WebView Source="http://publish.samsungsimulator.com/simulator/ac2b0789-5ad3-4932-b286-11e46e8e756c/"
                                  VerticalOptions="FillAndExpand"/>

@@ -1,5 +1,6 @@
 ﻿using DomoticApp.DataHelpers;
 using DomoticApp.Views.Monitoreo;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,37 +19,88 @@ namespace DomoticApp.Views.Lavado
         private const string urlLuz = "http://10.0.0.17/luz-lavadero";
         private const string urlGeneral = "http://10.0.0.17";
         private readonly HttpClient client = new HttpClient();
-        private string content, titleError, detailError;
+        private string content;
         string humedad;
-        int aguaNivel;
-        SignalRClient serverClient;
-        ResultsOperations results = new ResultsOperations();
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        int estadoLogicaLuz = 0;
+        HubConnection connectHub;
+        CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlLavadoPage()
         {
             InitializeComponent();
-            //if (btnLuz.IsPressed == false)
-            //{
-            //    serverClient = new SignalRClient(btnLuz);
-            //}
+            InitializeAction();
             GetNivel();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
+        private async void InitializeAction()
+        {
+            SetupAction();
+            await SignalRConnect();
+        }
+
+        private void SetupAction()
+        {
+            connectHub = new HubConnectionBuilder().WithUrl(urlServer).Build();
+            connectHub.On<int>("ReceiveStateLuzLavadero", (stateReceived) =>
+            {
+                CambiaColorLuz(btnLuz, stateReceived);
+            });
+        }
+
+        private void CambiaColorLuz(Button button, int stateButton)
+        {
+            if (stateButton == 0)
+            {
+                colorButton.CambiarColorLucesON(button);
+                estadoLogicaLuz = 1;
+            }
+            else
+            {
+                colorButton.CambiarColorOFF(button);
+                estadoLogicaLuz = 0;
+            }
+        }
+
+        public async Task SignalRConnect()
+        {
+            try
+            {
+                await connectHub.StartAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task SignalRSendStateLuzLavadero(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendStateLuzLavadero", state);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnAppearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnDisappearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
@@ -79,9 +131,10 @@ namespace DomoticApp.Views.Lavado
         }
 
         [Obsolete]
-        private void btnLuz_Clicked(object sender, EventArgs e)
+        private async void btnLuz_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz, stateLuz);
+            await SignalRSendStateLuzLavadero(estadoLogicaLuz);
         }
 
         [Obsolete]
@@ -93,16 +146,19 @@ namespace DomoticApp.Views.Lavado
                 if (url == urlLuz && state == 0)
                 {
                     state = 1;
-                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
                 else if (url == urlLuz && state == 1)
                 {
                     state = 0;
-                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
             }
+        }
+
+        private void btnActualizarNivelHumedad_Clicked(object sender, EventArgs e)
+        {
+            GetNivel();
         }
     }
 }

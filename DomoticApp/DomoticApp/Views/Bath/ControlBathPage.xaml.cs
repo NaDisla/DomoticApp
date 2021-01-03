@@ -1,9 +1,8 @@
 ﻿using DomoticApp.DataHelpers;
-using DomoticApp.Views.MasterMenu;
 using DomoticApp.Views.Monitoreo;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -16,38 +15,89 @@ namespace DomoticApp.Views.Bath
     {
         public static int stateLuz = 0;
         private const string urlLuz = "http://10.0.0.17/luz-bath";
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        int estadoLogicaLuz = 0;
+        HubConnection connectHub;
         private readonly HttpClient client = new HttpClient();
-        private string content, titleError, detailError;
+        private string content;
 
-        SignalRClient serverClient;
-        ResultsOperations results = new ResultsOperations();
+        CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
 
         public ControlBathPage()
         {
             InitializeComponent();
-
-            //if (btnLuz.IsPressed == false)
-            //{
-            //    serverClient = new SignalRClient(btnLuz);
-            //}
+            InitializeAction();
 
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
+        private async void InitializeAction()
+        {
+            SetupAction();
+            await SignalRConnect();
+        }
+
+        private void SetupAction()
+        {
+            connectHub = new HubConnectionBuilder().WithUrl(urlServer).Build();
+            connectHub.On<int>("ReceiveStateLuzBath", (stateReceived) =>
+            {
+                CambiaColorLuz(btnLuz, stateReceived);
+            });
+        }
+
+        private void CambiaColorLuz(Button button, int stateButton)
+        {
+            if (stateButton == 0)
+            {
+                colorButton.CambiarColorLucesON(button);
+                estadoLogicaLuz = 1;
+            }
+            else
+            {
+                colorButton.CambiarColorOFF(button);
+                estadoLogicaLuz = 0;
+            }
+        }
+
+        public async Task SignalRConnect()
+        {
+            try
+            {
+                await connectHub.StartAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task SignalRSendStateLuzBath(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendStateLuzBath", state);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnAppearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnDisappearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
@@ -60,9 +110,10 @@ namespace DomoticApp.Views.Bath
         }
 
         [Obsolete]
-        private void btnLuz_Clicked(object sender, EventArgs e)
+        private async void btnLuz_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz, stateLuz);
+            await SignalRSendStateLuzBath(estadoLogicaLuz);
         }
 
         [Obsolete]
@@ -74,13 +125,11 @@ namespace DomoticApp.Views.Bath
                 if(url == urlLuz && state == 0)
                 {
                     state = 1;
-                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
                 else if (url == urlLuz && state == 1)
                 {
                     state = 0;
-                    await serverClient.SignalRSendState(state);
                     stateLuz = state;
                 }
             }
