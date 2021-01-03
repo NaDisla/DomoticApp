@@ -96,7 +96,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="200" />
+                                <RowDefinition Height="200" x:Name="rowGrid"/>
                                 <RowDefinition Height="0.1*" />
                                 <RowDefinition Height="0.4*" />
                                 <RowDefinition Height="*" />

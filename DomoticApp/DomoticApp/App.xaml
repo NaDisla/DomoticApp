@@ -149,6 +149,10 @@
                         Value="0,8,0,5" />
                 <Setter Property="FontSize"
                         Value="15" />
+                <Setter Property="BorderColor"
+                        Value="#165E8D"/>
+                <Setter Property="BorderWidth"
+                        Value="1" />
             </Style>
 
             <Style TargetType="Button"
@@ -167,6 +171,10 @@
                         Value="0,8,0,5" />
                 <Setter Property="FontSize"
                         Value="16" />
+                <Setter Property="BorderColor"
+                        Value="#165E8D" />
+                <Setter Property="BorderWidth"
+                        Value="1" />
             </Style>
 
             <Style TargetType="Button"

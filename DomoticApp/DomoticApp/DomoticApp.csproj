@@ -47,9 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Accesos\AccesosPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Bath\ControlBathPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -81,6 +78,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Popups\AlertPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\ConfirmationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Popups\CorrectValidationPage.xaml">
@@ -116,9 +116,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Accesos\AccesosPage.xaml.cs">
-      <DependentUpon>AccesosPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Opciones\OpcionesAdminPage.xaml.cs">
       <DependentUpon>OpcionesAdminPage.xaml</DependentUpon>
     </Compile>

@@ -25,5 +25,11 @@ namespace DomoticApp.DataHelpers
             IncorrectValidationPage incorrectValidation = new IncorrectValidationPage(titleUnsuccess, detailUnsuccess);
             await PopupNavigation.PushAsync(incorrectValidation);
         }
+        [Obsolete]
+        public async Task Confirmation(string titleConfirmation, string detailConfirmation, string url)
+        {
+            ConfirmationPage confirmation = new ConfirmationPage(titleConfirmation, detailConfirmation, url);
+            await PopupNavigation.PushAsync(confirmation);
+        }
     }
 }

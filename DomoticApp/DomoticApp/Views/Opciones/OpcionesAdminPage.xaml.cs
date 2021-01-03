@@ -1,8 +1,6 @@
 ﻿using DomoticApp.DataHelpers;
-using DomoticApp.Views.Accesos;
 using DomoticApp.Views.Monitoreo;
 using DomoticApp.Views.Popups;
-using DomoticApp.Views.Usuarios;
 using Rg.Plugins.Popup.Services;
 using Syncfusion.SfDataGrid.XForms;
 using System;
@@ -21,12 +19,11 @@ namespace DomoticApp.Views.Opciones
     {
         GeneralData data = new GeneralData();
         public ObservableCollection<Models.Usuarios> ListUsuarios { get; set; }
-        private const string urlGeneral = "http://10.0.0.17", urlToken1 = "http://10.0.0.17/desactivar-token-1",
+        private const string urlToken1 = "http://10.0.0.17/desactivar-token-1",
             urlToken2 = "http://10.0.0.17/desactivar-token-2", urlTarjeta1 = "http://10.0.0.17/desactivar-tarjeta-1",
             urlTarjeta2 = "http://10.0.0.17/desactivar-tarjeta-2";
-        private readonly HttpClient client = new HttpClient();
-        private string content, titleAlert, detailAlert, titleError, detailError, titleCorrect, detailCorrect,
-            detailLoading, acceso;
+        private string titleAlert, detailAlert, titleCorrect, detailCorrect,
+            detailLoading, acceso, titleConfirmationDesAcceso, detailConfirmationDesAcceso;
         public static Models.Usuarios selectedUser;
         public static List<Models.Usuarios> getUsuarios;
         ResultsOperations results = new ResultsOperations();
@@ -53,18 +50,18 @@ namespace DomoticApp.Views.Opciones
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnAppearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnDisappearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
@@ -152,7 +149,7 @@ namespace DomoticApp.Views.Opciones
             {
                 MappingName = "UsuarioEstado",
                 HeaderFont = "Raleway-Bold.ttf#Raleway-Bold",
-                HeaderText = "Estado",
+                HeaderText = "Estado usuario",
                 LoadUIView = true
             };
             usuariosGrid.Columns.Add(octavaColumna);
@@ -168,20 +165,30 @@ namespace DomoticApp.Views.Opciones
                 lblTitleFrameMantenimiento.FontSize = 17;
                 lblTitleFrameUsuariosAccesos.FontSize = 17;
             }
+            else if(height >= 2000)
+            {
+                rowGrid.Height = 320;
+            }
         }
 
         private void btnUsuarios_Clicked(object sender, EventArgs e)
         {
             if(FrameUsuariosAccesos.IsVisible == false)
             {
+                btnUsuarios.BackgroundColor = Color.FromHex("#aec5d4");
+                btnUsuarios.TextColor = Color.FromHex("#166498");
                 FrameUsuariosAccesos.IsVisible = true;
                 usuariosGrid.IsVisible = true;
                 btnDesactivarUsuario.IsVisible = true;
             }
             else if(btnAsignarAcceso.IsVisible && btnDesactivarTokenTarjeta.IsVisible)
             {
+                btnUsuarios.BackgroundColor = Color.FromHex("#aec5d4");
+                btnUsuarios.TextColor = Color.FromHex("#166498");
                 usuariosGrid.IsVisible = true;
                 btnDesactivarUsuario.IsVisible = true;
+                btnAccesos.BackgroundColor = Color.FromHex("#b9d9f0");
+                btnAccesos.TextColor = Color.FromHex("#166498");
                 btnAsignarAcceso.IsVisible = false;
                 btnDesactivarTokenTarjeta.IsVisible = false;
             }
@@ -191,6 +198,8 @@ namespace DomoticApp.Views.Opciones
         {
             if (FrameUsuariosAccesos.IsVisible == false)
             {
+                btnAccesos.BackgroundColor = Color.FromHex("#aec5d4");
+                btnAccesos.TextColor = Color.FromHex("#166498");
                 FrameUsuariosAccesos.IsVisible = true;
                 usuariosGrid.IsVisible = true;
                 btnAsignarAcceso.IsVisible = true;
@@ -198,9 +207,13 @@ namespace DomoticApp.Views.Opciones
             }
             else if(btnDesactivarUsuario.IsVisible)
             {
+                btnAccesos.BackgroundColor = Color.FromHex("#aec5d4");
+                btnAccesos.TextColor = Color.FromHex("#166498");
                 usuariosGrid.IsVisible = true;
                 btnAsignarAcceso.IsVisible = true;
                 btnDesactivarTokenTarjeta.IsVisible = true;
+                btnUsuarios.BackgroundColor = Color.FromHex("#b9d9f0");
+                btnUsuarios.TextColor = Color.FromHex("#166498");
                 btnDesactivarUsuario.IsVisible = false;
             }
         }
@@ -310,22 +323,12 @@ namespace DomoticApp.Views.Opciones
         [Obsolete]
         async void DesactivarTarjetaToken(string url)
         {
-            content = await client.GetStringAsync(url);
-            if (content != null)
-            {
-                titleCorrect = "Acceso desactivado";
-                detailCorrect = "Se ha desactivado el acceso correctamente.";
-                await results.Success(titleCorrect, detailCorrect);
-            }
-            else
-            {
-                titleError = "Error de conexión";
-                detailError = "No se ha podido establecer la conexión con la vivienda.";
-                await results.Unsuccess(titleError, detailError);
-            }
+            titleConfirmationDesAcceso = "Confirmación - Desactivar acceso";
+            detailConfirmationDesAcceso = $"¿Confirma que desea desactivar {selectedUser.Acceso} a {selectedUser.UsuarioNombreReal}?";
+            await results.Confirmation(titleConfirmationDesAcceso, detailConfirmationDesAcceso, url);
         }
 
-        private void usuariosGrid_SelectionChanged(object sender, Syncfusion.SfDataGrid.XForms.GridSelectionChangedEventArgs e)
+        private void usuariosGrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
         {
             if (selectedUser == null)
             {

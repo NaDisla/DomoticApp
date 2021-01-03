@@ -1,5 +1,4 @@
 ﻿using DomoticApp.DataHelpers;
-using DomoticApp.Views.Accesos;
 using DomoticApp.Views.Opciones;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;

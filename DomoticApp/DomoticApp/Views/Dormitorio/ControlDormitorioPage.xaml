@@ -62,20 +62,20 @@
                                     x:Name="btnLuz1"
                                     Clicked="btnLuz1_Clicked"
                                     ImageSource="luz.png"
-                                    Style="{StaticResource DispositivosOFF}" />
+                                    Style="{StaticResource DispositivosOFF}"/>
                             <Button Text="Luz 2"
                                     x:Name="btnLuz2"
                                     Clicked="btnLuz2_Clicked"
                                     ImageSource="luz.png"
                                     Grid.Column="1"
-                                    Style="{StaticResource DispositivosOFF}" />
+                                    Style="{StaticResource DispositivosOFF}"/>
                             <Button Text="Abanico"
                                     x:Name="btnAbanico"
                                     Clicked="btnAbanico_Clicked"
                                     ImageSource="abanico.png"
                                     Grid.Column="2"
                                     Style="{StaticResource DispositivosOFF}"
-                                    Padding="0,10,0,0" />
+                                    Padding="0,10,0,0"/>
                         </Grid>
                     </StackLayout>
                 </Frame>

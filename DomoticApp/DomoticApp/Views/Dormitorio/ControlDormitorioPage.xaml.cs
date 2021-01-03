@@ -26,7 +26,7 @@ namespace DomoticApp.Views.Dormitorio
         ResultsOperations results = new ResultsOperations();
         HubConnection connectHub;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        Button receiveButton;
+        int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
 
         [Obsolete]
         public ControlDormitorioPage()
@@ -47,25 +47,75 @@ namespace DomoticApp.Views.Dormitorio
         private void SetupAction()
         {
             connectHub = new HubConnectionBuilder().WithUrl(urlServer).Build();
-            connectHub.On<int>("ReceiveState", (stateReceived) =>
+            connectHub.On<int>("ReceiveStateLuz1Dormitorio", (stateReceived) =>
             {
-                CambiaColor(receiveButton, stateReceived);
+                CambiaColorLuz1(btnLuz1, stateReceived);
+            });
+            connectHub.On<int>("ReceiveStateLuz2Dormitorio", (stateReceived) =>
+            {
+                CambiaColorLuz2(btnLuz2, stateReceived);
+            });
+            connectHub.On<int>("ReceiveStateAbanicoDormitorio", (stateReceived) =>
+            {
+                CambiaColorAbanico(btnAbanico, stateReceived);
             });
         }
 
-        private void CambiaColor(Button button, int stateButton)
+        void CambiarColorLucesON(Button button)
         {
-            receiveButton = button;
-            if (stateButton == 1)
+            button.BackgroundColor = Color.FromHex("#F8F8D8");
+            button.TextColor = Color.FromHex("#166498");
+            button.BorderColor = Color.FromHex("#e6e620");
+        }
+
+        void CambiarColorOFF(Button button)
+        {
+            button.BackgroundColor = Color.FromHex("#b9d9f0");
+            button.TextColor = Color.FromHex("#166498");
+            button.BorderColor = Color.FromHex("#166498");
+        }
+
+        private void CambiaColorLuz1(Button button, int stateButton)
+        {
+            if (stateButton == 0)
             {
-                button.BackgroundColor = Color.FromHex("#739DB8");
-                button.TextColor = Color.White;
+                CambiarColorLucesON(button);
+                estadoLogicaLuz1 = 1;
             }
-            /*else
+            else
             {
-                button.BackgroundColor = Color.FromHex("#b9d9f0");
+                CambiarColorOFF(button);
+                estadoLogicaLuz1 = 0;
+            }
+        }
+
+        private void CambiaColorLuz2(Button button, int stateButton)
+        {
+            if (stateButton == 0)
+            {
+                CambiarColorLucesON(button);
+                estadoLogicaLuz2 = 1;
+            }
+            else
+            {
+                CambiarColorOFF(button);
+                estadoLogicaLuz2 = 0;
+            }
+        }
+
+        private void CambiaColorAbanico(Button button, int stateButton)
+        {
+            if (stateButton == 0)
+            {
+                button.BackgroundColor = Color.FromHex("#aec5d4");
                 button.TextColor = Color.FromHex("#166498");
-            }*/
+                estadoLogicaAbanico = 1;
+            }
+            else
+            {
+                CambiarColorOFF(button);
+                estadoLogicaAbanico = 0;
+            }
         }
 
         public async Task SignalRConnect()
@@ -80,11 +130,35 @@ namespace DomoticApp.Views.Dormitorio
             }
         }
 
-        public async Task SignalRSendState(int state)
+        public async Task SignalRSendStateLuz1Dormitorio(int state)
         {
             try
             {
-                await connectHub.InvokeAsync("SendState", state);
+                await connectHub.InvokeAsync("SendStateLuz1Dormitorio", state);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task SignalRSendStateLuz2Dormitorio(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendStateLuz2Dormitorio", state);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task SignalRSendStateAbanicoDormitorio(int state)
+        {
+            try
+            {
+                await connectHub.InvokeAsync("SendStateAbanicoDormitorio", state);
             }
             catch (Exception)
             {
@@ -137,21 +211,21 @@ namespace DomoticApp.Views.Dormitorio
         private async void btnAbanico_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlAbanico, stateAbanico);
-            await SignalRSendState(stateAbanico);
+            await SignalRSendStateAbanicoDormitorio(estadoLogicaAbanico);
         }
 
         [Obsolete]
         private async void btnLuz1_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz1, stateLuz1);
-            await SignalRSendState(stateLuz1);
+            await SignalRSendStateLuz1Dormitorio(estadoLogicaLuz1);
         }
 
         [Obsolete]
         private async void btnLuz2_Clicked(object sender, EventArgs e)
         {
             SendArduinoRequest(urlLuz2, stateLuz2);
-            await SignalRSendState(stateLuz2);
+            await SignalRSendStateLuz2Dormitorio(estadoLogicaLuz2);
         }
 
         [Obsolete]
@@ -164,41 +238,31 @@ namespace DomoticApp.Views.Dormitorio
                 {
                     state = 1;
                     stateAbanico = state;
-                    CambiaColor(btnAbanico, stateAbanico);
                 }
                 else if (contentUrl == urlAbanico && state == 1)
                 {
                     state = 0;
                     stateAbanico = state;
-                    btnAbanico.BackgroundColor = Color.FromHex("#b9d9f0");
-                    btnAbanico.TextColor = Color.FromHex("#166498");
-                    //CambiaColor(btnAbanico, stateAbanico);
                 }
                 if (contentUrl == urlLuz1 && state == 0)
                 {
                     state = 1;
                     stateLuz1 = state;
-                    CambiaColor(btnLuz1, stateLuz1);
                 }
                 else if (contentUrl == urlLuz1 && state == 1)
                 {
                     state = 0;
                     stateLuz1 = state;
-                    btnLuz1.BackgroundColor = Color.FromHex("#b9d9f0");
-                    btnLuz1.TextColor = Color.FromHex("#166498");
-                    //CambiaColor(btnLuz1, stateLuz1);
                 }
                 if (contentUrl == urlLuz2 && state == 0)
                 {
                     state = 1;
                     stateLuz2 = state;
-                    CambiaColor(btnLuz2, stateLuz2);
                 }
                 else if (contentUrl == urlLuz2 && state == 1)
                 {
                     state = 0;
                     stateLuz2 = state;
-                    //CambiaColor(btnLuz2, stateLuz2);
                 }
             }
         }
