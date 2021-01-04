@@ -20,6 +20,7 @@ using DomoticApp.Views.Sala;
 using DomoticApp.DataHelpers;
 using DomoticApp.Models;
 using System.Net;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -28,24 +29,23 @@ namespace DomoticApp.Views.Monitoreo
     {
         public static Action inicio { get; set; }
         public int _stateReceived { get; set; }
-        GeneralData data = new GeneralData();
-        List<ControlesAlexa> controlesAlexa;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
-        SignalRClient serverClient;
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        HubConnection connectHub;
+        public static int estadoDormitorio;
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
-
             inicio = solicitudMenu;
             btnMenu.Clicked += (s, e) => inicio();
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnAppearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             GetStateModules();
             base.OnAppearing();
@@ -53,9 +53,9 @@ namespace DomoticApp.Views.Monitoreo
         }
 
         [Obsolete]
-#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning disable CS0809
         protected override void OnDisappearing()
-#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+#pragma warning restore CS0809
         {
             base.OnDisappearing();
             Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
@@ -69,8 +69,6 @@ namespace DomoticApp.Views.Monitoreo
 
        void GetStateModules()
         {
-            /*controlesAlexa = await data.GetControlesAlexa();
-            var alexaDormitorio = GetStateAlexaDormitorio();*/
             var dormitorio = GetStateDormitorio();
             var cocina = GetStateCocina();
             var bath = GetStateBath();
@@ -86,23 +84,6 @@ namespace DomoticApp.Views.Monitoreo
             else
             {
                 lblTextoActivos.IsVisible = true;
-            }
-        }
-
-        bool GetStateAlexaDormitorio()
-        {
-            var abanicoDormitorio = controlesAlexa.Select(x => x.AbanicoDormitorio).FirstOrDefault();
-            var luz1 = controlesAlexa.Select(x => x.LuzDormitorio1).FirstOrDefault();
-            var luz2 = controlesAlexa.Select(x => x.LuzDormitorio2).FirstOrDefault();
-
-            if(abanicoDormitorio == 1 || luz1 == 1 || luz2 == 1)
-            {
-                btnDormitorio.IsVisible = true;
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -223,9 +204,9 @@ namespace DomoticApp.Views.Monitoreo
             }
         }
 
-        private void btnDormitorio_Clicked(object sender, EventArgs e)
+        private async void btnDormitorio_Clicked(object sender, EventArgs e)
         {
-            
+            await Navigation.PushAsync(new ControlDormitorioPage());
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)
