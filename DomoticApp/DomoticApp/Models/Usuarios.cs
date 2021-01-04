@@ -3,11 +3,12 @@
     public class Usuarios
     {
         public int UsuarioID { get; set; }
-        public string UsuarioNombreCompleto { get; set; }
-        public string UsuarioCorreo { get; set; }
-        public string NombreUsuario { get; set; }
-        public string UsuarioClave { get; set; }
         public string UsuarioRol { get; set; }
-        public Accesos AccesoID { get; set; }
+        public string UsuarioNombreReal { get; set; }
+        public string UsuarioNombre { get; set; }
+        public string UsuarioCorreo { get; set; }
+        public string UsuarioClave { get; set; }
+        public string Acceso { get; set; }
+        public string UsuarioEstado { get; set; }
     }
 }

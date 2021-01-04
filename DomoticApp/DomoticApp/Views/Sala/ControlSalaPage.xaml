@@ -89,9 +89,7 @@
                                FontSize="19" />
                         <Grid ColumnSpacing="10">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="330" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="0.1*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -114,13 +112,13 @@
                                                TextColor="#166498"
                                                HorizontalTextAlignment="Center"
                                                FontFamily="{StaticResource RalewayBold}"
-                                               FontSize="16"
+                                               FontSize="Medium"
                                                Margin="0,25,0,10" />
                                         <Label TextColor="#166498"
                                                HorizontalTextAlignment="Center"
                                                x:Name="lblTemp"
                                                FontFamily="{StaticResource RalewayBold}"
-                                               FontSize="17"/>
+                                               FontSize="Title"/>
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
@@ -129,9 +127,7 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Image Source="temperatura.png"
-                                                   Margin="0,30,0,0"
-                                                   WidthRequest="120"
-                                                   HeightRequest="170"/>
+                                                   Margin="10"/>
                                         </Grid>
                                     </StackLayout>
                                 </Grid>
@@ -154,7 +150,7 @@
                                                TextColor="#166498"
                                                HorizontalTextAlignment="Center"
                                                FontFamily="{StaticResource RalewayBold}"
-                                               FontSize="15"
+                                               FontSize="Medium"
                                                Margin="0,25,0,10" />
                                         <Label TextColor="#166498"
                                                HorizontalTextAlignment="Center"
@@ -170,18 +166,11 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Image Source="humedad.png"
-                                                   Margin="0,30,0,0"
-                                                   WidthRequest="100"
-                                                   HeightRequest="130" />
+                                                   Margin="10"/>
                                         </Grid>
                                     </StackLayout>
                                 </Grid>
                             </Frame>
-                            <Button Text="Actualizar"
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Style="{StaticResource BtnUpdateTempHumCal}"
-                                    x:Name="btnUpdateTempHumCal"/>
                         </Grid>
                     </StackLayout>
                 </Frame>

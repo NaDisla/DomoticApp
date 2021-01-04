@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DomoticApp.Views.Opciones.OpcionesAdminPage"
              xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:Syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:local="clr-namespace:DomoticApp.Customs">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CustomGridStyle x:Key="ColorAlternoFila" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <magic:GradientView VerticalOptions="FillAndExpand">
@@ -23,7 +30,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.6*" />
                     <RowDefinition Height="0.6*" />
-                    <RowDefinition Height="150" />
+                    <RowDefinition Height="120" />
                     <RowDefinition Height="0.3*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -39,13 +46,15 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        Grid.ColumnSpan="2"
-                       Style="{StaticResource TitlePage}" />
+                       Style="{StaticResource TitlePage}"
+                       x:Name="lblTitlePage"/>
                 <Frame Grid.ColumnSpan="4"
                        Grid.Row="2"
                        Style="{StaticResource Panel}">
                     <StackLayout>
                         <Label Text="Mantenimiento"
-                               Style="{StaticResource FrameName}" />
+                               Style="{StaticResource FrameName}" 
+                               x:Name="lblTitleFrameMantenimiento"/>
                         <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -59,36 +68,80 @@
                                     Clicked="btnUsuarios_Clicked"
                                     ImageSource="usuarios.png"
                                     Style="{StaticResource BtnIconoIzquierda}"
-                                    Padding="20,8,0,5"/>
+                                    Padding="20,8,15,5"/>
                             <Button Text="Accesos"
                                     x:Name="btnAccesos"
                                     Clicked="btnAccesos_Clicked"
                                     ImageSource="accesos.png"
                                     Grid.Column="1"
-                                    Style="{StaticResource BtnIconoIzquierda}" />
+                                    Style="{StaticResource BtnIconoIzquierda}"
+                                    Padding="20,8,15,5"/>
                         </Grid>
                     </StackLayout>
                 </Frame>
                 <Frame Grid.ColumnSpan="4"
                        Grid.RowSpan="3"
                        Grid.Row="4"
-                       Style="{StaticResource Panel}">
+                       Style="{StaticResource Panel}"
+                       x:Name="FrameUsuariosAccesos"
+                       IsVisible="False">
                     <StackLayout>
-                        <Label Text="Log de actividades"
-                               Style="{StaticResource FrameName}" />
-                        <Grid ColumnSpacing="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <Label Style="{StaticResource FrameName}"
+                               x:Name="lblTitleFrameUsuariosAccesos"
+                               Text="Listado de usuarios"/>
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Text="Entradas a la vivienda"
-                                    x:Name="btnEntradas"
-                                    Clicked="btnEntradas_Clicked"
-                                    ImageSource="usuarios.png"
-                                    Style="{StaticResource DispositivosOFF}"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200" x:Name="rowGrid"/>
+                                <RowDefinition Height="0.1*" />
+                                <RowDefinition Height="0.4*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Syncfusion:SfDataGrid x:Name="usuariosGrid"
+                                                   IsVisible="False"
+                                                   ColumnSizer="Star"
+                                                   AutoGenerateColumns="True"
+                                                   SelectionMode="Multiple"
+                                                   GridStyle="{StaticResource ColorAlternoFila}"
+                                                   Grid.ColumnSpan="7"
+                                                   SelectionChanged="usuariosGrid_SelectionChanged"
+                                                   x:FieldModifier="public">
+                            </Syncfusion:SfDataGrid>
+                            <Button Text="Desactivar/activar usuario"
+                                    Style="{StaticResource BtnMantenimiento}"
+                                    BackgroundColor="LightGray"
+                                    Grid.Row="2"
+                                    Grid.RowSpan="8"
+                                    TextColor="#0E4265"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="5"
+                                    x:Name="btnDesactivarUsuario"
+                                    Clicked="btnDesactivarUsuario_Clicked"/>
+                            <Button Text="Asignar acceso"
+                                    BackgroundColor="#b9d9f0"
+                                    Grid.Row="2"
+                                    Grid.RowSpan="8"
+                                    Style="{StaticResource BtnMantenimiento}"
+                                    TextColor="#166498"
+                                    Grid.ColumnSpan="3"
+                                    x:Name="btnAsignarAcceso"
+                                    Clicked="btnAsignarAcceso_Clicked"/>
+                            <Button Text="Desactivar token/tarjeta"
+                                    BackgroundColor="LightGray"
+                                    Grid.Row="2"
+                                    Grid.Column="4"
+                                    Grid.RowSpan="8"
+                                    Style="{StaticResource BtnMantenimiento}"
+                                    TextColor="#0E4265"
+                                    Grid.ColumnSpan="3"
+                                    x:Name="btnDesactivarTokenTarjeta"
+                                    Clicked="btnDesactivarTokenTarjeta_Clicked"/>
                         </Grid>
                     </StackLayout>
                 </Frame>

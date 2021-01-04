@@ -65,10 +65,12 @@ namespace DomoticApp.DataHelpers
                 await PopupNavigation.PushAsync(loading);
                 await Task.Delay(2000);
                 var getUsers = await data.GetUsuarios();
-                var userLogin = getUsers.Where(x => x.NombreUsuario == txtUser.Text && x.UsuarioClave == claveEncriptada)
+                var userLogin = getUsers.Where(x => x.UsuarioNombre == txtUser.Text && x.UsuarioClave == claveEncriptada)
                     .Select(y => y.UsuarioRol).FirstOrDefault();
-                nombreRealUsuario = getUsers.Where(n => n.NombreUsuario == txtUser.Text && n.UsuarioClave == claveEncriptada)
-                    .Select(m => m.UsuarioNombreCompleto).FirstOrDefault();
+                nombreRealUsuario = getUsers.Where(n => n.UsuarioNombre == txtUser.Text && n.UsuarioClave == claveEncriptada)
+                    .Select(m => m.UsuarioNombreReal).FirstOrDefault();
+                var estadoUsuario = getUsers.Where(y => y.UsuarioNombre == txtUser.Text && y.UsuarioClave == claveEncriptada)
+                    .Select(v => v.UsuarioEstado).FirstOrDefault();
 
                 if (userLogin == "Administrador")
                 {
@@ -85,6 +87,13 @@ namespace DomoticApp.DataHelpers
                     await SecureStorage.SetAsync("isLogged", "2");
                     await SecureStorage.SetAsync("nombreUsuario", nombreRealUsuario);
                     result = 2;
+                }
+                else if(estadoUsuario == "Inactivo")
+                {
+                    await PopupNavigation.RemovePageAsync(loading);
+                    titleError = "Estado inactivo";
+                    detailError = "No puede iniciar sesión debido a que se encuentra inactivo.";
+                    await results.Unsuccess(titleError, detailError);
                 }
                 else
                 {

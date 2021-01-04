@@ -7,13 +7,9 @@ namespace DomoticApp.DataHelpers
 {
     public class ResultsOperations
     {
-        string titleAlert, detailAlert;
-
         [Obsolete]
-        public async Task Alert()
+        public async Task Alert(string titleAlert, string detailAlert)
         {
-            titleAlert = "Contraseñas no coinciden";
-            detailAlert = "Las contraseñas no coinciden. Verifique nuevamente.";
             AlertPage alert = new AlertPage(titleAlert, detailAlert);
             await PopupNavigation.PushAsync(alert);
         }
@@ -28,6 +24,12 @@ namespace DomoticApp.DataHelpers
         {
             IncorrectValidationPage incorrectValidation = new IncorrectValidationPage(titleUnsuccess, detailUnsuccess);
             await PopupNavigation.PushAsync(incorrectValidation);
+        }
+        [Obsolete]
+        public async Task Confirmation(string titleConfirmation, string detailConfirmation, string url)
+        {
+            ConfirmationPage confirmation = new ConfirmationPage(titleConfirmation, detailConfirmation, url);
+            await PopupNavigation.PushAsync(confirmation);
         }
     }
 }

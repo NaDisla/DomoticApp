@@ -15,6 +15,8 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
         RegistroBackend registroBackend = new RegistroBackend();
         CambiarClaveBackend cambioClave = new CambiarClaveBackend();
         public string usuario = "";
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
+
         public GeneralLoginPage()
         {
             InitializeComponent();
@@ -26,6 +28,30 @@ namespace DomoticApp.Views.Usuarios.GeneralLogin
             SendTap();
             HideElements();
             SecureStorage.RemoveAll();
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnAppearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnAppearing();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
+        protected override void OnDisappearing()
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
         }
 
         void HideElements()

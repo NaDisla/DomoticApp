@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using DomoticApp.Views.Popups;
-using System.Net.Http;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Essentials;
@@ -18,6 +17,10 @@ using DomoticApp.Views.Exteriores;
 using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
+using DomoticApp.DataHelpers;
+using DomoticApp.Models;
+using System.Net;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -26,26 +29,45 @@ namespace DomoticApp.Views.Monitoreo
     {
         public static Action inicio { get; set; }
         public int _stateReceived { get; set; }
+        ValidarCambioRed cambioRed = new ValidarCambioRed();
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        HubConnection connectHub;
+        public static int estadoDormitorio;
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
         {
             InitializeComponent();
-
             inicio = solicitudMenu;
             btnMenu.Clicked += (s, e) => inicio();
         }
 
+        [Obsolete]
+#pragma warning disable CS0809
         protected override void OnAppearing()
+#pragma warning restore CS0809
         {
             GetStateModules();
-
             base.OnAppearing();
-
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        void GetStateModules()
+        [Obsolete]
+#pragma warning disable CS0809
+        protected override void OnDisappearing()
+#pragma warning restore CS0809
+        {
+            base.OnDisappearing();
+            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
+        }
+
+        [Obsolete]
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            cambioRed.NetworkChanged(e);
+        }
+
+       void GetStateModules()
         {
             var dormitorio = GetStateDormitorio();
             var cocina = GetStateCocina();
@@ -182,20 +204,9 @@ namespace DomoticApp.Views.Monitoreo
             }
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
-        }
-
-        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            await DisplayAlert("Red Cambiada", "Estado: " + e.NetworkAccess, "OK");
-        }
-
         private async void btnDormitorio_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new ControlDormitorioPage());
+            await Navigation.PushAsync(new ControlDormitorioPage());
         }
 
         private void btnCocina_Clicked(object sender, EventArgs e)

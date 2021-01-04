@@ -91,6 +91,16 @@
                         Value="{StaticResource RalewayBold}" />
             </Style>
 
+            <Style TargetType="Label"
+                   x:Key="NombreCampoPerfil">
+                <Setter Property="TextColor"
+                        Value="#166498" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}" />
+            </Style>
+
             <Style TargetType="BoxView"
                    x:Key="PopupLine">
                 <Setter Property="HeightRequest"
@@ -139,6 +149,10 @@
                         Value="0,8,0,5" />
                 <Setter Property="FontSize"
                         Value="15" />
+                <Setter Property="BorderColor"
+                        Value="#165E8D"/>
+                <Setter Property="BorderWidth"
+                        Value="1" />
             </Style>
 
             <Style TargetType="Button"
@@ -156,7 +170,11 @@
                 <Setter Property="Padding"
                         Value="0,8,0,5" />
                 <Setter Property="FontSize"
-                        Value="15" />
+                        Value="16" />
+                <Setter Property="BorderColor"
+                        Value="#165E8D" />
+                <Setter Property="BorderWidth"
+                        Value="1" />
             </Style>
 
             <Style TargetType="Button"
@@ -389,10 +407,10 @@
                         Value="20,0,0,0" />
             </Style>
 
-            <Style TargetType="Button" 
+            <Style TargetType="Button"
                    x:Key="Activos">
                 <Setter Property="BackgroundColor"
-                        Value="#D2E9F8"/>
+                        Value="#D2E9F8" />
                 <Setter Property="FontSize"
                         Value="15" />
                 <Setter Property="BorderColor"
@@ -412,38 +430,58 @@
             </Style>
 
             <Style TargetType="Button"
-                   x:Key="BtnUpdateTempHumCal">
-                <Setter Property="CornerRadius" 
-                        Value="15"/>
+                   x:Key="SaludoUsuario">
                 <Setter Property="FontFamily"
                         Value="{StaticResource RalewaySemiBold}" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="TextColor"
+                        Value="#707087" />
+                <Setter Property="BorderColor"
+                        Value="#707087" />
+                <Setter Property="Padding"
+                        Value="12,8,12,8" />
                 <Setter Property="BackgroundColor"
-                        Value="#2E7BA9" />
+                        Value="#F0F0F3" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
+                <Setter Property="BorderWidth"
+                        Value="1" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+            </Style>
+            <Style TargetType="Label" x:Key="NivelAgua">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewaySemiBold}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor"
+                        Value="#166498"/>
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="Button"
+                   x:Key="BtnActualizar">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="FontSize"
+                        Value="16" />
                 <Setter Property="TextColor"
                         Value="White" />
-                <Setter Property="FontSize"
-                        Value="16"/>
-            </Style>
-
-            <Style TargetType="Button" x:Key="SaludoUsuario">
-                <Setter Property="FontFamily" 
-                        Value="{StaticResource RalewaySemiBold}"/>
-                <Setter Property="FontSize"
-                        Value="17"/>
-                <Setter Property="TextColor"
-                        Value="#707087"/>
-                <Setter Property="BorderColor"
-                        Value="#707087"/>
-                <Setter Property="Padding"
-                        Value="12,8,12,8"/>
                 <Setter Property="BackgroundColor"
-                        Value="#F0F0F3"/>
+                        Value="#166498" />
                 <Setter Property="CornerRadius"
-                        Value="30"/>
-                <Setter Property="BorderWidth"
-                        Value="1"/>
-                <Setter Property="HorizontalOptions"
-                        Value="CenterAndExpand"/>
+                        Value="15" />
+            </Style>
+            <Style TargetType="Button"
+                   x:Key="BtnMantenimiento">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RalewayBold}" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="IsVisible"
+                        Value="False" />
+                <Setter Property="CornerRadius"
+                        Value="30" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

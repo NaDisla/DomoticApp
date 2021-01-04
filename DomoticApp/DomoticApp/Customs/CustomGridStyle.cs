@@ -13,11 +13,6 @@ namespace DomoticApp.Customs
 
         }
 
-        public override Color GetAlternatingRowBackgroundColor()
-        {
-            return Color.FromHex("#99c8f0");
-        }
-
         public override Color GetRecordForegroundColor()
         {
             return Color.FromHex("#1E619A");
@@ -25,7 +20,7 @@ namespace DomoticApp.Customs
 
         public override Color GetSelectionBackgroundColor()
         {
-            return Color.LightGray;
+            return Color.DarkGray;
         }
     }
 }

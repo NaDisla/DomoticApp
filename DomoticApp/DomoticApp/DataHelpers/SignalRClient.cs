@@ -10,12 +10,12 @@ namespace DomoticApp.DataHelpers
     public class SignalRClient
     {
         HubConnection connectHub;
-        const string urlServer = "http://10.0.0.5:45458/actionHub";
-        Button buttonReceived;
+        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
+        Button receiveButton;
 
         public SignalRClient(Button btnReceived)
         {
-            buttonReceived = btnReceived;
+            receiveButton = btnReceived;
             InitializeAction();
         }
 
@@ -30,20 +30,20 @@ namespace DomoticApp.DataHelpers
             connectHub = new HubConnectionBuilder().WithUrl(urlServer).Build();
             connectHub.On<int>("ReceiveState", (stateReceived) =>
              {
-                 CambiaColor(buttonReceived, stateReceived);   
+                 CambiaColor(receiveButton, stateReceived);
              });
         }
        
         private void CambiaColor(Button button, int stateButton)
         {
-            if (stateButton == 0)
+            if (stateButton == 1)
             {
                 button.BackgroundColor = Color.FromHex("#739DB8");
                 button.TextColor = Color.White;
             }
             else
             {
-                button.BackgroundColor = Color.AliceBlue;
+                button.BackgroundColor = Color.FromHex("#b9d9f0");
                 button.TextColor = Color.FromHex("#166498");
             }
         }

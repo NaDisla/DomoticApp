@@ -19,12 +19,27 @@ namespace DomoticApp.DataHelpers
                 user => new Usuarios 
                 {
                     UsuarioID = user.Object.UsuarioID,
-                    AccesoID = user.Object.AccesoID,
-                    UsuarioNombreCompleto = user.Object.UsuarioNombreCompleto,
+                    Acceso = user.Object.Acceso,
+                    UsuarioNombreReal = user.Object.UsuarioNombreReal,
                     UsuarioCorreo = user.Object.UsuarioCorreo,
-                    NombreUsuario = user.Object.NombreUsuario,
+                    UsuarioNombre = user.Object.UsuarioNombre,
                     UsuarioClave = user.Object.UsuarioClave,
-                    UsuarioRol = user.Object.UsuarioRol
+                    UsuarioRol = user.Object.UsuarioRol,
+                    UsuarioEstado = user.Object.UsuarioEstado
+                }).ToList();
+        }
+
+        public async Task<List<ControlesAlexa>> GetControlesAlexa()
+        {
+            return (await client.Child("ControlesAlexa").OnceAsync<ControlesAlexa>()).Select(
+                alexa => new ControlesAlexa
+                {
+                    AbanicoDormitorio = alexa.Object.AbanicoDormitorio,
+                    AbanicoSala = alexa.Object.AbanicoSala,
+                    LuzDormitorio1 = alexa.Object.LuzDormitorio1,
+                    LuzDormitorio2 = alexa.Object.LuzDormitorio1,
+                    LuzSala1 = alexa.Object.LuzSala1,
+                    LuzSala2 = alexa.Object.LuzSala2
                 }).ToList();
         }
 
@@ -35,7 +50,7 @@ namespace DomoticApp.DataHelpers
             return users.Where(a => a.UsuarioID == idUsuario).FirstOrDefault();
         }
 
-        public async Task AgregarUsuario(int id, string nombreCompleto, string correo, string nombreUsuario, string clave)
+        public async Task AgregarUsuario(int id, string nombreReal, string correo, string nombreUsuario, string clave)
         {
             var obtenerUsuarios = await GetUsuarios();
 
@@ -44,11 +59,13 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombreCompleto = nombreCompleto,
+                    UsuarioNombreReal = nombreReal,
                     UsuarioCorreo = correo,
-                    NombreUsuario = nombreUsuario,
+                    UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
-                    UsuarioRol = "Administrador"
+                    UsuarioRol = "Administrador",
+                    Acceso = "null",
+                    UsuarioEstado = "Activo"
                  });
             }
             else
@@ -56,31 +73,24 @@ namespace DomoticApp.DataHelpers
                 await client.Child("Usuarios").PostAsync(new Usuarios() 
                 {
                     UsuarioID = id,
-                    UsuarioNombreCompleto = nombreCompleto,
+                    UsuarioNombreReal = nombreReal,
                     UsuarioCorreo = correo,
-                    NombreUsuario = nombreUsuario,
+                    UsuarioNombre = nombreUsuario,
                     UsuarioClave = clave,
-                    UsuarioRol = "Habitante"
+                    UsuarioRol = "Habitante",
+                    Acceso = "null",
+                    UsuarioEstado = "Activo"
                 });
             }
         }
         
-        public async Task AgregarClave(int id, string nombre, string valor)
-        {
-            await client.Child("Accesos").PostAsync(new Accesos()
-            {
-                AccesoID = id,
-                AccesoTipo = nombre,
-                AccesoValor = valor
-            });
-        }
-        
-        public async Task CambiarClave(int codigo, string usuario)
+        public async Task CambiarClave(int codigo, string usuario, string fecha)
         {
             await client.Child("CambiosClaveUsuarios").PostAsync(new CambiarClaveUsuario()
             {
                 CodigoCambio = codigo,
-                NombreUsuario = usuario
+                NombreUsuario = usuario,
+                FechaCambio = fecha
             });
         }
         
@@ -90,7 +100,8 @@ namespace DomoticApp.DataHelpers
                 userCodigo => new CambiarClaveUsuario
                 {
                     CodigoCambio = userCodigo.Object.CodigoCambio,
-                    NombreUsuario = userCodigo.Object.NombreUsuario
+                    NombreUsuario = userCodigo.Object.NombreUsuario,
+                    FechaCambio = userCodigo.Object.FechaCambio
                 }).ToList();
         }
         
@@ -102,8 +113,9 @@ namespace DomoticApp.DataHelpers
             await client.Child("CambiosClaveUsuarios").Child(updateCodigo.Key)
                 .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, CodigoCambio = codigo});
         }
+        
         public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave, 
-            string rolUsuario)
+            string rolUsuario, string acceso, string estado)
         {
             var claveNueva = (await client.Child("Usuarios").OnceAsync<Usuarios>()).
                 Where(x => x.Object.UsuarioID == idUsuario).FirstOrDefault();
@@ -111,11 +123,13 @@ namespace DomoticApp.DataHelpers
             await client.Child("Usuarios").Child(claveNueva.Key).PutAsync(new Usuarios() 
             {
                 UsuarioID = idUsuario,
-                UsuarioNombreCompleto = nombreRealUsuario,
+                UsuarioNombreReal = nombreRealUsuario,
                 UsuarioCorreo = correoUsuario,
-                NombreUsuario = nombreUsuario,
+                UsuarioNombre = nombreUsuario,
                 UsuarioClave = nuevaClave,
-                UsuarioRol = rolUsuario
+                UsuarioRol = rolUsuario,
+                Acceso = acceso,
+                UsuarioEstado = estado
             });
         }
     }

@@ -15,8 +15,8 @@ namespace DomoticApp.DataHelpers
         Random codigoCambio = new Random();
         GeneralData data = new GeneralData();
         ResultsOperations results = new ResultsOperations();
-        string detailLoading, titleError, detailError, titleCorrect, detailCorrect;
-
+        string detailLoading, titleError, detailError, titleCorrect, detailCorrect, titleAlert, detailAlert;
+        
         #region EnviarCodigo
         [Obsolete]
         public void EnviarCodigo(Entry txtUsuarioCambioClave, Frame frameUsuarioCambiarClave, Button btnEnviarCodigo,
@@ -65,7 +65,7 @@ namespace DomoticApp.DataHelpers
                 await PopupNavigation.PushAsync(loadingUsuario);
                 await Task.Delay(2000);
                 var getUsers = await data.GetUsuarios();
-                var userCorreo = getUsers.Where(x => x.NombreUsuario == txtUsuarioCambioClave.Text)
+                var userCorreo = getUsers.Where(x => x.UsuarioNombre == txtUsuarioCambioClave.Text)
                     .Select(y => y.UsuarioCorreo).FirstOrDefault();
 
                 if (userCorreo != null)
@@ -78,11 +78,12 @@ namespace DomoticApp.DataHelpers
 
                     var getUserCodigo = await data.GetUsuariosCambioClave();
                     var userCodigo = getUserCodigo.Where(x => x.NombreUsuario == txtUsuarioCambioClave.Text).ToList();
+                    var fechaCambio = DateTime.Now.ToShortDateString();
 
                     if (userCodigo.Count == 0)
                     {
                         ConfigEnviarCorreo(mail, SmtpServer, userCorreo, loadingSend, result);
-                        await data.CambiarClave(codigo, txtUsuarioCambioClave.Text);
+                        await data.CambiarClave(codigo, txtUsuarioCambioClave.Text, fechaCambio);
                         ControlesCodigo(frameUsuarioCambiarClave, btnEnviarCodigo, frameCodigo, btnConfirmarCodigo);
                     }
                     else
@@ -236,7 +237,9 @@ namespace DomoticApp.DataHelpers
             {
                 if (txtConfirmarClaveNueva.Text != txtNuevaClave.Text)
                 {
-                    await results.Alert();
+                    titleAlert = "Contraseñas no coinciden";
+                    detailAlert = "Las contraseñas no coinciden. Intente nuevamente.";
+                    await results.Alert(titleAlert, detailAlert);
                 }
                 else
                 {
@@ -248,15 +251,17 @@ namespace DomoticApp.DataHelpers
                     try
                     {
                         var getUsers = await data.GetUsuarios();
-                        var idUsuario = getUsers.Where(y => y.NombreUsuario == txtUsuarioCambioClave.Text).Select(x => x.UsuarioID).FirstOrDefault();
+                        var idUsuario = getUsers.Where(y => y.UsuarioNombre == txtUsuarioCambioClave.Text).Select(x => x.UsuarioID).FirstOrDefault();
                         var infoUsuario = await data.GetUsuario(idUsuario);
                         int usuarioID = infoUsuario.UsuarioID;
-                        string nombreRealUsuario = infoUsuario.UsuarioNombreCompleto;
-                        string nombreUsuario = infoUsuario.NombreUsuario;
+                        string nombreRealUsuario = infoUsuario.UsuarioNombreReal;
+                        string nombreUsuario = infoUsuario.UsuarioNombre;
                         string claveEncriptada = DataSecurity.Encrypt(txtNuevaClave.Text, "sblw-3hn8-sqoy19");
                         string rolUsuario = infoUsuario.UsuarioRol;
                         string correoUsuario = infoUsuario.UsuarioCorreo;
-                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario);
+                        string accesoUsuario = infoUsuario.Acceso;
+                        string estadoUsuario = infoUsuario.UsuarioEstado;
+                        await data.UpdateUsuario(idUsuario, nombreRealUsuario, correoUsuario, nombreUsuario, claveEncriptada, rolUsuario, accesoUsuario, estadoUsuario);
                         await PopupNavigation.RemovePageAsync(loading);
                         titleCorrect = "Contraseña actualizada";
                         detailCorrect = "Se ha cambiado la contraseña exitosamente.";

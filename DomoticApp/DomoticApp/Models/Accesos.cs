@@ -2,8 +2,9 @@
 {
     public class Accesos
     {
-        public int AccesoID { get; set; }
-        public string AccesoTipo { get; set; }
-        public string AccesoValor { get; set; }
+        public string Usuario { get; set; }
+        public string ClaveTeclado { get; set; }
+        public string Token { get; set; }
+        public string Tarjeta { get; set; }
     }
 }
