@@ -80,8 +80,9 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.9*"/>
                                 <RowDefinition Height="170" />
+                                <RowDefinition Height="20*" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -146,7 +147,7 @@
                                     </StackLayout>
                                 </Grid>
                             </Frame>
-                            <Button Grid.Row="3"
+                            <Button Grid.Row="2"
                                     x:Name="btnActualizarNivelHumedad"
                                     Text="Actualizar humedad"
                                     Grid.ColumnSpan="3"
