@@ -16,7 +16,7 @@ namespace DomoticApp.Views.Cocina
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
         private readonly HttpClient client = new HttpClient();
         private string content;
-        int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0;
+        static int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0;
         HubConnection connectHub;
         ValidarCambioRed cambioRed = new ValidarCambioRed();
         CambiarColorBotones colorButton = new CambiarColorBotones();
@@ -111,12 +111,38 @@ namespace DomoticApp.Views.Cocina
             }
         }
 
+        void EstadoBotonLuz1()
+        {
+            if (estadoLogicaLuz1 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz1);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz1);
+            }
+        }
+
+        void EstadoBotonLuz2()
+        {
+            if (estadoLogicaLuz2 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz2);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz2);
+            }
+        }
+
         [Obsolete]
 #pragma warning disable CS0809
         protected override void OnAppearing()
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

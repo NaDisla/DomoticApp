@@ -22,7 +22,7 @@ namespace DomoticApp.Views.Lavado
         private string content;
         string humedad;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        int estadoLogicaLuz = 0;
+        static int estadoLogicaLuz = 0;
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
@@ -88,12 +88,25 @@ namespace DomoticApp.Views.Lavado
             }
         }
 
+        void EstadoBotonLuz()
+        {
+            if (estadoLogicaLuz == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz);
+            }
+        }
+
         [Obsolete]
 #pragma warning disable CS0809
         protected override void OnAppearing()
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuz();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

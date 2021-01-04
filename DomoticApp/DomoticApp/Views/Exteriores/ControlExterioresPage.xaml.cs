@@ -22,7 +22,7 @@ namespace DomoticApp.Views.Exteriores
         private string content;
 
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        int estadoLogicaLuz1Entrada = 0, estadoLogicaLuz2Entrada = 0, estadoLogicaLuz3Entrada = 0,
+        static int estadoLogicaLuz1Entrada = 0, estadoLogicaLuz2Entrada = 0, estadoLogicaLuz3Entrada = 0,
             estadoLogicaLuz1Jardin = 0, estadoLogicaLuz2Jardin = 0, estadoLogicaLuzTerraza = 0;
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
@@ -238,6 +238,77 @@ namespace DomoticApp.Views.Exteriores
             }
         }
 
+        void EstadoBotonLuzEntrada1()
+        {
+            if (estadoLogicaLuz1Entrada == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzEntrada1);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzEntrada1);
+            }
+        }
+
+        void EstadoBotonLuzEntrada2()
+        {
+            if (estadoLogicaLuz2Entrada == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzEntrada2);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzEntrada2);
+            }
+        }
+
+        void EstadoBotonLuzEntrada3()
+        {
+            if (estadoLogicaLuz3Entrada == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzEntrada3);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzEntrada3);
+            }
+        }
+
+        void EstadoBotonLuzJardin1()
+        {
+            if (estadoLogicaLuz1Jardin == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzJardin1);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzJardin1);
+            }
+        }
+
+        void EstadoBotonLuzJardin2()
+        {
+            if (estadoLogicaLuz2Jardin == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzJardin2);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzJardin2);
+            }
+        }
+
+        void EstadoBotonLuzTerraza()
+        {
+            if (estadoLogicaLuzTerraza == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuzTerraza);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuzTerraza);
+            }
+        }
 
         [Obsolete]
 #pragma warning disable CS0809
@@ -245,6 +316,12 @@ namespace DomoticApp.Views.Exteriores
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuzEntrada1();
+            EstadoBotonLuzEntrada2();
+            EstadoBotonLuzEntrada3();
+            EstadoBotonLuzJardin1();
+            EstadoBotonLuzJardin2();
+            EstadoBotonLuzTerraza();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

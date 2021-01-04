@@ -19,7 +19,7 @@ namespace DomoticApp.Views.Sala
         private readonly HttpClient client = new HttpClient();
         private string content;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
+        static int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
@@ -145,6 +145,41 @@ namespace DomoticApp.Views.Sala
             }
         }
 
+        void EstadoBotonLuz1()
+        {
+            if (estadoLogicaLuz1 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz1);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz1);
+            }
+        }
+
+        void EstadoBotonLuz2()
+        {
+            if (estadoLogicaLuz2 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz2);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz2);
+            }
+        }
+
+        void EstadoBotonAbanico()
+        {
+            if (estadoLogicaAbanico == 0)
+            {
+                colorButton.CambiarColorOFF(btnAbanico);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnAbanico);
+            }
+        }
 
         [Obsolete]
 #pragma warning disable CS0809
@@ -152,6 +187,9 @@ namespace DomoticApp.Views.Sala
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
+            EstadoBotonAbanico();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

@@ -16,7 +16,7 @@ namespace DomoticApp.Views.Bath
         public static int stateLuz = 0;
         private const string urlLuz = "http://10.0.0.17/luz-bath";
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        int estadoLogicaLuz = 0;
+        static int estadoLogicaLuz = 0;
         HubConnection connectHub;
         private readonly HttpClient client = new HttpClient();
         private string content;
@@ -28,7 +28,6 @@ namespace DomoticApp.Views.Bath
         {
             InitializeComponent();
             InitializeAction();
-
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -85,12 +84,25 @@ namespace DomoticApp.Views.Bath
             }
         }
 
+        void EstadoBotonLuz()
+        {
+            if (estadoLogicaLuz == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz);
+            }
+        }
+
         [Obsolete]
 #pragma warning disable CS0809
         protected override void OnAppearing()
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuz();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

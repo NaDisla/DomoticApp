@@ -22,7 +22,7 @@ namespace DomoticApp.Views.Dormitorio
         CambiarColorBotones colorButton = new CambiarColorBotones();
         HubConnection connectHub;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
+        static int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
 
         [Obsolete]
         public ControlDormitorioPage()
@@ -30,7 +30,6 @@ namespace DomoticApp.Views.Dormitorio
             InitializeComponent();
             InitializeAction();
             DatosTermicos();
-
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -68,6 +67,42 @@ namespace DomoticApp.Views.Dormitorio
             {
                 colorButton.CambiarColorOFF(button);
                 estadoLogicaLuz1 = 0;
+            }
+        }
+
+        void EstadoBotonLuz1()
+        {
+            if(estadoLogicaLuz1 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz1);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz1);
+            }
+        }
+
+        void EstadoBotonLuz2()
+        {
+            if (estadoLogicaLuz2 == 0)
+            {
+                colorButton.CambiarColorOFF(btnLuz2);
+            }
+            else
+            {
+                colorButton.CambiarColorLucesON(btnLuz2);
+            }
+        }
+
+        void EstadoBotonAbanico()
+        {
+            if (estadoLogicaAbanico == 0)
+            {
+                colorButton.CambiarColorOFF(btnAbanico);
+            }
+            else
+            {
+                colorButton.CambiarColorOtrosON(btnAbanico);
             }
         }
 
@@ -159,6 +194,9 @@ namespace DomoticApp.Views.Dormitorio
 #pragma warning restore CS0809
         {
             base.OnAppearing();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
+            EstadoBotonAbanico();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
