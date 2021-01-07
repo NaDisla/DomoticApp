@@ -2,6 +2,7 @@
 using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -23,11 +24,13 @@ namespace DomoticApp.Views.Bath
 
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
+        GeneralData data = new GeneralData();
 
         public ControlBathPage()
         {
             InitializeComponent();
             InitializeAction();
+            EstadoBotonLuz();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -84,15 +87,20 @@ namespace DomoticApp.Views.Bath
             }
         }
 
-        void EstadoBotonLuz()
+        async void EstadoBotonLuz()
         {
-            if (estadoLogicaLuz == 0)
+            var getEstado = await data.GetEstadoBath();
+            var luz = getEstado.Where(x => x.Luz == 0 || x.Luz == 1).Select(y => y.Luz).FirstOrDefault();
+
+            if (luz == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz);
+                estadoLogicaLuz = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz);
+                estadoLogicaLuz = 1;
             }
         }
 
@@ -102,7 +110,6 @@ namespace DomoticApp.Views.Bath
 #pragma warning restore CS0809
         {
             base.OnAppearing();
-            EstadoBotonLuz();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
@@ -126,6 +133,7 @@ namespace DomoticApp.Views.Bath
         {
             SendArduinoRequest(urlLuz, stateLuz);
             await SignalRSendStateLuzBath(estadoLogicaLuz);
+            await data.UpdateEstadoBath("B01", estadoLogicaLuz);
         }
 
         [Obsolete]

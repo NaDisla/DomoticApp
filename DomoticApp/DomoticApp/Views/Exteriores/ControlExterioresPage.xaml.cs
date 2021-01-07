@@ -2,6 +2,7 @@
 using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -27,11 +28,18 @@ namespace DomoticApp.Views.Exteriores
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
+        GeneralData data = new GeneralData();
 
         public ControlExterioresPage()
         {
             InitializeComponent();
             InitializeAction();
+            EstadoBotonLuzEntrada1();
+            EstadoBotonLuzEntrada2();
+            EstadoBotonLuzEntrada3();
+            EstadoBotonLuzJardin1();
+            EstadoBotonLuzJardin2();
+            EstadoBotonLuzTerraza();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -238,75 +246,111 @@ namespace DomoticApp.Views.Exteriores
             }
         }
 
-        void EstadoBotonLuzEntrada1()
+        async void EstadoBotonLuzEntrada1()
         {
-            if (estadoLogicaLuz1Entrada == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzEntrada1 = getEstado.Where(x => x.LuzEntrada1 == 0 || x.LuzEntrada1 == 1).
+                Select(y => y.LuzEntrada1).FirstOrDefault();
+
+            if (luzEntrada1 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzEntrada1);
+                estadoLogicaLuz1Entrada = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzEntrada1);
+                estadoLogicaLuz1Entrada = 1;
             }
         }
 
-        void EstadoBotonLuzEntrada2()
+        async void EstadoBotonLuzEntrada2()
         {
-            if (estadoLogicaLuz2Entrada == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzEntrada2 = getEstado.Where(x => x.LuzEntrada2 == 0 || x.LuzEntrada2 == 1).
+                Select(y => y.LuzEntrada2).FirstOrDefault();
+
+            if (luzEntrada2 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzEntrada2);
+                estadoLogicaLuz2Entrada = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzEntrada2);
+                estadoLogicaLuz2Entrada = 1;
             }
         }
 
-        void EstadoBotonLuzEntrada3()
+        async void EstadoBotonLuzEntrada3()
         {
-            if (estadoLogicaLuz3Entrada == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzEntrada3 = getEstado.Where(x => x.LuzEntrada3 == 0 || x.LuzEntrada3 == 1).
+                Select(y => y.LuzEntrada3).FirstOrDefault();
+
+            if (luzEntrada3 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzEntrada3);
+                estadoLogicaLuz3Entrada = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzEntrada3);
+                estadoLogicaLuz3Entrada = 1;
             }
         }
 
-        void EstadoBotonLuzJardin1()
+        async void EstadoBotonLuzJardin1()
         {
-            if (estadoLogicaLuz1Jardin == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzJardin1 = getEstado.Where(x => x.LuzJardin1 == 0 || x.LuzJardin1 == 1).
+                Select(y => y.LuzJardin1).FirstOrDefault();
+
+            if (luzJardin1 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzJardin1);
+                estadoLogicaLuz1Jardin = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzJardin1);
+                estadoLogicaLuz1Jardin = 1;
             }
         }
 
-        void EstadoBotonLuzJardin2()
+        async void EstadoBotonLuzJardin2()
         {
-            if (estadoLogicaLuz2Jardin == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzJardin2 = getEstado.Where(x => x.LuzJardin2 == 0 || x.LuzJardin2 == 1).
+                Select(y => y.LuzJardin2).FirstOrDefault();
+
+            if (luzJardin2 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzJardin2);
+                estadoLogicaLuz2Jardin = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzJardin2);
+                estadoLogicaLuz2Jardin = 1;
             }
         }
 
-        void EstadoBotonLuzTerraza()
+        async void EstadoBotonLuzTerraza()
         {
-            if (estadoLogicaLuzTerraza == 0)
+            var getEstado = await data.GetEstadoExteriores();
+            var luzTerraza = getEstado.Where(x => x.LuzTerraza == 0 || x.LuzTerraza == 1).
+                Select(y => y.LuzTerraza).FirstOrDefault();
+
+            if (luzTerraza == 0)
             {
                 colorButton.CambiarColorOFF(btnLuzTerraza);
+                estadoLogicaLuzTerraza = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuzTerraza);
+                estadoLogicaLuzTerraza = 1;
             }
         }
 
@@ -345,6 +389,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzEntrada1, stateLuzEntrada1);
             await SignalRSendStateLuz1Entrada(estadoLogicaLuz1Entrada);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]
@@ -352,6 +398,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzEntrada2, stateLuzEntrada2);
             await SignalRSendStateLuz2Entrada(estadoLogicaLuz2Entrada);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]
@@ -359,6 +407,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzEntrada3, stateLuzEntrada3);
             await SignalRSendStateLuz3Entrada(estadoLogicaLuz3Entrada);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]
@@ -366,6 +416,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzJardin1, stateLuzJardin1);
             await SignalRSendStateLuz1Jardin(estadoLogicaLuz1Jardin);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]
@@ -373,6 +425,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzJardin2, stateLuzJardin2);
             await SignalRSendStateLuz2Jardin(estadoLogicaLuz2Jardin);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]
@@ -380,6 +434,8 @@ namespace DomoticApp.Views.Exteriores
         {
             SendArduinoRequest(urlLuzTerraza, stateLuzTerraza);
             await SignalRSendStateLuzTerraza(estadoLogicaLuzTerraza);
+            await data.UpdateEstadoExteriores("E01", estadoLogicaLuz1Entrada, estadoLogicaLuz2Entrada, estadoLogicaLuz3Entrada,
+                estadoLogicaLuz1Jardin, estadoLogicaLuz2Jardin, estadoLogicaLuzTerraza);
         }
 
         [Obsolete]

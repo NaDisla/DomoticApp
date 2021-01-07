@@ -2,6 +2,7 @@
 using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -11,7 +12,7 @@ namespace DomoticApp.Views.Dormitorio
 {
     public partial class ControlDormitorioPage : ContentPage
     {
-        public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0, stateGeneral = 0;
+        public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0;
         private const string urlGeneral = "http://10.0.0.17";
         private const string urlLuz1 = "http://10.0.0.17/luz-dormitorio-1";
         private const string urlLuz2 = "http://10.0.0.17/luz-dormitorio-2";
@@ -23,6 +24,7 @@ namespace DomoticApp.Views.Dormitorio
         HubConnection connectHub;
         const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
         static int estadoLogicaLuz1 = 0, estadoLogicaLuz2 = 0, estadoLogicaAbanico = 0;
+        GeneralData data = new GeneralData();
 
         [Obsolete]
         public ControlDormitorioPage()
@@ -30,6 +32,10 @@ namespace DomoticApp.Views.Dormitorio
             InitializeComponent();
             InitializeAction();
             DatosTermicos();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
+            EstadoBotonAbanico();
+            
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -70,39 +76,54 @@ namespace DomoticApp.Views.Dormitorio
             }
         }
 
-        void EstadoBotonLuz1()
+        async void EstadoBotonLuz1()
         {
-            if(estadoLogicaLuz1 == 0)
+            var getEstado = await data.GetEstadoDormitorio();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+            
+            if (luz1 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz1);
+                estadoLogicaLuz1 = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz1);
+                estadoLogicaLuz1 = 1;
             }
         }
 
-        void EstadoBotonLuz2()
+        async void EstadoBotonLuz2()
         {
-            if (estadoLogicaLuz2 == 0)
+            var getEstado = await data.GetEstadoDormitorio();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
+            
+            if (luz2 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz2);
+                estadoLogicaLuz2 = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz2);
+                estadoLogicaLuz2 = 1;
             }
         }
 
-        void EstadoBotonAbanico()
+        async void EstadoBotonAbanico()
         {
-            if (estadoLogicaAbanico == 0)
+            var getEstado = await data.GetEstadoDormitorio();
+            var abanico = getEstado.Where(x => x.Abanico == 0 || x.Abanico == 1).Select(y => y.Abanico).FirstOrDefault();
+            
+            if (abanico == 0)
             {
                 colorButton.CambiarColorOFF(btnAbanico);
+                estadoLogicaAbanico = 0;
             }
             else
             {
                 colorButton.CambiarColorOtrosON(btnAbanico);
+                estadoLogicaAbanico = 1;
             }
         }
 
@@ -194,9 +215,6 @@ namespace DomoticApp.Views.Dormitorio
 #pragma warning restore CS0809
         {
             base.OnAppearing();
-            EstadoBotonLuz1();
-            EstadoBotonLuz2();
-            EstadoBotonAbanico();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
@@ -231,6 +249,7 @@ namespace DomoticApp.Views.Dormitorio
         {
             SendArduinoRequest(urlAbanico, stateAbanico);
             await SignalRSendStateAbanicoDormitorio(estadoLogicaAbanico);
+            await data.UpdateEstadoDormitorio("D01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]
@@ -238,6 +257,7 @@ namespace DomoticApp.Views.Dormitorio
         {
             SendArduinoRequest(urlLuz1, stateLuz1);
             await SignalRSendStateLuz1Dormitorio(estadoLogicaLuz1);
+            await data.UpdateEstadoDormitorio("D01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]
@@ -245,6 +265,7 @@ namespace DomoticApp.Views.Dormitorio
         {
             SendArduinoRequest(urlLuz2, stateLuz2);
             await SignalRSendStateLuz2Dormitorio(estadoLogicaLuz2);
+            await data.UpdateEstadoDormitorio("D01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]

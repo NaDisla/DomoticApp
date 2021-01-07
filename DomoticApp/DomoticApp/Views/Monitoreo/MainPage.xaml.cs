@@ -18,9 +18,6 @@ using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.DataHelpers;
-using DomoticApp.Models;
-using System.Net;
-using Microsoft.AspNetCore.SignalR.Client;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -30,9 +27,7 @@ namespace DomoticApp.Views.Monitoreo
         public static Action inicio { get; set; }
         public int _stateReceived { get; set; }
         ValidarCambioRed cambioRed = new ValidarCambioRed();
-        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        HubConnection connectHub;
-        public static int estadoDormitorio;
+        GeneralData data = new GeneralData();
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
@@ -47,7 +42,7 @@ namespace DomoticApp.Views.Monitoreo
         protected override void OnAppearing()
 #pragma warning restore CS0809
         {
-            GetStateModules();
+            EstadoAreas();
             base.OnAppearing();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
@@ -67,17 +62,17 @@ namespace DomoticApp.Views.Monitoreo
             cambioRed.NetworkChanged(e);
         }
 
-       void GetStateModules()
+        async void EstadoAreas()
         {
-            var dormitorio = GetStateDormitorio();
-            var cocina = GetStateCocina();
-            var bath = GetStateBath();
-            var exteriores = GetStateExteriores();
-            var lavadero = GetStateLavadero();
-            var recibidor = GetStateRecibidor();
-            var sala = GetStateSala();
+            var dormitorio = await EstadoDormitorio();
+            var sala = await EstadoSala();
+            var recibidor = await EstadoRecibidor();
+            var cocina = await EstadoCocina();
+            var exteriores = await EstadoExteriores();
+            var lavado = await EstadoLavado();
+            var bath = await EstadoBath();
 
-            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
+            if (dormitorio || sala || recibidor || cocina || exteriores || lavado || bath)
             {
                 lblTextoActivos.IsVisible = false;
             }
@@ -85,158 +80,194 @@ namespace DomoticApp.Views.Monitoreo
             {
                 lblTextoActivos.IsVisible = true;
             }
+
         }
 
-        bool GetStateDormitorio()
+        async Task<bool> EstadoDormitorio()
         {
-            var luzDormitorio1 = ControlDormitorioPage.stateLuz1;
-            var luzDormitorio2 = ControlDormitorioPage.stateLuz2;
-            var dormitorioAbanico = ControlDormitorioPage.stateAbanico;
+            var getEstado = await data.GetEstadoDormitorio();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
+            var abanico = getEstado.Where(x => x.Abanico == 0 || x.Abanico == 1).Select(y => y.Abanico).FirstOrDefault();
 
-            if (luzDormitorio1 == 1 || luzDormitorio2 == 1 || dormitorioAbanico == 1)
+            if (getEstado.Count == 0)
             {
-                btnDormitorio.IsVisible = true;
-                return true;
+                await data.AgregarEstadoDormitorio();
+                return false;
             }
             else
             {
-                return false;
+                if (luz1 == 1 || luz2 == 1 || abanico == 1)
+                {
+                    btnDormitorio.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateCocina()
+        async Task<bool> EstadoSala()
         {
-            var luzCocina1 = ControlCocinaPage.stateLuz1;
-            var luzCocina2 = ControlCocinaPage.stateLuz2;
+            var getEstado = await data.GetEstadoSala();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
+            var abanico = getEstado.Where(x => x.Abanico == 0 || x.Abanico == 1).Select(y => y.Abanico).FirstOrDefault();
 
-            if (luzCocina1 == 1 || luzCocina2 == 1)
+            if (getEstado.Count == 0)
             {
-                btnCocina.IsVisible = true;
-                return true;
+                await data.AgregarEstadoSala();
+                return false;
             }
             else
             {
-                return false;
+                if (luz1 == 1 || luz2 == 1 || abanico == 1)
+                {
+                    btnSala.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateBath()
+        async Task<bool> EstadoExteriores()
         {
-            var luzBath = ControlBathPage.stateLuz;
+            var getEstado = await data.GetEstadoExteriores();
+            var luzEntrada1 = getEstado.Where(x => x.LuzEntrada1 == 0 || x.LuzEntrada1 == 1).
+                Select(y => y.LuzEntrada1).FirstOrDefault();
+            var luzEntrada2 = getEstado.Where(x => x.LuzEntrada2 == 0 || x.LuzEntrada2 == 1).
+                Select(y => y.LuzEntrada2).FirstOrDefault();
+            var luzEntrada3 = getEstado.Where(x => x.LuzEntrada3 == 0 || x.LuzEntrada3 == 1).
+                Select(y => y.LuzEntrada3).FirstOrDefault();
+            var luzJardin1 = getEstado.Where(x => x.LuzJardin1 == 0 || x.LuzJardin1 == 1).
+                Select(y => y.LuzJardin1).FirstOrDefault();
+            var luzJardin2 = getEstado.Where(x => x.LuzJardin2 == 0 || x.LuzJardin2 == 1).
+                Select(y => y.LuzJardin2).FirstOrDefault();
+            var luzTerraza = getEstado.Where(x => x.LuzTerraza == 0 || x.LuzTerraza == 1).
+                Select(y => y.LuzTerraza).FirstOrDefault();
 
-            if (luzBath == 1 || luzBath == 1)
+            if (getEstado.Count == 0)
             {
-                btnBath.IsVisible = true;
-                return true;
+                await data.AgregarEstadoExteriores();
+                return false;
             }
             else
             {
-                return false;
+                if (luzEntrada1 == 1 || luzEntrada2 == 1 || luzEntrada3 == 1 || luzJardin1 == 1 || luzJardin2 == 1
+                    || luzTerraza == 1)
+                {
+                    btnExteriores.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateExteriores()
+        async Task<bool> EstadoBath()
         {
-            var luzEntrada1 = ControlExterioresPage.stateLuzEntrada1;
-            var luzEntrada2 = ControlExterioresPage.stateLuzEntrada2;
-            var luzEntrada3 = ControlExterioresPage.stateLuzEntrada3;
-            var luzJardin1 = ControlExterioresPage.stateLuzJardin1;
-            var luzJardin2 = ControlExterioresPage.stateLuzJardin2;
-            var luzTerraza = ControlExterioresPage.stateLuzTerraza;
+            var getEstado = await data.GetEstadoBath();
+            var luz = getEstado.Where(x => x.Luz == 0 || x.Luz == 1).Select(y => y.Luz).FirstOrDefault();
 
-            if (luzEntrada1 == 1 || luzEntrada2 == 1 || luzEntrada3 == 1 || luzJardin1 == 1 || luzJardin2 == 1 || luzTerraza == 1)
+            if (getEstado.Count == 0)
             {
-                btnExteriores.IsVisible = true;
-                return true;
+                await data.AgregarEstadoBath();
+                return false;
             }
             else
             {
-                return false;
+                if (luz == 1)
+                {
+                    btnBath.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateLavadero()
+        async Task<bool> EstadoLavado()
         {
-            var luzLavadero = ControlLavadoPage.stateLuz;
+            var getEstado = await data.GetEstadoLavadero();
+            var luz = getEstado.Where(x => x.Luz == 0 || x.Luz == 1).Select(y => y.Luz).FirstOrDefault();
 
-            if (luzLavadero == 1 || luzLavadero == 1)
+            if (getEstado.Count == 0)
             {
-                btnLavado.IsVisible = true;
-                return true;
+                await data.AgregarEstadoLavadero();
+                return false;
             }
             else
             {
-                return false;
+                if (luz == 1)
+                {
+                    btnLavado.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateRecibidor()
+        async Task<bool> EstadoCocina()
         {
-            var luzRecibidor1 = ControlRecibidorPage.stateLuz1;
-            var luzRecibidor2 = ControlRecibidorPage.stateLuz2;
-            var luzRecibidor3 = ControlRecibidorPage.stateLuz3;
+            var getEstado = await data.GetEstadoCocina();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
 
-            if (luzRecibidor1 == 1 || luzRecibidor2 == 1 || luzRecibidor3 == 1)
+            if (getEstado.Count == 0)
             {
-                btnRecibidor.IsVisible = true;
-                return true;
+                await data.AgregarEstadoCocina();
+                return false;
             }
             else
             {
-                return false;
+                if (luz1 == 1 || luz2 == 1)
+                {
+                    btnCocina.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        bool GetStateSala()
+        async Task<bool> EstadoRecibidor()
         {
-            var luzSala1 = ControlSalaPage.stateLuz1;
-            var luzSala2 = ControlSalaPage.stateLuz2;
-            var abanicoSala = ControlSalaPage.stateAbanico;
+            var getEstado = await data.GetEstadoRecibidor();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
+            var luz3 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
 
-            if (luzSala1 == 1 || luzSala2 == 1 || abanicoSala == 1)
+            if (getEstado.Count == 0)
             {
-                btnSala.IsVisible = true;
-                return true;
+                await data.AgregarEstadoRecibidor();
+                return false;
             }
             else
             {
-                return false;
+                if (luz1 == 1 || luz2 == 1 || luz3 == 1)
+                {
+                    btnRecibidor.IsVisible = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-        }
-
-        private async void btnDormitorio_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ControlDormitorioPage());
-        }
-
-        private void btnCocina_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLavado_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSala_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBath_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRecibidor_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExteriores_Clicked(object sender, EventArgs e)
-        {
-
         }
     }
 }
