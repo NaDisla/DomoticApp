@@ -40,7 +40,7 @@
                        Grid.RowSpan="9"
                        Grid.Row="2"
                        Style="{StaticResource Panel}">
-                    <Label Text="Módulos activos"
+                    <Label Text="Áreas activas"
                            TextColor="#0E4265"
                            FontFamily="{StaticResource RalewayBold}"
                            FontSize="19"/>
@@ -65,7 +65,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="No hay módulos activos."
+                                <Label Text="No hay áreas activas."
                                        FontFamily="{StaticResource RalewayBold}"
                                        TextColor="White"
                                        FontSize="19"
@@ -79,14 +79,12 @@
                                         Style="{StaticResource Activos}"
                                         ImageSource="dormitorio.png"
                                         x:Name="btnDormitorio"
-                                        Clicked="btnDormitorio_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Cocina"
                                         Grid.Column="2"
                                         Style="{StaticResource Activos}"
                                         ImageSource="cocina.png"
                                         x:Name="btnCocina"
-                                        Clicked="btnCocina_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Área de lavado"
                                         Grid.Row="1"
@@ -94,7 +92,6 @@
                                         ImageSource="lavado.png"
                                         Padding="5,10,5,0"
                                         x:Name="btnLavado"
-                                        Clicked="btnLavado_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Sala"
                                         Grid.Row="1"
@@ -102,7 +99,6 @@
                                         Style="{StaticResource Activos}"
                                         ImageSource="sala.png"
                                         x:Name="btnSala"
-                                        Clicked="btnSala_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Baño"
                                         Grid.Row="1"
@@ -110,14 +106,12 @@
                                         Style="{StaticResource Activos}"
                                         ImageSource="bath.png"
                                         x:Name="btnBath"
-                                        Clicked="btnBath_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Recibidor"
                                         Grid.Row="2"
                                         Style="{StaticResource Activos}"
                                         ImageSource="recibidor.png"
                                         x:Name="btnRecibidor"
-                                        Clicked="btnRecibidor_Clicked"
                                         IsVisible="False"/>
                                 <Button Text="Exteriores"
                                         Grid.Row="2"
@@ -125,7 +119,6 @@
                                         Style="{StaticResource Activos}"
                                         ImageSource="exteriores.png"
                                         x:Name="btnExteriores"
-                                        Clicked="btnExteriores_Clicked"
                                         IsVisible="False"/>
                             </Grid>
                         </StackLayout>

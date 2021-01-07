@@ -11,7 +11,7 @@ namespace DomoticApp.Views.Dormitorio
 {
     public partial class ControlDormitorioPage : ContentPage
     {
-        public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0, stateGeneral = 0;
+        public static int stateLuz1 = 0, stateLuz2 = 0, stateAbanico = 0;
         private const string urlGeneral = "http://10.0.0.17";
         private const string urlLuz1 = "http://10.0.0.17/luz-dormitorio-1";
         private const string urlLuz2 = "http://10.0.0.17/luz-dormitorio-2";
@@ -30,6 +30,10 @@ namespace DomoticApp.Views.Dormitorio
             InitializeComponent();
             InitializeAction();
             DatosTermicos();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
+            EstadoBotonAbanico();
+            
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -194,9 +198,6 @@ namespace DomoticApp.Views.Dormitorio
 #pragma warning restore CS0809
         {
             base.OnAppearing();
-            EstadoBotonLuz1();
-            EstadoBotonLuz2();
-            EstadoBotonAbanico();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 

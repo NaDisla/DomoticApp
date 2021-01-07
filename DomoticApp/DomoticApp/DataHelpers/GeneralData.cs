@@ -12,11 +12,11 @@ namespace DomoticApp.DataHelpers
         public const string clientUri = "https://domoticapp-database.firebaseio.com/";
         FirebaseClient client = new FirebaseClient(clientUri);
         public int controlRol;
-        
+
         public async Task<List<Usuarios>> GetUsuarios()
         {
             return (await client.Child("Usuarios").OnceAsync<Usuarios>()).Select(
-                user => new Usuarios 
+                user => new Usuarios
                 {
                     UsuarioID = user.Object.UsuarioID,
                     Acceso = user.Object.Acceso,
@@ -26,20 +26,6 @@ namespace DomoticApp.DataHelpers
                     UsuarioClave = user.Object.UsuarioClave,
                     UsuarioRol = user.Object.UsuarioRol,
                     UsuarioEstado = user.Object.UsuarioEstado
-                }).ToList();
-        }
-
-        public async Task<List<ControlesAlexa>> GetControlesAlexa()
-        {
-            return (await client.Child("ControlesAlexa").OnceAsync<ControlesAlexa>()).Select(
-                alexa => new ControlesAlexa
-                {
-                    AbanicoDormitorio = alexa.Object.AbanicoDormitorio,
-                    AbanicoSala = alexa.Object.AbanicoSala,
-                    LuzDormitorio1 = alexa.Object.LuzDormitorio1,
-                    LuzDormitorio2 = alexa.Object.LuzDormitorio1,
-                    LuzSala1 = alexa.Object.LuzSala1,
-                    LuzSala2 = alexa.Object.LuzSala2
                 }).ToList();
         }
 
@@ -56,7 +42,7 @@ namespace DomoticApp.DataHelpers
 
             if (obtenerUsuarios.Count == 0)
             {
-                await client.Child("Usuarios").PostAsync(new Usuarios() 
+                await client.Child("Usuarios").PostAsync(new Usuarios()
                 {
                     UsuarioID = id,
                     UsuarioNombreReal = nombreReal,
@@ -66,11 +52,11 @@ namespace DomoticApp.DataHelpers
                     UsuarioRol = "Administrador",
                     Acceso = "null",
                     UsuarioEstado = "Activo"
-                 });
+                });
             }
             else
             {
-                await client.Child("Usuarios").PostAsync(new Usuarios() 
+                await client.Child("Usuarios").PostAsync(new Usuarios()
                 {
                     UsuarioID = id,
                     UsuarioNombreReal = nombreReal,
@@ -83,7 +69,7 @@ namespace DomoticApp.DataHelpers
                 });
             }
         }
-        
+
         public async Task CambiarClave(int codigo, string usuario, string fecha)
         {
             await client.Child("CambiosClaveUsuarios").PostAsync(new CambiarClaveUsuario()
@@ -93,7 +79,7 @@ namespace DomoticApp.DataHelpers
                 FechaCambio = fecha
             });
         }
-        
+
         public async Task<List<CambiarClaveUsuario>> GetUsuariosCambioClave()
         {
             return (await client.Child("CambiosClaveUsuarios").OnceAsync<CambiarClaveUsuario>()).Select(
@@ -104,23 +90,23 @@ namespace DomoticApp.DataHelpers
                     FechaCambio = userCodigo.Object.FechaCambio
                 }).ToList();
         }
-        
+
         public async Task UpdateCodigoUsuario(string usuario, int codigo)
         {
             var updateCodigo = (await client.Child("CambiosClaveUsuarios").OnceAsync<CambiarClaveUsuario>()).
                 Where(a => a.Object.NombreUsuario == usuario).FirstOrDefault();
 
             await client.Child("CambiosClaveUsuarios").Child(updateCodigo.Key)
-                .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, CodigoCambio = codigo});
+                .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, CodigoCambio = codigo });
         }
-        
-        public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave, 
+
+        public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave,
             string rolUsuario, string acceso, string estado)
         {
             var claveNueva = (await client.Child("Usuarios").OnceAsync<Usuarios>()).
                 Where(x => x.Object.UsuarioID == idUsuario).FirstOrDefault();
 
-            await client.Child("Usuarios").Child(claveNueva.Key).PutAsync(new Usuarios() 
+            await client.Child("Usuarios").Child(claveNueva.Key).PutAsync(new Usuarios()
             {
                 UsuarioID = idUsuario,
                 UsuarioNombreReal = nombreRealUsuario,

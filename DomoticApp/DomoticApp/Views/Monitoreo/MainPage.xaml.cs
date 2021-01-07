@@ -18,9 +18,6 @@ using DomoticApp.Views.Lavado;
 using DomoticApp.Views.Recibidor;
 using DomoticApp.Views.Sala;
 using DomoticApp.DataHelpers;
-using DomoticApp.Models;
-using System.Net;
-using Microsoft.AspNetCore.SignalR.Client;
 
 namespace DomoticApp.Views.Monitoreo
 {
@@ -30,9 +27,7 @@ namespace DomoticApp.Views.Monitoreo
         public static Action inicio { get; set; }
         public int _stateReceived { get; set; }
         ValidarCambioRed cambioRed = new ValidarCambioRed();
-        const string urlServer = "https://realtimeserver.conveyor.cloud/actionHub";
-        HubConnection connectHub;
-        public static int estadoDormitorio;
+        GeneralData data = new GeneralData();
 
         [Obsolete]
         public MainPage(Action solicitudMenu)
@@ -67,7 +62,7 @@ namespace DomoticApp.Views.Monitoreo
             cambioRed.NetworkChanged(e);
         }
 
-       void GetStateModules()
+        void GetStateModules()
         {
             var dormitorio = GetStateDormitorio();
             var cocina = GetStateCocina();
@@ -77,7 +72,7 @@ namespace DomoticApp.Views.Monitoreo
             var recibidor = GetStateRecibidor();
             var sala = GetStateSala();
 
-            if(dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
+            if (dormitorio || cocina || bath || exteriores || lavadero || recibidor || sala)
             {
                 lblTextoActivos.IsVisible = false;
             }
@@ -202,41 +197,6 @@ namespace DomoticApp.Views.Monitoreo
             {
                 return false;
             }
-        }
-
-        private async void btnDormitorio_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ControlDormitorioPage());
-        }
-
-        private void btnCocina_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLavado_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSala_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBath_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRecibidor_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExteriores_Clicked(object sender, EventArgs e)
-        {
-
         }
     }
 }
