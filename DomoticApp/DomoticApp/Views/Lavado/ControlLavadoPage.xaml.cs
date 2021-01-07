@@ -26,12 +26,14 @@ namespace DomoticApp.Views.Lavado
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
+        GeneralData data = new GeneralData();
 
         public ControlLavadoPage()
         {
             InitializeComponent();
             InitializeAction();
             GetNivel();
+            EstadoBotonLuz();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -88,15 +90,20 @@ namespace DomoticApp.Views.Lavado
             }
         }
 
-        void EstadoBotonLuz()
+        async void EstadoBotonLuz()
         {
-            if (estadoLogicaLuz == 0)
+            var getEstado = await data.GetEstadoLavadero();
+            var luz = getEstado.Where(x => x.Luz == 0 || x.Luz == 1).Select(y => y.Luz).FirstOrDefault();
+
+            if (luz == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz);
+                estadoLogicaLuz = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz);
+                estadoLogicaLuz = 1;
             }
         }
 
@@ -106,7 +113,6 @@ namespace DomoticApp.Views.Lavado
 #pragma warning restore CS0809
         {
             base.OnAppearing();
-            EstadoBotonLuz();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
@@ -148,6 +154,7 @@ namespace DomoticApp.Views.Lavado
         {
             SendArduinoRequest(urlLuz, stateLuz);
             await SignalRSendStateLuzLavadero(estadoLogicaLuz);
+            await data.UpdateEstadoLavado("L01",estadoLogicaLuz);
         }
 
         [Obsolete]

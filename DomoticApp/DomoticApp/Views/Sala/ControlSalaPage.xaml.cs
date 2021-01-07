@@ -2,6 +2,7 @@
 using DomoticApp.Views.Monitoreo;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -23,12 +24,16 @@ namespace DomoticApp.Views.Sala
         HubConnection connectHub;
         CambiarColorBotones colorButton = new CambiarColorBotones();
         ValidarCambioRed cambioRed = new ValidarCambioRed();
+        GeneralData data = new GeneralData();
 
         public ControlSalaPage()
         {
             InitializeComponent();
             InitializeAction();
             DatosTermicos();
+            EstadoBotonLuz1();
+            EstadoBotonLuz2();
+            EstadoBotonAbanico();
             btnMenu.Clicked += (s, e) => MainPage.inicio();
         }
 
@@ -145,39 +150,54 @@ namespace DomoticApp.Views.Sala
             }
         }
 
-        void EstadoBotonLuz1()
+        async void EstadoBotonLuz1()
         {
-            if (estadoLogicaLuz1 == 0)
+            var getEstado = await data.GetEstadoSala();
+            var luz1 = getEstado.Where(x => x.Luz1 == 0 || x.Luz1 == 1).Select(y => y.Luz1).FirstOrDefault();
+
+            if (luz1 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz1);
+                estadoLogicaLuz1 = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz1);
+                estadoLogicaLuz1 = 1;
             }
         }
 
-        void EstadoBotonLuz2()
+        async void EstadoBotonLuz2()
         {
-            if (estadoLogicaLuz2 == 0)
+            var getEstado = await data.GetEstadoSala();
+            var luz2 = getEstado.Where(x => x.Luz2 == 0 || x.Luz2 == 1).Select(y => y.Luz2).FirstOrDefault();
+
+            if (luz2 == 0)
             {
                 colorButton.CambiarColorOFF(btnLuz2);
+                estadoLogicaLuz2 = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnLuz2);
+                estadoLogicaLuz2 = 1;
             }
         }
 
-        void EstadoBotonAbanico()
+        async void EstadoBotonAbanico()
         {
-            if (estadoLogicaAbanico == 0)
+            var getEstado = await data.GetEstadoSala();
+            var abanico = getEstado.Where(x => x.Abanico == 0 || x.Abanico == 1).Select(y => y.Abanico).FirstOrDefault();
+
+            if (abanico == 0)
             {
                 colorButton.CambiarColorOFF(btnAbanico);
+                estadoLogicaAbanico = 0;
             }
             else
             {
                 colorButton.CambiarColorLucesON(btnAbanico);
+                estadoLogicaAbanico = 1;
             }
         }
 
@@ -187,9 +207,6 @@ namespace DomoticApp.Views.Sala
 #pragma warning restore CS0809
         {
             base.OnAppearing();
-            EstadoBotonLuz1();
-            EstadoBotonLuz2();
-            EstadoBotonAbanico();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
@@ -226,6 +243,7 @@ namespace DomoticApp.Views.Sala
         {
             SendArduinoRequest(urlAbanico, stateAbanico);
             await SignalRSendStateAbanicoSala(estadoLogicaAbanico);
+            await data.UpdateEstadoSala("S01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]
@@ -233,6 +251,7 @@ namespace DomoticApp.Views.Sala
         {
             SendArduinoRequest(urlLuz1, stateLuz1);
             await SignalRSendStateLuz1Sala(estadoLogicaLuz1);
+            await data.UpdateEstadoSala("S01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]
@@ -240,6 +259,7 @@ namespace DomoticApp.Views.Sala
         {
             SendArduinoRequest(urlLuz2, stateLuz2);
             await SignalRSendStateLuz2Sala(estadoLogicaLuz2);
+            await data.UpdateEstadoSala("S01", estadoLogicaLuz1, estadoLogicaLuz2, estadoLogicaAbanico);
         }
 
         [Obsolete]
