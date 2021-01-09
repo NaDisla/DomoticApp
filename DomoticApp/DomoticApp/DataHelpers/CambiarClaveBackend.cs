@@ -89,7 +89,7 @@ namespace DomoticApp.DataHelpers
                     else
                     {
                         ConfigEnviarCorreo(mail, SmtpServer, userCorreo, loadingSend, result);
-                        await data.UpdateCodigoUsuario(txtUsuarioCambioClave.Text, codigo);
+                        await data.UpdateCodigoUsuario(txtUsuarioCambioClave.Text, codigo, fechaCambio);
                         ControlesCodigo(frameUsuarioCambiarClave, btnEnviarCodigo, frameCodigo, btnConfirmarCodigo);
                     }
                 }

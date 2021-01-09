@@ -359,13 +359,14 @@ namespace DomoticApp.DataHelpers
                 }).ToList();
         }
 
-        public async Task UpdateCodigoUsuario(string usuario, int codigo)
+        public async Task UpdateCodigoUsuario(string usuario, int codigo, string fechaCambio)
         {
             var updateCodigo = (await client.Child("CambiosClaveUsuarios").OnceAsync<CambiarClaveUsuario>()).
                 Where(a => a.Object.NombreUsuario == usuario).FirstOrDefault();
 
             await client.Child("CambiosClaveUsuarios").Child(updateCodigo.Key)
-                .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, CodigoCambio = codigo });
+                .PutAsync(new CambiarClaveUsuario() { NombreUsuario = usuario, 
+                    CodigoCambio = codigo, FechaCambio = fechaCambio });
         }
 
         public async Task UpdateUsuario(int idUsuario, string nombreRealUsuario, string correoUsuario, string nombreUsuario, string nuevaClave,
