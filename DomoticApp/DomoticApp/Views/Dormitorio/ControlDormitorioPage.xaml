@@ -84,7 +84,7 @@
                        Grid.Row="4"
                        Style="{StaticResource Panel}">
                     <StackLayout>
-                        <Label Text="Condiciones atmosféricas"
+                        <Label Text="Condiciones ambientales"
                                TextColor="#0E4265"
                                FontFamily="{StaticResource RalewayBold}"
                                FontSize="19" />
